@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useApp } from '../../../context/AppContext';
-import { ActivityRecord, ActivityRecordStatus } from '../../../types';
+import { ActivityRecord } from '../../../types';
 import {
   Plus,
-  Upload,
   ScanLine,
   Search,
-  Filter,
   FileText,
+  FileSpreadsheet,
   CheckCircle2,
   Clock,
   AlertCircle,
-  Lock,
-  ArrowRight,
-  Eye,
-  FileSpreadsheet,
+  Database,
 } from 'lucide-react';
+import { PageHeader } from '../../common/PageHeader';
+import { KpiCard } from '../../common/KpiCard';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen10_ActivityDashboard: React.FC = () => {
   const {
@@ -52,50 +51,6 @@ export const Screen10_ActivityDashboard: React.FC = () => {
     return matchesSite && matchesStatus && matchesSearch;
   });
 
-  const getStatusBadge = (status: ActivityRecordStatus) => {
-    switch (status) {
-      case 'Approved':
-        return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#EAF2FB] text-[#174A8B] border border-[#2166B1]/20">
-            ✓ Approved
-          </span>
-        );
-      case 'Submitted':
-        return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#F1F3F5] text-[#174A8B] border border-[#D9DDE3]">
-            ● Submitted
-          </span>
-        );
-      case 'Under Review':
-        return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#EAF2FB] text-[#2166B1]">
-            ⟳ Under Review
-          </span>
-        );
-      case 'Draft':
-        return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#F8F9FB] text-[#5E6672] border border-[#D9DDE3]">
-            ○ Draft
-          </span>
-        );
-      case 'Error':
-      case 'Sent Back':
-        return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#FEF0EF] text-[#B42318] border border-[#D92D20]/20">
-            ! {status === 'Error' ? 'Flagged / Error' : 'Sent Back'}
-          </span>
-        );
-      case 'Locked':
-        return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#F1F3F5] text-[#858C96]">
-            🔒 Locked
-          </span>
-        );
-      default:
-        return <span>{status}</span>;
-    }
-  };
-
   const handleRowClick = (rec: ActivityRecord) => {
     setSelectedRecordId(rec.id);
     if (rec.status === 'Submitted') {
@@ -108,74 +63,78 @@ export const Screen10_ActivityDashboard: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
+    <div id="screen-10-activity-dashboard" className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-[#D9DDE3]">
-        <div>
-          <h1 className="text-xl font-normal text-[#171A1F]">Activity Data Dashboard</h1>
-          <p className="text-xs text-[#5E6672] mt-0.5">
-            Operational workspace for manual data entry, bulk CSV imports, utility bill OCR, and submission status.
-          </p>
-        </div>
+      <PageHeader
+        breadcrumbs={[
+          { label: 'Activity Ingestion' },
+          { label: 'Dashboard' },
+        ]}
+        title="Activity Data Dashboard"
+        description="Operational workspace for manual data entry, bulk CSV imports, utility bill OCR, and submission status."
+        actions={
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
+              className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Add Entry</span>
+            </button>
 
-        {/* 3 Primary Data Ingestion CTAs */}
-        <div className="mt-3 sm:mt-0 flex flex-wrap items-center gap-2">
-          {/* Path 1: Manual Entry */}
-          <button
-            onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
-            className="px-3.5 py-1.5 bg-[#174A8B] hover:bg-[#2166B1] text-white text-xs font-medium rounded-md transition-colors flex items-center space-x-1.5 shadow-sm"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Add Entry</span>
-          </button>
+            <button
+              onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
+              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5 text-[#5F6368]" />
+              <span>Import CSV</span>
+            </button>
 
-          {/* Path 2: Bulk CSV Import */}
-          <button
-            onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
-            className="px-3 py-1.5 bg-white border border-[#D9DDE3] hover:bg-[#F8F9FB] text-xs text-[#171A1F] rounded-md transition-colors flex items-center space-x-1.5"
-          >
-            <FileSpreadsheet className="w-3.5 h-3.5 text-[#5E6672]" />
-            <span>Import CSV</span>
-          </button>
+            <button
+              onClick={() => navigateToScreen('17_bill_upload', 'FLOW_D')}
+              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold text-[#6254E8]"
+            >
+              <ScanLine className="w-3.5 h-3.5 text-[#6254E8]" />
+              <span>Upload Bill OCR</span>
+            </button>
+          </div>
+        }
+      />
 
-          {/* Path 3: Electricity Bill OCR */}
-          <button
-            onClick={() => navigateToScreen('17_bill_upload', 'FLOW_D')}
-            className="px-3 py-1.5 bg-white border border-[#D9DDE3] hover:bg-[#F8F9FB] text-xs text-[#171A1F] rounded-md transition-colors flex items-center space-x-1.5"
-          >
-            <ScanLine className="w-3.5 h-3.5 text-[#2166B1]" />
-            <span>Upload Bill OCR</span>
-          </button>
-        </div>
-      </div>
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <KpiCard
+          label="Total Records"
+          value={totalDisplayRows.toLocaleString()}
+          subtext={`Reporting period: ${activePeriod.name}`}
+          icon={<Database className="w-4 h-4 text-[#8A8F98]" />}
+          change="1,842 total"
+        />
 
-      {/* Recommended Dashboard Structure Metrics (Screen 10 PRD) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <div className="p-4 bg-white border border-[#D9DDE3] rounded-lg">
-          <div className="text-xs text-[#5E6672]">Total Records</div>
-          <div className="text-xl font-normal text-[#171A1F] mt-1 font-mono">{totalDisplayRows.toLocaleString()}</div>
-          <div className="text-[11px] text-[#858C96] mt-0.5">Reporting period: {activePeriod.name}</div>
-        </div>
-
-        <div className="p-4 bg-white border border-[#D9DDE3] rounded-lg">
-          <div className="text-xs text-[#5E6672]">Data Quality / Validated</div>
-          <div className="text-xl font-normal text-[#174A8B] mt-1 font-mono">{validatedPercent}%</div>
-          <div className="text-[11px] text-[#858C96] mt-0.5">Passes bounds & factor checks</div>
-        </div>
+        <KpiCard
+          label="Data Quality / Validated"
+          value={`${validatedPercent}%`}
+          subtext="Passes bounds & factor checks"
+          icon={<CheckCircle2 className="w-4 h-4 text-[#0F9D58]" />}
+          change="+1.4%"
+        />
 
         <div
           onClick={() => {
             setActiveFilterStatus('Submitted');
             navigateToScreen('24_review_approve', 'FLOW_B');
           }}
-          className="p-4 bg-white border border-[#D9DDE3] rounded-lg hover:border-[#2166B1] cursor-pointer transition-colors group"
+          className="h-full"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-[#5E6672]">Pending Review</span>
-            <span className="text-[10px] text-[#2166B1] group-hover:underline">Review Queue →</span>
-          </div>
-          <div className="text-xl font-normal text-[#171A1F] mt-1 font-mono">{pendingReviewCount}</div>
-          <div className="text-[11px] text-[#858C96] mt-0.5">Awaiting Reviewer approval</div>
+          <KpiCard
+            label="Pending Review"
+            value={pendingReviewCount.toString()}
+            subtext="Awaiting Reviewer approval"
+            statusDot="warning"
+            icon={<Clock className="w-4 h-4 text-[#F59E0B]" />}
+            change="Review queue →"
+            className="cursor-pointer"
+          />
         </div>
 
         <div
@@ -183,29 +142,32 @@ export const Screen10_ActivityDashboard: React.FC = () => {
             setActiveFilterStatus('Error');
             navigateToScreen('15_fix_detail_view', 'FLOW_C');
           }}
-          className="p-4 bg-white border border-[#D9DDE3] rounded-lg hover:border-[#D92D20] cursor-pointer transition-colors group"
+          className="h-full"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-[#B42318]">Flagged / Attention</span>
-            <span className="text-[10px] text-[#D92D20] group-hover:underline">Fix Errors →</span>
-          </div>
-          <div className="text-xl font-normal text-[#B42318] mt-1 font-mono">{flaggedCount}</div>
-          <div className="text-[11px] text-[#858C96] mt-0.5">Validation discrepancies</div>
+          <KpiCard
+            label="Flagged / Attention"
+            value={flaggedCount.toString()}
+            subtext="Validation discrepancies"
+            statusDot="error"
+            icon={<AlertCircle className="w-4 h-4 text-[#B42318]" />}
+            change="Fix errors →"
+            className="cursor-pointer"
+          />
         </div>
       </div>
 
       {/* Persistent Filters Bar */}
-      <div className="p-3.5 bg-white border border-[#D9DDE3] rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 font-sans">
         <div className="flex flex-wrap items-center gap-2 flex-1">
           {/* Search */}
           <div className="relative min-w-[200px] flex-1 max-w-xs">
-            <Search className="w-3.5 h-3.5 text-[#858C96] absolute left-3 top-2.5" />
+            <Search className="w-3.5 h-3.5 text-[#8A8F98] absolute left-3 top-2.5" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search source, site, or ID…"
-              className="w-full pl-8 pr-3 py-1.5 text-xs border border-[#D9DDE3] rounded-md focus:outline-none focus:border-[#174A8B]"
+              className="w-full pl-8 pr-4 py-1.5 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
             />
           </div>
 
@@ -213,7 +175,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           <select
             value={activeFilterSite}
             onChange={(e) => setActiveFilterSite(e.target.value)}
-            className="px-2.5 py-1.5 text-xs border border-[#D9DDE3] rounded-md bg-white text-[#5E6672]"
+            className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A]"
           >
             <option value="all">All Sites</option>
             {sites.map((s) => (
@@ -227,7 +189,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           <select
             value={activeFilterStatus}
             onChange={(e) => setActiveFilterStatus(e.target.value)}
-            className="px-2.5 py-1.5 text-xs border border-[#D9DDE3] rounded-md bg-white text-[#5E6672]"
+            className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A]"
           >
             <option value="all">All Statuses</option>
             <option value="Approved">Approved</option>
@@ -238,27 +200,27 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           </select>
         </div>
 
-        <div className="flex items-center space-x-2 text-xs text-[#858C96]">
+        <div className="flex items-center space-x-2 text-xs text-[#5F6368] font-data">
           <span>Displaying {filteredRecords.length} active records</span>
         </div>
       </div>
 
-      {/* Activity Data Table (PRD Screen 10 specification) */}
-      <div className="bg-white border border-[#D9DDE3] rounded-lg overflow-hidden shadow-xs">
+      {/* Activity Data Table */}
+      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs font-sans">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[#F8F9FB] border-b border-[#D9DDE3] text-[#5E6672]">
-                <th className="py-2.5 px-4 font-medium">Record ID</th>
-                <th className="py-2.5 px-4 font-medium">Date</th>
-                <th className="py-2.5 px-4 font-medium">Site</th>
-                <th className="py-2.5 px-4 font-medium">Emission Source</th>
-                <th className="py-2.5 px-4 font-medium text-right">Quantity</th>
-                <th className="py-2.5 px-4 font-medium">Unit</th>
-                <th className="py-2.5 px-4 font-medium text-right">Calculated tCO2e</th>
-                <th className="py-2.5 px-4 font-medium text-center">Evidence</th>
-                <th className="py-2.5 px-4 font-medium">Status</th>
-                <th className="py-2.5 px-4 font-medium text-right">Action</th>
+              <tr className="bg-[#FAFAFB] border-b border-[#E5E7EB] text-[#5F6368]">
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A]">Record ID</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A]">Date</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A]">Site</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A]">Emission Source</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A] text-right">Quantity</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A]">Unit</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A] text-right">Calculated tCO2e</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A] text-center">Evidence</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A]">Status</th>
+                <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A] text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F1F3F5]">
@@ -268,40 +230,58 @@ export const Screen10_ActivityDashboard: React.FC = () => {
                   <tr
                     key={record.id}
                     onClick={() => handleRowClick(record)}
-                    className="hover:bg-[#F8F9FB] transition-colors cursor-pointer group"
+                    className="hover:bg-[#FAFAFB] transition-colors cursor-pointer group"
                   >
-                    <td className="py-3 px-4 font-mono font-medium text-[#174A8B]">
+                    <td className="py-3 px-4 activity-id font-medium text-[#6254E8]">
                       {record.id}
                     </td>
-                    <td className="py-3 px-4 text-[#5E6672] font-mono">{record.date}</td>
-                    <td className="py-3 px-4 text-[#171A1F] font-medium">{record.siteName}</td>
+                    <td className="py-3 px-4 text-[#5F6368] font-data">{record.date}</td>
+                    <td className="py-3 px-4 text-[#17181A] font-semibold">{record.siteName}</td>
                     <td className="py-3 px-4">
-                      <div className="text-[#171A1F]">{record.sourceName}</div>
-                      <span className="text-[10px] text-[#858C96]">{record.scope}</span>
+                      <div className="text-[#17181A] font-medium">{record.sourceName}</div>
+                      <span className="text-[10px] text-[#8A8F98] font-data">{record.scope}</span>
                     </td>
-                    <td className="py-3 px-4 text-right font-mono text-[#171A1F] font-medium">
+                    <td className="py-3 px-4 text-right font-data text-[#17181A] font-semibold">
                       {record.quantity.toLocaleString()}
                     </td>
-                    <td className="py-3 px-4 text-[#5E6672] font-mono">{record.unit}</td>
-                    <td className="py-3 px-4 text-right font-mono text-[#171A1F]">
+                    <td className="py-3 px-4 text-[#5F6368] font-data">{record.unit}</td>
+                    <td className="py-3 px-4 text-right font-data text-[#17181A] font-medium">
                       {record.emissions_tCO2e.toFixed(3)}
                     </td>
                     <td className="py-3 px-4 text-center">
                       {hasEvidence ? (
                         <span
-                          className="inline-flex items-center space-x-1 px-1.5 py-0.5 rounded bg-[#EAF2FB] text-[#174A8B] text-[10px] font-medium"
+                          className="inline-flex items-center space-x-1 px-1.5 py-0.5 rounded-md bg-[#6254E8]/10 text-[#6254E8] text-[10px] font-semibold border border-[#6254E8]/20"
                           title={record.evidenceFiles[0].name}
                         >
                           <FileText className="w-3 h-3" />
                           <span>{record.evidenceFiles.length} file</span>
                         </span>
                       ) : (
-                        <span className="text-[10px] text-[#858C96] italic">None</span>
+                        <span className="text-[10px] text-[#8A8F98] italic font-data">None</span>
                       )}
                     </td>
-                    <td className="py-3 px-4">{getStatusBadge(record.status)}</td>
+                    <td className="py-3 px-4">
+                      <StatusBadge
+                        status={
+                          record.status === 'Approved'
+                            ? 'Approved'
+                            : record.status === 'Submitted'
+                            ? 'Submitted'
+                            : record.status === 'Under Review'
+                            ? 'Under Review'
+                            : record.status === 'Draft'
+                            ? 'Draft'
+                            : record.status === 'Error' || record.status === 'Sent Back'
+                            ? 'Rejected'
+                            : 'Approved'
+                        }
+                        customLabel={record.status}
+                        size="sm"
+                      />
+                    </td>
                     <td className="py-3 px-4 text-right">
-                      <span className="text-[11px] text-[#2166B1] group-hover:underline">
+                      <span className="text-[11px] text-[#6254E8] group-hover:underline font-semibold">
                         Open →
                       </span>
                     </td>

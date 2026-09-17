@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
-  FilePlus,
-  Paperclip,
   CheckCircle,
   ArrowRight,
   Calculator,
@@ -12,8 +10,9 @@ import {
   FileText,
   Trash2,
   Sparkles,
-  CheckCircle2,
 } from 'lucide-react';
+import { PageHeader } from '../../common/PageHeader';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen11_EntryForm: React.FC = () => {
   const {
@@ -131,7 +130,6 @@ export const Screen11_EntryForm: React.FC = () => {
     });
 
     setSelectedRecordId(newRecord.id);
-    // Clear prefill after commit
     if (ocrPrefillData) {
       setOcrPrefillData(null);
     }
@@ -146,58 +144,46 @@ export const Screen11_EntryForm: React.FC = () => {
 
   return (
     <div id="screen-11-container" className="max-w-4xl mx-auto space-y-6">
-      {/* Header & Breadcrumb */}
-      <div className="pb-3 border-b border-[#D9DDE3]">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex items-center space-x-2 text-xs font-mono text-[#5E6672] mb-1">
-              <span>Activity Data</span>
-              <span>›</span>
-              <span className="text-[#174A8B] font-semibold">New Entry</span>
-              <span className="text-[#858C96]">·</span>
-              <span className="text-[#858C96]">/activity-data/new</span>
-            </div>
-            <h1 className="text-xl font-normal text-[#171A1F]">New Activity Data Entry</h1>
-            <p className="text-xs text-[#5E6672] mt-0.5">
-              Enter operational activity measurements for GHG calculation and compliance evidence.
-            </p>
-          </div>
+      {/* Header */}
+      <PageHeader
+        breadcrumbs={[
+          { label: 'Activity Data' },
+          { label: 'New Entry' },
+        ]}
+        title="New Activity Data Entry"
+        description="Enter operational activity measurements for GHG calculation and compliance evidence."
+        actions={
+          <button
+            id="back-to-activity-dashboard"
+            onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}
+            className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to Dashboard</span>
+          </button>
+        }
+      />
 
-          <div className="mt-3 sm:mt-0 flex items-center space-x-2">
-            <button
-              id="back-to-activity-dashboard"
-              onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}
-              className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#5E6672] bg-white border border-[#D9DDE3] rounded hover:bg-[#F8F9FB] transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Dashboard</span>
-            </button>
-          </div>
-        </div>
-
-        {/* AI Pre-fill Banner if coming from Screen 18 */}
-        {entryMethod === 'AI Extracted' && (
-          <div className="mt-3 p-3 bg-[#EAF2FB] border border-[#2166B1]/30 rounded flex items-center justify-between text-xs text-[#174A8B]">
-            <div className="flex items-center space-x-2">
-              <Sparkles className="w-4 h-4 text-[#174A8B] shrink-0" />
-              <span>
-                <strong>Pre-filled from Screen 18 OCR review #8821.</strong> Human-confirmed values loaded for Chennai Plant 1.
-              </span>
-            </div>
-            <span className="text-[11px] font-mono bg-white px-2 py-0.5 rounded border border-[#2166B1]/20 font-medium">
-              OCR Confirmed
+      {/* AI Pre-fill Banner if coming from Screen 18 */}
+      {entryMethod === 'AI Extracted' && (
+        <div className="p-3 bg-[#6254E8]/10 border border-[#6254E8]/20 rounded-xl flex items-center justify-between text-xs text-[#6254E8] font-sans">
+          <div className="flex items-center space-x-2">
+            <Sparkles className="w-4 h-4 text-[#6254E8] shrink-0" />
+            <span>
+              <strong>Pre-filled from Screen 18 OCR review #8821.</strong> Human-confirmed values loaded for Chennai Plant 1.
             </span>
           </div>
-        )}
-      </div>
+          <StatusBadge status="Approved" customLabel="OCR Confirmed" size="sm" />
+        </div>
+      )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 font-sans">
         {/* Main Entry Details Form (2 Cols) */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="p-5 bg-white border border-[#D9DDE3] rounded space-y-4">
+          <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-[#F1F3F5]">
-              <h2 className="text-sm font-medium text-[#171A1F]">Entry Details</h2>
-              <span className="text-[11px] font-mono text-[#5E6672] bg-[#F1F3F5] px-2 py-0.5 rounded">
+              <h2 className="text-sm font-semibold text-[#17181A]">Entry Details</h2>
+              <span className="text-[11px] font-data text-[#5F6368] bg-[#FAFAFB] px-2.5 py-0.5 rounded-md border border-[#E5E7EB]">
                 Method: {entryMethod}
               </span>
             </div>
@@ -205,14 +191,14 @@ export const Screen11_EntryForm: React.FC = () => {
             {/* Site & Emission Source */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-[#5E6672] mb-1">
+                <label className="block text-xs font-semibold text-[#17181A] mb-1">
                   Site <span className="text-[#D92D20]">*</span>
                 </label>
                 <select
                   id="entry-site-select"
                   value={siteId}
                   onChange={(e) => handleSiteChange(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded bg-white text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+                  className="w-full px-4 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#7567F5]"
                 >
                   {sites.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -223,14 +209,14 @@ export const Screen11_EntryForm: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#5E6672] mb-1">
+                <label className="block text-xs font-semibold text-[#17181A] mb-1">
                   Emission source <span className="text-[#D92D20]">*</span>
                 </label>
                 <select
                   id="entry-source-select"
                   value={sourceId}
                   onChange={(e) => setSourceId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded bg-white text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+                  className="w-full px-4 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#7567F5]"
                 >
                   {availableSources.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -244,7 +230,7 @@ export const Screen11_EntryForm: React.FC = () => {
             {/* Activity Date, Quantity, Unit */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-medium text-[#5E6672] mb-1">
+                <label className="block text-xs font-semibold text-[#17181A] mb-1">
                   Activity date <span className="text-[#D92D20]">*</span>
                 </label>
                 <input
@@ -253,12 +239,12 @@ export const Screen11_EntryForm: React.FC = () => {
                   required
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#7567F5] bg-white font-data"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#5E6672] mb-1">
+                <label className="block text-xs font-semibold text-[#17181A] mb-1">
                   Quantity <span className="text-[#D92D20]">*</span>
                 </label>
                 <input
@@ -269,12 +255,12 @@ export const Screen11_EntryForm: React.FC = () => {
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
                   placeholder="48,200"
-                  className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded font-mono text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg font-data text-[#17181A] focus:outline-none focus:border-[#7567F5] bg-white font-medium"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#5E6672] mb-1">
+                <label className="block text-xs font-semibold text-[#17181A] mb-1">
                   Unit <span className="text-[#D92D20]">*</span>
                 </label>
                 <input
@@ -282,14 +268,14 @@ export const Screen11_EntryForm: React.FC = () => {
                   type="text"
                   value={unit}
                   onChange={(e) => setUnit(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded font-mono bg-[#F8F9FB] text-[#171A1F] focus:outline-none"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg font-data bg-[#FAFAFB] text-[#17181A] focus:outline-none font-medium"
                 />
               </div>
             </div>
 
             {/* Entry Method Selector */}
             <div>
-              <label className="block text-xs font-medium text-[#5E6672] mb-1">
+              <label className="block text-xs font-semibold text-[#17181A] mb-1">
                 Entry method
               </label>
               <div className="flex items-center space-x-3 text-xs">
@@ -300,7 +286,7 @@ export const Screen11_EntryForm: React.FC = () => {
                     value="Manual"
                     checked={entryMethod === 'Manual'}
                     onChange={() => setEntryMethod('Manual')}
-                    className="text-[#174A8B]"
+                    className="text-[#6254E8] focus:ring-[#6254E8]"
                   />
                   <span>Manual</span>
                 </label>
@@ -311,7 +297,7 @@ export const Screen11_EntryForm: React.FC = () => {
                     value="AI Extracted"
                     checked={entryMethod === 'AI Extracted'}
                     onChange={() => setEntryMethod('AI Extracted')}
-                    className="text-[#174A8B]"
+                    className="text-[#6254E8] focus:ring-[#6254E8]"
                   />
                   <span>AI Extracted</span>
                 </label>
@@ -320,7 +306,7 @@ export const Screen11_EntryForm: React.FC = () => {
 
             {/* Notes */}
             <div>
-              <label className="block text-xs font-medium text-[#5E6672] mb-1">
+              <label className="block text-xs font-semibold text-[#17181A] mb-1">
                 Operational Notes / Reference
               </label>
               <textarea
@@ -329,40 +315,40 @@ export const Screen11_EntryForm: React.FC = () => {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="e.g. EB Bill Ref #TANGEDCO-2025-08 for Substation A."
-                className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#7567F5] bg-white font-sans"
               />
             </div>
           </div>
 
           {/* Evidence Upload Section */}
-          <div className="p-5 bg-white border border-[#D9DDE3] rounded space-y-3">
+          <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-medium text-[#171A1F]">Evidence Attachment</h2>
+              <h2 className="text-sm font-semibold text-[#17181A]">Evidence Attachment</h2>
               <button
                 type="button"
                 onClick={() => navigateToScreen('16_attach_evidence', 'FLOW_B')}
-                className="text-xs text-[#174A8B] hover:underline flex items-center space-x-1"
+                className="text-xs text-[#6254E8] hover:underline flex items-center space-x-1 font-semibold"
               >
                 <span>Go to Screen 16 (Full Evidence Manager)</span>
                 <ArrowRight className="w-3 h-3" />
               </button>
             </div>
 
-            {/* Drag and drop area matching Screen 11 spec */}
+            {/* Drag and drop area */}
             <div
               onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
               onDragLeave={() => setIsDragOver(false)}
               onDrop={(e) => { e.preventDefault(); setIsDragOver(false); handleSimulatedFileUpload(); }}
               onClick={handleSimulatedFileUpload}
-              className={`p-6 border-2 border-dashed rounded text-center cursor-pointer transition-colors ${
-                isDragOver ? 'border-[#174A8B] bg-[#EAF2FB]' : 'border-[#D9DDE3] hover:border-[#174A8B]/60 bg-[#F8F9FB]'
+              className={`p-6 border-2 border-dashed rounded-xl text-center cursor-pointer transition-colors ${
+                isDragOver ? 'border-[#6254E8] bg-[#6254E8]/5' : 'border-[#E5E7EB] hover:border-[#7567F5] bg-[#FAFAFB]'
               }`}
             >
-              <Upload className="w-6 h-6 text-[#858C96] mx-auto mb-2" />
-              <p className="text-xs text-[#171A1F] font-medium">
+              <Upload className="w-6 h-6 text-[#8A8F98] mx-auto mb-2" />
+              <p className="text-xs text-[#17181A] font-semibold">
                 Drag & drop file, or click to attach evidence document
               </p>
-              <p className="text-[11px] text-[#5E6672] mt-1">
+              <p className="text-[11px] text-[#5F6368] mt-1 font-data">
                 Supports PDF, scanned invoice, image or spreadsheet (Max 10MB)
               </p>
             </div>
@@ -370,25 +356,25 @@ export const Screen11_EntryForm: React.FC = () => {
             {/* Attached file list */}
             {attachedFiles.length > 0 && (
               <div className="space-y-2 pt-2">
-                <div className="text-[11px] font-medium text-[#5E6672] uppercase tracking-wider">
+                <div className="text-[11px] font-semibold text-[#5F6368] uppercase tracking-wider font-data">
                   Attached Documents ({attachedFiles.length})
                 </div>
                 {attachedFiles.map((file, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between p-2.5 bg-[#F8F9FB] border border-[#D9DDE3] rounded text-xs"
+                    className="flex items-center justify-between p-2.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg text-xs"
                   >
                     <div className="flex items-center space-x-2.5">
-                      <FileText className="w-4 h-4 text-[#174A8B]" />
+                      <FileText className="w-4 h-4 text-[#6254E8]" />
                       <div>
-                        <div className="font-medium text-[#171A1F]">{file.name}</div>
-                        <div className="text-[10px] text-[#858C96]">{file.size} · Uploaded {file.uploadDate}</div>
+                        <div className="font-semibold text-[#17181A]">{file.name}</div>
+                        <div className="text-[10px] text-[#8A8F98] font-data">{file.size} · Uploaded {file.uploadDate}</div>
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => removeFile(idx)}
-                      className="p-1 text-[#858C96] hover:text-[#D92D20] transition-colors"
+                      className="p-1 text-[#8A8F98] hover:text-[#B42318] transition-colors"
                       title="Remove file"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -405,7 +391,7 @@ export const Screen11_EntryForm: React.FC = () => {
               id="btn-save-as-draft"
               type="button"
               onClick={() => handleSave('Draft')}
-              className="w-full sm:w-auto px-4 py-2.5 sm:py-2 bg-white border border-[#D9DDE3] hover:bg-[#F8F9FB] text-xs font-medium text-[#171A1F] rounded transition-colors shadow-xs text-center"
+              className="enterprise-btn-secondary h-9 px-5 text-xs font-semibold rounded-full"
             >
               Save as Draft
             </button>
@@ -414,7 +400,7 @@ export const Screen11_EntryForm: React.FC = () => {
               id="btn-submit-for-review"
               type="button"
               onClick={() => handleSave('Submitted')}
-              className="w-full sm:w-auto px-5 py-2.5 sm:py-2 bg-[#174A8B] hover:bg-[#2166B1] text-white text-xs font-medium rounded transition-colors flex items-center justify-center space-x-1.5 shadow-sm"
+              className="enterprise-btn-primary h-9 px-6 text-xs font-semibold shadow-xs flex items-center justify-center space-x-1.5 rounded-full"
             >
               <CheckCircle className="w-3.5 h-3.5" />
               <span>Submit for Review</span>
@@ -424,47 +410,47 @@ export const Screen11_EntryForm: React.FC = () => {
 
         {/* Live Calculation Preview Card (1 Col) */}
         <div className="space-y-4">
-          <div className="p-5 bg-white border border-[#D9DDE3] rounded space-y-4">
-            <div className="flex items-center space-x-2 text-[#174A8B]">
+          <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-4">
+            <div className="flex items-center space-x-2 text-[#6254E8]">
               <Calculator className="w-4 h-4" />
-              <h3 className="text-sm font-medium text-[#171A1F]">Calculation Preview</h3>
+              <h3 className="text-sm font-semibold text-[#17181A]">Calculation Preview</h3>
             </div>
 
-            <div className="p-3 bg-[#F8F9FB] rounded border border-[#D9DDE3] space-y-2 text-xs font-mono">
-              <div className="flex justify-between text-[#5E6672]">
+            <div className="p-3 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB] space-y-2 text-xs font-data">
+              <div className="flex justify-between text-[#5F6368]">
                 <span>Activity Quantity:</span>
-                <span className="text-[#171A1F] font-medium">
+                <span className="text-[#17181A] font-semibold">
                   {numQuantity.toLocaleString()} {unit}
                 </span>
               </div>
 
-              <div className="flex justify-between text-[#5E6672]">
+              <div className="flex justify-between text-[#5F6368]">
                 <span>Emission Factor:</span>
-                <span className="text-[#171A1F] font-medium">
+                <span className="text-[#17181A] font-semibold emission-factor">
                   {factor} {currentSource?.factorUnit || 'kg CO2e / kWh'}
                 </span>
               </div>
 
-              <div className="pt-2 border-t border-[#D9DDE3] flex justify-between items-baseline">
-                <span className="font-sans text-xs text-[#5E6672]">Computed Emissions:</span>
-                <span className="text-base font-normal text-[#174A8B]">
+              <div className="pt-2 border-t border-[#E5E7EB] flex justify-between items-baseline">
+                <span className="font-sans text-xs text-[#5F6368]">Computed Emissions:</span>
+                <span className="text-base font-bold text-[#6254E8]">
                   {emissions_tCO2e.toFixed(3)} tCO2e
                 </span>
               </div>
             </div>
 
-            <div className="text-[11px] text-[#5E6672] space-y-1">
-              <div className="font-medium text-[#171A1F]">Emission Factor Authority:</div>
-              <div>{currentSource?.factorSource || 'CEA CO2 Baseline Database v19 (India)'}</div>
-              <div className="text-[#858C96] pt-1">
+            <div className="text-[11px] text-[#5F6368] space-y-1">
+              <div className="font-semibold text-[#17181A]">Emission Factor Authority:</div>
+              <div className="font-data">{currentSource?.factorSource || 'CEA CO2 Baseline Database v19 (India)'}</div>
+              <div className="text-[#5F6368] font-data text-[11px] pt-1 formula-text">
                 Formula: (Activity × EF) ÷ 1,000 = tCO2e
               </div>
             </div>
           </div>
 
-          <div className="p-4 bg-[#EAF2FB]/50 border border-[#2166B1]/20 rounded text-xs text-[#5E6672] flex items-start space-x-2">
-            <Info className="w-4 h-4 text-[#174A8B] shrink-0 mt-0.5" />
-            <span>
+          <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2 shadow-2xs font-sans">
+            <Info className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
+            <span className="font-data">
               All manual entries require supporting evidence (PDF invoices, meter logs) to pass independent verifier inspection in Screen 32.
             </span>
           </div>

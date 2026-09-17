@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
   CheckCircle2,
-  AlertCircle,
-  XCircle,
   FileText,
   ArrowRight,
   ArrowLeft,
   ShieldCheck,
   Building2,
-  ExternalLink,
-  MessageSquare,
   AlertTriangle,
 } from 'lucide-react';
+import { PageHeader } from '../../common/PageHeader';
+import { StatusBadge } from '../../common/StatusBadge';
 
 interface BatchItem {
   id: string;
@@ -129,95 +127,80 @@ export const Screen24_ReviewApprove: React.FC = () => {
   return (
     <div id="screen-24-container" className="max-w-5xl mx-auto space-y-6">
       {/* Header & Hierarchy */}
-      <div className="pb-3 border-b border-[#D9DDE3]">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex items-center space-x-2 text-xs font-mono text-[#5E6672] mb-1">
-              <span>Workflow & Approvals</span>
-              <span>›</span>
-              <span 
-                onClick={() => navigateToScreen('23_submission_queue', 'FLOW_B')} 
-                className="cursor-pointer hover:underline"
-              >
-                Submission Queue
-              </span>
-              <span>›</span>
-              <span className="text-[#174A8B] font-semibold">Batch #204</span>
-              <span className="text-[#858C96]">·</span>
-              <span className="text-[#858C96]">/workflow/queue/204</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <h1 className="text-xl font-normal text-[#171A1F]">
-                Review Batch #204 — Chennai Plant 1
-              </h1>
-              <span className="px-2 py-0.5 rounded bg-[#FEF0C7] text-[#B54708] border border-[#F79009]/30 text-xs font-medium">
-                Awaiting Review
-              </span>
-            </div>
-            <p className="text-xs text-[#5E6672] mt-0.5">
-              Inspect submitted activity rows and supporting evidence before making an approval decision.
-            </p>
-          </div>
-
-          <div className="mt-3 sm:mt-0 flex items-center space-x-2">
-            <button
-              onClick={() => navigateToScreen('23_submission_queue', 'FLOW_B')}
-              className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#5E6672] bg-white border border-[#D9DDE3] rounded hover:bg-[#F8F9FB] transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Queue</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        breadcrumbs={[
+          { label: 'Workflow & Approvals' },
+          { label: 'Submission Queue', onClick: () => navigateToScreen('23_submission_queue', 'FLOW_B') },
+          { label: 'Batch #204' },
+        ]}
+        title="Review Batch #204 — Chennai Plant 1"
+        description="Inspect submitted activity rows and supporting evidence before making an approval decision."
+        badge={
+          <StatusBadge status="Pending" customLabel="Awaiting Review" size="sm" />
+        }
+        contextInfo={
+          <span className="route-path text-xs text-[#8A8F98] font-medium">
+            /workflow/queue/204
+          </span>
+        }
+        actions={
+          <button
+            onClick={() => navigateToScreen('23_submission_queue', 'FLOW_B')}
+            className="enterprise-btn-secondary h-9 px-3.5 flex items-center space-x-1.5 text-xs"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to Queue</span>
+          </button>
+        }
+      />
 
       {/* Review Table (FR Section 9.1) */}
-      <div className="bg-white border border-[#D9DDE3] rounded overflow-hidden">
-        <div className="p-4 border-b border-[#D9DDE3] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
+        <div className="p-4 border-b border-[#E5E7EB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center space-x-2">
-            <Building2 className="w-4 h-4 text-[#174A8B]" />
-            <h2 className="text-sm font-medium text-[#171A1F]">Submitted Activity Rows</h2>
+            <Building2 className="w-4 h-4 text-[#6254E8]" />
+            <h2 className="text-sm font-semibold text-[#17181A] font-sans">Submitted Activity Rows</h2>
           </div>
-          <span className="text-xs text-[#5E6672] font-mono">
-            Submitted by {batchDetails.submittedBy} on {batchDetails.submittedDate}
+          <span className="text-xs text-[#5F6368] font-sans">
+            Submitted by <span className="font-medium text-[#17181A]">{batchDetails.submittedBy}</span> on <span className="period-code font-medium">{batchDetails.submittedDate}</span>
           </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[#F8F9FB] border-b border-[#D9DDE3] text-[#5E6672]">
-                <th className="py-3 px-4 font-medium">Date</th>
-                <th className="py-3 px-4 font-medium">Source</th>
-                <th className="py-3 px-4 font-medium text-right">Quantity</th>
-                <th className="py-3 px-4 font-medium">Unit</th>
-                <th className="py-3 px-4 font-medium">Evidence</th>
+              <tr className="bg-[#F4F5F6] border-b border-[#E5E7EB] text-[#5F6368]">
+                <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Date</th>
+                <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Source</th>
+                <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-right">Quantity</th>
+                <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Unit</th>
+                <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Evidence</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F1F3F5]">
               {batchDetails.items.map((item) => (
-                <tr key={item.id} className="hover:bg-[#F8F9FB]">
-                  <td className="py-3.5 px-4 font-mono text-[#5E6672]">
+                <tr key={item.id} className="hover:bg-[#FAFAFB] transition-colors">
+                  <td className="py-3.5 px-4 period-code text-[#5F6368]">
                     {item.date}
                   </td>
-                  <td className="py-3.5 px-4 font-medium text-[#171A1F]">
+                  <td className="py-3.5 px-4 font-semibold text-[#17181A]">
                     {item.source}
                   </td>
-                  <td className="py-3.5 px-4 text-right font-mono font-bold text-[#171A1F]">
+                  <td className="py-3.5 px-4 text-right period-code font-medium text-[#17181A]">
                     {item.quantity.toLocaleString()}
                   </td>
-                  <td className="py-3.5 px-4 font-mono text-[#5E6672]">
+                  <td className="py-3.5 px-4 emission-factor text-[#5F6368]">
                     {item.unit}
                   </td>
                   <td className="py-3.5 px-4">
                     <button
                       type="button"
                       onClick={() => setActiveEvidenceModal(item.evidenceName)}
-                      className="inline-flex items-center space-x-1.5 text-xs text-[#174A8B] hover:underline"
+                      className="inline-flex items-center space-x-1.5 text-xs text-[#6254E8] hover:underline font-semibold"
                     >
-                      <FileText className="w-3.5 h-3.5 text-[#5E6672]" />
+                      <FileText className="w-3.5 h-3.5 text-[#5F6368]" />
                       <span>{item.evidenceCount} file attached</span>
-                      <span className="text-[11px] text-[#858C96]">({item.evidenceName})</span>
+                      <span className="text-[11px] text-[#8A8F98] file-hash">({item.evidenceName})</span>
                     </button>
                   </td>
                 </tr>
@@ -228,12 +211,12 @@ export const Screen24_ReviewApprove: React.FC = () => {
       </div>
 
       {/* Reviewer Comment Area (Section 10) */}
-      <div className="p-5 bg-white border border-[#D9DDE3] rounded space-y-3">
+      <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl space-y-3 shadow-2xs">
         <div>
-          <label className="block text-xs font-semibold text-[#171A1F] uppercase tracking-wider mb-1">
+          <label className="block text-xs font-semibold text-[#17181A] uppercase tracking-wider mb-1 font-sans">
             Reviewer comment
           </label>
-          <p className="text-[11px] text-[#5E6672] mb-2">
+          <p className="text-[11px] text-[#5F6368] mb-2 font-data">
             Field label: Comment · Mandatory on non-approval actions (Return for Correction or Reject).
           </p>
           <textarea
@@ -245,17 +228,17 @@ export const Screen24_ReviewApprove: React.FC = () => {
               if (errorMessage) setErrorMessage(null);
             }}
             placeholder="Add a note (required if returning for correction)"
-            className={`w-full px-3 py-2 text-xs border rounded text-[#171A1F] focus:outline-none ${
+            className={`w-full px-3 py-2 text-xs border rounded-lg text-[#17181A] focus:outline-none font-sans ${
               errorMessage
                 ? 'border-[#D92D20] bg-[#FEF0EF]/30 focus:border-[#D92D20]'
-                : 'border-[#D9DDE3] focus:border-[#174A8B]'
+                : 'border-[#E5E7EB] focus:border-[#7567F5]'
             }`}
           />
         </div>
 
         {/* Validation error message */}
         {errorMessage && (
-          <div className="p-2.5 bg-[#FEF0EF] border border-[#D92D20]/30 rounded text-xs text-[#D92D20] flex items-center space-x-2">
+          <div className="p-2.5 bg-[#FEF0EF] border border-[#D92D20]/30 rounded-lg text-xs text-[#D92D20] flex items-center space-x-2 font-data">
             <AlertTriangle className="w-4 h-4 shrink-0" />
             <span>{errorMessage}</span>
           </div>
@@ -269,7 +252,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
               id="btn-reject-batch"
               type="button"
               onClick={handleReject}
-              className="px-4 py-2.5 sm:py-2 bg-white border border-[#D92D20] text-[#D92D20] hover:bg-[#FEF0EF] text-xs font-medium rounded transition-colors text-center"
+              className="px-4 py-2 bg-white border border-[#D92D20] text-[#D92D20] hover:bg-[#FEF0EF] text-xs font-semibold rounded-lg transition-colors text-center"
             >
               Reject
             </button>
@@ -279,7 +262,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
               id="btn-return-correction"
               type="button"
               onClick={handleReturnForCorrection}
-              className="px-4 py-2.5 sm:py-2 bg-white border border-[#F79009] text-[#B54708] hover:bg-[#FEF0C7] text-xs font-medium rounded transition-colors text-center"
+              className="px-4 py-2 bg-white border border-[#F79009] text-[#B54708] hover:bg-[#FEF0C7] text-xs font-semibold rounded-lg transition-colors text-center"
             >
               Return for Correction
             </button>
@@ -290,7 +273,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
             id="btn-approve-batch"
             type="button"
             onClick={handleApprove}
-            className="px-6 py-2.5 sm:py-2 bg-[#174A8B] hover:bg-[#2166B1] text-white text-xs font-medium rounded transition-colors flex items-center justify-center space-x-1.5 shadow-sm"
+            className="enterprise-btn-primary h-9 px-6 text-xs inline-flex items-center justify-center space-x-1.5 shadow-xs font-semibold"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Approve</span>
@@ -300,40 +283,40 @@ export const Screen24_ReviewApprove: React.FC = () => {
       </div>
 
       {/* Audit Requirement Note (Section 10.3) */}
-      <div className="p-3 bg-[#F8F9FB] border border-[#D9DDE3] rounded text-xs text-[#5E6672] flex items-start space-x-2">
-        <ShieldCheck className="w-4 h-4 text-[#174A8B] shrink-0 mt-0.5" />
+      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
+        <ShieldCheck className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
         <div>
-          <strong>Audit Requirement:</strong> Every workflow action writes to an append-only audit trail recording: <em>Who (S. Iyer), When, What, and Why</em>. Recorded events are permanently preserved for verifier inspection.
+          <strong className="text-[#17181A] font-semibold">Audit Requirement:</strong> Every workflow action writes to an append-only audit trail recording: <em>Who (S. Iyer), When, What, and Why</em>. Recorded events are permanently preserved for verifier inspection.
         </div>
       </div>
 
       {/* Evidence Viewer Dialog Simulation */}
       {activeEvidenceModal && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[1px] flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg border border-[#D9DDE3] max-w-lg w-full p-5 space-y-4 shadow-xl">
+          <div className="bg-white rounded-xl border border-[#E5E7EB] max-w-lg w-full p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between pb-2 border-b border-[#F1F3F5]">
               <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4 text-[#174A8B]" />
-                <h3 className="text-sm font-medium text-[#171A1F]">{activeEvidenceModal}</h3>
+                <FileText className="w-4 h-4 text-[#6254E8]" />
+                <h3 className="text-sm font-semibold text-[#17181A] font-sans">{activeEvidenceModal}</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveEvidenceModal(null)}
-                className="text-xs text-[#858C96] hover:text-[#171A1F]"
+                className="text-xs text-[#8A8F98] hover:text-[#17181A]"
               >
                 ✕ Close
               </button>
             </div>
-            <div className="p-6 bg-[#F8F9FB] border border-[#D9DDE3] rounded font-mono text-xs text-[#5E6672] text-center space-y-2">
-              <div className="font-bold text-[#171A1F]">Primary Utility Evidence Document</div>
-              <div>Source File: {activeEvidenceModal}</div>
-              <div className="text-[11px] text-[#0F6B48]">Verified & attached from TC-ARC-002 repository</div>
+            <div className="p-6 bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg font-data text-xs text-[#5F6368] text-center space-y-2">
+              <div className="font-semibold text-[#17181A]">Primary Utility Evidence Document</div>
+              <div className="file-hash">Source File: {activeEvidenceModal}</div>
+              <div className="text-[11px] text-[#0F6B48] font-semibold">Verified & attached from TC-ARC-002 repository</div>
             </div>
             <div className="flex justify-end">
               <button
                 type="button"
                 onClick={() => setActiveEvidenceModal(null)}
-                className="px-4 py-1.5 text-xs bg-[#174A8B] text-white rounded font-medium"
+                className="enterprise-btn-primary h-8 px-4 text-xs"
               >
                 Close Preview
               </button>

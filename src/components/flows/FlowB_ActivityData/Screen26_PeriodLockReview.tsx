@@ -3,12 +3,14 @@ import { useApp } from '../../../context/AppContext';
 import {
   Lock,
   AlertTriangle,
-  CheckCircle2,
   ArrowRight,
   ArrowLeft,
   ShieldAlert,
   Info,
 } from 'lucide-react';
+import { PageHeader } from '../../common/PageHeader';
+import { KpiCard } from '../../common/KpiCard';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen26_PeriodLockReview: React.FC = () => {
   const {
@@ -73,95 +75,81 @@ export const Screen26_PeriodLockReview: React.FC = () => {
   return (
     <div id="screen-26-container" className="max-w-3xl mx-auto space-y-6">
       {/* Header & Hierarchy */}
-      <div className="pb-3 border-b border-[#D9DDE3]">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex items-center space-x-2 text-xs font-mono text-[#5E6672] mb-1">
-              <span>Workflow & Approvals</span>
-              <span>›</span>
-              <span className="text-[#174A8B] font-semibold">Period Lock</span>
-              <span className="text-[#858C96]">·</span>
-              <span className="text-[#858C96]">/workflow/lock/fy2025-26</span>
-            </div>
-            <h1 className="text-xl font-normal text-[#171A1F]">
-              Lock Reporting Period — FY 2025–26
-            </h1>
-            <p className="text-xs text-[#5E6672] mt-0.5">
-              High-risk destructive workflow requiring explicit typed confirmation from Tenant Admin.
-            </p>
-          </div>
-
-          <div className="mt-3 sm:mt-0 flex items-center space-x-2">
-            <button
-              onClick={() => navigateToScreen('25_approval_history', 'FLOW_B')}
-              className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#5E6672] bg-white border border-[#D9DDE3] rounded hover:bg-[#F8F9FB] transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Approval History</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        breadcrumbs={[
+          { label: 'Workflow & Approvals' },
+          { label: 'Period Lock' },
+        ]}
+        title="Lock Reporting Period — FY 2025–26"
+        description="High-risk destructive workflow requiring explicit typed confirmation from Tenant Admin."
+        badge={
+          <StatusBadge status="Locked" customLabel="Admin Governance" size="sm" />
+        }
+        contextInfo={
+          <span className="route-path text-xs text-[#8A8F98] font-medium">
+            /workflow/lock/fy2025-26
+          </span>
+        }
+        actions={
+          <button
+            onClick={() => navigateToScreen('25_approval_history', 'FLOW_B')}
+            className="enterprise-btn-secondary h-9 px-3.5 flex items-center space-x-1.5 text-xs"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to Approval History</span>
+          </button>
+        }
+      />
 
       {/* High-Risk Lock Warning Banner (Section 13) */}
-      <div className="p-4 bg-[#FEF0EF] border-2 border-[#D92D20] rounded-lg space-y-2">
-        <div className="flex items-center space-x-2 text-[#D92D20] font-medium text-sm">
+      <div className="p-4 bg-[#FEF0EF] border border-[#D92D20]/40 rounded-xl space-y-2 shadow-2xs">
+        <div className="flex items-center space-x-2 text-[#D92D20] font-semibold text-sm">
           <ShieldAlert className="w-5 h-5 shrink-0" />
           <span>Irreversible Governance Action Warning</span>
         </div>
-        <p className="text-xs text-[#7A271A] leading-relaxed">
+        <p className="text-xs text-[#7A271A] leading-relaxed font-data">
           Locking this period makes all approved activity data, calculation results and reports permanently read-only. This cannot be undone. Any further changes require a new adjustment entry in the next open period.
         </p>
       </div>
 
       {/* Summary Information Cards (Section 13.1) */}
-      <div className="bg-white border border-[#D9DDE3] rounded-lg p-5 space-y-4">
-        <h2 className="text-xs font-semibold text-[#171A1F] uppercase tracking-wider">
+      <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 space-y-4 shadow-2xs">
+        <h2 className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
           Final Verification Checkpoint
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-3.5 bg-[#F8F9FB] border border-[#D9DDE3] rounded">
-            <div className="text-xs text-[#5E6672]">Approved rows</div>
-            <div className="text-xl font-normal text-[#171A1F] font-mono mt-1">
-              {summaryInfo.approvedRows}
-            </div>
-            <div className="text-[11px] text-[#0F6B48] mt-0.5 flex items-center space-x-1">
-              <CheckCircle2 className="w-3 h-3" />
-              <span>All items approved</span>
-            </div>
-          </div>
+          <KpiCard
+            label="Approved rows"
+            value={summaryInfo.approvedRows}
+            subtext="All items approved"
+            statusDot="success"
+          />
 
-          <div className="p-3.5 bg-[#F8F9FB] border border-[#D9DDE3] rounded">
-            <div className="text-xs text-[#5E6672]">Pending review</div>
-            <div className="text-xl font-normal text-[#171A1F] font-mono mt-1">
-              {summaryInfo.pendingReview}
-            </div>
-            <div className="text-[11px] text-[#5E6672] mt-0.5">
-              Zero pending items
-            </div>
-          </div>
+          <KpiCard
+            label="Pending review"
+            value={summaryInfo.pendingReview}
+            subtext="Zero pending items"
+            statusDot="neutral"
+          />
 
-          <div className="p-3.5 bg-[#F8F9FB] border border-[#D9DDE3] rounded">
-            <div className="text-xs text-[#174A8B] font-medium">tCO2e locked-in total</div>
-            <div className="text-xl font-normal text-[#174A8B] font-mono mt-1">
-              {summaryInfo.tCO2eLockedTotal}
-            </div>
-            <div className="text-[11px] text-[#858C96] mt-0.5">
-              Permanent baseline snapshot
-            </div>
-          </div>
+          <KpiCard
+            label="tCO2e locked total"
+            value={summaryInfo.tCO2eLockedTotal}
+            subtext="Permanent baseline snapshot"
+            statusDot="brand"
+          />
         </div>
       </div>
 
       {/* Confirmation Form (Section 14 & Section 31) */}
-      <form onSubmit={handleLockPeriod} className="p-6 bg-white border border-[#D9DDE3] rounded-lg space-y-5">
+      <form onSubmit={handleLockPeriod} className="p-6 bg-white border border-[#E5E7EB] rounded-xl space-y-5 shadow-2xs">
         <div>
-          <label className="block text-xs font-semibold text-[#171A1F] mb-1">
+          <label className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
             Confirm by typing the period name
           </label>
-          <p className="text-xs text-[#5E6672] mb-2">
-            Type exactly <strong className="font-mono text-[#171A1F]">FY 2025-26</strong> below to unlock the period lock action:
+          <p className="text-xs text-[#5F6368] mb-2 font-data">
+            Type exactly <strong className="period-code font-semibold text-[#17181A]">FY 2025-26</strong> below to unlock the period lock action:
           </p>
           <input
             id="input-confirm-period-lock"
@@ -169,18 +157,18 @@ export const Screen26_PeriodLockReview: React.FC = () => {
             value={confirmationInput}
             onChange={(e) => setConfirmationInput(e.target.value)}
             placeholder="FY 2025-26"
-            className={`w-full max-w-md px-3.5 py-2 text-xs border rounded font-mono ${
+            className={`w-full max-w-md px-3.5 py-2 text-xs border rounded-lg period-code ${
               attemptedSubmit && !isMatch
                 ? 'border-[#D92D20] bg-[#FEF0EF]/40 focus:border-[#D92D20]'
                 : isMatch
-                ? 'border-[#0F6B48] bg-[#E8F5E9]/30 text-[#171A1F]'
-                : 'border-[#D9DDE3] focus:border-[#174A8B]'
+                ? 'border-[#0F6B48] bg-[#E8F5E9]/30 text-[#17181A]'
+                : 'border-[#E5E7EB] focus:border-[#7567F5]'
             }`}
           />
 
           {/* Explicit error validation message from PRD Section 31 */}
           {attemptedSubmit && !isMatch && (
-            <p className="text-xs text-[#D92D20] mt-1.5 flex items-center space-x-1">
+            <p className="text-xs text-[#D92D20] mt-1.5 flex items-center space-x-1 font-data">
               <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
               <span>Enter “FY 2025-26” to confirm the lock.</span>
             </p>
@@ -192,7 +180,7 @@ export const Screen26_PeriodLockReview: React.FC = () => {
           <button
             type="button"
             onClick={() => navigateToScreen('25_approval_history', 'FLOW_B')}
-            className="px-4 py-2 bg-white border border-[#D9DDE3] hover:bg-[#F8F9FB] text-xs font-medium text-[#171A1F] rounded transition-colors"
+            className="enterprise-btn-secondary h-9 px-4 text-xs font-semibold"
           >
             Cancel
           </button>
@@ -201,10 +189,10 @@ export const Screen26_PeriodLockReview: React.FC = () => {
             id="btn-lock-period-confirm"
             type="submit"
             disabled={!isMatch || isLocking}
-            className={`px-5 py-2 text-xs font-medium rounded transition-colors flex items-center space-x-2 shadow-sm ${
+            className={`h-9 px-5 text-xs font-semibold rounded-lg transition-colors flex items-center space-x-2 shadow-xs ${
               isMatch
                 ? 'bg-[#D92D20] hover:bg-[#B42318] text-white cursor-pointer'
-                : 'bg-[#F1F3F5] text-[#858C96] border border-[#D9DDE3] cursor-not-allowed'
+                : 'bg-[#F1F3F5] text-[#8A8F98] border border-[#E5E7EB] cursor-not-allowed'
             }`}
           >
             <Lock className="w-3.5 h-3.5" />
@@ -215,10 +203,10 @@ export const Screen26_PeriodLockReview: React.FC = () => {
       </form>
 
       {/* RBAC & Governance Note */}
-      <div className="p-3 bg-[#F8F9FB] border border-[#D9DDE3] rounded text-xs text-[#5E6672] flex items-start space-x-2">
-        <Info className="w-4 h-4 text-[#174A8B] shrink-0 mt-0.5" />
+      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
+        <Info className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
         <div>
-          <strong>FR-26.01:</strong> Only authorised Tenant Admin users can initiate period lock. Once locked, calculations become immutable snapshots and reports become read-only.
+          <strong className="text-[#17181A] font-semibold">FR-26.01:</strong> Only authorised Tenant Admin users can initiate period lock. Once locked, calculations become immutable snapshots and reports become read-only.
         </div>
       </div>
     </div>

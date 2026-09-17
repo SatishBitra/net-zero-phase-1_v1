@@ -125,7 +125,7 @@ export const Screen30_DataLineage: React.FC = () => {
             >
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <span className="text-[10px] font-mono text-[#174A8B] font-bold">
+                  <span className="text-[10px] font-mono text-[#174A8B] font-medium">
                     STEP {stage.id}
                   </span>
                   {stage.id <= 4 ? (

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
-  BookOpen,
   ArrowLeft,
   ArrowRight,
   ShieldCheck,
   Info,
   Calendar,
   Filter,
-  CheckCircle2,
-  Lock,
 } from 'lucide-react';
+import { PageHeader } from '../../common/PageHeader';
+import { StatusBadge } from '../../common/StatusBadge';
 
 interface EmissionFactorRow {
   factor: string;
@@ -61,32 +60,26 @@ export const Screen22_EmissionFactors: React.FC = () => {
   return (
     <div id="screen-22-container" className="max-w-6xl mx-auto space-y-6">
       {/* Header & Hierarchy */}
-      <div className="pb-3 border-b border-[#D9DDE3]">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex items-center space-x-2 text-xs font-mono text-[#5E6672] mb-1">
-              <span>Calculations & Results</span>
-              <span>›</span>
-              <span className="text-[#174A8B] font-semibold">Emission Factors Reference</span>
-              <span className="text-[#858C96]">·</span>
-              <span className="text-[#858C96]">/calculations/factors</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <h1 className="text-xl font-normal text-[#171A1F]">Emission Factors Reference</h1>
-              <span className="px-2 py-0.5 rounded bg-[#F1F3F5] text-[#5E6672] text-xs font-mono border border-[#D9DDE3] flex items-center space-x-1">
-                <Lock className="w-3 h-3" />
-                <span>Read-only platform library</span>
-              </span>
-            </div>
-            <p className="text-xs text-[#5E6672] mt-0.5">
-              Transparent, versioned reference library for the emission factors used in Tula Carbon ZE calculations.
-            </p>
-          </div>
-
-          <div className="mt-3 sm:mt-0 flex items-center space-x-2">
+      <PageHeader
+        breadcrumbs={[
+          { label: 'Calculations & Results', onClick: () => navigateToScreen('20_results_summary', 'FLOW_E') },
+          { label: 'Emission Factors Reference' },
+        ]}
+        title="Emission Factors Reference"
+        description="Transparent, versioned reference library for the emission factors used in Tula Carbon ZE calculations."
+        badge={
+          <StatusBadge status="Locked" customLabel="Read-only platform library" size="sm" />
+        }
+        contextInfo={
+          <span className="route-path text-xs text-[#8A8F98] font-medium">
+            /calculations/factors
+          </span>
+        }
+        actions={
+          <div className="flex items-center space-x-2">
             <button
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
-              className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#5E6672] bg-white border border-[#D9DDE3] rounded hover:bg-[#F8F9FB] transition-colors"
+              className="enterprise-btn-secondary h-9 px-3.5 flex items-center space-x-1.5 text-xs"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Drill-Down (Screen 21)</span>
@@ -94,38 +87,38 @@ export const Screen22_EmissionFactors: React.FC = () => {
 
             <button
               onClick={() => navigateToScreen('23_submission_queue', 'FLOW_B')}
-              className="flex items-center space-x-1.5 px-3.5 py-1.5 text-xs bg-[#174A8B] text-white rounded hover:bg-[#2166B1] transition-colors font-medium shadow-sm"
+              className="enterprise-btn-primary h-9 px-3.5 flex items-center space-x-1.5 text-xs shadow-xs"
             >
               <span>Submission Queue</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
-        </div>
-      </div>
+        }
+      />
 
       {/* Core Business Rule Banner */}
-      <div className="p-3.5 bg-[#EAF2FB]/60 border border-[#2166B1]/20 rounded text-xs text-[#174A8B] flex items-center justify-between">
+      <div className="p-3.5 bg-[#F0EEFF] border border-[#D8D3FF] rounded-xl text-xs text-[#5144C9] flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <ShieldCheck className="w-4 h-4 shrink-0 text-[#174A8B]" />
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#6254E8]" />
           <span>
-            <strong>Core Business Rule:</strong> Emission factors are read-only, versioned by financial year, and never overwritten. <em>A 2026 result stays reproducible in 2029.</em>
+            <strong className="font-semibold text-[#17181A]">Core Business Rule:</strong> Emission factors are read-only, versioned by financial year, and never overwritten. <em>A 2026 result stays reproducible in 2029.</em>
           </span>
         </div>
-        <span className="text-[11px] font-mono text-[#5E6672] bg-white px-2 py-0.5 rounded border border-[#D9DDE3]">
+        <span className="text-[11px] font-sans font-semibold text-[#5144C9] bg-white px-2.5 py-0.5 rounded-full border border-[#D8D3FF]">
           Zero silent modifications
         </span>
       </div>
 
       {/* Filter Toolbar */}
-      <div className="p-4 bg-white border border-[#D9DDE3] rounded flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xs">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-2">
-            <Filter className="w-3.5 h-3.5 text-[#5E6672]" />
-            <label className="text-xs font-medium text-[#5E6672]">Publishing body:</label>
+            <Filter className="w-3.5 h-3.5 text-[#5F6368]" />
+            <label className="text-xs font-semibold text-[#5F6368] font-sans">Publishing body:</label>
             <select
               value={publishingBodyFilter}
               onChange={(e) => setPublishingBodyFilter(e.target.value)}
-              className="px-2.5 py-1.5 text-xs border border-[#D9DDE3] rounded bg-white text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+              className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#7567F5] font-sans"
             >
               <option value="All">All</option>
               <option value="CEA">CEA (Central Electricity Authority)</option>
@@ -135,12 +128,12 @@ export const Screen22_EmissionFactors: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-2">
-            <Calendar className="w-3.5 h-3.5 text-[#5E6672]" />
-            <label className="text-xs font-medium text-[#5E6672]">Financial year:</label>
+            <Calendar className="w-3.5 h-3.5 text-[#5F6368]" />
+            <label className="text-xs font-semibold text-[#5F6368] font-sans">Financial year:</label>
             <select
               value={financialYearFilter}
               onChange={(e) => setFinancialYearFilter(e.target.value)}
-              className="px-2.5 py-1.5 text-xs border border-[#D9DDE3] rounded bg-white text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+              className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#7567F5] font-sans"
             >
               <option value="FY 2025–26">FY 2025–26 (Active)</option>
               <option value="FY 2024–25">FY 2024–25 (Historical Snapshot)</option>
@@ -148,52 +141,49 @@ export const Screen22_EmissionFactors: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-xs text-[#5E6672] font-mono">
+        <div className="text-xs text-[#5F6368] font-sans font-medium">
           Showing {filteredFactors.length} verified factors
         </div>
       </div>
 
       {/* Factor Table */}
-      <div className="bg-white border border-[#D9DDE3] rounded overflow-hidden">
+      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
-            <tr className="bg-[#F8F9FB] border-b border-[#D9DDE3] text-[#5E6672]">
-              <th className="py-3 px-4 font-medium">Factor</th>
-              <th className="py-3 px-4 font-medium text-right">Value</th>
-              <th className="py-3 px-4 font-medium">Unit</th>
-              <th className="py-3 px-4 font-medium">Publishing Body</th>
-              <th className="py-3 px-4 font-medium">Effective From</th>
-              <th className="py-3 px-4 font-medium text-center">Status</th>
+            <tr className="bg-[#F4F5F6] border-b border-[#E5E7EB] text-[#5F6368]">
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Factor</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-right">Value</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Unit</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Publishing Body</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Effective From</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-center">Status</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#F1F3F5]">
             {filteredFactors.map((row, idx) => (
-              <tr key={idx} className="hover:bg-[#F8F9FB]">
-                <td className="py-3.5 px-4 font-medium text-[#171A1F]">
+              <tr key={idx} className="hover:bg-[#FAFAFB] transition-colors">
+                <td className="py-3.5 px-4 font-semibold text-[#17181A]">
                   <div>{row.factor}</div>
                   {row.gwpMethodology && (
-                    <div className="text-[11px] text-[#858C96]">{row.gwpMethodology}</div>
+                    <div className="text-[11px] text-[#8A8F98] font-data">{row.gwpMethodology}</div>
                   )}
                 </td>
-                <td className="py-3.5 px-4 text-right font-mono font-bold text-[#171A1F]">
+                <td className="py-3.5 px-4 text-right emission-factor font-medium text-[#17181A]">
                   {row.value}
                 </td>
-                <td className="py-3.5 px-4 font-mono text-[#5E6672]">
+                <td className="py-3.5 px-4 emission-factor text-[#5F6368]">
                   {row.unit}
                 </td>
-                <td className="py-3.5 px-4 font-medium text-[#174A8B]">
-                  <span className="px-2 py-0.5 rounded bg-[#EAF2FB] border border-[#2166B1]/20">
+                <td className="py-3.5 px-4 font-semibold text-[#5144C9]">
+                  <span className="px-2 py-0.5 rounded-full bg-[#F0EEFF] border border-[#D8D3FF] text-xs">
                     {row.publishingBody}
                   </span>
                 </td>
-                <td className="py-3.5 px-4 font-mono text-[#5E6672]">
+                <td className="py-3.5 px-4 period-code text-[#5F6368]">
                   {row.effectiveFrom}
                 </td>
                 <td className="py-3.5 px-4 text-center">
-                  <span className="inline-flex items-center space-x-1 text-[#0F6B48] bg-[#E8F5E9] px-2 py-0.5 rounded text-[11px] font-medium">
-                    <CheckCircle2 className="w-3 h-3" />
-                    <span>Published</span>
-                  </span>
+                  <StatusBadge status="Approved" customLabel="Published" size="sm" />
                 </td>
               </tr>
             ))}
@@ -202,12 +192,12 @@ export const Screen22_EmissionFactors: React.FC = () => {
       </div>
 
       {/* Compliance & Functional Notes */}
-      <div className="p-4 bg-[#F8F9FB] border border-[#D9DDE3] rounded text-xs text-[#5E6672] space-y-1.5">
-        <div className="font-medium text-[#171A1F] flex items-center space-x-1.5">
-          <Info className="w-3.5 h-3.5 text-[#174A8B]" />
+      <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] space-y-1.5 shadow-2xs font-data">
+        <div className="font-semibold text-[#17181A] flex items-center space-x-1.5">
+          <Info className="w-3.5 h-3.5 text-[#6254E8]" />
           <span>Functional Requirements (FR-22.01 – FR-22.05):</span>
         </div>
-        <ul className="list-disc list-inside space-y-1 pl-1 text-[11px]">
+        <ul className="list-disc list-inside space-y-1 pl-1 text-[11px] text-[#5F6368]">
           <li><strong>FR-22.01:</strong> Every calculation retains the emission-factor version used at calculation time.</li>
           <li><strong>FR-22.02:</strong> Updating the platform factor library will never mutate or retroactively adjust historical calculations.</li>
           <li><strong>FR-22.03:</strong> Users cannot directly edit published factors; adjustments require new version releases with an effective date.</li>

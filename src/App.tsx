@@ -158,7 +158,7 @@ const MainAppContent: React.FC = () => {
 
   return (
     <div className="h-screen bg-[#F8F9FB] flex flex-col overflow-hidden">
-      <Header onOpenFlowMap={() => setFlowMapOpen(true)} />
+      <Header onOpenFlowMap={() => {}} />
 
       <div className="flex-1 flex overflow-hidden min-h-0">
         <Sidebar />
@@ -167,8 +167,6 @@ const MainAppContent: React.FC = () => {
           {renderActiveScreen()}
         </main>
       </div>
-
-      <FlowNavigator isOpen={flowMapOpen} onClose={() => setFlowMapOpen(false)} />
     </div>
   );
 };

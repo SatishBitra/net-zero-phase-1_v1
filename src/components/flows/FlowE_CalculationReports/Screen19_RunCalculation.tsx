@@ -11,7 +11,10 @@ import {
   Info,
   Layers,
   Sparkles,
+  RefreshCw,
 } from 'lucide-react';
+import { PageHeader } from '../../common/PageHeader';
+import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen19_RunCalculation: React.FC = () => {
   const {
@@ -23,7 +26,7 @@ export const Screen19_RunCalculation: React.FC = () => {
     addAuditLog,
   } = useApp();
 
-  const [period, setPeriod] = useState('FY 2025–26');
+  const [period, setPeriod] = useState(activePeriod?.name || 'FY 2025–26');
   const [boundary, setBoundary] = useState('All configured sites (3)');
   const [scopes, setScopes] = useState(['Scope 1', 'Scope 2 (Location-based)']);
   const [isCalculating, setIsCalculating] = useState(false);
@@ -62,73 +65,66 @@ export const Screen19_RunCalculation: React.FC = () => {
 
   return (
     <div id="screen-19-container" className="max-w-4xl mx-auto space-y-6">
-      {/* Header & Hierarchy */}
-      <div className="pb-3 border-b border-[#D9DDE3]">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex items-center space-x-2 text-xs font-mono text-[#5E6672] mb-1">
-              <span>Calculations</span>
-              <span>›</span>
-              <span className="text-[#174A8B] font-semibold">Run Calculation</span>
-              <span className="text-[#858C96]">·</span>
-              <span className="text-[#858C96]">/calculations/new</span>
-            </div>
-            <h1 className="text-xl font-normal text-[#171A1F]">Run GHG Calculation</h1>
-            <p className="text-xs text-[#5E6672] mt-0.5">
-              Configure parameters to execute the deterministic calculation engine against approved activity records.
-            </p>
-          </div>
-
-          <div className="mt-3 sm:mt-0 flex items-center space-x-2">
-            <button
-              onClick={() => navigateToScreen('20_results_summary', 'FLOW_E')}
-              className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#5E6672] bg-white border border-[#D9DDE3] rounded hover:bg-[#F8F9FB] transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Runs</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Page Header */}
+      <PageHeader
+        breadcrumbs={[
+          { label: 'Calculations & Reports', onClick: () => navigateToScreen('20_results_summary', 'FLOW_E') },
+          { label: 'Calculations Ledger', onClick: () => navigateToScreen('20_results_summary', 'FLOW_E') },
+          { label: 'Run Calculation' },
+        ]}
+        title="Run GHG Calculation"
+        badge={<StatusBadge status="Ready" customLabel="Engine v1.4.2" size="sm" />}
+        description="Configure parameters to execute the deterministic calculation engine against approved activity records."
+        actions={
+          <button
+            type="button"
+            onClick={() => navigateToScreen('20_results_summary', 'FLOW_E')}
+            className="px-3.5 py-2 text-xs font-semibold text-[#17181A] bg-white border border-[#E5E7EB] rounded-lg hover:bg-[#FAFAFB] hover:border-[#D5D8DD] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 text-[#5F6368]" />
+            <span>Back to Ledger</span>
+          </button>
+        }
+      />
 
       {/* Run Configuration Form */}
       <form onSubmit={handleRunCalculation} className="space-y-6">
-        <div className="p-6 bg-white border border-[#D9DDE3] rounded space-y-5">
-          <div className="flex items-center justify-between pb-2 border-b border-[#F1F3F5]">
-            <h2 className="text-sm font-medium text-[#171A1F]">Calculation Parameters</h2>
-            <span className="text-[11px] font-mono text-[#5E6672] bg-[#F1F3F5] px-2 py-0.5 rounded">
+        <div className="p-6 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-5">
+          <div className="flex items-center justify-between pb-3 border-b border-[#F1F3F5]">
+            <h2 className="text-sm font-semibold text-[#17181A] font-sans">Calculation Parameters</h2>
+            <span className="text-[11px] font-data font-semibold text-[#6254E8] bg-[#6254E8]/10 px-2.5 py-1 rounded-full">
               Engine Version: TC-CALC-v1.4.2
             </span>
           </div>
 
           {/* Reporting Period Field */}
           <div>
-            <label className="block text-xs font-medium text-[#5E6672] mb-1">
-              Reporting period <span className="text-[#D92D20]">*</span>
+            <label className="block text-xs font-semibold text-[#5F6368] uppercase tracking-wider font-sans mb-1.5">
+              Reporting period <span className="text-[#B42318]">*</span>
             </label>
             <div className="relative">
               <input
                 type="text"
                 readOnly
-                value="FY 2025–26 (Apr 2025 – Mar 2026)"
-                className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded bg-[#F8F9FB] text-[#171A1F] font-medium"
+                value={`${period} (Apr 2025 – Mar 2026)`}
+                className="w-full px-3.5 py-2.5 text-xs border border-[#E5E7EB] rounded-lg bg-[#FAFAFB] text-[#17181A] font-medium font-sans cursor-not-allowed"
               />
-              <Calendar className="w-4 h-4 text-[#858C96] absolute right-3 top-2.5" />
+              <Calendar className="w-4 h-4 text-[#8A8F98] absolute right-3.5 top-3" />
             </div>
-            <p className="text-[11px] text-[#5E6672] mt-1">
-              Active reporting period defined in Screen 06.
+            <p className="text-[11px] text-[#5F6368] font-data mt-1.5">
+              Active reporting period defined in Organization Settings.
             </p>
           </div>
 
           {/* Boundary Selection */}
           <div>
-            <label className="block text-xs font-medium text-[#5E6672] mb-1">
-              Boundary <span className="text-[#D92D20]">*</span>
+            <label className="block text-xs font-semibold text-[#5F6368] uppercase tracking-wider font-sans mb-1.5">
+              Boundary <span className="text-[#B42318]">*</span>
             </label>
             <select
               value={boundary}
               onChange={(e) => setBoundary(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-[#D9DDE3] rounded bg-white text-[#171A1F] focus:outline-none focus:border-[#174A8B]"
+              className="w-full px-3.5 py-2.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] font-sans focus:outline-none focus:border-[#6254E8] focus:ring-2 focus:ring-[#6254E8]/20"
             >
               <option value="All configured sites (3)">
                 All configured sites (3) — Chennai Plant 1, Pune Warehouse, Hyderabad HQ
@@ -141,64 +137,65 @@ export const Screen19_RunCalculation: React.FC = () => {
 
           {/* Emission Scopes Checklist */}
           <div>
-            <label className="block text-xs font-medium text-[#5E6672] mb-1.5">
-              Emission scopes <span className="text-[#D92D20]">*</span>
+            <label className="block text-xs font-semibold text-[#5F6368] uppercase tracking-wider font-sans mb-2">
+              Emission scopes <span className="text-[#B42318]">*</span>
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 bg-[#F8F9FB] border border-[#D9DDE3] rounded flex items-start space-x-2.5">
+              <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-start space-x-3">
                 <input
                   type="checkbox"
                   checked
                   readOnly
-                  className="mt-0.5 text-[#174A8B] rounded border-[#D9DDE3]"
+                  className="mt-0.5 text-[#6254E8] rounded border-[#E5E7EB] focus:ring-[#6254E8]"
                 />
                 <div>
-                  <div className="font-medium text-[#171A1F]">Scope 1: Stationary combustion</div>
-                  <div className="text-[11px] text-[#5E6672]">
+                  <div className="font-semibold text-[#17181A] font-sans">Scope 1: Stationary combustion</div>
+                  <div className="text-[11px] text-[#5F6368] font-data mt-0.5">
                     Diesel generators, boilers, and on-site fuel combustion.
                   </div>
                 </div>
               </div>
 
-              <div className="p-3 bg-[#F8F9FB] border border-[#D9DDE3] rounded flex items-start space-x-2.5">
+              <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-start space-x-3">
                 <input
                   type="checkbox"
                   checked
                   readOnly
-                  className="mt-0.5 text-[#174A8B] rounded border-[#D9DDE3]"
+                  className="mt-0.5 text-[#6254E8] rounded border-[#E5E7EB] focus:ring-[#6254E8]"
                 />
                 <div>
-                  <div className="font-medium text-[#171A1F]">Scope 2: Location-based grid electricity</div>
-                  <div className="text-[11px] text-[#5E6672]">
+                  <div className="font-semibold text-[#17181A] font-sans">Scope 2: Location-based grid electricity</div>
+                  <div className="text-[11px] text-[#5F6368] font-data mt-0.5">
                     Purchased grid electricity mapped to regional baseline emission factors (CEA v19).
                   </div>
                 </div>
               </div>
             </div>
-            <p className="text-[11px] text-[#858C96] mt-1.5">
+            <p className="text-[11px] text-[#8A8F98] font-data mt-2">
               Scope 3 is not included in Phase 1 scope.
             </p>
           </div>
 
           {/* Source Count Summary Box */}
-          <div className="p-3.5 bg-[#EAF2FB]/50 border border-[#2166B1]/20 rounded flex items-center justify-between text-xs">
-            <div className="flex items-center space-x-2 text-[#174A8B]">
+          <div className="p-4 bg-[#6254E8]/5 border border-[#6254E8]/20 rounded-xl flex items-center justify-between text-xs">
+            <div className="flex items-center space-x-2.5 text-[#6254E8]">
               <Layers className="w-4 h-4 shrink-0" />
-              <span>
+              <span className="font-sans">
                 <strong>Source count:</strong> 3 active sources with approved data ready for aggregation.
               </span>
             </div>
-            <span className="font-mono text-[#0F6B48] bg-[#E8F5E9] px-2 py-0.5 rounded text-[11px] font-medium">
-              100% Approved Records
-            </span>
+            <StatusBadge status="Approved" customLabel="100% Approved Records" size="sm" />
           </div>
         </div>
 
         {/* Build Notes Banner */}
-        <div className="p-3.5 bg-[#F8F9FB] border border-[#D9DDE3] rounded text-xs text-[#5E6672] space-y-1">
-          <div className="font-medium text-[#171A1F]">Build Notes:</div>
-          <ul className="list-disc list-inside text-[11px] space-y-0.5 pl-1">
-            <li>Calculation jobs are asynchronous background tasks managed by the worker queue.</li>
+        <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs text-xs text-[#5F6368] space-y-1.5 font-sans">
+          <div className="font-semibold text-[#17181A] flex items-center space-x-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-[#6254E8]" />
+            <span>Engine Execution Guidelines</span>
+          </div>
+          <ul className="list-disc list-inside text-[11px] space-y-1 pl-1 font-data text-[#5F6368]">
+            <li>Calculation jobs are asynchronous background tasks managed by the deterministic worker queue.</li>
             <li>Phase 1 scope covers: Scope 1 (Stationary combustion) + Scope 2 (Location-based grid electricity). Scope 3 is not in Phase 1.</li>
             <li>Produces an immutable calculation snapshot for complete verifier audit trail traceability.</li>
           </ul>
@@ -209,7 +206,7 @@ export const Screen19_RunCalculation: React.FC = () => {
           <button
             type="button"
             onClick={() => navigateToScreen('20_results_summary', 'FLOW_E')}
-            className="px-4 py-2 bg-white border border-[#D9DDE3] hover:bg-[#F8F9FB] text-xs font-medium text-[#171A1F] rounded transition-colors"
+            className="px-4 py-2 bg-white border border-[#E5E7EB] hover:bg-[#FAFAFB] text-xs font-semibold text-[#17181A] rounded-lg transition-colors shadow-2xs"
           >
             Cancel
           </button>
@@ -218,11 +215,20 @@ export const Screen19_RunCalculation: React.FC = () => {
             id="btn-trigger-run-calculation"
             type="submit"
             disabled={isCalculating}
-            className="px-6 py-2 bg-[#174A8B] hover:bg-[#2166B1] text-white text-xs font-medium rounded transition-colors flex items-center space-x-2 shadow-sm disabled:opacity-50"
+            className="px-6 py-2.5 bg-[#6254E8] hover:bg-[#5244DE] text-white text-xs font-semibold rounded-lg transition-colors flex items-center space-x-2 shadow-sm disabled:opacity-50"
           >
-            <Play className={`w-3.5 h-3.5 ${isCalculating ? 'animate-spin' : ''}`} />
-            <span>{isCalculating ? 'Executing Calculation...' : 'Run Calculation'}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            {isCalculating ? (
+              <>
+                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                <span>Executing Calculation...</span>
+              </>
+            ) : (
+              <>
+                <Play className="w-3.5 h-3.5 fill-current" />
+                <span>Run Calculation</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </>
+            )}
           </button>
         </div>
       </form>
