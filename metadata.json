@@ -1,0 +1,6 @@
+{
+  "name": "Tula Carbon",
+  "description": "Enterprise Net-Zero SaaS platform for carbon accounting, emissions activity data, OCR bill extraction, calculation, audit verification, and GHG reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

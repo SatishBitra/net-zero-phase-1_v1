@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-data: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    color: #171A1F;
+    background-color: #F8F9FB;
+    font-weight: 400;
+  }
+
+  input, select, textarea, button {
+    font-family: inherit;
+    font-weight: 400;
+  }
+
+  /* Table styling */
+  th {
+    font-weight: 500;
+    color: #5E6672;
+  }
+}
+
+.font-data {
+  font-family: var(--font-data);
+}
+
+/* Custom scrollbars for high-density tables */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F3F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #B8BEC7;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #858C96;
+}
