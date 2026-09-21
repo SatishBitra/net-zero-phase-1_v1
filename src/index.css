@@ -2,6 +2,33 @@
 
 @theme {
   --font-mono: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  /* Primary Navy (#01153C) & Blue Shades Palette */
+  --color-brand-primary: #01153C;
+  --color-brand-950: #01102E;
+  --color-brand-900: #01153C;
+  --color-brand-800: #0A2352;
+  --color-brand-700: #133575;
+  --color-brand-600: #1E499F;
+  --color-brand-500: #2E62C4;
+  --color-brand-400: #4B7FD8;
+  --color-brand-300: #7EAAEB;
+  --color-brand-200: #B9CCE9;
+  --color-brand-100: #DCE5F5;
+  --color-brand-50: #EDF2FA;
+
+  /* Red Badge & Indicator Palette (#ED2024) */
+  --color-indicator-red: #ED2024;
+  --color-badge-red: #ED2024;
+  --color-badge-red-hover: #D91A1E;
+  --color-badge-red-bg: #FEF1F1;
+  --color-badge-red-border: #FED2D3;
+  --color-red-900: #8E0E11;
+  --color-red-700: #B81418;
+  --color-red-600: #ED2024;
+  --color-red-500: #F43C3F;
+  --color-red-100: #FED2D3;
+  --color-red-50: #FEF1F1;
 }
 
 @layer base {
@@ -25,13 +52,34 @@
     --border-default: #E5E7EB;
     --border-subtle: #ECEDEF;
     --border-strong: #D5D8DD;
-    --border-focus: #9B93F8;
+    --border-focus: #01153C;
 
-    --brand-50: #F4F2FF;
-    --brand-100: #EAE7FF;
-    --brand-500: #7567F5;
-    --brand-600: #6254E8;
-    --brand-700: #5144C9;
+    /* Primary Navy Brand (#01153C) & Blue System Tokens */
+    --brand-primary: #01153C;
+    --brand-primary-hover: #0A2352;
+    --brand-primary-active: #06193E;
+    --brand-50: #EDF2FA;
+    --brand-100: #DCE5F5;
+    --brand-200: #B9CCE9;
+    --brand-300: #7EAAEB;
+    --brand-400: #4B7FD8;
+    --brand-500: #2E62C4;
+    --brand-600: #1E499F;
+    --brand-700: #133575;
+    --brand-800: #0A2352;
+    --brand-900: #01153C;
+
+    /* Red System Tokens (#ED2024) for Badges & Indicators */
+    --color-red-badge: #ED2024;
+    --color-red-badge-hover: #D91A1E;
+    --color-red-badge-bg: #FEF1F1;
+    --color-red-badge-border: #FED2D3;
+    --color-red-indicator: #ED2024;
+    --color-red-50: #FEF1F1;
+    --color-red-100: #FED2D3;
+    --color-red-500: #ED2024;
+    --color-red-600: #D91A1E;
+    --color-red-700: #B81418;
   }
   
   body {
@@ -137,9 +185,9 @@ code.font-medium {
 }
 
 .pill-pending {
-  background-color: #F6F0FF;
-  color: #8145C5;
-  border: 1px solid rgba(129, 69, 197, 0.2);
+  background-color: #EDF2FA;
+  color: #01153C;
+  border: 1px solid rgba(1, 21, 60, 0.18);
 }
 
 .pill-returned,
@@ -152,10 +200,11 @@ code.font-medium {
 
 .pill-flagged,
 .pill-error,
-.pill-rejected {
-  background-color: #FFF1F1;
-  color: #B83C3C;
-  border: 1px solid rgba(217, 83, 83, 0.2);
+.pill-rejected,
+.pill-alert {
+  background-color: #FEF1F1;
+  color: #ED2024;
+  border: 1px solid #FED2D3;
 }
 
 .pill-default,
@@ -166,9 +215,9 @@ code.font-medium {
 }
 
 .pill-initiated {
-  background-color: #F0EEFF;
-  color: #5144C9;
-  border: 1px solid rgba(98, 84, 232, 0.2);
+  background-color: #EDF2FA;
+  color: #01153C;
+  border: 1px solid rgba(1, 21, 60, 0.2);
 }
 
 .pill-neutral,
@@ -187,7 +236,7 @@ code.font-medium {
 }
 
 .enterprise-btn-primary {
-  background-color: #6254E8;
+  background-color: #01153C;
   color: #FFFFFF;
   font-weight: 600;
   font-size: 13px;
@@ -195,7 +244,26 @@ code.font-medium {
   transition: all 0.15s ease-in-out;
 }
 .enterprise-btn-primary:hover {
-  background-color: #5144C9;
+  background-color: #0A2352;
+}
+
+/* Red Badges and Indicators (#ED2024) */
+.badge-red {
+  background-color: #FEF1F1;
+  color: #ED2024;
+  border: 1px solid #FED2D3;
+}
+
+.indicator-red {
+  background-color: #ED2024;
+}
+
+/* Primary Navy Utilities */
+.bg-brand-primary {
+  background-color: #01153C !important;
+}
+.text-brand-primary {
+  color: #01153C !important;
 }
 
 .enterprise-btn-secondary {

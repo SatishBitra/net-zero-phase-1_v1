@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { ScreenId } from '../../types';
+import zeLogo from '../../assets/ze.png';
 import {
   LayoutDashboard,
   TableProperties,
@@ -67,7 +68,7 @@ export const Sidebar: React.FC = () => {
             label: 'Verifier Dashboard',
             icon: ShieldCheck,
             badge: openQueriesCount > 0 ? `${openQueriesCount} open` : undefined,
-            badgeColor: 'bg-[#FEF0EF] text-[#B42318]',
+            badgeColor: 'bg-[#FEF1F1] text-[#ED2024]',
           },
           { id: '32_evidence_trace', label: 'Evidence Trace', icon: Files },
           { id: '33_raise_query', label: 'Assurance Queries', icon: HelpCircle },
@@ -84,7 +85,7 @@ export const Sidebar: React.FC = () => {
             label: 'Notification Center',
             icon: Bell,
             badge: unreadNotificationsCount > 0 ? unreadNotificationsCount : undefined,
-            badgeColor: 'bg-[#EAF2FB] text-[#174A8B]',
+            badgeColor: 'bg-[#FEF1F1] text-[#ED2024]',
           },
         ],
       },
@@ -123,7 +124,7 @@ export const Sidebar: React.FC = () => {
             label: 'Notification Center',
             icon: Bell,
             badge: unreadNotificationsCount > 0 ? unreadNotificationsCount : undefined,
-            badgeColor: 'bg-[#EAF2FB] text-[#174A8B]',
+            badgeColor: 'bg-[#FEF1F1] text-[#ED2024]',
           },
           { id: '22_factors_reference', label: 'Emission Factors', icon: BookOpen },
         ],
@@ -145,7 +146,7 @@ export const Sidebar: React.FC = () => {
             label: 'Review & Approvals',
             icon: CheckCircle2,
             badge: pendingReviewCount > 0 ? pendingReviewCount : undefined,
-            badgeColor: 'bg-[#EAF2FB] text-[#174A8B]',
+            badgeColor: 'bg-[#EDF2FA] text-[#01153C]',
           },
           { id: '23_submission_queue', label: 'Submission Queue', icon: Inbox },
           { id: '25_approval_history', label: 'Approval History', icon: History },
@@ -170,7 +171,7 @@ export const Sidebar: React.FC = () => {
             label: 'Notification Center',
             icon: Bell,
             badge: unreadNotificationsCount > 0 ? unreadNotificationsCount : undefined,
-            badgeColor: 'bg-[#EAF2FB] text-[#174A8B]',
+            badgeColor: 'bg-[#FEF1F1] text-[#ED2024]',
           },
         ],
       },
@@ -210,7 +211,7 @@ export const Sidebar: React.FC = () => {
             label: 'Review & Approvals',
             icon: CheckCircle2,
             badge: pendingReviewCount > 0 ? pendingReviewCount : undefined,
-            badgeColor: 'bg-[#EAF2FB] text-[#174A8B]',
+            badgeColor: 'bg-[#EDF2FA] text-[#01153C]',
           },
           { id: '23_submission_queue', label: 'Submission Queue', icon: Inbox },
           { id: '26_period_lock', label: 'Period Governance', icon: Calendar },
@@ -219,14 +220,14 @@ export const Sidebar: React.FC = () => {
             label: 'Verifier Portal',
             icon: ShieldCheck,
             badge: openQueriesCount > 0 ? openQueriesCount : undefined,
-            badgeColor: 'bg-[#FEF0EF] text-[#B42318]',
+            badgeColor: 'bg-[#FEF1F1] text-[#ED2024]',
           },
           {
             id: '34_reviewer_notification',
             label: 'Notification Center',
             icon: Bell,
             badge: unreadNotificationsCount > 0 ? unreadNotificationsCount : undefined,
-            badgeColor: 'bg-[#EAF2FB] text-[#174A8B]',
+            badgeColor: 'bg-[#FEF1F1] text-[#ED2024]',
           },
         ],
       },
@@ -276,19 +277,19 @@ export const Sidebar: React.FC = () => {
                   onClick={() => navigateToScreen(item.id)}
                   className={`w-full flex items-center justify-between px-3 py-2 text-[13px] rounded-lg transition-colors text-left relative group font-sans ${
                     isActive
-                      ? 'bg-[#F0EEFF] text-[#5144C9] font-semibold'
+                      ? 'bg-[#EDF2FA] text-[#01153C] font-semibold'
                       : 'text-[#5F6368] hover:bg-[#FAFAFB] hover:text-[#17181A]'
                   }`}
                 >
                   {/* Active left border indicator */}
                   {isActive && (
-                    <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] bg-[#6254E8] rounded-r" />
+                    <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] bg-[#01153C] rounded-r" />
                   )}
 
                   <div className="flex items-center space-x-2.5 truncate">
                     <Icon
                       className={`w-4 h-4 shrink-0 transition-colors ${
-                        isActive ? 'text-[#6254E8]' : 'text-[#8A8F98] group-hover:text-[#5F6368]'
+                        isActive ? 'text-[#01153C]' : 'text-[#8A8F98] group-hover:text-[#5F6368]'
                       }`}
                     />
                     <span className="truncate">{item.label}</span>
@@ -298,7 +299,7 @@ export const Sidebar: React.FC = () => {
                     <span
                       className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold shrink-0 ml-1.5 ${
                         isActive
-                          ? 'bg-[#EAE7FF] text-[#5144C9]'
+                          ? 'bg-[#DCE5F5] text-[#01153C]'
                           : item.badgeColor || 'bg-[#F1F3F5] text-[#59616B]'
                       }`}
                     >
@@ -336,11 +337,13 @@ export const Sidebar: React.FC = () => {
         {/* Mobile Drawer Header */}
         <div className="p-3.5 border-b border-[#ECEDEF] bg-[#FAFAFB] flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#6254E8] flex items-center justify-center text-white font-semibold text-sm shadow-xs">
-              T
-            </div>
+            <img
+              src={zeLogo}
+              alt="ZE Logo"
+              className="w-7 h-7 object-contain rounded-md shrink-0 shadow-2xs"
+            />
             <div>
-              <div className="text-sm font-semibold text-[#17181A]">Tula Carbon</div>
+              <div className="text-sm font-bold text-[#01153C]">Tula Carbon <span className="text-[#ED2024] text-xs">ZE</span></div>
               <div className="text-[11px] text-[#5F6368]">{getRoleLabel()}</div>
             </div>
           </div>
@@ -361,7 +364,7 @@ export const Sidebar: React.FC = () => {
             <span
               className={`w-2 h-2 rounded-full shrink-0 ${
                 currentRole === 'VERIFIER'
-                  ? 'bg-[#6254E8]'
+                  ? 'bg-[#01153C]'
                   : currentRole === 'REVIEWER'
                   ? 'bg-[#43A65C]'
                   : currentRole === 'DATA_ENTRY'
@@ -397,7 +400,7 @@ export const Sidebar: React.FC = () => {
             <span
               className={`w-2 h-2 rounded-full shrink-0 ${
                 currentRole === 'VERIFIER'
-                  ? 'bg-[#6254E8]'
+                  ? 'bg-[#01153C]'
                   : currentRole === 'REVIEWER'
                   ? 'bg-[#43A65C]'
                   : currentRole === 'DATA_ENTRY'

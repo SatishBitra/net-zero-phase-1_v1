@@ -248,7 +248,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
               id="btn-drilldown-shortcut"
               type="button"
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
-              className="px-4 py-2 text-xs font-semibold text-[#6254E8] bg-[#6254E8]/10 border border-[#6254E8]/20 rounded-full hover:bg-[#6254E8]/15 shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-full hover:bg-[#DCE5F5] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
             >
               <Eye className="w-3.5 h-3.5" />
               <span>Results Drill-Down</span>
@@ -258,7 +258,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
               id="btn-trigger-run-modal"
               type="button"
               onClick={() => setIsRunModalOpen(true)}
-              className="px-4 py-2 text-xs font-semibold text-white bg-[#6254E8] rounded-full hover:bg-[#5244DE] shadow-sm inline-flex items-center space-x-1.5 transition-all"
+              className="px-5 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>Run Calculation</span>
@@ -289,7 +289,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           label="Scope 2: Grid Electricity"
           value={`${activeRun.scope2.toLocaleString('en-US', { minimumFractionDigits: 1 })} tCO2e`}
           subtext="CEA v19 grid factor (0.708 kg/kWh)"
-          icon={<Layers className="w-4 h-4 text-[#6254E8]" />}
+          icon={<Layers className="w-4 h-4 text-[#01153C]" />}
           change={`${((activeRun.scope2 / activeRun.total_tCO2e) * 100).toFixed(1)}%`}
         />
 
@@ -311,7 +311,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           onClick={() => setActiveTab('runs')}
           className={`pb-3 font-semibold transition-all flex items-center space-x-2 border-b-2 font-sans ${
             activeTab === 'runs'
-              ? 'border-[#6254E8] text-[#6254E8]'
+              ? 'border-[#01153C] text-[#01153C]'
               : 'border-transparent text-[#5F6368] hover:text-[#17181A] hover:border-[#D5D8DD]'
           }`}
         >
@@ -319,7 +319,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           <span>Calculation Runs (Batch Ledger)</span>
           <span
             className={`ml-1 px-2 py-0.5 rounded-full text-[11px] font-data font-semibold ${
-              activeTab === 'runs' ? 'bg-[#6254E8]/10 text-[#6254E8]' : 'bg-[#F1F3F5] text-[#5F6368]'
+              activeTab === 'runs' ? 'bg-[#EDF2FA] text-[#01153C]' : 'bg-[#F1F3F5] text-[#5F6368]'
             }`}
           >
             {calculationRuns.length}
@@ -332,7 +332,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           onClick={() => setActiveTab('ledger')}
           className={`pb-3 font-semibold transition-all flex items-center space-x-2 border-b-2 font-sans ${
             activeTab === 'ledger'
-              ? 'border-[#6254E8] text-[#6254E8]'
+              ? 'border-[#01153C] text-[#01153C]'
               : 'border-transparent text-[#5F6368] hover:text-[#17181A] hover:border-[#D5D8DD]'
           }`}
         >
@@ -340,7 +340,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           <span>Line-Item Emissions Ledger</span>
           <span
             className={`ml-1 px-2 py-0.5 rounded-full text-[11px] font-data font-semibold ${
-              activeTab === 'ledger' ? 'bg-[#6254E8]/10 text-[#6254E8]' : 'bg-[#F1F3F5] text-[#5F6368]'
+              activeTab === 'ledger' ? 'bg-[#EDF2FA] text-[#01153C]' : 'bg-[#F1F3F5] text-[#5F6368]'
             }`}
           >
             {records.length} entries
@@ -353,7 +353,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           onClick={() => setActiveTab('methodology')}
           className={`pb-3 font-semibold transition-all flex items-center space-x-2 border-b-2 font-sans ${
             activeTab === 'methodology'
-              ? 'border-[#6254E8] text-[#6254E8]'
+              ? 'border-[#01153C] text-[#01153C]'
               : 'border-transparent text-[#5F6368] hover:text-[#17181A] hover:border-[#D5D8DD]'
           }`}
         >
@@ -369,7 +369,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 sm:p-6 shadow-2xs space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#F1F3F5] gap-3">
               <div className="flex items-center space-x-3.5">
-                <div className="w-10 h-10 rounded-xl bg-[#6254E8]/10 text-[#6254E8] flex items-center justify-center font-bold font-data text-sm">
+                <div className="w-10 h-10 rounded-xl bg-[#EDF2FA] text-[#01153C] flex items-center justify-center font-bold font-data text-sm">
                   {activeRun.id.replace('#RUN-', '')}
                 </div>
                 <div>
@@ -377,7 +377,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                     Inspecting Calculation Batch
                   </div>
                   <div className="text-base font-bold text-[#17181A] flex items-center space-x-2 mt-0.5 font-sans">
-                    <span className="font-data text-[#6254E8]">{activeRun.id}</span>
+                    <span className="font-data text-[#01153C]">{activeRun.id}</span>
                     <span className="text-[#8A8F98]">·</span>
                     <span>{activeRun.period}</span>
                     <span className="text-[#8A8F98]">·</span>
@@ -388,7 +388,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
 
               <div className="flex items-center space-x-2.5">
                 <StatusBadge status={activeRun.status} size="md" />
-                <span className="text-[#5F6368] font-data text-xs flex items-center space-x-1.5 bg-[#FAFAFB] px-2.5 py-1 rounded-lg border border-[#E5E7EB]">
+                <span className="text-[#5F6368] font-data text-xs flex items-center space-x-1.5 bg-[#FAFAFB] px-3 py-1.5 rounded-full border border-[#E5E7EB]">
                   <Clock className="w-3.5 h-3.5 text-[#8A8F98]" />
                   <span>Runtime: {activeRun.duration}</span>
                 </span>
@@ -400,11 +400,11 @@ export const Screen20_CalculationRuns: React.FC = () => {
               <div className="flex items-center justify-between text-xs text-[#5F6368] font-data">
                 <div className="flex items-center space-x-5">
                   <span className="flex items-center space-x-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#6254E8]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#01153C]" />
                     <span>Scope 1: {activeRun.scope1.toLocaleString()} tCO2e</span>
                   </span>
                   <span className="flex items-center space-x-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#8145C5]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#204382]" />
                     <span>Scope 2: {activeRun.scope2.toLocaleString()} tCO2e</span>
                   </span>
                 </div>
@@ -416,12 +416,12 @@ export const Screen20_CalculationRuns: React.FC = () => {
               <div className="w-full h-2.5 bg-[#F1F3F5] rounded-full overflow-hidden flex">
                 <div
                   style={{ width: `${(activeRun.scope1 / activeRun.total_tCO2e) * 100}%` }}
-                  className="bg-[#6254E8] h-full transition-all"
+                  className="bg-[#01153C] h-full transition-all"
                   title={`Scope 1: ${activeRun.scope1} tCO2e`}
                 />
                 <div
                   style={{ width: `${(activeRun.scope2 / activeRun.total_tCO2e) * 100}%` }}
-                  className="bg-[#8145C5] h-full transition-all"
+                  className="bg-[#204382] h-full transition-all"
                   title={`Scope 2: ${activeRun.scope2} tCO2e`}
                 />
               </div>
@@ -440,7 +440,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleViewDetails(activeRun.id)}
-                  className="px-3.5 py-1.5 bg-[#6254E8] hover:bg-[#5244DE] text-white rounded-lg font-semibold text-xs flex items-center space-x-1.5 transition-colors shadow-2xs"
+                  className="px-4 py-2 bg-[#01153C] hover:bg-[#02215c] text-white rounded-full font-semibold text-xs flex items-center space-x-1.5 transition-colors shadow-2xs"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   <span>Results Drill-Down</span>
@@ -451,7 +451,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           </div>
 
           {/* Runs Table */}
-          <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs">
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs">
             <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#FAFAFB]">
               <h2 className="text-sm font-semibold text-[#17181A] font-sans">Historical Batch Ledger</h2>
               <span className="text-xs text-[#5F6368] font-data font-semibold">
@@ -482,12 +482,12 @@ export const Screen20_CalculationRuns: React.FC = () => {
                         key={run.id}
                         onClick={() => setSelectedRunId(run.id)}
                         className={`cursor-pointer transition-colors ${
-                          isSelected ? 'bg-[#6254E8]/5' : 'hover:bg-[#FAFAFB]'
+                          isSelected ? 'bg-[#EDF2FA]/60' : 'hover:bg-[#FAFAFB]'
                         }`}
                       >
-                        <td className="py-3.5 px-4 font-data font-semibold text-[#6254E8] whitespace-nowrap">
+                        <td className="py-3.5 px-4 font-data font-semibold text-[#01153C] whitespace-nowrap">
                           <div className="flex items-center space-x-2">
-                            {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#6254E8]" />}
+                            {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-[#01153C]" />}
                             <span>{run.id}</span>
                           </div>
                         </td>
@@ -507,7 +507,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                         <td className="py-3.5 px-4 font-data text-right text-[#17181A]">
                           {run.scope1.toLocaleString('en-US', { minimumFractionDigits: 1 })}
                         </td>
-                        <td className="py-3.5 px-4 font-data text-right text-[#6254E8] font-semibold">
+                        <td className="py-3.5 px-4 font-data text-right text-[#01153C] font-semibold">
                           {run.scope2.toLocaleString('en-US', { minimumFractionDigits: 1 })}
                         </td>
                         <td className="py-3.5 px-4 font-data text-right font-bold text-[#17181A]">
@@ -521,7 +521,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                                 e.stopPropagation();
                                 handleViewDetails(run.id);
                               }}
-                              className="inline-flex items-center space-x-1 text-[#6254E8] hover:underline font-semibold text-xs"
+                              className="inline-flex items-center space-x-1 text-[#01153C] hover:underline font-semibold text-xs"
                             >
                               <span>Drill-Down</span>
                               <ExternalLink className="w-3 h-3" />
@@ -542,7 +542,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
       {activeTab === 'ledger' && (
         <div className="space-y-4">
           {/* Filtering and Search Controls */}
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3">
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 shadow-2xs space-y-3">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="relative flex-1 max-w-md">
                 <input
@@ -550,7 +550,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                   value={ledgerSearch}
                   onChange={(e) => setLedgerSearch(e.target.value)}
                   placeholder="Search ledger entries by source, facility, record ID..."
-                  className="w-full pl-9 pr-4 py-2 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:ring-2 focus:ring-[#6254E8]/20 focus:border-[#6254E8] bg-white text-[#17181A] font-sans placeholder-[#8A8F98]"
+                  className="w-full pl-9 pr-4 py-2 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:ring-2 focus:ring-[#01153C]/20 focus:border-[#01153C] bg-white text-[#17181A] font-sans placeholder-[#8A8F98]"
                 />
                 <Search className="w-4 h-4 text-[#8A8F98] absolute left-3 top-2.5" />
               </div>
@@ -560,7 +560,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 <select
                   value={selectedScopeFilter}
                   onChange={(e) => setSelectedScopeFilter(e.target.value)}
-                  className="px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#6254E8] font-sans"
+                  className="px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
                 >
                   <option value="all">All Scopes</option>
                   <option value="scope 1">Scope 1 Only</option>
@@ -571,7 +571,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 <select
                   value={selectedSiteFilter}
                   onChange={(e) => setSelectedSiteFilter(e.target.value)}
-                  className="px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#6254E8] font-sans"
+                  className="px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
                 >
                   <option value="all">All Facilities</option>
                   {sites.map((s) => (
@@ -605,7 +605,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
               </div>
               <div>
                 Filtered Total:{' '}
-                <strong className="text-[#6254E8] font-bold">
+                <strong className="text-[#01153C] font-bold">
                   {filteredTotalEmissions.toLocaleString('en-US', { minimumFractionDigits: 2 })}{' '}
                   tCO2e
                 </strong>
@@ -614,7 +614,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
           </div>
 
           {/* Granular Journal Table */}
-          <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs">
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
@@ -633,7 +633,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 <tbody className="divide-y divide-[#F1F3F5]">
                   {filteredLedger.map((item) => (
                     <tr key={item.ledgerId} className="hover:bg-[#FAFAFB] transition-colors">
-                      <td className="py-3.5 px-4 font-data font-semibold text-[#6254E8] whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-data font-semibold text-[#01153C] whitespace-nowrap">
                         {item.ledgerId}
                       </td>
                       <td className="py-3.5 px-4 text-[#5F6368] font-data whitespace-nowrap">
@@ -665,9 +665,9 @@ export const Screen20_CalculationRuns: React.FC = () => {
                             showToast('Evidence Repository', `Opening ${item.evidenceFile}`);
                             navigateToScreen('16_attach_evidence', 'FLOW_B');
                           }}
-                          className="inline-flex items-center space-x-1.5 text-[#6254E8] hover:underline text-xs font-medium font-sans"
+                          className="inline-flex items-center space-x-1.5 text-[#01153C] hover:underline text-xs font-medium font-sans"
                         >
-                          <FileText className="w-3.5 h-3.5 text-[#6254E8]" />
+                          <FileText className="w-3.5 h-3.5 text-[#01153C]" />
                           <span className="truncate max-w-[140px]">{item.evidenceFile}</span>
                         </button>
                       </td>
@@ -687,17 +687,17 @@ export const Screen20_CalculationRuns: React.FC = () => {
       {activeTab === 'methodology' && (
         <div className="space-y-6">
           {/* Mathematical Formulation Card */}
-          <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 sm:p-6 shadow-2xs space-y-4">
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-4">
             <h2 className="text-base font-semibold text-[#17181A] flex items-center space-x-2 font-sans">
-              <Sparkles className="w-4 h-4 text-[#6254E8]" />
+              <Sparkles className="w-4 h-4 text-[#01153C]" />
               <span>Deterministic GHG Protocol Calculation Engine</span>
             </h2>
             <p className="text-xs text-[#5F6368] leading-relaxed font-sans max-w-3xl">
               Emissions in this ledger are computed strictly adhering to the GHG Protocol Corporate Standard (WBCSD & WRI) and ISO 14064-1 specification.
             </p>
 
-            <div className="p-4 bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg font-data text-xs text-[#17181A] space-y-2">
-              <div className="font-semibold text-[#6254E8] font-sans uppercase tracking-wider text-[11px]">
+            <div className="p-4 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl font-data text-xs text-[#17181A] space-y-2">
+              <div className="font-semibold text-[#01153C] font-sans uppercase tracking-wider text-[11px]">
                 General Mathematical Formulation:
               </div>
               <div className="bg-white p-3 rounded-lg border border-[#E5E7EB] font-bold text-xs">
@@ -710,13 +710,13 @@ export const Screen20_CalculationRuns: React.FC = () => {
           </div>
 
           {/* Active Factor Registry Table */}
-          <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs">
+          <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs">
             <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#FAFAFB]">
               <h3 className="text-sm font-semibold text-[#17181A] font-sans">Applied Emission Factor Library</h3>
               <button
                 type="button"
                 onClick={() => navigateToScreen('22_factors_reference', 'FLOW_E')}
-                className="text-xs text-[#6254E8] hover:underline font-semibold flex items-center space-x-1"
+                className="text-xs text-[#01153C] hover:underline font-semibold flex items-center space-x-1"
               >
                 <span>Full Factor Library (Screen 22)</span>
                 <ArrowRight className="w-3 h-3" />
@@ -737,12 +737,12 @@ export const Screen20_CalculationRuns: React.FC = () => {
               <tbody className="divide-y divide-[#F1F3F5]">
                 <tr>
                   <td className="py-3.5 px-4 font-semibold text-[#17181A] font-sans">Grid Electricity (Southern Region)</td>
-                  <td className="py-3.5 px-4 text-[#6254E8] font-semibold font-sans">Scope 2</td>
+                  <td className="py-3.5 px-4 text-[#01153C] font-semibold font-sans">Scope 2</td>
                   <td className="py-3.5 px-4 font-data font-bold text-[#17181A]">0.7080</td>
                   <td className="py-3.5 px-4 text-[#5F6368] font-data">kg CO2e / kWh</td>
                   <td className="py-3.5 px-4 text-[#5F6368] font-sans">Central Electricity Authority (CEA) Baseline v19 (2024)</td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2.5 py-1 bg-[#6254E8]/10 text-[#6254E8] rounded-full text-[11px] font-semibold font-data">
+                    <span className="px-2.5 py-1 bg-[#EDF2FA] text-[#01153C] rounded-full text-[11px] font-semibold font-data">
                       Tier 2 · ±3.5%
                     </span>
                   </td>
@@ -754,7 +754,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                   <td className="py-3.5 px-4 text-[#5F6368] font-data">kg CO2e / Liter</td>
                   <td className="py-3.5 px-4 text-[#5F6368] font-sans">IPCC 2006 Guidelines for National GHG Inventories</td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2.5 py-1 bg-[#6254E8]/10 text-[#6254E8] rounded-full text-[11px] font-semibold font-data">
+                    <span className="px-2.5 py-1 bg-[#EDF2FA] text-[#01153C] rounded-full text-[11px] font-semibold font-data">
                       Tier 1 · ±2.0%
                     </span>
                   </td>
@@ -766,7 +766,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                   <td className="py-3.5 px-4 text-[#5F6368] font-data">kg CO2e / m³</td>
                   <td className="py-3.5 px-4 text-[#5F6368] font-sans">UK DEFRA / BEIS Voluntary Reporting Standards</td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2.5 py-1 bg-[#6254E8]/10 text-[#6254E8] rounded-full text-[11px] font-semibold font-data">
+                    <span className="px-2.5 py-1 bg-[#EDF2FA] text-[#01153C] rounded-full text-[11px] font-semibold font-data">
                       Tier 1 · ±4.0%
                     </span>
                   </td>
@@ -783,13 +783,13 @@ export const Screen20_CalculationRuns: React.FC = () => {
           <div className="bg-white rounded-2xl shadow-xl max-w-md w-full border border-[#E5E7EB] overflow-hidden">
             <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#FAFAFB]">
               <div className="flex items-center space-x-2">
-                <Calculator className="w-4 h-4 text-[#6254E8]" />
+                <Calculator className="w-4 h-4 text-[#01153C]" />
                 <h3 className="text-sm font-semibold text-[#17181A] font-sans">Execute GHG Calculation Run</h3>
               </div>
               <button
                 type="button"
                 onClick={() => !isExecuting && setIsRunModalOpen(false)}
-                className="text-[#8A8F98] hover:text-[#17181A] transition-colors p-1"
+                className="text-[#8A8F98] hover:text-[#17181A] transition-colors p-1 rounded-full"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -804,7 +804,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                   value={runPeriod}
                   disabled={isExecuting}
                   onChange={(e) => setRunPeriod(e.target.value)}
-                  className="w-full px-4 py-2.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] font-sans focus:outline-none focus:border-[#6254E8]"
+                  className="w-full px-4 py-2.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] font-sans focus:outline-none focus:border-[#01153C]"
                 >
                   {periods.map((p) => (
                     <option key={p.id} value={p.name}>
@@ -822,7 +822,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                   value={runScope}
                   disabled={isExecuting}
                   onChange={(e) => setRunScope(e.target.value)}
-                  className="w-full px-4 py-2.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] font-sans focus:outline-none focus:border-[#6254E8]"
+                  className="w-full px-4 py-2.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] font-sans focus:outline-none focus:border-[#01153C]"
                 >
                   <option value="Scope 1 + Scope 2">Scope 1 & Scope 2 (Location-based)</option>
                   <option value="Scope 1 Only">Scope 1 Only (Direct Combustion)</option>
@@ -832,9 +832,9 @@ export const Screen20_CalculationRuns: React.FC = () => {
 
               {/* Progress Feedback during execution */}
               {isExecuting && (
-                <div className="p-4 bg-[#6254E8]/5 border border-[#6254E8]/20 rounded-xl space-y-2.5">
-                  <div className="flex items-center space-x-2 text-xs text-[#6254E8] font-semibold font-sans">
-                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                <div className="p-4 bg-[#EDF2FA] border border-[#DCE5F5] rounded-xl space-y-2.5">
+                  <div className="flex items-center space-x-2 text-xs text-[#01153C] font-semibold font-sans">
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#01153C]" />
                     <span>Processing Calculation Batch...</span>
                   </div>
                   <div className="text-[11px] text-[#5F6368] space-y-1 font-data">
@@ -865,7 +865,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 type="button"
                 disabled={isExecuting}
                 onClick={handleStartCalculation}
-                className="px-5 py-2 text-xs bg-[#6254E8] text-white rounded-full hover:bg-[#5244DE] font-semibold shadow-sm flex items-center space-x-1.5 transition-colors"
+                className="px-5 py-2 text-xs bg-[#01153C] text-white rounded-full hover:bg-[#02215c] font-semibold shadow-sm flex items-center space-x-1.5 transition-colors"
               >
                 {isExecuting ? (
                   <>

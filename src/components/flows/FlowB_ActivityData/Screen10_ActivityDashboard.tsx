@@ -76,7 +76,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2">
             <button
               onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
-              className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+              className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add Entry</span>
@@ -84,7 +84,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
 
             <button
               onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
-              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
+              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
             >
               <FileSpreadsheet className="w-3.5 h-3.5 text-[#5F6368]" />
               <span>Import CSV</span>
@@ -92,9 +92,9 @@ export const Screen10_ActivityDashboard: React.FC = () => {
 
             <button
               onClick={() => navigateToScreen('17_bill_upload', 'FLOW_D')}
-              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold text-[#6254E8]"
+              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-full hover:bg-[#DCE5F5] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
             >
-              <ScanLine className="w-3.5 h-3.5 text-[#6254E8]" />
+              <ScanLine className="w-3.5 h-3.5 text-[#01153C]" />
               <span>Upload Bill OCR</span>
             </button>
           </div>
@@ -102,7 +102,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
       />
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
         <KpiCard
           label="Total Records"
           value={totalDisplayRows.toLocaleString()}
@@ -119,45 +119,35 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           change="+1.4%"
         />
 
-        <div
+        <KpiCard
+          label="Pending Review"
+          value={pendingReviewCount.toString()}
+          subtext="Awaiting Reviewer approval"
+          statusDot="warning"
+          icon={<Clock className="w-4 h-4 text-[#F59E0B]" />}
+          change="Review queue →"
           onClick={() => {
             setActiveFilterStatus('Submitted');
             navigateToScreen('24_review_approve', 'FLOW_B');
           }}
-          className="h-full"
-        >
-          <KpiCard
-            label="Pending Review"
-            value={pendingReviewCount.toString()}
-            subtext="Awaiting Reviewer approval"
-            statusDot="warning"
-            icon={<Clock className="w-4 h-4 text-[#F59E0B]" />}
-            change="Review queue →"
-            className="cursor-pointer"
-          />
-        </div>
+        />
 
-        <div
+        <KpiCard
+          label="Flagged / Attention"
+          value={flaggedCount.toString()}
+          subtext="Validation discrepancies"
+          statusDot="error"
+          icon={<AlertCircle className="w-4 h-4 text-[#ED2024]" />}
+          change="Fix errors →"
           onClick={() => {
             setActiveFilterStatus('Error');
             navigateToScreen('15_fix_detail_view', 'FLOW_C');
           }}
-          className="h-full"
-        >
-          <KpiCard
-            label="Flagged / Attention"
-            value={flaggedCount.toString()}
-            subtext="Validation discrepancies"
-            statusDot="error"
-            icon={<AlertCircle className="w-4 h-4 text-[#B42318]" />}
-            change="Fix errors →"
-            className="cursor-pointer"
-          />
-        </div>
+        />
       </div>
 
       {/* Persistent Filters Bar */}
-      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 font-sans">
+      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-2xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 font-sans">
         <div className="flex flex-wrap items-center gap-2 flex-1">
           {/* Search */}
           <div className="relative min-w-[200px] flex-1 max-w-xs">
@@ -167,7 +157,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search source, site, or ID…"
-              className="w-full pl-8 pr-4 py-1.5 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+              className="w-full pl-8 pr-4 py-1.5 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:ring-2 focus:ring-[#01153C]/20 focus:border-[#01153C] bg-white text-[#17181A]"
             />
           </div>
 
@@ -175,7 +165,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           <select
             value={activeFilterSite}
             onChange={(e) => setActiveFilterSite(e.target.value)}
-            className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A]"
+            className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C]"
           >
             <option value="all">All Sites</option>
             {sites.map((s) => (
@@ -189,7 +179,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           <select
             value={activeFilterStatus}
             onChange={(e) => setActiveFilterStatus(e.target.value)}
-            className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A]"
+            className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C]"
           >
             <option value="all">All Statuses</option>
             <option value="Approved">Approved</option>
@@ -206,7 +196,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
       </div>
 
       {/* Activity Data Table */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs font-sans">
+      <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs font-sans">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
@@ -232,7 +222,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
                     onClick={() => handleRowClick(record)}
                     className="hover:bg-[#FAFAFB] transition-colors cursor-pointer group"
                   >
-                    <td className="py-3 px-4 activity-id font-medium text-[#6254E8]">
+                    <td className="py-3 px-4 activity-id font-medium text-[#01153C]">
                       {record.id}
                     </td>
                     <td className="py-3 px-4 text-[#5F6368] font-data">{record.date}</td>
@@ -251,7 +241,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
                     <td className="py-3 px-4 text-center">
                       {hasEvidence ? (
                         <span
-                          className="inline-flex items-center space-x-1 px-1.5 py-0.5 rounded-md bg-[#6254E8]/10 text-[#6254E8] text-[10px] font-semibold border border-[#6254E8]/20"
+                          className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-[#EDF2FA] text-[#01153C] text-[10px] font-semibold border border-[#DCE5F5]"
                           title={record.evidenceFiles[0].name}
                         >
                           <FileText className="w-3 h-3" />
@@ -281,7 +271,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
                       />
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <span className="text-[11px] text-[#6254E8] group-hover:underline font-semibold">
+                      <span className="text-[11px] text-[#01153C] group-hover:underline font-semibold">
                         Open →
                       </span>
                     </td>

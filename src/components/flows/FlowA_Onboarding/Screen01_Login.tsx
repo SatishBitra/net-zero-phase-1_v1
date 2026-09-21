@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../../context/AppContext';
 import { Shield, Lock, Mail, ArrowRight } from 'lucide-react';
 import { StatusBadge } from '../../common/StatusBadge';
+import zeLogo from '../../../assets/ze.png';
 
 export const Screen01_Login: React.FC = () => {
   const { navigateToScreen, showToast } = useApp();
@@ -33,16 +34,18 @@ export const Screen01_Login: React.FC = () => {
       {/* Header Badge */}
       <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#F1F3F5]">
         <div className="flex items-center space-x-2.5">
-          <div className="w-7 h-7 rounded-lg bg-[#6254E8] text-white flex items-center justify-center font-bold text-xs shadow-2xs">
-            T
-          </div>
-          <span className="text-xs font-semibold text-[#17181A]">Tula Carbon ZE</span>
+          <img
+            src={zeLogo}
+            alt="Zenith Energy ZE Logo"
+            className="w-8 h-8 object-contain rounded-lg shadow-2xs"
+          />
+          <span className="text-sm font-bold text-[#01153C]">Tula Carbon <span className="text-[#ED2024]">ZE</span></span>
         </div>
         <StatusBadge status="Approved" customLabel="Secure Authentication" size="sm" />
       </div>
 
       <div className="text-center mb-6">
-        <h1 className="text-xl font-bold text-[#17181A] tracking-tight">Sign in to Tula Carbon</h1>
+        <h1 className="text-xl font-bold text-[#01153C] tracking-tight">Sign in to Tula Carbon</h1>
         <p className="text-xs text-[#5F6368] mt-1 font-data">
           Enterprise carbon accounting & emissions assurance platform
         </p>
@@ -58,7 +61,7 @@ export const Screen01_Login: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+              className="w-full pl-9 pr-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
               placeholder="name@company.com"
             />
           </div>
@@ -67,7 +70,7 @@ export const Screen01_Login: React.FC = () => {
         <div>
           <div className="flex items-center justify-between mb-1">
             <label className="text-xs font-semibold text-[#17181A]">Password</label>
-            <a href="#forgot" onClick={(e) => e.preventDefault()} className="text-[11px] text-[#6254E8] hover:underline font-medium">
+            <a href="#forgot" onClick={(e) => e.preventDefault()} className="text-[11px] text-[#01153C] hover:underline font-semibold">
               Forgot password?
             </a>
           </div>
@@ -78,7 +81,7 @@ export const Screen01_Login: React.FC = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+              className="w-full pl-9 pr-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
               placeholder="••••••••••••"
             />
           </div>
@@ -109,7 +112,7 @@ export const Screen01_Login: React.FC = () => {
         disabled={loading}
         className="enterprise-btn-secondary w-full h-10 text-xs font-semibold flex items-center justify-center space-x-2"
       >
-        <Shield className="w-4 h-4 text-[#6254E8]" />
+        <Shield className="w-4 h-4 text-[#01153C]" />
         <span>Continue with Enterprise SAML / Okta SSO</span>
       </button>
 

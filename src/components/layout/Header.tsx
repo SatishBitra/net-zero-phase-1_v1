@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { UserRole } from '../../types';
+import zeLogo from '../../assets/ze.png';
 import {
   Building2,
   ChevronDown,
@@ -19,7 +20,7 @@ import {
 } from 'lucide-react';
 
 interface HeaderProps {
-  onOpenFlowMap: () => void;
+  onOpenFlowMap?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
@@ -115,7 +116,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               id="btn-mobile-left-menu"
               type="button"
               onClick={toggleMobileMenu}
-              className="p-2 -ml-1 text-[#17181A] hover:text-[#6254E8] hover:bg-[#F4F2FF] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#7567F5]/30"
+              className="p-2 -ml-1 text-[#17181A] hover:text-[#01153C] hover:bg-[#EDF2FA] rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#01153C]/20"
               aria-label={isMobileMenuOpen ? "Close left navigation menu" : "Open left navigation menu"}
               title="Open navigation menu"
             >
@@ -128,11 +129,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             onClick={() => navigateToScreen('10_activity_dashboard')}
             className="flex items-center space-x-2 cursor-pointer select-none group"
           >
-            <div className="w-7 h-7 rounded-lg bg-[#6254E8] flex items-center justify-center text-white font-semibold text-sm shadow-xs group-hover:bg-[#5144C9] transition-colors">
-              T
-            </div>
-            <span className="text-[15px] font-semibold tracking-tight text-[#17181A] font-sans">
-              Tula Carbon <span className="text-[11px] font-normal text-[#6254E8]">ZE</span>
+            <img
+              src={zeLogo}
+              alt="Zenith Energy ZE Logo"
+              className="h-8 w-8 object-contain rounded-md shadow-2xs shrink-0"
+            />
+            <span className="text-[14px] font-bold tracking-tight text-[#01153C] font-sans">
+              Tula Carbon <span className="text-[#ED2024] font-black text-xs">ZE</span>
             </span>
           </div>
 
@@ -142,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               id="btn-mobile-right-menu"
               type="button"
               onClick={toggleMobileRightNav}
-              className="p-2 -mr-1 text-[#17181A] hover:text-[#6254E8] hover:bg-[#F4F2FF] rounded-lg transition-colors relative focus:outline-none focus:ring-2 focus:ring-[#7567F5]/30"
+              className="p-2 -mr-1 text-[#17181A] hover:text-[#01153C] hover:bg-[#EDF2FA] rounded-lg transition-colors relative focus:outline-none focus:ring-2 focus:ring-[#01153C]/20"
               aria-label={isMobileRightNavOpen ? "Close side nav menu" : "Open side nav menu"}
               title="Open side nav bar menu"
             >
@@ -152,7 +155,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                 <PanelRight className="w-5 h-5" />
               )}
               {unreadNotificationsCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#6254E8] rounded-full ring-2 ring-white" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#ED2024] rounded-full ring-2 ring-white" />
               )}
             </button>
           </div>
@@ -166,14 +169,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
           <div className="flex items-center space-x-3 md:space-x-4 min-w-0">
             {/* Brand Logo */}
             <div
+              id="header-brand-logo"
               onClick={() => navigateToScreen('10_activity_dashboard')}
               className="flex items-center space-x-2.5 cursor-pointer select-none group shrink-0"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#6254E8] flex items-center justify-center text-white font-semibold text-sm shadow-sm group-hover:bg-[#5144C9] transition-colors">
-                T
+              <div className="flex items-center justify-center shrink-0">
+                <img
+                  src={zeLogo}
+                  alt="Zenith Energy ZE Logo"
+                  className="h-9 w-9 object-contain rounded-lg shadow-2xs group-hover:scale-105 transition-transform"
+                />
               </div>
               <div className="flex items-center space-x-1.5">
-                <span className="text-[15px] font-semibold tracking-tight text-[#17181A] font-sans">TULA CARBON ZE</span>
+                <span className="text-[15px] font-bold tracking-tight text-[#01153C] font-sans">
+                  TULA CARBON <span className="text-[#ED2024] font-black">ZE</span>
+                </span>
               </div>
             </div>
 
@@ -204,7 +214,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                         setTenantDropdownOpen(false);
                       }}
                       className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#FAFAFB] ${
-                        t.id === currentTenant.id ? 'bg-[#F0EEFF] text-[#5144C9]' : 'text-[#17181A]'
+                        t.id === currentTenant.id ? 'bg-[#EDF2FA] text-[#01153C] font-medium' : 'text-[#17181A]'
                       }`}
                     >
                       <div className="truncate">
@@ -212,7 +222,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                         <div className="text-[11px] text-[#5F6368] font-data">{t.legalEntityName}</div>
                       </div>
                       {t.id === currentTenant.id && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#6254E8]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#01153C]" />
                       )}
                     </button>
                   ))}
@@ -222,7 +232,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                         setTenantDropdownOpen(false);
                         navigateToScreen('03_tenant_selector');
                       }}
-                      className="w-full text-center py-1 text-xs text-[#6254E8] font-semibold hover:underline"
+                      className="w-full text-center py-1 text-xs text-[#01153C] font-semibold hover:underline"
                     >
                       View Tenant Directory →
                     </button>
@@ -264,7 +274,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                         setPeriodDropdownOpen(false);
                       }}
                       className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#FAFAFB] ${
-                        p.id === activePeriod.id ? 'bg-[#F0EEFF] text-[#5144C9]' : 'text-[#17181A]'
+                        p.id === activePeriod.id ? 'bg-[#EDF2FA] text-[#01153C] font-medium' : 'text-[#17181A]'
                       }`}
                     >
                       <div>
@@ -286,7 +296,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                         setPeriodDropdownOpen(false);
                         navigateToScreen('06_periods');
                       }}
-                      className="w-full text-center py-1 text-xs text-[#6254E8] font-semibold hover:underline"
+                      className="w-full text-center py-1 text-xs text-[#01153C] font-semibold hover:underline"
                     >
                       Manage Reporting Periods →
                     </button>
@@ -305,7 +315,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                 className="flex items-center space-x-1.5 px-3.5 py-1.5 text-xs rounded-full bg-white border border-[#E5E7EB] hover:border-[#D5D8DD] hover:bg-[#FAFAFB] transition-colors shadow-2xs"
                 title="Switch active user role"
               >
-                <UserCheck className="w-3.5 h-3.5 text-[#6254E8] shrink-0" />
+                <UserCheck className="w-3.5 h-3.5 text-[#01153C] shrink-0" />
                 <span className="text-[11px] text-[#5F6368]">Role:</span>
                 <span className="font-semibold text-[#17181A]">
                   {roles.find((r) => r.role === currentRole)?.shortLabel || currentRole}
@@ -326,13 +336,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                       key={r.role}
                       onClick={() => handleRoleSelect(r.role)}
                       className={`w-full text-left px-3 py-2 text-xs flex flex-col hover:bg-[#FAFAFB] transition-colors ${
-                        currentRole === r.role ? 'bg-[#F0EEFF] border-l-3 border-[#6254E8]' : ''
+                        currentRole === r.role ? 'bg-[#EDF2FA] border-l-3 border-[#01153C]' : ''
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-semibold text-[#17181A]">{r.label}</span>
                         {currentRole === r.role && (
-                          <span className="text-[10px] text-[#5144C9] font-semibold">Active</span>
+                          <span className="text-[10px] text-[#01153C] font-semibold">Active</span>
                         )}
                       </div>
                       <span className="text-[11px] text-[#5F6368] font-data mt-0.5">{r.desc}</span>
@@ -346,13 +356,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <button
               id="btn-nav-notifications"
               onClick={() => navigateToScreen('34_reviewer_notification', 'FLOW_F')}
-              className="p-2 text-[#5F6368] hover:text-[#17181A] hover:bg-[#F4F2FF] rounded-lg transition-colors relative"
+              className="p-2 text-[#5F6368] hover:text-[#17181A] hover:bg-[#EDF2FA] rounded-lg transition-colors relative"
               title="Notification Center (Screen 34)"
               aria-label="Notification Center"
             >
               <Bell className="w-4 h-4" />
               {unreadNotificationsCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#6254E8] rounded-full ring-2 ring-white" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#ED2024] rounded-full ring-2 ring-white" />
               )}
             </button>
 
@@ -362,7 +372,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               className="flex items-center space-x-2 px-2 py-1 rounded-lg hover:bg-[#FAFAFB] cursor-pointer transition-colors border border-transparent hover:border-[#E5E7EB]"
               title="Account Settings / Log out"
             >
-              <div className="w-8 h-8 rounded-full bg-[#EAE7FF] text-[#5144C9] font-semibold text-xs flex items-center justify-center shrink-0 border border-[#D8D3FF]">
+              <div className="w-8 h-8 rounded-full bg-[#EDF2FA] text-[#01153C] font-semibold text-xs flex items-center justify-center shrink-0 border border-[#DCE5F5]">
                 {getUserInitials()}
               </div>
               <div className="hidden lg:flex items-center space-x-1">
@@ -574,7 +584,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                   <span className="font-medium text-[#171A1F]">Notification Center</span>
                 </div>
                 {unreadNotificationsCount > 0 ? (
-                  <span className="px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-[#174A8B] text-white">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#ED2024] text-white">
                     {unreadNotificationsCount} unread
                   </span>
                 ) : (

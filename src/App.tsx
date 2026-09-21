@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Header } from './components/layout/Header';
 import { Sidebar } from './components/layout/Sidebar';
-import { FlowNavigator } from './components/layout/FlowNavigator';
 
 // Flow A — Onboarding & Organisation Setup
 import { Screen01_Login } from './components/flows/FlowA_Onboarding/Screen01_Login';
@@ -54,7 +53,6 @@ import { Screen35_AuditTrail } from './components/flows/FlowF_VerifierAudit/Scre
 
 const MainAppContent: React.FC = () => {
   const { currentScreen } = useApp();
-  const [flowMapOpen, setFlowMapOpen] = useState(false);
 
   // Authentication screens without standard shell (separate surface)
   const isAuthScreen = currentScreen === '01_login' || currentScreen === '02_mfa' || currentScreen === '30_verifier_login';
@@ -158,7 +156,7 @@ const MainAppContent: React.FC = () => {
 
   return (
     <div className="h-screen bg-[#F8F9FB] flex flex-col overflow-hidden">
-      <Header onOpenFlowMap={() => {}} />
+      <Header />
 
       <div className="flex-1 flex overflow-hidden min-h-0">
         <Sidebar />

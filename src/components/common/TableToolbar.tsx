@@ -42,7 +42,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           value={searchValue ?? ''}
           onChange={(e) => onSearchChange?.(e.target.value)}
           placeholder={searchPlaceholder}
-          className="w-full h-9 pl-9 pr-3 text-xs sm:text-[13px] bg-white border border-[#E2E4E8] rounded-lg text-[#17181A] placeholder-[#8A8F98] focus:outline-none focus:border-[#7567F5] focus:ring-2 focus:ring-[#F0EEFF] transition-all"
+          className="w-full h-9 pl-9 pr-3 text-xs sm:text-[13px] bg-white border border-[#E2E4E8] rounded-full text-[#17181A] placeholder-[#8A8F98] focus:outline-none focus:border-[#01153C] focus:ring-2 focus:ring-[#01153C]/10 transition-all"
         />
       </div>
 
@@ -52,9 +52,9 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           <button
             type="button"
             onClick={onFilterClick}
-            className={`h-9 px-3 text-xs font-semibold rounded-lg border flex items-center space-x-1.5 transition-colors ${
+            className={`h-9 px-3.5 text-xs font-semibold rounded-full border flex items-center space-x-1.5 transition-colors ${
               filterActive
-                ? 'bg-[#F0EEFF] border-[#6254E8] text-[#5144C9]'
+                ? 'bg-[#EDF2FA] border-[#01153C] text-[#01153C]'
                 : 'bg-white border-[#DCDFE4] text-[#5F6368] hover:bg-[#F8F9FB] hover:text-[#17181A]'
             }`}
           >
@@ -67,7 +67,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           <button
             type="button"
             onClick={onSortClick}
-            className="h-9 px-3 text-xs font-semibold rounded-lg border bg-white border-[#DCDFE4] text-[#5F6368] hover:bg-[#F8F9FB] hover:text-[#17181A] flex items-center space-x-1.5 transition-colors"
+            className="h-9 px-3.5 text-xs font-semibold rounded-full border bg-white border-[#DCDFE4] text-[#5F6368] hover:bg-[#F8F9FB] hover:text-[#17181A] flex items-center space-x-1.5 transition-colors"
           >
             <ArrowUpDown className="w-3.5 h-3.5" />
             <span>Sort</span>
@@ -78,7 +78,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           <button
             type="button"
             onClick={onColumnsClick}
-            className="h-9 px-3 text-xs font-semibold rounded-lg border bg-white border-[#DCDFE4] text-[#5F6368] hover:bg-[#F8F9FB] hover:text-[#17181A] flex items-center space-x-1.5 transition-colors"
+            className="h-9 px-3.5 text-xs font-semibold rounded-full border bg-white border-[#DCDFE4] text-[#5F6368] hover:bg-[#F8F9FB] hover:text-[#17181A] flex items-center space-x-1.5 transition-colors"
           >
             <Columns className="w-3.5 h-3.5" />
             <span>Columns</span>
@@ -91,7 +91,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           <button
             type="button"
             onClick={onExportClick}
-            className="h-9 px-3 text-xs font-semibold rounded-lg border bg-white border-[#DCDFE4] text-[#303238] hover:bg-[#F8F9FB] flex items-center space-x-1.5 transition-colors"
+            className="h-9 px-3.5 text-xs font-semibold rounded-full border bg-white border-[#DCDFE4] text-[#303238] hover:bg-[#F8F9FB] flex items-center space-x-1.5 transition-colors"
           >
             <Download className="w-3.5 h-3.5 text-[#5F6368]" />
             <span>Export</span>
@@ -102,7 +102,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           <button
             type="button"
             onClick={onAddClick}
-            className="h-9 px-3.5 text-xs font-semibold rounded-lg bg-[#6254E8] hover:bg-[#5144C9] text-white flex items-center space-x-1.5 transition-colors shadow-xs"
+            className="h-9 px-4 text-xs font-semibold rounded-full bg-[#01153C] hover:bg-[#0A2352] text-white flex items-center space-x-1.5 transition-colors shadow-xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>{addLabel}</span>

@@ -57,39 +57,39 @@ export const Screen31_VerifierDashboard: React.FC = () => {
   return (
     <div id="screen-31-verifier-dashboard" className="max-w-7xl mx-auto space-y-6">
       {/* Verifier Surface Banner / Top Header */}
-      <div className="bg-white text-[#17181A] rounded-2xl p-5 md:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-5 shadow-2xs border border-[#E5E7EB]">
+      <div className="bg-[#FAFAFB] text-[#17181A] rounded-2xl p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-2xs border border-[#E5E7EB]">
         <div className="flex items-center space-x-4 min-w-0">
-          <div className="w-11 h-11 rounded-full bg-[#6254E8]/10 border border-[#6254E8]/20 flex items-center justify-center text-[#6254E8] shrink-0">
-            <ShieldCheck className="w-5 h-5 text-[#6254E8]" />
+          <div className="w-12 h-12 rounded-2xl bg-white border border-[#E5E7EB] flex items-center justify-center text-[#01153C] shrink-0 shadow-2xs">
+            <ShieldCheck className="w-6 h-6 text-[#01153C]" />
           </div>
           <div className="min-w-0">
-            <div className="flex items-center space-x-2">
-              <span className="text-[11px] font-sans uppercase font-bold tracking-wider text-[#6254E8] bg-[#6254E8]/10 px-2.5 py-0.5 rounded-full border border-[#6254E8]/20">
+            <div className="flex items-center flex-wrap gap-2.5">
+              <span className="text-[11px] font-sans uppercase font-bold tracking-wider text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] px-3 py-0.5 rounded-full">
                 Verifier Portal
               </span>
-              <span className="text-xs text-[#5F6368] hidden sm:inline font-data">
-                Read-only verification surface · ISO 14064-3
+              <span className="text-xs text-[#5F6368] font-sans">
+                Read-only assurance docket · ISO 14064-3
               </span>
             </div>
-            <h1 className="text-lg sm:text-xl font-bold text-[#17181A] mt-1 font-sans tracking-tight truncate">
+            <h1 className="text-xl sm:text-2xl font-bold text-[#17181A] mt-1.5 font-sans tracking-tight truncate">
               Independent Assurance & Verification Docket
             </h1>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 text-xs pt-3 lg:pt-0 border-t lg:border-t-0 border-[#F1F3F5] shrink-0">
-          <div className="bg-[#FAFAFB] px-3.5 py-2 rounded-xl border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">Organisation</div>
-            <div className="font-semibold text-[#17181A] flex items-center space-x-1.5 mt-0.5 font-sans">
-              <Building2 className="w-3.5 h-3.5 text-[#6254E8]" />
+        <div className="flex flex-wrap items-center gap-3 text-xs pt-4 lg:pt-0 border-t lg:border-t-0 border-[#E5E7EB] shrink-0">
+          <div className="bg-white px-4 py-2 rounded-full border border-[#E5E7EB] shadow-2xs flex items-center space-x-2.5">
+            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">Organisation:</div>
+            <div className="font-semibold text-[#17181A] flex items-center space-x-1.5 font-sans">
+              <Building2 className="w-3.5 h-3.5 text-[#01153C]" />
               <span>Zenith Energy</span>
             </div>
           </div>
 
-          <div className="bg-[#FAFAFB] px-3.5 py-2 rounded-xl border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">Lead Verifier</div>
-            <div className="font-semibold text-[#17181A] flex items-center space-x-1.5 mt-0.5 font-sans">
-              <div className="w-4 h-4 rounded-full bg-[#6254E8] text-white flex items-center justify-center text-[9px] font-bold">
+          <div className="bg-white px-4 py-2 rounded-full border border-[#E5E7EB] shadow-2xs flex items-center space-x-2.5">
+            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">Lead Verifier:</div>
+            <div className="font-semibold text-[#17181A] flex items-center space-x-1.5 font-sans">
+              <div className="w-4 h-4 rounded-full bg-[#01153C] text-white flex items-center justify-center text-[9px] font-bold">
                 JR
               </div>
               <span>J. Rao (VVB)</span>
@@ -98,7 +98,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
 
           <button
             onClick={() => setShowEmptyState(!showEmptyState)}
-            className="px-4 py-2 rounded-full bg-white hover:bg-[#FAFAFB] text-[#5F6368] hover:text-[#17181A] border border-[#E5E7EB] hover:border-[#D5D8DD] transition-all font-sans font-semibold text-xs shadow-2xs shrink-0"
+            className="px-4 py-2 rounded-full bg-white hover:bg-[#FAFAFB] text-[#5F6368] hover:text-[#01153C] border border-[#E5E7EB] hover:border-[#01153C]/30 transition-all font-sans font-semibold text-xs shadow-2xs shrink-0"
             title="Demonstrate empty state when no reviews are assigned"
           >
             {showEmptyState ? 'Show Assigned Reviews' : 'Simulate Empty State'}
@@ -110,37 +110,37 @@ export const Screen31_VerifierDashboard: React.FC = () => {
       <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-2 text-xs overflow-x-auto whitespace-nowrap scrollbar-none font-sans">
         <div className="flex items-center space-x-6">
           <button
-            className="font-semibold text-[#6254E8] border-b-2 border-[#6254E8] pb-2 flex items-center space-x-1.5 -mb-[9px]"
+            className="font-semibold text-[#01153C] border-b-2 border-[#01153C] pb-2 flex items-center space-x-1.5 -mb-[9px]"
           >
             <span>Dashboard</span>
           </button>
           <button
             onClick={() => navigateToScreen('32_evidence_trace', 'FLOW_F')}
-            className="text-[#5F6368] hover:text-[#17181A] pb-2 transition-colors flex items-center space-x-1.5 font-medium"
+            className="text-[#5F6368] hover:text-[#01153C] pb-2 transition-colors flex items-center space-x-1.5 font-medium"
           >
             <span>Evidence Trace</span>
           </button>
           <button
             onClick={() => navigateToScreen('33_raise_query', 'FLOW_F')}
-            className="text-[#5F6368] hover:text-[#17181A] pb-2 transition-colors flex items-center space-x-1.5 font-medium"
+            className="text-[#5F6368] hover:text-[#01153C] pb-2 transition-colors flex items-center space-x-1.5 font-medium"
           >
             <span>Queries</span>
             {openQueriesCount > 0 && (
-              <span className="px-1.5 py-0.2 bg-[#FEF3F2] text-[#B42318] text-[10px] font-bold rounded-full">
+              <span className="px-1.5 py-0.5 bg-[#FEF1F1] text-[#ED2024] text-[10px] font-bold rounded-full border border-[#FED2D3]">
                 {openQueriesCount}
               </span>
             )}
           </button>
           <button
             onClick={() => navigateToScreen('09_tenant_settings')}
-            className="text-[#5F6368] hover:text-[#17181A] pb-2 transition-colors font-medium"
+            className="text-[#5F6368] hover:text-[#01153C] pb-2 transition-colors font-medium"
           >
             <span>Settings</span>
           </button>
         </div>
 
         <div className="text-[11px] route-path text-[#8A8F98] hidden sm:block font-medium">
-          Route: <span className="text-[#6254E8]">/dashboard</span>
+          Route: <span className="text-[#01153C] font-semibold">/dashboard</span>
         </div>
       </div>
 
@@ -182,8 +182,8 @@ export const Screen31_VerifierDashboard: React.FC = () => {
       ) : (
         <div className="space-y-4">
           {/* Desktop & Tablet Table (PRD Section 5 & 9) */}
-          <div className="hidden sm:block bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
-            <div className="px-4 py-3 border-b border-[#E5E7EB] bg-[#F4F5F6] flex items-center justify-between">
+          <div className="hidden sm:block bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs">
+            <div className="px-5 py-3.5 border-b border-[#E5E7EB] bg-[#FAFAFB] flex items-center justify-between">
               <span className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
                 Assigned Reports Table
               </span>
@@ -194,7 +194,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
 
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-[#F4F5F6] border-b border-[#E5E7EB] text-[#5F6368]">
+                <tr className="bg-[#FAFAFB] border-b border-[#E5E7EB] text-[#5F6368]">
                   <th scope="col" className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Client</th>
                   <th scope="col" className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Report</th>
                   <th scope="col" className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Period</th>
@@ -210,7 +210,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
                     className="hover:bg-[#FAFAFB] transition-colors cursor-pointer group"
                   >
                     <td className="py-3.5 px-4">
-                      <div className="font-semibold text-[#17181A] group-hover:text-[#6254E8] transition-colors font-sans">
+                      <div className="font-semibold text-[#17181A] group-hover:text-[#01153C] transition-colors font-sans">
                         {rev.client}
                       </div>
                       <div className="text-[11px] text-[#8A8F98] mt-0.5 font-data">
@@ -239,7 +239,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
                           e.stopPropagation();
                           handleOpenTrace(rev);
                         }}
-                        className="enterprise-btn-primary h-8 px-4 text-xs inline-flex items-center space-x-1.5 shadow-2xs font-semibold rounded-full"
+                        className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
                       >
                         <span>Open Evidence Trace</span>
                         <ArrowRight className="w-3 h-3" />
@@ -256,7 +256,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
             {assignedReviews.map((rev) => (
               <div
                 key={rev.id}
-                className="bg-white border border-[#E5E7EB] rounded-xl p-4 space-y-3 shadow-2xs"
+                className="bg-white border border-[#E5E7EB] rounded-2xl p-4 space-y-3 shadow-2xs"
               >
                 <div>
                   <div className="text-sm font-semibold text-[#17181A] font-sans">{rev.client}</div>
@@ -271,7 +271,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
                 <div className="pt-2 border-t border-[#F1F3F5]">
                   <button
                     onClick={() => handleOpenTrace(rev)}
-                    className="w-full enterprise-btn-primary h-9 flex items-center justify-between px-3 text-xs font-semibold"
+                    className="w-full px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm flex items-center justify-between transition-all"
                   >
                     <span>View evidence</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -284,9 +284,9 @@ export const Screen31_VerifierDashboard: React.FC = () => {
       )}
 
       {/* Access Control & Governance Matrix (PRD Section 8) */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 md:p-5 space-y-4 shadow-2xs">
+      <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 md:p-5 space-y-4 shadow-2xs">
         <div className="flex items-center space-x-2 pb-2 border-b border-[#F1F3F5]">
-          <Lock className="w-4 h-4 text-[#6254E8]" />
+          <Lock className="w-4 h-4 text-[#01153C]" />
           <h3 className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
             Verifier Access Control & Boundary Model (ISO 14064-3 Compliance)
           </h3>
@@ -309,9 +309,9 @@ export const Screen31_VerifierDashboard: React.FC = () => {
           </div>
 
           {/* What verifier CANNOT do */}
-          <div className="p-3.5 bg-[#FEF3F2]/40 border border-[#FDA29B]/40 rounded-xl space-y-2">
-            <div className="font-semibold text-[#B42318] flex items-center space-x-1.5 font-sans">
-              <AlertCircle className="w-4 h-4 text-[#B42318]" />
+          <div className="p-3.5 bg-[#FEF1F1]/50 border border-[#FED2D3] rounded-xl space-y-2">
+            <div className="font-semibold text-[#ED2024] flex items-center space-x-1.5 font-sans">
+              <AlertCircle className="w-4 h-4 text-[#ED2024]" />
               <span>Prohibited Operations (Strict Boundary Enforced)</span>
             </div>
             <ul className="space-y-1.5 text-[#5F6368] list-disc list-inside text-[11px]">

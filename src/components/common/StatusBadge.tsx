@@ -78,12 +78,12 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'in review' ||
     normStatus === 'in progress'
   ) {
-    bgClass = 'bg-[#F6F0FF] text-[#8145C5] border-[#EBDDFF]';
-    dotColor = '#8145C5';
+    bgClass = 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]';
+    dotColor = '#1E499F';
     IconComponent = Clock;
   } else if (normStatus === 'initiated') {
-    bgClass = 'bg-[#F0EEFF] text-[#5144C9] border-[#D8D3FF]';
-    dotColor = '#6254E8';
+    bgClass = 'bg-[#EDF2FA] text-[#01153C] border-[#B9CCE9]';
+    dotColor = '#01153C';
     IconComponent = Sparkles;
   } else if (
     normStatus === 'returned' ||
@@ -99,10 +99,13 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   } else if (
     normStatus === 'flagged' ||
     normStatus === 'rejected' ||
-    normStatus === 'error'
+    normStatus === 'error' ||
+    normStatus === 'critical' ||
+    normStatus === 'urgent' ||
+    normStatus === 'action required'
   ) {
-    bgClass = 'bg-[#FFF1F1] text-[#B83C3C] border-[#FFE0E0]';
-    dotColor = '#D95353';
+    bgClass = 'bg-[#FEF1F1] text-[#ED2024] border-[#FED2D3]';
+    dotColor = '#ED2024';
     IconComponent = AlertCircle;
   } else if (normStatus === 'default' || normStatus === 'info') {
     bgClass = 'bg-[#EEF5FF] text-[#2D61AC] border-[#DFECFF]';
