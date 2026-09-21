@@ -343,7 +343,7 @@ export const Sidebar: React.FC = () => {
               className="w-7 h-7 object-contain rounded-md shrink-0 shadow-2xs"
             />
             <div>
-              <div className="text-sm font-bold text-[#01153C]">Tula Carbon <span className="text-[#ED2024] text-xs">ZE</span></div>
+              <div className="text-sm font-bold text-[#01153C]">Tula Carbon</div>
               <div className="text-[11px] text-[#5F6368]">{getRoleLabel()}</div>
             </div>
           </div>

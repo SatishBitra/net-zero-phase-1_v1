@@ -158,7 +158,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
         <div className="p-4 border-b border-[#E5E7EB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center space-x-2">
-            <Building2 className="w-4 h-4 text-[#6254E8]" />
+            <Building2 className="w-4 h-4 text-[#01153C]" />
             <h2 className="text-sm font-semibold text-[#17181A] font-sans">Submitted Activity Rows</h2>
           </div>
           <span className="text-xs text-[#5F6368] font-sans">
@@ -196,7 +196,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setActiveEvidenceModal(item.evidenceName)}
-                      className="inline-flex items-center space-x-1.5 text-xs text-[#6254E8] hover:underline font-semibold"
+                      className="inline-flex items-center space-x-1.5 text-xs text-[#01153C] hover:underline font-semibold"
                     >
                       <FileText className="w-3.5 h-3.5 text-[#5F6368]" />
                       <span>{item.evidenceCount} file attached</span>
@@ -230,15 +230,15 @@ export const Screen24_ReviewApprove: React.FC = () => {
             placeholder="Add a note (required if returning for correction)"
             className={`w-full px-3 py-2 text-xs border rounded-lg text-[#17181A] focus:outline-none font-sans ${
               errorMessage
-                ? 'border-[#D92D20] bg-[#FEF0EF]/30 focus:border-[#D92D20]'
-                : 'border-[#E5E7EB] focus:border-[#7567F5]'
+                ? 'border-[#ED2024] bg-[#FEF0EF]/30 focus:border-[#ED2024]'
+                : 'border-[#E5E7EB] focus:border-[#01153C]'
             }`}
           />
         </div>
 
         {/* Validation error message */}
         {errorMessage && (
-          <div className="p-2.5 bg-[#FEF0EF] border border-[#D92D20]/30 rounded-lg text-xs text-[#D92D20] flex items-center space-x-2 font-data">
+          <div className="p-2.5 bg-[#FEF0EF] border border-[#ED2024]/30 rounded-lg text-xs text-[#ED2024] flex items-center space-x-2 font-data">
             <AlertTriangle className="w-4 h-4 shrink-0" />
             <span>{errorMessage}</span>
           </div>
@@ -252,7 +252,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
               id="btn-reject-batch"
               type="button"
               onClick={handleReject}
-              className="px-4 py-2 bg-white border border-[#D92D20] text-[#D92D20] hover:bg-[#FEF0EF] text-xs font-semibold rounded-lg transition-colors text-center"
+              className="px-4 py-2 bg-white border border-[#ED2024] text-[#ED2024] hover:bg-[#FEF0EF] text-xs font-semibold rounded-lg transition-colors text-center"
             >
               Reject
             </button>
@@ -284,7 +284,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
 
       {/* Audit Requirement Note (Section 10.3) */}
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
-        <ShieldCheck className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
+        <ShieldCheck className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
         <div>
           <strong className="text-[#17181A] font-semibold">Audit Requirement:</strong> Every workflow action writes to an append-only audit trail recording: <em>Who (S. Iyer), When, What, and Why</em>. Recorded events are permanently preserved for verifier inspection.
         </div>
@@ -296,7 +296,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
           <div className="bg-white rounded-xl border border-[#E5E7EB] max-w-lg w-full p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between pb-2 border-b border-[#F1F3F5]">
               <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4 text-[#6254E8]" />
+                <FileText className="w-4 h-4 text-[#01153C]" />
                 <h3 className="text-sm font-semibold text-[#17181A] font-sans">{activeEvidenceModal}</h3>
               </div>
               <button

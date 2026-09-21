@@ -68,7 +68,7 @@ export const Screen12_ImportUpload: React.FC = () => {
 
       {/* 4-Step Import Progress */}
       <div className="flex items-center space-x-2 text-xs font-data bg-white p-3 rounded-xl border border-[#E5E7EB] shadow-2xs">
-        <span className="px-2.5 py-1 rounded-lg bg-[#6254E8]/10 text-[#6254E8] font-bold border border-[#6254E8]/20">
+        <span className="px-2.5 py-1 rounded-lg bg-[#01153C]/10 text-[#01153C] font-bold border border-[#01153C]/20">
           1. Upload File
         </span>
         <span className="text-[#8A8F98]">→</span>
@@ -102,8 +102,8 @@ export const Screen12_ImportUpload: React.FC = () => {
           onClick={handleUploadSimulate}
           className={`p-10 border-2 border-dashed rounded-xl text-center cursor-pointer transition-colors ${
             dragActive
-              ? 'border-[#6254E8] bg-[#6254E8]/5'
-              : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#7567F5]'
+              ? 'border-[#01153C] bg-[#01153C]/5'
+              : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#01153C]'
           }`}
         >
           <Upload className="w-10 h-10 text-[#8A8F98] mx-auto mb-3" />
@@ -125,13 +125,13 @@ export const Screen12_ImportUpload: React.FC = () => {
         {selectedFile && (
           <div className="p-4 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-[#6254E8]/10 text-[#6254E8] flex items-center justify-center shrink-0 border border-[#6254E8]/20">
+              <div className="w-10 h-10 rounded-xl bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0 border border-[#01153C]/20">
                 <FileSpreadsheet className="w-5 h-5" />
               </div>
               <div>
                 <div className="text-xs font-semibold text-[#17181A]">{selectedFile.name}</div>
                 <div className="text-[11px] text-[#5F6368] font-data">
-                  {selectedFile.size} • <span className="text-[#6254E8] font-medium">{selectedFile.rows.toLocaleString()} rows detected</span>
+                  {selectedFile.size} • <span className="text-[#01153C] font-medium">{selectedFile.rows.toLocaleString()} rows detected</span>
                 </div>
               </div>
             </div>
@@ -154,7 +154,7 @@ export const Screen12_ImportUpload: React.FC = () => {
           <button
             type="button"
             onClick={handleDownloadTemplate}
-            className="enterprise-btn-secondary h-8 px-3 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#6254E8] shrink-0"
+            className="enterprise-btn-secondary h-8 px-3 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#01153C] shrink-0"
           >
             <Download className="w-3.5 h-3.5" />
             <span>download-activity-data-template.xlsx</span>
@@ -163,7 +163,7 @@ export const Screen12_ImportUpload: React.FC = () => {
 
         {/* Build Note */}
         <div className="p-3 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2">
-          <Info className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
+          <Info className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
           <span className="font-data">
             <strong>Build note:</strong> The import flow is built to be forgiving of messy input because spreadsheet uploads are still how most real enterprise activity data arrives.
           </span>

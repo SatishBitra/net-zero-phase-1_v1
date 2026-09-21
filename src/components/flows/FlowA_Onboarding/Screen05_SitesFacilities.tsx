@@ -117,7 +117,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search site name, location or state…"
-              className="w-full pl-8 pr-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+              className="w-full pl-8 pr-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
             />
           </div>
 
@@ -186,7 +186,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                   <td className="py-3 px-4 text-center">
                     <button
                       onClick={() => navigateToScreen('07_emission_sources', 'FLOW_A')}
-                      className="text-xs text-[#6254E8] hover:underline font-semibold"
+                      className="text-xs text-[#01153C] hover:underline font-semibold"
                     >
                       {site.emissionSourcesCount} configured →
                     </button>
@@ -202,7 +202,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                   <td className="py-3 px-4 text-right">
                     <button
                       onClick={() => navigateToScreen('07_emission_sources', 'FLOW_A')}
-                      className="px-2.5 py-1 text-[11px] text-[#6254E8] hover:bg-[#6254E8]/10 rounded-md transition-colors font-semibold"
+                      className="px-2.5 py-1 text-[11px] text-[#01153C] hover:bg-[#01153C]/10 rounded-md transition-colors font-semibold"
                     >
                       Sources
                     </button>
@@ -234,7 +234,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
           <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col border-l border-[#E5E7EB] font-sans animate-in slide-in-from-right duration-200">
             <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F4F5F6]">
               <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-[#6254E8]" />
+                <MapPin className="w-4 h-4 text-[#01153C]" />
                 <h3 className="text-sm font-semibold text-[#17181A]">Add New Facility / Site</h3>
               </div>
               <button
@@ -248,7 +248,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
             <form onSubmit={handleCreateSite} className="p-4 flex-1 overflow-y-auto space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                  Site Name <span className="text-[#D92D20]">*</span>
+                  Site Name <span className="text-[#ED2024]">*</span>
                 </label>
                 <input
                   type="text"
@@ -256,13 +256,13 @@ export const Screen05_SitesFacilities: React.FC = () => {
                   value={siteName}
                   onChange={(e) => setSiteName(e.target.value)}
                   placeholder="e.g. Coimbatore Casting Plant"
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                  Physical Address / Location <span className="text-[#D92D20]">*</span>
+                  Physical Address / Location <span className="text-[#ED2024]">*</span>
                 </label>
                 <textarea
                   required
@@ -270,7 +270,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="Street, Industrial Area, City"
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 />
               </div>
 
@@ -282,7 +282,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                     value={state}
                     onChange={(e) => setState(e.target.value)}
                     placeholder="e.g. Tamil Nadu"
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                   />
                 </div>
                 <div>
@@ -290,7 +290,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                   <select
                     value={siteType}
                     onChange={(e) => setSiteType(e.target.value as any)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                   >
                     <option value="Manufacturing">Manufacturing</option>
                     <option value="Storage">Storage</option>
@@ -307,7 +307,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                   value={manager}
                   onChange={(e) => setManager(e.target.value)}
                   placeholder="e.g. K. Sundaram"
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 />
               </div>
 
@@ -316,7 +316,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as any)}
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 >
                   <option value="Active">Active (Ready for emissions recording)</option>
                   <option value="Draft">Draft (Preliminary planning)</option>
@@ -349,7 +349,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
           <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#E5E7EB] p-5 font-sans">
             <div className="flex items-center justify-between pb-3 border-b border-[#F1F3F5]">
               <div className="flex items-center space-x-2">
-                <FileSpreadsheet className="w-4 h-4 text-[#6254E8]" />
+                <FileSpreadsheet className="w-4 h-4 text-[#01153C]" />
                 <h3 className="text-sm font-semibold text-[#17181A]">Import Sites via CSV</h3>
               </div>
               <button
@@ -375,7 +375,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
                 <span>Need our standardized CSV template?</span>
                 <button
                   onClick={() => showToast('Template Downloaded', 'sites_import_template.csv saved.', 'info')}
-                  className="text-[#6254E8] hover:underline font-semibold font-sans"
+                  className="text-[#01153C] hover:underline font-semibold font-sans"
                 >
                   Download template (.csv)
                 </button>

@@ -59,38 +59,38 @@ export const Screen04_OrgProfile: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                Legal Entity Name <span className="text-[#D92D20]">*</span>
+                Legal Entity Name <span className="text-[#ED2024]">*</span>
               </label>
               <input
                 type="text"
                 required
                 value={legalEntityName}
                 onChange={(e) => setLegalEntityName(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C]/20 bg-white text-[#17181A]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                Registration / Corporate ID (CIN) <span className="text-[#D92D20]">*</span>
+                Registration / Corporate ID (CIN) <span className="text-[#ED2024]">*</span>
               </label>
               <input
                 type="text"
                 required
                 value={registrationNo}
                 onChange={(e) => setRegistrationNo(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A] activity-id font-medium"
+                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C]/20 bg-white text-[#17181A] activity-id font-medium"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                Primary Country <span className="text-[#D92D20]">*</span>
+                Primary Country <span className="text-[#ED2024]">*</span>
               </label>
               <select
                 value={primaryCountry}
                 onChange={(e) => setPrimaryCountry(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                className="w-full px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
               >
                 <option value="India">India</option>
                 <option value="United States">United States</option>
@@ -102,12 +102,12 @@ export const Screen04_OrgProfile: React.FC = () => {
 
             <div>
               <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                Reporting Currency <span className="text-[#D92D20]">*</span>
+                Reporting Currency <span className="text-[#ED2024]">*</span>
               </label>
               <select
                 value={reportingCurrency}
                 onChange={(e) => setReportingCurrency(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                className="w-full px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
               >
                 <option value="INR (₹)">INR (₹)</option>
                 <option value="USD ($)">USD ($)</option>
@@ -118,12 +118,12 @@ export const Screen04_OrgProfile: React.FC = () => {
 
             <div>
               <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                Fiscal Year Start Month <span className="text-[#D92D20]">*</span>
+                Fiscal Year Start Month <span className="text-[#ED2024]">*</span>
               </label>
               <select
                 value={fiscalYearStart}
                 onChange={(e) => setFiscalYearStart(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                className="w-full px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
               >
                 <option value="April">April (e.g. Apr 1 – Mar 31 standard Indian FY)</option>
                 <option value="January">January (e.g. Jan 1 – Dec 31 Calendar Year)</option>
@@ -134,12 +134,12 @@ export const Screen04_OrgProfile: React.FC = () => {
 
             <div>
               <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                Industry Sector <span className="text-[#D92D20]">*</span>
+                Industry Sector <span className="text-[#ED2024]">*</span>
               </label>
               <select
                 value={industrySector}
                 onChange={(e) => setIndustrySector(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                className="w-full px-3.5 py-2 text-xs border border-[#E5E7EB] rounded-full focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
               >
                 <option value="Power Generation & Renewable Energy">Power Generation & Renewable Energy</option>
                 <option value="Automotive & Industrial Components">Automotive & Industrial Components</option>
@@ -181,10 +181,10 @@ export const Screen04_OrgProfile: React.FC = () => {
             ].map((option) => (
               <label
                 key={option.id}
-                className={`flex items-start p-3.5 rounded-xl border cursor-pointer transition-all ${
+                className={`flex items-start p-3.5 rounded-2xl border cursor-pointer transition-all ${
                   consolidationApproach === option.id
-                    ? 'border-[#6254E8] bg-[#6254E8]/5'
-                    : 'border-[#E5E7EB] bg-white hover:border-[#7567F5]'
+                    ? 'border-[#01153C] bg-[#EDF2FA]'
+                    : 'border-[#E5E7EB] bg-white hover:border-[#01153C]/40'
                 }`}
               >
                 <input
@@ -192,7 +192,7 @@ export const Screen04_OrgProfile: React.FC = () => {
                   name="consolidationApproach"
                   checked={consolidationApproach === option.id}
                   onChange={() => setConsolidationApproach(option.id as any)}
-                  className="mt-0.5 mr-3 text-[#6254E8] focus:ring-[#6254E8]"
+                  className="mt-0.5 mr-3 text-[#01153C] focus:ring-[#01153C]"
                 />
                 <div className="text-xs">
                   <div className="font-semibold text-[#17181A]">{option.title}</div>
@@ -202,8 +202,8 @@ export const Screen04_OrgProfile: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-4 p-3 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB] flex items-start space-x-2 text-xs text-[#5F6368]">
-            <Info className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
+          <div className="mt-4 p-3.5 bg-[#FAFAFB] rounded-2xl border border-[#E5E7EB] flex items-start space-x-2 text-xs text-[#5F6368]">
+            <Info className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
             <span className="font-data">
               This setting establishes the boundary baseline for all downstream activity ingestion, site additions, and BRSR / GHG Protocol verification filings.
             </span>
@@ -215,7 +215,7 @@ export const Screen04_OrgProfile: React.FC = () => {
           <button
             type="button"
             onClick={() => navigateToScreen('03_tenant_selector', 'FLOW_A')}
-            className="enterprise-btn-secondary h-9 px-4 text-xs font-semibold"
+            className="px-5 py-2.5 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs transition-all"
           >
             Cancel
           </button>
@@ -223,7 +223,7 @@ export const Screen04_OrgProfile: React.FC = () => {
           <button
             type="submit"
             disabled={isSaving}
-            className="enterprise-btn-primary h-9 px-5 text-xs font-semibold shadow-xs flex items-center space-x-1.5"
+            className="px-6 py-2.5 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm flex items-center space-x-1.5 transition-all"
           >
             <span>{isSaving ? 'Saving profile…' : 'Save & Continue to Sites'}</span>
             <ArrowRight className="w-3.5 h-3.5" />

@@ -85,7 +85,7 @@ export const Screen14_ValidationResults: React.FC = () => {
           2. Map Columns
         </span>
         <span className="text-[#8A8F98]">→</span>
-        <span className="px-2.5 py-1 rounded-lg bg-[#6254E8]/10 text-[#6254E8] font-bold border border-[#6254E8]/20">
+        <span className="px-2.5 py-1 rounded-lg bg-[#01153C]/10 text-[#01153C] font-bold border border-[#01153C]/20">
           3. Validate
         </span>
         <span className="text-[#8A8F98]">→</span>
@@ -128,10 +128,10 @@ export const Screen14_ValidationResults: React.FC = () => {
       </div>
 
       {/* Prominent Warning Message Banner */}
-      <div className="p-4 bg-[#B42318]/5 border border-[#B42318]/20 rounded-xl flex items-start space-x-3 text-xs">
-        <AlertCircle className="w-5 h-5 text-[#B42318] shrink-0 mt-0.5" />
+      <div className="p-4 bg-[#ED2024]/5 border border-[#ED2024]/20 rounded-xl flex items-start space-x-3 text-xs">
+        <AlertCircle className="w-5 h-5 text-[#ED2024] shrink-0 mt-0.5" />
         <div className="text-[#17181A]">
-          <p className="font-semibold text-[#B42318]">
+          <p className="font-semibold text-[#ED2024]">
             44 rows will be skipped unless corrected. You can still import the 1,798 valid rows now and fix the rest later.
           </p>
           <p className="text-[#5F6368] mt-1 font-data">
@@ -152,7 +152,7 @@ export const Screen14_ValidationResults: React.FC = () => {
           <button
             type="button"
             onClick={handleDownloadErrorReport}
-            className="enterprise-btn-secondary h-8 px-3 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#6254E8] shrink-0"
+            className="enterprise-btn-secondary h-8 px-3 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#01153C] shrink-0"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Download error report (import_errors_job88.csv)</span>
@@ -182,7 +182,7 @@ export const Screen14_ValidationResults: React.FC = () => {
                   {err.field}
                 </td>
                 <td className="py-3 px-4 font-data text-[11px] text-[#17181A]">
-                  <code className="bg-[#FAFAFB] border border-[#E5E7EB] px-2 py-0.5 rounded text-[#B42318] font-data">
+                  <code className="bg-[#FAFAFB] border border-[#E5E7EB] px-2 py-0.5 rounded text-[#ED2024] font-data">
                     {err.value}
                   </code>
                 </td>
@@ -190,7 +190,7 @@ export const Screen14_ValidationResults: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => navigateToScreen('15_fix_detail_view', 'FLOW_C')}
-                    className="inline-flex items-center space-x-1 text-[#6254E8] hover:underline font-semibold text-xs"
+                    className="inline-flex items-center space-x-1 text-[#01153C] hover:underline font-semibold text-xs"
                   >
                     <span>Fix Row</span>
                     <ExternalLink className="w-3 h-3" />
@@ -217,7 +217,7 @@ export const Screen14_ValidationResults: React.FC = () => {
             id="btn-fix-flagged-rows"
             type="button"
             onClick={() => navigateToScreen('15_fix_detail_view', 'FLOW_C')}
-            className="enterprise-btn-secondary h-9 px-4 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#6254E8]"
+            className="enterprise-btn-secondary h-9 px-4 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#01153C]"
           >
             <Wrench className="w-3.5 h-3.5" />
             <span>Fix Flagged Rows</span>

@@ -92,7 +92,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
       <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs flex flex-wrap items-center justify-between gap-4 text-xs font-sans">
         <div>
           <span className="text-[#8A8F98] block text-[10px] uppercase font-data font-semibold">Target Record</span>
-          <span className="activity-id font-medium text-[#6254E8] text-sm">Row #998 ({currentRecord?.id || 'ACT-2025-0812'})</span>
+          <span className="activity-id font-medium text-[#01153C] text-sm">Row #998 ({currentRecord?.id || 'ACT-2025-0812'})</span>
         </div>
         <div>
           <span className="text-[#8A8F98] block text-[10px] uppercase font-data font-semibold">Site</span>
@@ -124,7 +124,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
           }}
           onClick={handleUploadFile}
           className={`p-8 border-2 border-dashed rounded-xl text-center cursor-pointer transition-colors ${
-            dragActive ? 'border-[#6254E8] bg-[#6254E8]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#7567F5]'
+            dragActive ? 'border-[#01153C] bg-[#01153C]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#01153C]'
           }`}
         >
           <Upload className="w-8 h-8 text-[#8A8F98] mx-auto mb-2" />
@@ -150,7 +150,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
             <button
               type="button"
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
-              className="text-xs text-[#6254E8] hover:underline flex items-center space-x-1 font-semibold"
+              className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
             >
               <span>View in Screen 21 — Results Drill-Down</span>
               <ExternalLink className="w-3 h-3" />
@@ -172,12 +172,12 @@ export const Screen16_AttachEvidence: React.FC = () => {
                 <tr key={doc.id} className="hover:bg-[#FAFAFB]">
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-2 font-semibold text-[#17181A]">
-                      <FileText className="w-4 h-4 text-[#6254E8] shrink-0" />
+                      <FileText className="w-4 h-4 text-[#01153C] shrink-0" />
                       <span>{doc.file}</span>
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <span className="bg-[#6254E8]/10 text-[#6254E8] px-2 py-0.5 rounded-md font-data text-[10px] font-semibold border border-[#6254E8]/20">
+                    <span className="bg-[#01153C]/10 text-[#01153C] px-2 py-0.5 rounded-md font-data text-[10px] font-semibold border border-[#01153C]/20">
                       {doc.type}
                     </span>
                   </td>
@@ -192,7 +192,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => showToast('Evidence Preview', `Viewing ${doc.file}`)}
-                        className="p-1 text-[#5F6368] hover:text-[#6254E8]"
+                        className="p-1 text-[#5F6368] hover:text-[#01153C]"
                         title="Preview Document"
                       >
                         <Eye className="w-3.5 h-3.5" />
@@ -200,7 +200,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => handleRemoveDoc(doc.id)}
-                        className="p-1 text-[#5F6368] hover:text-[#B42318]"
+                        className="p-1 text-[#5F6368] hover:text-[#ED2024]"
                         title="Detach Document"
                       >
                         <Trash2 className="w-3.5 h-3.5" />

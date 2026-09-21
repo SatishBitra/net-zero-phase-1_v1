@@ -94,7 +94,7 @@ export const Screen07_EmissionSources: React.FC = () => {
         actions={
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+            className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Add Emission Source</span>
@@ -103,16 +103,16 @@ export const Screen07_EmissionSources: React.FC = () => {
       />
 
       {/* Site Selector Bar & Filter */}
-      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 font-sans">
+      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-2xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 font-sans">
         <div className="flex items-center space-x-3">
           <label className="text-xs font-semibold text-[#17181A] shrink-0 flex items-center space-x-1.5">
-            <Building className="w-3.5 h-3.5 text-[#6254E8]" />
+            <Building className="w-3.5 h-3.5 text-[#01153C]" />
             <span>Target Site:</span>
           </label>
           <select
             value={selectedSiteId}
             onChange={(e) => setSelectedSiteId(e.target.value)}
-            className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-[#FAFAFB] text-[#17181A] font-medium focus:border-[#7567F5]"
+            className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-[#FAFAFB] text-[#17181A] font-medium focus:outline-none focus:border-[#01153C]"
           >
             {sites.map((site) => (
               <option key={site.id} value={site.id}>
@@ -126,7 +126,7 @@ export const Screen07_EmissionSources: React.FC = () => {
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="px-2.5 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A]"
+            className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C]"
           >
             <option value="all">All Scopes</option>
             <option value="Scope 1">Scope 1 (Direct)</option>
@@ -141,7 +141,7 @@ export const Screen07_EmissionSources: React.FC = () => {
       </div>
 
       {/* Sources Table */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs font-sans">
+      <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs font-sans">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
@@ -155,7 +155,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                 <th scope="col" className="py-2.5 px-4 font-semibold text-[#17181A] text-right">Lifecycle</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#F1F3F5]">
+            <tbody className="divide-y divide-[#E5E7EB]">
               {filteredSources.map((source) => (
                 <tr key={source.id} className="hover:bg-[#FAFAFB] transition-colors">
                   <td className="py-3 px-4">
@@ -164,12 +164,12 @@ export const Screen07_EmissionSources: React.FC = () => {
                   </td>
                   <td className="py-3 px-4">
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold ${
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${
                         source.category === 'Scope 1'
-                          ? 'bg-[#FEF3F2] text-[#B42318] border border-[#FDA29B]'
+                          ? 'bg-[#FEF1F1] text-[#ED2024] border-[#FED2D3]'
                           : source.category === 'Scope 2'
-                          ? 'bg-[#6254E8]/10 text-[#6254E8] border border-[#6254E8]/20'
-                          : 'bg-[#FAFAFB] text-[#5F6368] border border-[#E5E7EB]'
+                          ? 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]'
+                          : 'bg-[#FAFAFB] text-[#5F6368] border-[#E5E7EB]'
                       }`}
                     >
                       {source.category}
@@ -207,13 +207,13 @@ export const Screen07_EmissionSources: React.FC = () => {
       </div>
 
       {/* Progression to Step 6 */}
-      <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl flex items-center justify-between text-xs shadow-2xs font-sans">
+      <div className="p-4 bg-white border border-[#E5E7EB] rounded-2xl flex items-center justify-between text-xs shadow-2xs font-sans">
         <div className="text-[#5F6368] font-data">
           Sources configured. Proceed to invite users and assign operational roles.
         </div>
         <button
           onClick={() => navigateToScreen('08_users_roles', 'FLOW_A')}
-          className="enterprise-btn-primary h-9 px-4 text-xs font-semibold shadow-xs flex items-center space-x-1.5"
+          className="px-6 py-2.5 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm flex items-center space-x-1.5 transition-all"
         >
           <span>Continue to Users & Roles</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -224,9 +224,9 @@ export const Screen07_EmissionSources: React.FC = () => {
       {isDrawerOpen && (
         <div className="fixed inset-0 z-50 bg-black/40 flex justify-end">
           <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col border-l border-[#E5E7EB] font-sans animate-in slide-in-from-right duration-200">
-            <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F4F5F6]">
+            <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#FAFAFB]">
               <div className="flex items-center space-x-2">
-                <Zap className="w-4 h-4 text-[#6254E8]" />
+                <Zap className="w-4 h-4 text-[#01153C]" />
                 <h3 className="text-sm font-semibold text-[#17181A]">Add Emission Source</h3>
               </div>
               <button
@@ -247,7 +247,7 @@ export const Screen07_EmissionSources: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                  Source Name <span className="text-[#D92D20]">*</span>
+                  Source Name <span className="text-[#ED2024]">*</span>
                 </label>
                 <input
                   type="text"
@@ -255,7 +255,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                   value={sourceName}
                   onChange={(e) => setSourceName(e.target.value)}
                   placeholder="e.g. Natural gas boiler, Rooftop solar, Forklift fleet"
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C]/20 bg-white text-[#17181A]"
                 />
               </div>
 
@@ -265,7 +265,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                   <select
                     value={category}
                     onChange={(e) => handleCategoryMethodChange(e.target.value as any, method)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                   >
                     <option value="Scope 1">Scope 1 (Direct combustion / fugitive)</option>
                     <option value="Scope 2">Scope 2 (Indirect electricity)</option>
@@ -278,7 +278,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                   <select
                     value={method}
                     onChange={(e) => handleCategoryMethodChange(category, e.target.value)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                   >
                     {category === 'Scope 2' ? (
                       <>
@@ -304,7 +304,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                     required
                     value={unit}
                     onChange={(e) => setUnit(e.target.value)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A] font-data"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C]/20 bg-white text-[#17181A] font-data"
                   />
                 </div>
 
@@ -316,7 +316,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                     required
                     value={emissionFactor}
                     onChange={(e) => setEmissionFactor(parseFloat(e.target.value) || 0)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A] emission-factor font-medium"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C]/20 bg-white text-[#17181A] emission-factor font-medium"
                   />
                 </div>
               </div>
@@ -327,7 +327,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                   type="text"
                   value={factorSource}
                   onChange={(e) => setFactorSource(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C]/20 bg-white text-[#17181A]"
                 />
               </div>
 
@@ -336,7 +336,7 @@ export const Screen07_EmissionSources: React.FC = () => {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as any)}
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 >
                   <option value="Active">Active (Available for logging entries)</option>
                   <option value="Draft">Draft</option>
@@ -348,13 +348,13 @@ export const Screen07_EmissionSources: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsDrawerOpen(false)}
-                  className="enterprise-btn-secondary h-9 px-3 text-xs font-semibold"
+                  className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="enterprise-btn-primary h-9 px-4 text-xs font-semibold shadow-xs"
+                  className="px-5 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm"
                 >
                   Save Source
                 </button>

@@ -147,7 +147,7 @@ export const Screen08_UsersRoles: React.FC = () => {
                   <tr key={user.id} className="hover:bg-[#FAFAFB] transition-colors">
                     <td className="py-3 px-4">
                       <div className="flex items-center space-x-2.5">
-                        <div className="w-7 h-7 rounded-full bg-[#6254E8]/10 border border-[#6254E8]/20 flex items-center justify-center font-bold text-xs text-[#6254E8]">
+                        <div className="w-7 h-7 rounded-full bg-[#01153C]/10 border border-[#01153C]/20 flex items-center justify-center font-bold text-xs text-[#01153C]">
                           {user.avatarInitials}
                         </div>
                         <span className="font-semibold text-[#17181A]">{user.name}</span>
@@ -173,7 +173,7 @@ export const Screen08_UsersRoles: React.FC = () => {
                       />
                     </td>
                     <td className="py-3 px-4 text-right">
-                      <button className="text-[11px] text-[#6254E8] hover:underline font-semibold">
+                      <button className="text-[11px] text-[#01153C] hover:underline font-semibold">
                         Edit Access
                       </button>
                     </td>
@@ -216,28 +216,28 @@ export const Screen08_UsersRoles: React.FC = () => {
                   <td className="py-2.5 px-4 text-[#17181A]">{row.action}</td>
                   <td className="py-2.5 px-3 text-center">
                     {row.admin ? (
-                      <Check className="w-4 h-4 text-[#6254E8] mx-auto" />
+                      <Check className="w-4 h-4 text-[#01153C] mx-auto" />
                     ) : (
                       <span className="text-[#8A8F98]">—</span>
                     )}
                   </td>
                   <td className="py-2.5 px-3 text-center">
                     {row.dataEntry ? (
-                      <Check className="w-4 h-4 text-[#6254E8] mx-auto" />
+                      <Check className="w-4 h-4 text-[#01153C] mx-auto" />
                     ) : (
                       <span className="text-[#8A8F98]">—</span>
                     )}
                   </td>
                   <td className="py-2.5 px-3 text-center">
                     {row.reviewer ? (
-                      <Check className="w-4 h-4 text-[#6254E8] mx-auto" />
+                      <Check className="w-4 h-4 text-[#01153C] mx-auto" />
                     ) : (
                       <span className="text-[#8A8F98]">—</span>
                     )}
                   </td>
                   <td className="py-2.5 px-3 text-center">
                     {row.verifier ? (
-                      <Check className="w-4 h-4 text-[#6254E8] mx-auto" />
+                      <Check className="w-4 h-4 text-[#01153C] mx-auto" />
                     ) : (
                       <span className="text-[#8A8F98]">—</span>
                     )}
@@ -250,9 +250,9 @@ export const Screen08_UsersRoles: React.FC = () => {
       </div>
 
       {/* Completion of Flow A Onboarding */}
-      <div className="p-4 bg-[#6254E8]/5 border border-[#6254E8]/20 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-sans">
+      <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-sans">
         <div>
-          <span className="font-bold text-[#6254E8]">Onboarding Complete</span>
+          <span className="font-bold text-[#01153C]">Onboarding Complete</span>
           <p className="text-[#5F6368] mt-0.5 text-[11px] font-data">
             The organisation boundary, sites, reporting periods, emission factors, and user roles are configured. You are now ready to begin Activity Data Ingestion.
           </p>
@@ -272,7 +272,7 @@ export const Screen08_UsersRoles: React.FC = () => {
           <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col border-l border-[#E5E7EB] font-sans animate-in slide-in-from-right duration-200">
             <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F4F5F6]">
               <div className="flex items-center space-x-2">
-                <UserPlus className="w-4 h-4 text-[#6254E8]" />
+                <UserPlus className="w-4 h-4 text-[#01153C]" />
                 <h3 className="text-sm font-semibold text-[#17181A]">Invite Team Member</h3>
               </div>
               <button
@@ -286,7 +286,7 @@ export const Screen08_UsersRoles: React.FC = () => {
             <form onSubmit={handleInvite} className="p-4 flex-1 overflow-y-auto space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                  Full Name <span className="text-[#D92D20]">*</span>
+                  Full Name <span className="text-[#ED2024]">*</span>
                 </label>
                 <input
                   type="text"
@@ -294,13 +294,13 @@ export const Screen08_UsersRoles: React.FC = () => {
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                   placeholder="e.g. Priya Sharma"
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                  Work Email <span className="text-[#D92D20]">*</span>
+                  Work Email <span className="text-[#ED2024]">*</span>
                 </label>
                 <input
                   type="email"
@@ -308,7 +308,7 @@ export const Screen08_UsersRoles: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@company.com"
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 />
               </div>
 
@@ -317,7 +317,7 @@ export const Screen08_UsersRoles: React.FC = () => {
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value as any)}
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 >
                   <option value="DATA_ENTRY">Data Entry (Enters/imports activity data)</option>
                   <option value="REVIEWER">Reviewer / Approver (Verifies & approves)</option>
@@ -331,7 +331,7 @@ export const Screen08_UsersRoles: React.FC = () => {
                 <select
                   value={siteScope}
                   onChange={(e) => setSiteScope(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
                 >
                   <option value="all">All Sites (Organisation-wide)</option>
                   {sites.map((site) => (

@@ -24,7 +24,7 @@ export const Screen03_TenantSelector: React.FC = () => {
     <div id="screen-03-tenant-selector" className="max-w-xl mx-auto my-10 p-6 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
       <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#F1F3F5]">
         <div className="flex items-center space-x-2">
-          <Building2 className="w-4 h-4 text-[#6254E8]" />
+          <Building2 className="w-4 h-4 text-[#01153C]" />
           <span className="text-xs font-semibold text-[#17181A]">Tenant Directory</span>
         </div>
         <StatusBadge status="Approved" customLabel="Organisation Boundary" size="sm" />
@@ -45,7 +45,7 @@ export const Screen03_TenantSelector: React.FC = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search organisation name, sector or CIN…"
-          className="w-full pl-9 pr-3 py-2 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#7567F5] bg-white text-[#17181A]"
+          className="w-full pl-9 pr-3 py-2 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] bg-white text-[#17181A]"
         />
       </div>
 
@@ -59,13 +59,13 @@ export const Screen03_TenantSelector: React.FC = () => {
               onClick={() => handleSelect(tenant)}
               className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between group ${
                 isSelected
-                  ? 'border-[#6254E8] bg-[#6254E8]/5 shadow-2xs'
-                  : 'border-[#E5E7EB] bg-white hover:border-[#7567F5] hover:bg-[#FAFAFB]'
+                  ? 'border-[#01153C] bg-[#01153C]/5 shadow-2xs'
+                  : 'border-[#E5E7EB] bg-white hover:border-[#01153C] hover:bg-[#FAFAFB]'
               }`}
             >
               <div className="space-y-1">
                 <div className="flex items-center space-x-2">
-                  <h3 className="text-sm font-semibold text-[#17181A] group-hover:text-[#6254E8] transition-colors">
+                  <h3 className="text-sm font-semibold text-[#17181A] group-hover:text-[#01153C] transition-colors">
                     {tenant.name}
                   </h3>
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#FAFAFB] text-[#5F6368] border border-[#E5E7EB] font-data">
@@ -84,11 +84,11 @@ export const Screen03_TenantSelector: React.FC = () => {
 
               <div className="pl-4 flex items-center space-x-2">
                 {isSelected ? (
-                  <div className="w-7 h-7 rounded-full bg-[#6254E8] text-white flex items-center justify-center shadow-2xs">
+                  <div className="w-7 h-7 rounded-full bg-[#01153C] text-white flex items-center justify-center shadow-2xs">
                     <Check className="w-4 h-4" />
                   </div>
                 ) : (
-                  <div className="w-7 h-7 rounded-full border border-[#E5E7EB] group-hover:border-[#6254E8] group-hover:bg-[#6254E8]/10 flex items-center justify-center text-[#8A8F98] group-hover:text-[#6254E8] transition-colors">
+                  <div className="w-7 h-7 rounded-full border border-[#E5E7EB] group-hover:border-[#01153C] group-hover:bg-[#01153C]/10 flex items-center justify-center text-[#8A8F98] group-hover:text-[#01153C] transition-colors">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 )}
@@ -108,7 +108,7 @@ export const Screen03_TenantSelector: React.FC = () => {
         <span>Need access to another subsidiary?</span>
         <button
           onClick={() => navigateToScreen('04_org_profile', 'FLOW_A')}
-          className="text-[#6254E8] hover:underline font-semibold font-sans"
+          className="text-[#01153C] hover:underline font-semibold font-sans"
         >
           Request Permission →
         </button>

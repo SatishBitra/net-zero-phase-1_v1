@@ -135,7 +135,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               className="h-8 w-8 object-contain rounded-md shadow-2xs shrink-0"
             />
             <span className="text-[14px] font-bold tracking-tight text-[#01153C] font-sans">
-              Tula Carbon <span className="text-[#ED2024] font-black text-xs">ZE</span>
+              Tula Carbon
             </span>
           </div>
 
@@ -182,7 +182,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               </div>
               <div className="flex items-center space-x-1.5">
                 <span className="text-[15px] font-bold tracking-tight text-[#01153C] font-sans">
-                  TULA CARBON <span className="text-[#ED2024] font-black">ZE</span>
+                  TULA CARBON
                 </span>
               </div>
             </div>
@@ -598,7 +598,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                   setIsMobileRightNavOpen(false);
                   navigateToScreen('01_login', 'FLOW_A');
                 }}
-                className="w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-md bg-white border border-[#D9DDE3] hover:bg-[#FEF0EF] hover:border-[#FDA29B] text-xs text-[#5E6672] hover:text-[#B42318] transition-colors"
+                className="w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-full bg-white border border-[#E5E7EB] hover:bg-[#FEF1F1] hover:border-[#FED2D3] text-xs text-[#5F6368] hover:text-[#ED2024] transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Switch Account / Sign Out</span>

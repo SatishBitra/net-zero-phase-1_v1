@@ -102,7 +102,7 @@ export const Screen13_ColumnMapping: React.FC = () => {
           1. Upload File
         </span>
         <span className="text-[#8A8F98]">→</span>
-        <span className="px-2.5 py-1 rounded-lg bg-[#6254E8]/10 text-[#6254E8] font-bold border border-[#6254E8]/20">
+        <span className="px-2.5 py-1 rounded-lg bg-[#01153C]/10 text-[#01153C] font-bold border border-[#01153C]/20">
           2. Map Columns
         </span>
         <span className="text-[#8A8F98]">→</span>
@@ -116,15 +116,15 @@ export const Screen13_ColumnMapping: React.FC = () => {
       </div>
 
       {/* Auto-suggest badge & tenant persistence note */}
-      <div className="p-3.5 bg-[#6254E8]/5 border border-[#6254E8]/20 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-        <div className="flex items-center space-x-2 text-[#6254E8]">
+      <div className="p-3.5 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+        <div className="flex items-center space-x-2 text-[#01153C]">
           <Sparkles className="w-4 h-4 shrink-0" />
           <span className="font-semibold">
             Auto-suggested 5 of 5 column mappings from file headers and past import history.
           </span>
         </div>
         <div className="flex items-center space-x-1.5 text-[#5F6368] text-[11px] font-data">
-          <BookmarkCheck className="w-3.5 h-3.5 text-[#6254E8]" />
+          <BookmarkCheck className="w-3.5 h-3.5 text-[#01153C]" />
           <span>Remembered for {currentTenant.name}</span>
         </div>
       </div>
@@ -152,7 +152,7 @@ export const Screen13_ColumnMapping: React.FC = () => {
                   <select
                     value={row.mapsTo}
                     onChange={(e) => handleFieldMapChange(idx, e.target.value)}
-                    className="w-full max-w-xs px-2.5 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#7567F5]"
+                    className="w-full max-w-xs px-2.5 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C]"
                   >
                     {targetSystemFields.map((field) => (
                       <option key={field} value={field}>

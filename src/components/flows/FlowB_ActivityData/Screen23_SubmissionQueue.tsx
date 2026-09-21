@@ -124,7 +124,7 @@ export const Screen23_SubmissionQueue: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
         <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Inbox className="w-4 h-4 text-[#6254E8]" />
+            <Inbox className="w-4 h-4 text-[#01153C]" />
             <h2 className="text-sm font-semibold text-[#17181A] font-sans">Pending Submissions</h2>
           </div>
           <span className="text-xs text-[#5F6368] font-sans font-medium">
@@ -149,7 +149,7 @@ export const Screen23_SubmissionQueue: React.FC = () => {
                   {item.submittedDate}
                 </td>
                 <td className="py-3.5 px-4 font-semibold text-[#17181A] flex items-center space-x-2">
-                  <Building2 className="w-3.5 h-3.5 text-[#6254E8]" />
+                  <Building2 className="w-3.5 h-3.5 text-[#01153C]" />
                   <span>{item.siteName}</span>
                 </td>
                 <td className="py-3.5 px-4 text-right period-code font-medium text-[#17181A]">
@@ -177,7 +177,7 @@ export const Screen23_SubmissionQueue: React.FC = () => {
 
       {/* RBAC Notice */}
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
-        <ShieldCheck className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
+        <ShieldCheck className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
         <div>
           <strong className="text-[#17181A] font-semibold">Role-Based Access Control (FR-23.09):</strong> The submission queue is accessible exclusively to Reviewers/Approvers and Tenant Admins. Data entry submitters cannot approve their own submissions.
         </div>

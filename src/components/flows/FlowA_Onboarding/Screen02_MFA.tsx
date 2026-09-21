@@ -70,7 +70,7 @@ export const Screen02_MFA: React.FC = () => {
       </div>
 
       <div className="text-center mb-6">
-        <div className="w-11 h-11 bg-[#6254E8]/10 rounded-xl flex items-center justify-center mx-auto mb-3 text-[#6254E8] border border-[#6254E8]/20">
+        <div className="w-11 h-11 bg-[#01153C]/10 rounded-xl flex items-center justify-center mx-auto mb-3 text-[#01153C] border border-[#01153C]/20">
           <KeyRound className="w-5 h-5" />
         </div>
         <h1 className="text-lg font-bold text-[#17181A]">Verify it's you</h1>
@@ -92,7 +92,7 @@ export const Screen02_MFA: React.FC = () => {
               value={digit}
               onChange={(e) => handleChange(idx, e.target.value)}
               onKeyDown={(e) => handleKeyDown(idx, e)}
-              className="w-11 h-12 text-center text-lg font-mono border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#7567F5] focus:ring-1 focus:ring-[#7567F5] bg-[#FAFAFB] text-[#17181A]"
+              className="w-11 h-12 text-center text-lg font-mono border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C] bg-[#FAFAFB] text-[#17181A]"
             />
           ))}
         </div>

@@ -102,8 +102,8 @@ export const Screen26_PeriodLockReview: React.FC = () => {
       />
 
       {/* High-Risk Lock Warning Banner (Section 13) */}
-      <div className="p-4 bg-[#FEF0EF] border border-[#D92D20]/40 rounded-xl space-y-2 shadow-2xs">
-        <div className="flex items-center space-x-2 text-[#D92D20] font-semibold text-sm">
+      <div className="p-4 bg-[#FEF0EF] border border-[#ED2024]/40 rounded-xl space-y-2 shadow-2xs">
+        <div className="flex items-center space-x-2 text-[#ED2024] font-semibold text-sm">
           <ShieldAlert className="w-5 h-5 shrink-0" />
           <span>Irreversible Governance Action Warning</span>
         </div>
@@ -159,16 +159,16 @@ export const Screen26_PeriodLockReview: React.FC = () => {
             placeholder="FY 2025-26"
             className={`w-full max-w-md px-3.5 py-2 text-xs border rounded-lg period-code ${
               attemptedSubmit && !isMatch
-                ? 'border-[#D92D20] bg-[#FEF0EF]/40 focus:border-[#D92D20]'
+                ? 'border-[#ED2024] bg-[#FEF0EF]/40 focus:border-[#ED2024]'
                 : isMatch
                 ? 'border-[#0F6B48] bg-[#E8F5E9]/30 text-[#17181A]'
-                : 'border-[#E5E7EB] focus:border-[#7567F5]'
+                : 'border-[#E5E7EB] focus:border-[#01153C]'
             }`}
           />
 
           {/* Explicit error validation message from PRD Section 31 */}
           {attemptedSubmit && !isMatch && (
-            <p className="text-xs text-[#D92D20] mt-1.5 flex items-center space-x-1 font-data">
+            <p className="text-xs text-[#ED2024] mt-1.5 flex items-center space-x-1 font-data">
               <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
               <span>Enter “FY 2025-26” to confirm the lock.</span>
             </p>
@@ -191,7 +191,7 @@ export const Screen26_PeriodLockReview: React.FC = () => {
             disabled={!isMatch || isLocking}
             className={`h-9 px-5 text-xs font-semibold rounded-lg transition-colors flex items-center space-x-2 shadow-xs ${
               isMatch
-                ? 'bg-[#D92D20] hover:bg-[#B42318] text-white cursor-pointer'
+                ? 'bg-[#ED2024] hover:bg-[#ED2024] text-white cursor-pointer'
                 : 'bg-[#F1F3F5] text-[#8A8F98] border border-[#E5E7EB] cursor-not-allowed'
             }`}
           >
@@ -204,7 +204,7 @@ export const Screen26_PeriodLockReview: React.FC = () => {
 
       {/* RBAC & Governance Note */}
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
-        <Info className="w-4 h-4 text-[#6254E8] shrink-0 mt-0.5" />
+        <Info className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
         <div>
           <strong className="text-[#17181A] font-semibold">FR-26.01:</strong> Only authorised Tenant Admin users can initiate period lock. Once locked, calculations become immutable snapshots and reports become read-only.
         </div>

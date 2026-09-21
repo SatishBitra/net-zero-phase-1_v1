@@ -39,7 +39,7 @@ export const Screen01_Login: React.FC = () => {
             alt="Zenith Energy ZE Logo"
             className="w-8 h-8 object-contain rounded-lg shadow-2xs"
           />
-          <span className="text-sm font-bold text-[#01153C]">Tula Carbon <span className="text-[#ED2024]">ZE</span></span>
+          <span className="text-sm font-bold text-[#01153C]">Tula Carbon</span>
         </div>
         <StatusBadge status="Approved" customLabel="Secure Authentication" size="sm" />
       </div>
