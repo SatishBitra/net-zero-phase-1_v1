@@ -12,10 +12,10 @@ import {
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
+import { QuickActionsMenu } from '../../common/QuickActionsMenu';
 
 export const Screen31_VerifierDashboard: React.FC = () => {
-  const { navigateToScreen, setActiveTraceContext, verifierQueries, currentUser, currentRole } = useApp();
-  const [showEmptyState, setShowEmptyState] = useState(false);
+  const { navigateToScreen, setActiveTraceContext, verifierQueries, currentUser, currentRole, showToast } = useApp();
 
   // Scoped assigned review per PRD specifications
   const assignedReviews = [
@@ -96,13 +96,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
             </div>
           </div>
 
-          <button
-            onClick={() => setShowEmptyState(!showEmptyState)}
-            className="px-4 py-2 rounded-full bg-white hover:bg-[#FAFAFB] text-[#5F6368] hover:text-[#01153C] border border-[#E5E7EB] hover:border-[#01153C]/30 transition-all font-sans font-semibold text-xs shadow-2xs shrink-0"
-            title="Demonstrate empty state when no reviews are assigned"
-          >
-            {showEmptyState ? 'Show Assigned Reviews' : 'Simulate Empty State'}
-          </button>
+          <QuickActionsMenu variant="page" />
         </div>
       </div>
 
@@ -158,7 +152,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
       />
 
       {/* Main Review Section */}
-      {showEmptyState ? (
+      {assignedReviews.length === 0 ? (
         /* Empty state per PRD Section 7 */
         <div id="verifier-empty-state" className="bg-white border border-[#E5E7EB] rounded-xl p-12 text-center space-y-3 shadow-2xs">
           <div className="w-12 h-12 rounded-full bg-[#F4F5F6] text-[#8A8F98] flex items-center justify-center mx-auto">
@@ -172,7 +166,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
           </div>
           <div className="pt-2">
             <button
-              onClick={() => setShowEmptyState(false)}
+              onClick={() => showToast('Scopes Synchronized', 'Assigned review scopes refreshed.')}
               className="text-xs text-[#01153C] hover:underline font-semibold font-sans"
             >
               Reload assigned scopes

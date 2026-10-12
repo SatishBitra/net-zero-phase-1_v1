@@ -23,10 +23,12 @@ import {
   Database,
   Building2,
   TrendingUp,
+  Lock,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { KpiCard } from '../../common/KpiCard';
 import { StatusBadge } from '../../common/StatusBadge';
+import { QuickActionsMenu } from '../../common/QuickActionsMenu';
 
 export const Screen20_CalculationRuns: React.FC = () => {
   const {
@@ -39,7 +41,11 @@ export const Screen20_CalculationRuns: React.FC = () => {
     navigateToScreen,
     showToast,
     addAuditLog,
+    currentRole,
+    currentUser,
   } = useApp();
+
+  const canRunCalculation = currentRole === 'TENANT_ADMIN' || currentRole === 'REVIEWER';
 
   // Active view tab
   const [activeTab, setActiveTab] = useState<'runs' | 'ledger' | 'methodology'>('runs');
@@ -131,6 +137,11 @@ export const Screen20_CalculationRuns: React.FC = () => {
 
   // Handle new calculation execution
   const handleStartCalculation = () => {
+    if (!canRunCalculation) {
+      showToast('Action Restricted', 'Triggering calculation runs requires Reviewer or Tenant Admin permissions.', 'error');
+      return;
+    }
+
     setIsExecuting(true);
     setExecutionStep(1);
 
@@ -145,8 +156,8 @@ export const Screen20_CalculationRuns: React.FC = () => {
     setTimeout(() => {
       triggerCalculationRun(runPeriod, runScope);
       addAuditLog({
-        userName: 'A. Kumar',
-        role: 'Reviewer',
+        userName: currentUser.name,
+        role: currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : currentRole === 'REVIEWER' ? 'Reviewer' : currentRole,
         action: 'Executed GHG Calculations Ledger Run',
         previousValue: `Previous run: ${latestRun.id} (${latestRun.total_tCO2e.toLocaleString()} tCO2e)`,
         newValue: `New Run: ${runPeriod} (${runScope}) — 28,270.0 tCO2e computed`,
@@ -254,18 +265,44 @@ export const Screen20_CalculationRuns: React.FC = () => {
               <span>Results Drill-Down</span>
             </button>
 
-            <button
-              id="btn-trigger-run-modal"
-              type="button"
-              onClick={() => setIsRunModalOpen(true)}
-              className="px-5 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
-            >
-              <Play className="w-3.5 h-3.5 fill-current" />
-              <span>Run Calculation</span>
-            </button>
+            <QuickActionsMenu variant="page" />
+
+            {canRunCalculation ? (
+              <button
+                id="btn-trigger-run-modal"
+                type="button"
+                onClick={() => setIsRunModalOpen(true)}
+                className="px-5 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
+              >
+                <Play className="w-3.5 h-3.5 fill-current" />
+                <span>Run Calculation</span>
+              </button>
+            ) : (
+              <div className="flex items-center space-x-2 text-xs text-[#5F6368] font-data bg-[#FAFAFB] px-3.5 py-1.5 rounded-full border border-[#E5E7EB]">
+                <Lock className="w-3.5 h-3.5 text-[#8A8F98]" />
+                <span>Calculation trigger governed by Reviewer & Admin</span>
+              </div>
+            )}
           </div>
         }
       />
+
+      {/* Role Notice Banner */}
+      {!canRunCalculation && (
+        <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center space-x-3 text-xs text-[#5F6368] font-data shadow-2xs">
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="text-[#17181A] font-semibold">
+              {currentRole === 'VERIFIER'
+                ? 'Auditor Independent Inspection Ledger'
+                : 'Data Entry Scoped View'}
+              :
+            </strong>{' '}
+            You are inspecting computed emission runs as{' '}
+            <strong className="text-[#17181A]">{currentUser.name} ({currentRole})</strong>. The ledger values are immutable. Triggering batch recalculations is restricted to Reviewer and Tenant Admin roles.
+          </div>
+        </div>
+      )}
 
       {/* Accounting Balance Strip & Assurance KPI Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -718,7 +755,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 onClick={() => navigateToScreen('22_factors_reference', 'FLOW_E')}
                 className="text-xs text-[#01153C] hover:underline font-semibold flex items-center space-x-1"
               >
-                <span>Full Factor Library (Screen 22)</span>
+                <span>Full Applied Factor Library</span>
                 <ArrowRight className="w-3 h-3" />
               </button>
             </div>

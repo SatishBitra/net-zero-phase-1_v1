@@ -59,7 +59,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
   // Merge live audit trail events for batches
   const historyData = useMemo<ApprovalHistoryRow[]>(() => {
     const liveBatchEvents: ApprovalHistoryRow[] = auditTrail
-      .filter((log) => log.source?.includes('Screen 24') || log.lineItemId?.includes('Batch'))
+      .filter((log) => log.source?.includes('Workflow') || log.source?.includes('Screen 24') || log.lineItemId?.includes('Batch'))
       .map((log) => ({
         batchId: log.lineItemId || '#204',
         siteName: 'Chennai Plant 1',
@@ -174,7 +174,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
           onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
           className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
         >
-          <span>View Comprehensive Audit Trail (Screen 35)</span>
+          <span>View Comprehensive Audit Trail</span>
           <ExternalLink className="w-3 h-3" />
         </button>
       </div>

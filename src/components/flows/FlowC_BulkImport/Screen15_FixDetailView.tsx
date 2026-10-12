@@ -151,7 +151,7 @@ export const Screen15_FixDetailView: React.FC = () => {
                 value={site}
                 onChange={(e) => setSite(e.target.value)}
                 className={`flex-1 px-3 py-2 text-xs border rounded-lg bg-white text-[#17181A] focus:outline-none ${
-                  hasSiteError ? 'border-[#B42318] bg-[#B42318]/5' : 'border-[#E5E7EB] focus:border-[#7567F5]'
+                  hasSiteError ? 'border-[#B42318] bg-[#B42318]/5' : 'border-[#E5E7EB] focus:border-[#01153C]'
                 }`}
               >
                 <option value="Chennai Plant One">Chennai Plant One (Flagged Unrecognized)</option>
@@ -164,7 +164,7 @@ export const Screen15_FixDetailView: React.FC = () => {
                 <button
                   type="button"
                   onClick={applySuggestedSite}
-                  className="enterprise-btn-secondary h-9 px-3 text-xs font-semibold inline-flex items-center text-[#6254E8] shrink-0"
+                  className="enterprise-btn-secondary h-9 px-3 text-xs font-semibold inline-flex items-center text-[#01153C] shrink-0"
                 >
                   Apply "Chennai Plant 1"
                 </button>
@@ -191,7 +191,7 @@ export const Screen15_FixDetailView: React.FC = () => {
               type="text"
               value={source}
               onChange={(e) => setSource(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#7567F5] bg-white font-medium"
+              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#01153C] bg-white font-medium"
             />
           </div>
 
@@ -204,7 +204,7 @@ export const Screen15_FixDetailView: React.FC = () => {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#7567F5] bg-white font-data"
+              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#01153C] bg-white font-data"
             />
           </div>
 
@@ -217,7 +217,7 @@ export const Screen15_FixDetailView: React.FC = () => {
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg font-data text-[#17181A] focus:outline-none focus:border-[#7567F5] bg-white font-medium"
+              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg font-data text-[#17181A] focus:outline-none focus:border-[#01153C] bg-white font-medium"
             />
           </div>
 
@@ -240,15 +240,15 @@ export const Screen15_FixDetailView: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs">
         <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <History className="w-4 h-4 text-[#6254E8]" />
+            <History className="w-4 h-4 text-[#01153C]" />
             <h2 className="text-sm font-semibold text-[#17181A]">Change History</h2>
           </div>
           <button
             type="button"
             onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
-            className="text-xs text-[#6254E8] hover:underline flex items-center space-x-1 font-semibold"
+            className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
           >
-            <span>View Screen 35 — Audit Trail</span>
+            <span>View Immutable Audit Trail</span>
             <ExternalLink className="w-3 h-3" />
           </button>
         </div>

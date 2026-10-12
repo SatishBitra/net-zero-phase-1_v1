@@ -64,7 +64,7 @@ export const Screen28_ReportPreview: React.FC = () => {
       <div className="bg-[#484C52] p-4 sm:p-8 rounded-xl shadow-inner overflow-x-auto">
         <div className="max-w-[760px] mx-auto bg-white shadow-2xl rounded-xl p-8 sm:p-12 text-[#17181A] space-y-8 font-sans border border-[#E5E7EB]">
           {/* Document Cover Header */}
-          <div className="border-b-2 border-[#6254E8] pb-6">
+          <div className="border-b-2 border-[#01153C] pb-6">
             <div className="flex justify-between items-start">
               <div>
                 <span className="text-[10px] font-sans font-semibold tracking-widest text-[#5F6368] uppercase">
@@ -73,13 +73,13 @@ export const Screen28_ReportPreview: React.FC = () => {
                 <h2 className="text-2xl font-bold text-[#17181A] mt-1 font-sans">
                   Annual GHG Emissions Inventory Report
                 </h2>
-                <div className="text-sm font-semibold text-[#6254E8] mt-1 font-sans">
+                <div className="text-sm font-semibold text-[#01153C] mt-1 font-sans">
                   Tenant: {activeTenant?.name || 'Zenith Energy Services Pvt Ltd'}
                 </div>
               </div>
 
               <div className="text-right">
-                <span className="inline-block px-2.5 py-1 rounded-md bg-[#6254E8]/10 text-[#6254E8] text-xs activity-id font-semibold border border-[#6254E8]/20">
+                <span className="inline-block px-2.5 py-1 rounded-md bg-[#01153C]/10 text-[#01153C] text-xs activity-id font-semibold border border-[#01153C]/20">
                   DOC-GHG-2025-088
                 </span>
                 <div className="text-xs text-[#5F6368] mt-1 font-sans">Reporting Period: <span className="period-code font-medium">FY 2025–26</span></div>
@@ -104,11 +104,11 @@ export const Screen28_ReportPreview: React.FC = () => {
               </div>
               <div className="p-3 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl text-center shadow-2xs">
                 <div className="text-[11px] text-[#5F6368] font-sans">Scope 2 (Grid Electricity)</div>
-                <div className="text-lg font-bold text-[#6254E8] emission-factor mt-0.5">833.5 tCO2e</div>
+                <div className="text-lg font-bold text-[#01153C] emission-factor mt-0.5">833.5 tCO2e</div>
               </div>
-              <div className="p-3 bg-[#6254E8]/5 border border-[#6254E8]/30 rounded-xl text-center shadow-2xs">
-                <div className="text-[11px] text-[#6254E8] font-semibold font-sans">Total Gross Emissions</div>
-                <div className="text-lg font-bold text-[#6254E8] emission-factor mt-0.5">1,245.8 tCO2e</div>
+              <div className="p-3 bg-[#01153C]/5 border border-[#01153C]/30 rounded-xl text-center shadow-2xs">
+                <div className="text-[11px] text-[#01153C] font-semibold font-sans">Total Gross Emissions</div>
+                <div className="text-lg font-bold text-[#01153C] emission-factor mt-0.5">1,245.8 tCO2e</div>
               </div>
             </div>
           </div>
@@ -169,7 +169,7 @@ export const Screen28_ReportPreview: React.FC = () => {
               <span>Independent Verification Statement Container</span>
             </div>
             <p className="text-[11px] text-[#5F6368]">
-              All underlying activity line-items are backed by primary invoices stored in TC-ARC-002. Ready for external VVB assurance via the Verifier Portal (Screen 30).
+              All underlying activity line-items are backed by primary invoices. Ready for external VVB assurance via the Verifier Portal.
             </p>
           </div>
         </div>

@@ -62,7 +62,7 @@ export const Screen18_OCRReview: React.FC = () => {
 
     showToast(
       'OCR Confirmed',
-      'Data passed to Screen 11 Activity Data Entry Form with attached evidence bill.'
+      'Data passed to Activity Data Entry Form with attached evidence bill.'
     );
 
     navigateToScreen('11_entry_form', 'FLOW_B');
@@ -110,7 +110,7 @@ export const Screen18_OCRReview: React.FC = () => {
       />
 
       {/* Critical Policy Banner */}
-      <div className="p-3 bg-[#6254E8]/5 border border-[#6254E8]/20 rounded-xl text-xs text-[#6254E8] flex items-center justify-between shadow-2xs">
+      <div className="p-3 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl text-xs text-[#01153C] flex items-center justify-between shadow-2xs">
         <div className="flex items-center space-x-2 font-data">
           <Info className="w-4 h-4 shrink-0" />
           <span>
@@ -120,9 +120,9 @@ export const Screen18_OCRReview: React.FC = () => {
         <button
           type="button"
           onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
-          className="text-xs text-[#6254E8] hover:underline flex items-center space-x-1 shrink-0 font-semibold"
+          className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 shrink-0 font-semibold"
         >
-          <span>Screen 35 — Audit Trail</span>
+          <span>Immutable Audit Trail</span>
           <ExternalLink className="w-3 h-3" />
         </button>
       </div>
@@ -133,7 +133,7 @@ export const Screen18_OCRReview: React.FC = () => {
         <div className="lg:col-span-6 bg-white border border-[#E5E7EB] rounded-xl p-5 space-y-3 shadow-2xs">
           <div className="flex items-center justify-between pb-2 border-b border-[#F1F3F5]">
             <div className="flex items-center space-x-2">
-              <FileText className="w-4 h-4 text-[#6254E8]" />
+              <FileText className="w-4 h-4 text-[#01153C]" />
               <h2 className="text-sm font-semibold text-[#17181A]">Uploaded bill preview</h2>
             </div>
             <span className="text-[11px] font-data font-medium text-[#5F6368]">
@@ -163,8 +163,8 @@ export const Screen18_OCRReview: React.FC = () => {
             </div>
 
             {/* Billing Period Box */}
-            <div className="p-2.5 rounded-lg bg-white border border-[#6254E8] ring-2 ring-[#6254E8]/20 relative">
-              <span className="absolute top-1 right-2 text-[9px] font-sans font-semibold text-[#6254E8] bg-[#6254E8]/10 px-1.5 py-0.5 rounded">
+            <div className="p-2.5 rounded-lg bg-white border border-[#01153C] ring-2 ring-[#01153C]/20 relative">
+              <span className="absolute top-1 right-2 text-[9px] font-sans font-semibold text-[#01153C] bg-[#01153C]/10 px-1.5 py-0.5 rounded">
                 95% Conf
               </span>
               <div className="text-[10px] text-[#5F6368]">Billing Cycle: <span className="font-bold text-[#17181A]">{billingPeriod}</span></div>
@@ -172,11 +172,11 @@ export const Screen18_OCRReview: React.FC = () => {
             </div>
 
             {/* Units Consumed Box with High Visibility Highlight */}
-            <div className="p-3 rounded-lg bg-[#6254E8]/5 border-2 border-[#6254E8] relative">
-              <span className="absolute top-1.5 right-2 text-[9px] font-sans font-semibold text-[#6254E8] bg-white px-1.5 py-0.5 rounded border border-[#6254E8]/20">
+            <div className="p-3 rounded-lg bg-[#01153C]/5 border-2 border-[#01153C] relative">
+              <span className="absolute top-1.5 right-2 text-[9px] font-sans font-semibold text-[#01153C] bg-white px-1.5 py-0.5 rounded border border-[#01153C]/20">
                 92% Conf
               </span>
-              <div className="text-[10px] uppercase font-bold text-[#6254E8]">Active Energy Consumed (Units)</div>
+              <div className="text-[10px] uppercase font-bold text-[#01153C]">Active Energy Consumed (Units)</div>
               <div className="text-xl font-bold text-[#17181A] mt-1 font-data">
                 {parseFloat(unitsConsumed).toLocaleString()} <span className="text-xs font-normal">kWh</span>
               </div>
@@ -201,7 +201,7 @@ export const Screen18_OCRReview: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsEditing(!isEditing)}
-              className="text-xs text-[#6254E8] hover:underline flex items-center space-x-1 font-semibold"
+              className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
             >
               <Edit3 className="w-3.5 h-3.5" />
               <span>{isEditing ? 'Done Editing' : 'Edit Manually'}</span>
@@ -228,7 +228,7 @@ export const Screen18_OCRReview: React.FC = () => {
                         type="text"
                         value={billingPeriod}
                         onChange={(e) => setBillingPeriod(e.target.value)}
-                        className="px-2 py-1 text-xs border border-[#E5E7EB] rounded-md w-full font-data focus:border-[#7567F5]"
+                        className="px-2 py-1 text-xs border border-[#E5E7EB] rounded-md w-full font-data focus:border-[#01153C]"
                       />
                     ) : (
                       <span className="text-[#17181A] font-semibold">{billingPeriod}</span>
@@ -240,15 +240,15 @@ export const Screen18_OCRReview: React.FC = () => {
                 </tr>
 
                 {/* Row 2: Units consumed (kWh) */}
-                <tr className="bg-[#6254E8]/5 hover:bg-[#6254E8]/10">
-                  <td className="py-3 px-3 font-semibold text-[#6254E8]">Units consumed (kWh)</td>
+                <tr className="bg-[#01153C]/5 hover:bg-[#01153C]/10">
+                  <td className="py-3 px-3 font-semibold text-[#01153C]">Units consumed (kWh)</td>
                   <td className="py-3 px-3 font-data">
                     {isEditing ? (
                       <input
                         type="number"
                         value={unitsConsumed}
                         onChange={(e) => setUnitsConsumed(e.target.value)}
-                        className="px-2 py-1 text-xs border border-[#6254E8] rounded-md w-full font-data font-bold focus:outline-none"
+                        className="px-2 py-1 text-xs border border-[#01153C] rounded-md w-full font-data font-bold focus:outline-none"
                       />
                     ) : (
                       <span className="text-base font-bold text-[#17181A]">

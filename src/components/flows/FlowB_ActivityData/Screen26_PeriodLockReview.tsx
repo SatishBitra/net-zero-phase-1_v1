@@ -61,7 +61,7 @@ export const Screen26_PeriodLockReview: React.FC = () => {
       action: 'Locked Reporting Period FY 2025–26',
       previousValue: 'Period Status: Open (Active Ingestion)',
       newValue: 'Period Status: Permanently Locked (Read-Only)',
-      source: 'Period Lock Workflow (Screen 26)',
+      source: 'Period Lock Governance',
       reason: 'All reviews resolved. Locked-in inventory total: 28,270 tCO2e across 2,046 rows',
       status: 'Locked',
       lineItemId: 'FY 2025–26',

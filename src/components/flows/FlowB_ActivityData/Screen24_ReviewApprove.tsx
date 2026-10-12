@@ -79,7 +79,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
       action: 'Approved Batch #204',
       previousValue: 'Batch #204: Awaiting Review (2 activity records)',
       newValue: 'Batch #204: Approved and Committed to GHG Inventory',
-      source: 'Workflow & Approvals (Screen 24)',
+      source: 'Workflow & Approvals',
       reason: comment || 'Verified against attached meter invoice and fuel delivery challan',
       status: 'Approved',
       lineItemId: 'Batch #204',
@@ -107,7 +107,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
       action: 'Returned Batch #204 for correction',
       previousValue: 'Batch #204: Awaiting Review',
       newValue: 'Batch #204: Returned for correction to A. Kumar',
-      source: 'Workflow & Approvals (Screen 24)',
+      source: 'Workflow & Approvals',
       reason: comment,
       status: 'Returned',
       lineItemId: 'Batch #204',
@@ -134,7 +134,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
       action: 'Rejected Batch #204',
       previousValue: 'Batch #204: Awaiting Review',
       newValue: 'Batch #204: Rejected',
-      source: 'Workflow & Approvals (Screen 24)',
+      source: 'Workflow & Approvals',
       reason: comment,
       status: 'Rejected',
       lineItemId: 'Batch #204',
@@ -358,7 +358,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
             <div className="p-6 bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg font-data text-xs text-[#5F6368] text-center space-y-2">
               <div className="font-semibold text-[#17181A]">Primary Utility Evidence Document</div>
               <div className="file-hash">Source File: {activeEvidenceModal}</div>
-              <div className="text-[11px] text-[#0F6B48] font-semibold">Verified & attached from TC-ARC-002 repository</div>
+              <div className="text-[11px] text-[#0F6B48] font-semibold">Verified & attached from document repository</div>
             </div>
             <div className="flex justify-end">
               <button

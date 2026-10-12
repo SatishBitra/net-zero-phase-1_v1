@@ -137,17 +137,17 @@ export const Screen33_VerifierQuery: React.FC = () => {
   return (
     <div id="screen-33-verifier-query" className="max-w-6xl mx-auto space-y-6">
       {/* Verifier Read-Only Assurance Notice */}
-      <div className="bg-[#17181A] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#2D3339] shadow-2xs font-data">
+      <div className="bg-[#01153C] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#01153C] shadow-2xs font-data">
         <div className="flex items-center space-x-2">
-          <ShieldCheck className="w-4 h-4 text-[#9E77ED]" />
+          <ShieldCheck className="w-4 h-4 text-emerald-400" />
           <span className="font-semibold text-white font-sans">External Assurance Surface</span>
-          <span className="text-[#8A8F98]">•</span>
-          <span className="text-[#D9DDE3]">Structured Query & Clarification Dispatch</span>
+          <span className="text-white/40">•</span>
+          <span className="text-white/90">Structured Query & Clarification Dispatch</span>
         </div>
-        <div className="flex items-center space-x-2 text-[11px] text-[#A2A9B4]">
+        <div className="flex items-center space-x-2 text-[11px] text-white/70">
           <span>Lead Verifier: M. Singh</span>
-          <span className="text-[#8A8F98]">•</span>
-          <span className="route-path text-[#9E77ED] font-medium">ISO 14064-3 Verifier Docket</span>
+          <span className="text-white/40">•</span>
+          <span className="route-path text-emerald-300 font-medium">ISO 14064-3 Verifier Docket</span>
         </div>
       </div>
 

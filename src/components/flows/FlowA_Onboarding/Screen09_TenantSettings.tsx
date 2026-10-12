@@ -328,7 +328,7 @@ export const Screen09_TenantSettings: React.FC = () => {
           <div className="pb-4 border-b border-[#F1F3F5]">
             <h2 className="text-sm font-bold text-[#17181A]">Notification Dispatch Rules</h2>
             <p className="text-xs text-[#5F6368] mt-0.5 font-data">
-              Automated alerts routed via email and the in-app notification center (Screen 34).
+              Automated alerts routed via email and the in-app notification center.
             </p>
           </div>
 

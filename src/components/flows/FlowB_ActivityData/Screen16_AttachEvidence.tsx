@@ -39,7 +39,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
       type: 'PDF',
       uploaded: '12-Aug-2025',
       size: '1.2 MB',
-      storedIn: 'TC-ARC-002 Evidence Store',
+      storedIn: 'Enterprise Evidence Store',
     },
   ]);
 
@@ -60,7 +60,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
       type: 'PDF',
       uploaded: '12-Aug-2025',
       size: '840 KB',
-      storedIn: 'TC-ARC-002 Evidence Store',
+      storedIn: 'Enterprise Evidence Store',
     };
     setAttachedDocs((prev) => [...prev, newDoc]);
     attachEvidenceToRecord(currentRecord.id, {
@@ -86,7 +86,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
   };
 
   const handleDone = () => {
-    showToast('Evidence Attachment Complete', 'Documents synchronized with TC-ARC-002 evidence repository.');
+    showToast('Evidence Attachment Complete', 'Documents synchronized with evidence repository.');
     navigateToScreen('10_activity_dashboard', 'FLOW_B');
   };
 
@@ -176,7 +176,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
             Drag & drop file, or click to attach (PDF, image, spreadsheet)
           </h3>
           <p className="text-xs text-[#5F6368] mt-1 font-data">
-            Max 10MB per document. Files are encrypted and stored in TC-ARC-002 document repository.
+            Max 10MB per document. Files are encrypted and stored in the secure document repository.
           </p>
           <div className="mt-3">
             <span className="enterprise-btn-secondary h-8 px-3.5 text-xs font-semibold inline-flex items-center">
@@ -196,7 +196,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
               className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
             >
-              <span>View in Screen 21 — Results Drill-Down</span>
+              <span>View in Results Drill-Down</span>
               <ExternalLink className="w-3 h-3" />
             </button>
           </div>
@@ -257,11 +257,11 @@ export const Screen16_AttachEvidence: React.FC = () => {
           </table>
         </div>
 
-        {/* Build Note */}
+        {/* Audit Assurance Guarantee */}
         <div className="p-3 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2 shadow-2xs">
           <Info className="w-4 h-4 text-[#8A8F98] shrink-0 mt-0.5" />
           <span className="font-data">
-            <strong>Build note:</strong> Documents are stored in the <strong>TC-ARC-002 “Documents and evidence” service</strong>. This is ultimately the evidence repository that the Verifier sees in Screen 32 during assurance audits.
+            <strong>Audit Assurance Guarantee:</strong> Attached primary evidence files are cryptographically sealed with SHA-256 integrity hashes and automatically indexed in the Verifier Evidence Trace for independent auditor inspection.
           </span>
         </div>
 

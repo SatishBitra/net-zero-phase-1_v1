@@ -58,7 +58,7 @@ export const Screen19_RunCalculation: React.FC = () => {
       });
 
       setIsCalculating(false);
-      showToast('Calculation Complete', 'Emissions compiled: 1,245.8 tCO2e. Results ready in Screen 20.');
+      showToast('Calculation Complete', 'Emissions compiled: 1,245.8 tCO2e. Results ledger updated.');
       navigateToScreen('20_results_summary', 'FLOW_E');
     }, 1100);
   };
@@ -92,7 +92,7 @@ export const Screen19_RunCalculation: React.FC = () => {
         <div className="p-6 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-5">
           <div className="flex items-center justify-between pb-3 border-b border-[#F1F3F5]">
             <h2 className="text-sm font-semibold text-[#17181A] font-sans">Calculation Parameters</h2>
-            <span className="text-[11px] font-data font-semibold text-[#6254E8] bg-[#6254E8]/10 px-2.5 py-1 rounded-full">
+            <span className="text-[11px] font-data font-semibold text-[#01153C] bg-[#01153C]/10 px-2.5 py-1 rounded-full">
               Engine Version: TC-CALC-v1.4.2
             </span>
           </div>
@@ -124,7 +124,7 @@ export const Screen19_RunCalculation: React.FC = () => {
             <select
               value={boundary}
               onChange={(e) => setBoundary(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] font-sans focus:outline-none focus:border-[#6254E8] focus:ring-2 focus:ring-[#6254E8]/20"
+              className="w-full px-3.5 py-2.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] font-sans focus:outline-none focus:border-[#01153C] focus:ring-2 focus:ring-[#01153C]/20"
             >
               <option value="All configured sites (3)">
                 All configured sites (3) — Chennai Plant 1, Pune Warehouse, Hyderabad HQ
@@ -146,7 +146,7 @@ export const Screen19_RunCalculation: React.FC = () => {
                   type="checkbox"
                   checked
                   readOnly
-                  className="mt-0.5 text-[#6254E8] rounded border-[#E5E7EB] focus:ring-[#6254E8]"
+                  className="mt-0.5 text-[#01153C] rounded border-[#E5E7EB] focus:ring-[#01153C]"
                 />
                 <div>
                   <div className="font-semibold text-[#17181A] font-sans">Scope 1: Stationary combustion</div>
@@ -161,7 +161,7 @@ export const Screen19_RunCalculation: React.FC = () => {
                   type="checkbox"
                   checked
                   readOnly
-                  className="mt-0.5 text-[#6254E8] rounded border-[#E5E7EB] focus:ring-[#6254E8]"
+                  className="mt-0.5 text-[#01153C] rounded border-[#E5E7EB] focus:ring-[#01153C]"
                 />
                 <div>
                   <div className="font-semibold text-[#17181A] font-sans">Scope 2: Location-based grid electricity</div>
@@ -177,8 +177,8 @@ export const Screen19_RunCalculation: React.FC = () => {
           </div>
 
           {/* Source Count Summary Box */}
-          <div className="p-4 bg-[#6254E8]/5 border border-[#6254E8]/20 rounded-xl flex items-center justify-between text-xs">
-            <div className="flex items-center space-x-2.5 text-[#6254E8]">
+          <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex items-center justify-between text-xs">
+            <div className="flex items-center space-x-2.5 text-[#01153C]">
               <Layers className="w-4 h-4 shrink-0" />
               <span className="font-sans">
                 <strong>Source count:</strong> 3 active sources with approved data ready for aggregation.
@@ -191,7 +191,7 @@ export const Screen19_RunCalculation: React.FC = () => {
         {/* Build Notes Banner */}
         <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs text-xs text-[#5F6368] space-y-1.5 font-sans">
           <div className="font-semibold text-[#17181A] flex items-center space-x-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-[#6254E8]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#01153C]" />
             <span>Engine Execution Guidelines</span>
           </div>
           <ul className="list-disc list-inside text-[11px] space-y-1 pl-1 font-data text-[#5F6368]">
@@ -215,7 +215,7 @@ export const Screen19_RunCalculation: React.FC = () => {
             id="btn-trigger-run-calculation"
             type="submit"
             disabled={isCalculating}
-            className="px-6 py-2.5 bg-[#6254E8] hover:bg-[#5244DE] text-white text-xs font-semibold rounded-lg transition-colors flex items-center space-x-2 shadow-sm disabled:opacity-50"
+            className="px-6 py-2.5 bg-[#01153C] hover:bg-[#02215c] text-white text-xs font-semibold rounded-lg transition-colors flex items-center space-x-2 shadow-sm disabled:opacity-50"
           >
             {isCalculating ? (
               <>

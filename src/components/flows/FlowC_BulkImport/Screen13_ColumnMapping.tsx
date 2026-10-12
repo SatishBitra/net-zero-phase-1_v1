@@ -173,11 +173,11 @@ export const Screen13_ColumnMapping: React.FC = () => {
         </table>
       </div>
 
-      {/* Build Note */}
+      {/* Mapping Configuration Tip */}
       <div className="p-3 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2 shadow-2xs">
         <Info className="w-4 h-4 text-[#8A8F98] shrink-0 mt-0.5" />
         <span className="font-data">
-          <strong>Build note:</strong> Mapping configurations are saved per tenant. Next time files with these column headers are uploaded, columns will be matched automatically.
+          <strong>Mapping Persistence:</strong> Column mapping templates are saved for this organization. Future uploads using identical header schemas will be auto-matched.
         </span>
       </div>
 

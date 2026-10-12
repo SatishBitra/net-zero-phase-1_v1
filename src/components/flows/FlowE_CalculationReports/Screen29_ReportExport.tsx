@@ -190,9 +190,9 @@ export const Screen29_ReportExport: React.FC = () => {
       </div>
 
       {/* Immutability Requirement Banner (Section 19.1 & FR-29.01 - FR-29.04) */}
-      <div className="p-3.5 bg-[#6254E8]/5 border border-[#6254E8]/20 rounded-xl text-xs text-[#6254E8] flex items-center justify-between shadow-2xs font-data">
+      <div className="p-3.5 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl text-xs text-[#01153C] flex items-center justify-between shadow-2xs font-data">
         <div className="flex items-center space-x-2">
-          <Lock className="w-4 h-4 shrink-0 text-[#6254E8]" />
+          <Lock className="w-4 h-4 shrink-0 text-[#01153C]" />
           <span>
             <strong className="font-semibold text-[#17181A]">Immutability Guarantee:</strong> Exported reports are immutable snapshots and will never be overwritten. Re-running a report after underlying data changes creates a new version/snapshot.
           </span>
@@ -204,7 +204,7 @@ export const Screen29_ReportExport: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
         <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <History className="w-4 h-4 text-[#6254E8]" />
+            <History className="w-4 h-4 text-[#01153C]" />
             <h2 className="text-sm font-semibold text-[#17181A] font-sans">Report History</h2>
           </div>
           <span className="text-xs text-[#5F6368] font-data">
@@ -268,7 +268,7 @@ export const Screen29_ReportExport: React.FC = () => {
                 required
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:border-[#7567F5] focus:outline-none font-sans"
+                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:border-[#01153C] focus:outline-none font-sans"
               />
               <p className="text-[11px] text-[#8A8F98] mt-1 file-hash">
                 Attached: {reportExportDetails.filename} ({reportExportDetails.fileSize})

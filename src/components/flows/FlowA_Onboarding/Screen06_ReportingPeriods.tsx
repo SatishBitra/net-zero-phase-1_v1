@@ -70,7 +70,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
       action: `Locked Reporting Period ${lockingPeriod.name}`,
       previousValue: 'Period Status: Open (Active Ingestion)',
       newValue: 'Period Status: Permanently Locked (Read-Only)',
-      source: 'Reporting Periods Governance (Screen 06)',
+      source: 'Reporting Periods Governance',
       reason: 'Administrative period lock checkpoint executed.',
       status: 'Locked',
       lineItemId: lockingPeriod.name,

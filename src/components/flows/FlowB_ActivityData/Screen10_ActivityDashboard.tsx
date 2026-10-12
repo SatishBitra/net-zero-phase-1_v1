@@ -11,10 +11,13 @@ import {
   Clock,
   AlertCircle,
   Database,
+  ShieldCheck,
+  Files,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { KpiCard } from '../../common/KpiCard';
 import { StatusBadge } from '../../common/StatusBadge';
+import { QuickActionsMenu } from '../../common/QuickActionsMenu';
 
 export const Screen10_ActivityDashboard: React.FC = () => {
   const {
@@ -54,7 +57,9 @@ export const Screen10_ActivityDashboard: React.FC = () => {
 
   const handleRowClick = (rec: ActivityRecord) => {
     setSelectedRecordId(rec.id);
-    if (rec.status === 'Submitted') {
+    if (currentRole === 'VERIFIER') {
+      navigateToScreen('32_evidence_trace', 'FLOW_F');
+    } else if (rec.status === 'Submitted') {
       navigateToScreen('24_review_approve', 'FLOW_B');
     } else if (rec.status === 'Error' || rec.status === 'Sent Back') {
       navigateToScreen('15_fix_detail_view', 'FLOW_C');
@@ -74,31 +79,50 @@ export const Screen10_ActivityDashboard: React.FC = () => {
         title="Activity Data Dashboard"
         description="Operational workspace for manual data entry, bulk CSV imports, utility bill OCR, and submission status."
         actions={
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
-              className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add Entry</span>
-            </button>
+          currentRole === 'VERIFIER' ? (
+            <div className="flex items-center gap-2">
+              <span className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] rounded-full border border-[#01153C]/20 flex items-center space-x-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#01153C]" />
+                <span>Auditor Inspection Mode (Read-Only)</span>
+              </span>
+              <button
+                onClick={() => navigateToScreen('32_evidence_trace', 'FLOW_F')}
+                className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
+              >
+                <Files className="w-3.5 h-3.5" />
+                <span>Trace Evidence</span>
+              </button>
+              <QuickActionsMenu variant="page" />
+            </div>
+          ) : (
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
+                className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Entry</span>
+              </button>
 
-            <button
-              onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
-              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
-            >
-              <FileSpreadsheet className="w-3.5 h-3.5 text-[#5F6368]" />
-              <span>Import CSV</span>
-            </button>
+              <button
+                onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
+                className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              >
+                <FileSpreadsheet className="w-3.5 h-3.5 text-[#5F6368]" />
+                <span>Import CSV</span>
+              </button>
 
-            <button
-              onClick={() => navigateToScreen('17_bill_upload', 'FLOW_D')}
-              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-full hover:bg-[#DCE5F5] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
-            >
-              <ScanLine className="w-3.5 h-3.5 text-[#01153C]" />
-              <span>Upload Bill OCR</span>
-            </button>
-          </div>
+              <button
+                onClick={() => navigateToScreen('17_bill_upload', 'FLOW_D')}
+                className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-full hover:bg-[#DCE5F5] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              >
+                <ScanLine className="w-3.5 h-3.5 text-[#01153C]" />
+                <span>Upload Bill OCR</span>
+              </button>
+
+              <QuickActionsMenu variant="page" />
+            </div>
+          )
         }
       />
 

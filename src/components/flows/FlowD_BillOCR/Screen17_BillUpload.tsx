@@ -178,7 +178,7 @@ export const Screen17_BillUpload: React.FC = () => {
           }}
           onClick={handleSimulateFile}
           className={`p-10 border-2 border-dashed rounded-xl text-center cursor-pointer transition-colors ${
-            dragActive ? 'border-[#6254E8] bg-[#6254E8]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#7567F5]'
+            dragActive ? 'border-[#01153C] bg-[#01153C]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#01153C]'
           }`}
         >
           <Upload className="w-10 h-10 text-[#8A8F98] mx-auto mb-3" />
@@ -218,21 +218,11 @@ export const Screen17_BillUpload: React.FC = () => {
         <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] space-y-1">
           <div className="flex items-center space-x-1.5 font-semibold text-[#17181A]">
             <Info className="w-4 h-4 text-[#01153C]" />
-            <span>Optional feature — can be switched off per tenant. Manual entry (Screen 11) is always available.</span>
+            <span>Assurance Policy: Human review is mandatory before any extracted utility bill data can be approved or ingested.</span>
           </div>
           <p className="text-[11px] pl-5 text-[#8A8F98] font-data">
-            Tenant admins can enable or disable AI Document Intelligence under Tenant Settings.
+            Document extraction extracts consumption, billing windows, and meter identifiers for human verification.
           </p>
-        </div>
-
-        {/* Build Notes */}
-        <div className="p-3 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] space-y-1 shadow-2xs font-sans">
-          <div className="font-semibold text-[#01153C]">Build Notes:</div>
-          <ul className="list-disc list-inside text-[11px] space-y-0.5 pl-1 font-data">
-            <li>Engine: Azure AI Document Intelligence, prebuilt invoice model</li>
-            <li>Phase 1 scope covers one document type only: electricity utility bills</li>
-            <li>Human-in-the-loop guarantee: nothing reaches calculations without human review in Screen 18</li>
-          </ul>
         </div>
 
         {/* Action Button */}
@@ -242,7 +232,7 @@ export const Screen17_BillUpload: React.FC = () => {
             onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
             className="text-xs text-[#01153C] hover:underline font-semibold"
           >
-            Prefer manual entry? Switch to Screen 11
+            Prefer manual entry? Switch to Manual Data Entry
           </button>
 
           <button

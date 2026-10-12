@@ -17,7 +17,11 @@ import {
   ArrowRight,
   ShieldCheck,
   User,
+  ScanLine,
+  PlusCircle,
+  FileBarChart,
 } from 'lucide-react';
+import { QuickActionsMenu } from '../common/QuickActionsMenu';
 
 interface HeaderProps {
   onOpenFlowMap?: () => void;
@@ -306,8 +310,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             </div>
           </div>
 
-          {/* Right: Role Switcher, Direct Notification Center, User */}
+          {/* Right: Quick Actions, Role Switcher, Direct Notification Center, User */}
           <div className="flex items-center space-x-2 md:space-x-3 shrink-0">
+            {/* Quick Actions Menu */}
+            <QuickActionsMenu variant="header" />
+
             {/* Role Switcher Pill */}
             <div className="relative">
               <button
@@ -357,7 +364,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               id="btn-nav-notifications"
               onClick={() => navigateToScreen('34_reviewer_notification', 'FLOW_F')}
               className="p-2 text-[#5F6368] hover:text-[#17181A] hover:bg-[#EDF2FA] rounded-lg transition-colors relative"
-              title="Notification Center (Screen 34)"
+              title="Notification Center"
               aria-label="Notification Center"
             >
               <Bell className="w-4 h-4" />
@@ -432,6 +439,79 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               <span className="inline-block mt-1 text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#EAF2FB] text-[#174A8B] border border-[#2166B1]/20">
                 {roles.find((r) => r.role === currentRole)?.label || currentRole}
               </span>
+            </div>
+          </div>
+
+          {/* Quick Actions Shortcuts */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-semibold text-[#858C96] uppercase tracking-wider">
+                Quick Actions
+              </span>
+              <span className="text-[10px] text-[#01153C] font-semibold bg-[#EDF2FA] px-1.5 py-0.5 rounded">
+                Direct Jump
+              </span>
+            </div>
+            <div className="space-y-1.5">
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileRightNavOpen(false);
+                  navigateToScreen('17_bill_upload', 'FLOW_D');
+                }}
+                className="w-full p-2.5 rounded-lg border border-[#E5E7EB] bg-white hover:bg-[#FAFAFB] text-left flex items-center justify-between text-xs transition-colors"
+              >
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-7 h-7 rounded-md bg-[#EDF2FA] text-[#01153C] flex items-center justify-center shrink-0">
+                    <ScanLine className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[#17181A]">Upload Bill</div>
+                    <div className="text-[10px] text-[#5F6368]">AI OCR Extraction</div>
+                  </div>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98]" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileRightNavOpen(false);
+                  navigateToScreen('11_entry_form', 'FLOW_B');
+                }}
+                className="w-full p-2.5 rounded-lg border border-[#E5E7EB] bg-white hover:bg-[#FAFAFB] text-left flex items-center justify-between text-xs transition-colors"
+              >
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-7 h-7 rounded-md bg-[#EEF9F1] text-[#26783B] flex items-center justify-center shrink-0">
+                    <PlusCircle className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[#17181A]">Log Emission</div>
+                    <div className="text-[10px] text-[#5F6368]">Manual Activity Entry</div>
+                  </div>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98]" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileRightNavOpen(false);
+                  navigateToScreen('27_report_builder', 'FLOW_E');
+                }}
+                className="w-full p-2.5 rounded-lg border border-[#E5E7EB] bg-white hover:bg-[#FAFAFB] text-left flex items-center justify-between text-xs transition-colors"
+              >
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-7 h-7 rounded-md bg-[#FFF8E6] text-[#B54708] flex items-center justify-center shrink-0">
+                    <FileBarChart className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[#17181A]">Start New Report</div>
+                    <div className="text-[10px] text-[#5F6368]">GHG Disclosure Builder</div>
+                  </div>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98]" />
+              </button>
             </div>
           </div>
 

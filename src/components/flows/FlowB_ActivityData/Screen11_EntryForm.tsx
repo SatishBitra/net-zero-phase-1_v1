@@ -209,13 +209,13 @@ export const Screen11_EntryForm: React.FC = () => {
         </div>
       )}
 
-      {/* AI Pre-fill Banner if coming from Screen 18 */}
+      {/* AI Pre-fill Banner if coming from OCR Review */}
       {entryMethod === 'AI Extracted' && (
         <div className="p-3 bg-[#01153C]/10 border border-[#01153C]/20 rounded-xl flex items-center justify-between text-xs text-[#01153C] font-sans">
           <div className="flex items-center space-x-2">
             <Sparkles className="w-4 h-4 text-[#01153C] shrink-0" />
             <span>
-              <strong>Pre-filled from Screen 18 OCR review #8821.</strong> Human-confirmed values loaded for Chennai Plant 1.
+              <strong>Pre-filled from Utility Bill OCR Review (#8821).</strong> Human-verified electricity consumption loaded.
             </span>
           </div>
           <StatusBadge status="Approved" customLabel="OCR Confirmed" size="sm" />
@@ -380,7 +380,7 @@ export const Screen11_EntryForm: React.FC = () => {
                 onClick={() => navigateToScreen('16_attach_evidence', 'FLOW_B')}
                 className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
               >
-                <span>Go to Screen 16 (Full Evidence Manager)</span>
+                <span>Open Evidence & Documents Repository</span>
                 <ArrowRight className="w-3 h-3" />
               </button>
             </div>
@@ -504,7 +504,7 @@ export const Screen11_EntryForm: React.FC = () => {
           <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2 shadow-2xs font-sans">
             <Info className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
             <span className="font-data">
-              All manual entries require supporting evidence (PDF invoices, meter logs) to pass independent verifier inspection in Screen 32.
+              All activity entries require supporting evidence (PDF invoices, meter logs) to assure audit readiness and pass independent verifier inspection.
             </span>
           </div>
         </div>
