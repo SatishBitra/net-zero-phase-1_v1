@@ -40,6 +40,7 @@ interface AppContextType {
   // Navigation & Identity
   currentRole: UserRole;
   setCurrentRole: (role: UserRole) => void;
+  currentUser: User;
   currentTenant: Tenant;
   setCurrentTenant: (tenant: Tenant) => void;
   tenants: Tenant[];
@@ -141,7 +142,8 @@ interface AppContextType {
     requiredAction?: string,
     contextOverride?: Partial<VerifierQuery>
   ) => void;
-  resolveVerifierQuery: (queryId: string, response: string) => void;
+  resolveVerifierQuery: (queryId: string, response: string, responderName?: string) => void;
+  closeVerifierQuery: (queryId: string, finalStatus?: 'Closed' | 'Resolved', auditNote?: string) => void;
 
   // Active Trace Context for verifier workflow
   activeTraceContext: {
@@ -242,6 +244,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const saved = localStorage.getItem('tula_users');
     return saved ? JSON.parse(saved) : INITIAL_USERS;
   });
+
+  const currentUser = useMemo<User>(() => {
+    const found = users.find((u) => u.role === currentRole);
+    if (found) return found;
+    return {
+      id: `user-${currentRole.toLowerCase()}`,
+      name: currentRole === 'TENANT_ADMIN' ? 'J. Rao' : currentRole === 'DATA_ENTRY' ? 'A. Kumar' : currentRole === 'REVIEWER' ? 'S. Iyer' : 'M. Singh',
+      email: `${currentRole.toLowerCase()}@zenith.in`,
+      role: currentRole,
+      siteScope: currentRole === 'DATA_ENTRY' ? ['site-chennai-1'] : ['all'],
+      status: 'Active',
+      avatarInitials: currentRole === 'TENANT_ADMIN' ? 'JR' : currentRole === 'DATA_ENTRY' ? 'AK' : currentRole === 'REVIEWER' ? 'SI' : 'MS',
+    };
+  }, [users, currentRole]);
 
   const [records, setRecords] = useState<ActivityRecord[]>(() => {
     const saved = localStorage.getItem('tula_records');
@@ -1037,13 +1053,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     showToast('Query Dispatched', `Query ${newQuery.id} recorded and notification delivered to reviewer.`);
   };
 
-  const resolveVerifierQuery = (queryId: string, response: string) => {
+  const resolveVerifierQuery = (queryId: string, response: string, responderName?: string) => {
     setVerifierQueries((prev) =>
       prev.map((q) =>
         q.id === queryId
           ? {
               ...q,
-              status: 'Resolved',
+              status: 'Answered',
               reviewerResponse: response,
               resolvedAt: new Date().toISOString().replace('T', ' ').substring(0, 16),
             }
@@ -1052,17 +1068,43 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     );
 
     addAuditLog({
-      userName: 'S. Iyer',
-      role: 'Reviewer / Approver',
-      action: 'Resolved Verifier Query',
+      userName: responderName || currentUser.name,
+      role: currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : 'Reviewer',
+      action: `Answered Verifier Query ${queryId}`,
       previousValue: 'Status: Open',
-      newValue: 'Status: Resolved',
+      newValue: 'Status: Answered',
       source: 'Verification & Queries',
       reason: response,
-      status: 'Resolved',
+      status: 'Under Review',
     });
 
-    showToast('Query Resolved', `Explanation and evidence response recorded for ${queryId}.`);
+    showToast('Query Answered', `Clarification and evidence recorded for ${queryId}. Awaiting verifier sign-off.`);
+  };
+
+  const closeVerifierQuery = (queryId: string, finalStatus: 'Closed' | 'Resolved' = 'Closed', auditNote?: string) => {
+    setVerifierQueries((prev) =>
+      prev.map((q) =>
+        q.id === queryId
+          ? {
+              ...q,
+              status: finalStatus,
+            }
+          : q
+      )
+    );
+
+    addAuditLog({
+      userName: currentUser.name,
+      role: 'Verifier / VVB',
+      action: `Auditor Sign-Off on Query ${queryId}`,
+      previousValue: 'Status: Answered',
+      newValue: `Status: ${finalStatus}`,
+      source: 'Verification & Queries',
+      reason: auditNote || 'Auditor verified and closed clarification finding.',
+      status: 'Approved',
+    });
+
+    showToast('Query Signed Off', `Query ${queryId} has been marked as ${finalStatus}.`);
   };
 
   return (
@@ -1070,6 +1112,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       value={{
         currentRole,
         setCurrentRole,
+        currentUser,
         currentTenant,
         setCurrentTenant,
         tenants,
@@ -1126,6 +1169,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         verifierQueries,
         raiseVerifierQuery,
         resolveVerifierQuery,
+        closeVerifierQuery,
         activeTraceContext,
         setActiveTraceContext,
         notifications,

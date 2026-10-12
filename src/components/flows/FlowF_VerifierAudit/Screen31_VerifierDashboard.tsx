@@ -14,7 +14,7 @@ import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen31_VerifierDashboard: React.FC = () => {
-  const { navigateToScreen, setActiveTraceContext, verifierQueries } = useApp();
+  const { navigateToScreen, setActiveTraceContext, verifierQueries, currentUser, currentRole } = useApp();
   const [showEmptyState, setShowEmptyState] = useState(false);
 
   // Scoped assigned review per PRD specifications
@@ -47,7 +47,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
       date: '12-Aug-2025',
       quantity: '48,200 kWh',
       evidenceRef: 'electricity-bill-aug25.pdf',
-      verifier: 'M. Singh',
+      verifier: currentRole === 'VERIFIER' ? currentUser.name : 'M. Singh',
     });
     navigateToScreen('32_evidence_trace', 'FLOW_F');
   };
@@ -90,9 +90,9 @@ export const Screen31_VerifierDashboard: React.FC = () => {
             <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">Lead Verifier:</div>
             <div className="font-semibold text-[#17181A] flex items-center space-x-1.5 font-sans">
               <div className="w-4 h-4 rounded-full bg-[#01153C] text-white flex items-center justify-center text-[9px] font-bold">
-                JR
+                {currentRole === 'VERIFIER' ? (currentUser.name ? currentUser.name.slice(0, 2).toUpperCase() : 'MS') : 'MS'}
               </div>
-              <span>J. Rao (VVB)</span>
+              <span>{currentRole === 'VERIFIER' ? `${currentUser.name} (VVB)` : 'M. Singh (VVB)'}</span>
             </div>
           </div>
 
@@ -173,7 +173,7 @@ export const Screen31_VerifierDashboard: React.FC = () => {
           <div className="pt-2">
             <button
               onClick={() => setShowEmptyState(false)}
-              className="text-xs text-[#6254E8] hover:underline font-semibold font-sans"
+              className="text-xs text-[#01153C] hover:underline font-semibold font-sans"
             >
               Reload assigned scopes
             </button>

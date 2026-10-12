@@ -23,10 +23,14 @@ export const Screen33_VerifierQuery: React.FC = () => {
     activeTraceContext,
     verifierQueries,
     raiseVerifierQuery,
+    resolveVerifierQuery,
+    closeVerifierQuery,
     showToast,
+    currentRole,
+    currentUser,
   } = useApp();
 
-  // Form State
+  // Verifier Raise Form State
   const [queryCategory, setQueryCategory] = useState<VerifierQuery['queryType']>('Meter Anomaly');
   const [queryText, setQueryText] = useState<string>(
     'Can you confirm this meter reading covers the full billing cycle for Chennai Plant 1?'
@@ -37,6 +41,16 @@ export const Screen33_VerifierQuery: React.FC = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [expandedQueryId, setExpandedQueryId] = useState<string | null>('VQ-2025-001');
+
+  // Reviewer / Tenant Admin Response State
+  const openQueries = verifierQueries.filter((q) => q.status === 'Open');
+  const [selectedResponseQueryId, setSelectedResponseQueryId] = useState<string>(
+    openQueries.length > 0 ? openQueries[0].id : (verifierQueries[0]?.id || '')
+  );
+  const [responseText, setResponseText] = useState<string>('');
+  const [evidenceDocRef, setEvidenceDocRef] = useState<string>('TANGEDCO_HT_Bill_Jul_2025.pdf');
+  const [responseSubmitting, setResponseSubmitting] = useState<boolean>(false);
+  const [responseError, setResponseError] = useState<string | null>(null);
 
   // Active Context from Screen 32 (or default)
   const context = {
@@ -95,6 +109,31 @@ export const Screen33_VerifierQuery: React.FC = () => {
     setQueryText('');
   };
 
+  const handleReviewerResponse = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedResponseQueryId) {
+      setResponseError('Please select a verifier query to respond to.');
+      return;
+    }
+    if (!responseText.trim()) {
+      setResponseError('Response explanation is mandatory.');
+      return;
+    }
+
+    setResponseSubmitting(true);
+    setResponseError(null);
+
+    const fullResponse = evidenceDocRef.trim()
+      ? `${responseText.trim()} [Attached Evidence: ${evidenceDocRef.trim()}]`
+      : responseText.trim();
+
+    resolveVerifierQuery(selectedResponseQueryId, fullResponse, currentUser.name);
+
+    setResponseSubmitting(false);
+    setResponseText('');
+    setExpandedQueryId(selectedResponseQueryId);
+  };
+
   return (
     <div id="screen-33-verifier-query" className="max-w-6xl mx-auto space-y-6">
       {/* Verifier Read-Only Assurance Notice */}
@@ -136,7 +175,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3">
         <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2">
           <div className="flex items-center space-x-2">
-            <FileCheck className="w-4 h-4 text-[#6254E8]" />
+            <FileCheck className="w-4 h-4 text-[#01153C]" />
             <h2 className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
               Query Context (Bound Line Item & Source Document)
             </h2>
@@ -167,8 +206,8 @@ export const Screen33_VerifierQuery: React.FC = () => {
             <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Facility Site</div>
             <div className="font-semibold text-[#17181A] mt-0.5">{context.site}</div>
           </div>
-          <div className="p-2.5 bg-[#6254E8]/5 rounded-lg border border-[#6254E8]/30">
-            <div className="text-[10px] uppercase text-[#6254E8] font-semibold">Quantity & Date</div>
+          <div className="p-2.5 bg-[#01153C]/5 rounded-lg border border-[#01153C]/30">
+            <div className="text-[10px] uppercase text-[#01153C] font-semibold">Quantity & Date</div>
             <div className="font-medium text-[#17181A] mt-0.5">
               {context.quantity} ({context.date})
             </div>
@@ -185,110 +224,226 @@ export const Screen33_VerifierQuery: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Grid: Query Creation Form + Engagement Query History */}
+      {/* Main Grid: Query Creation Form / Reviewer Response Form + Engagement Query History */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left: Raise Query Form (7 cols on lg) */}
+        {/* Left: Role-Specific Action Panel (7 cols on lg) */}
         <div className="lg:col-span-7 bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs space-y-4">
-          <div className="flex items-center space-x-2 border-b border-[#F1F3F5] pb-3">
-            <MessageSquare className="w-4 h-4 text-[#6254E8]" />
-            <h3 className="text-sm font-semibold text-[#17181A] font-sans">Raise Verification Clarification</h3>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-            {formError && (
-              <div className="p-3 bg-[#FEF3F2] border border-[#FDA29B] rounded-lg text-[#B42318] flex items-center space-x-2 font-data">
-                <AlertCircle className="w-4 h-4 shrink-0" />
-                <span>{formError}</span>
+          {currentRole === 'VERIFIER' ? (
+            <>
+              <div className="flex items-center space-x-2 border-b border-[#F1F3F5] pb-3">
+                <MessageSquare className="w-4 h-4 text-[#01153C]" />
+                <h3 className="text-sm font-semibold text-[#17181A] font-sans">Raise Verification Clarification</h3>
               </div>
-            )}
 
-            {/* Query Category */}
-            <div>
-              <label htmlFor="query-category" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
-                Query Category <span className="text-[#B42318]">*</span>
-              </label>
-              <select
-                id="query-category"
-                value={queryCategory}
-                onChange={(e) => setQueryCategory(e.target.value as any)}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#7567F5] font-sans"
-              >
-                <option value="Meter Anomaly">Meter Anomaly</option>
-                <option value="Missing Evidence">Missing Evidence</option>
-                <option value="Calculation Methodology">Calculation Methodology</option>
-                <option value="Emission Factor Selection">Emission Factor Selection</option>
-                <option value="Boundary Question">Boundary Question</option>
-                <option value="Other">Other</option>
-              </select>
-              <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-                Categorize the finding to route it directly to the designated facility reviewer.
+              <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+                {formError && (
+                  <div className="p-3 bg-[#FEF1F1] border border-[#FED2D3] rounded-lg text-[#ED2024] flex items-center space-x-2 font-data">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>{formError}</span>
+                  </div>
+                )}
+
+                {/* Query Category */}
+                <div>
+                  <label htmlFor="query-category" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
+                    Query Category <span className="text-[#ED2024]">*</span>
+                  </label>
+                  <select
+                    id="query-category"
+                    value={queryCategory}
+                    onChange={(e) => setQueryCategory(e.target.value as any)}
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] font-sans"
+                  >
+                    <option value="Meter Anomaly">Meter Anomaly</option>
+                    <option value="Missing Evidence">Missing Evidence</option>
+                    <option value="Calculation Methodology">Calculation Methodology</option>
+                    <option value="Emission Factor Selection">Emission Factor Selection</option>
+                    <option value="Boundary Question">Boundary Question</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
+                    Categorize the finding to route it directly to the designated facility reviewer.
+                  </p>
+                </div>
+
+                {/* Query Clarification Question */}
+                <div>
+                  <label htmlFor="query-text" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
+                    Clarification Question <span className="text-[#ED2024]">*</span>
+                  </label>
+                  <textarea
+                    id="query-text"
+                    rows={4}
+                    value={queryText}
+                    onChange={(e) => setQueryText(e.target.value)}
+                    placeholder="Can you confirm this meter reading covers the full billing cycle for Chennai Plant 1?"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                    required
+                  />
+                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
+                    Provide precise inquiry describing any discrepancy, date mismatch, or evidence gap.
+                  </p>
+                </div>
+
+                {/* Required Action */}
+                <div>
+                  <label htmlFor="required-action" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
+                    Required Action (Recommended)
+                  </label>
+                  <input
+                    type="text"
+                    id="required-action"
+                    value={requiredAction}
+                    onChange={(e) => setRequiredAction(e.target.value)}
+                    placeholder="Cross-verify meter multiplier and billing start/end dates against DISCOM HT consumer card."
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                  />
+                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
+                    Explicit remediation expected from the organisation review team.
+                  </p>
+                </div>
+
+                {/* Form Actions */}
+                <div className="pt-3 border-t border-[#F1F3F5] flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => navigateToScreen('32_evidence_trace', 'FLOW_F')}
+                    className="enterprise-btn-secondary h-9 px-3.5 text-xs font-semibold"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="enterprise-btn-primary h-9 px-4 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>{submitting ? 'Submitting...' : 'Submit Query'}</span>
+                  </button>
+                </div>
+              </form>
+            </>
+          ) : currentRole === 'REVIEWER' || currentRole === 'TENANT_ADMIN' ? (
+            <>
+              <div className="flex items-center space-x-2 border-b border-[#F1F3F5] pb-3">
+                <FileCheck className="w-4 h-4 text-[#01153C]" />
+                <div>
+                  <h3 className="text-sm font-semibold text-[#17181A] font-sans">
+                    Respond to Verifier Clarification
+                  </h3>
+                  <p className="text-[11px] text-[#5F6368]">
+                    Responding as <strong className="text-[#17181A]">{currentUser.name}</strong> ({currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : 'Reviewer'})
+                  </p>
+                </div>
+              </div>
+
+              <form onSubmit={handleReviewerResponse} className="space-y-4 text-xs">
+                {responseError && (
+                  <div className="p-3 bg-[#FEF1F1] border border-[#FED2D3] rounded-lg text-[#ED2024] flex items-center space-x-2 font-data">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>{responseError}</span>
+                  </div>
+                )}
+
+                {/* Select Query */}
+                <div>
+                  <label htmlFor="select-query-response" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
+                    Target Verifier Query <span className="text-[#ED2024]">*</span>
+                  </label>
+                  <select
+                    id="select-query-response"
+                    value={selectedResponseQueryId}
+                    onChange={(e) => setSelectedResponseQueryId(e.target.value)}
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] font-sans"
+                  >
+                    {verifierQueries.map((q) => (
+                      <option key={q.id} value={q.id}>
+                        {q.id} — [{q.status}] {q.description.slice(0, 50)}...
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Response Text */}
+                <div>
+                  <label htmlFor="reviewer-response-text" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
+                    Clarification Explanation / Remediation Details <span className="text-[#ED2024]">*</span>
+                  </label>
+                  <textarea
+                    id="reviewer-response-text"
+                    rows={4}
+                    value={responseText}
+                    onChange={(e) => setResponseText(e.target.value)}
+                    placeholder="e.g. Verified with plant facility engineer that billing cycle covers 01-Jul-2025 through 31-Jul-2025. Attached certified consumer ledger."
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                    required
+                  />
+                </div>
+
+                {/* Evidence Attachment Reference */}
+                <div>
+                  <label htmlFor="evidence-doc-ref" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
+                    Supporting Document Reference
+                  </label>
+                  <input
+                    type="text"
+                    id="evidence-doc-ref"
+                    value={evidenceDocRef}
+                    onChange={(e) => setEvidenceDocRef(e.target.value)}
+                    placeholder="TANGEDCO_HT_Bill_Jul_2025.pdf"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                  />
+                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
+                    Cross-referenced file in organization evidence repository for third-party audit validation.
+                  </p>
+                </div>
+
+                {/* Form Actions */}
+                <div className="pt-3 border-t border-[#F1F3F5] flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => setResponseText('')}
+                    className="enterprise-btn-secondary h-9 px-3.5 text-xs font-semibold"
+                  >
+                    Clear
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={responseSubmitting}
+                    className="enterprise-btn-primary h-9 px-4 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>{responseSubmitting ? 'Submitting...' : 'Submit Response to Verifier'}</span>
+                  </button>
+                </div>
+              </form>
+            </>
+          ) : (
+            <div className="space-y-3 py-4">
+              <div className="flex items-center space-x-2 text-[#01153C] font-semibold">
+                <ShieldCheck className="w-5 h-5 text-[#01153C]" />
+                <h3 className="text-sm">Assurance Query Channel</h3>
+              </div>
+              <p className="text-xs text-[#5F6368] leading-relaxed">
+                As a <strong>Data Entry Operator</strong>, verification queries from independent auditors are routed to your appointed Reviewer (S. Iyer) and Tenant Administrator.
               </p>
+              <div className="p-3 bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg text-xs space-y-1">
+                <span className="font-semibold text-[#17181A]">Need to provide additional receipts?</span>
+                <p className="text-[#5F6368]">
+                  You can attach updated bills or meter read certificates via the Activity Data form or OCR intake screen.
+                </p>
+              </div>
             </div>
-
-            {/* Query Clarification Question */}
-            <div>
-              <label htmlFor="query-text" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
-                Clarification Question <span className="text-[#B42318]">*</span>
-              </label>
-              <textarea
-                id="query-text"
-                rows={4}
-                value={queryText}
-                onChange={(e) => setQueryText(e.target.value)}
-                placeholder="Can you confirm this meter reading covers the full billing cycle for Chennai Plant 1?"
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#7567F5] placeholder-[#8A8F98] font-sans"
-                required
-              />
-              <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-                Provide precise inquiry describing any discrepancy, date mismatch, or evidence gap.
-              </p>
-            </div>
-
-            {/* Required Action */}
-            <div>
-              <label htmlFor="required-action" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
-                Required Action (Recommended)
-              </label>
-              <input
-                type="text"
-                id="required-action"
-                value={requiredAction}
-                onChange={(e) => setRequiredAction(e.target.value)}
-                placeholder="Cross-verify meter multiplier and billing start/end dates against DISCOM HT consumer card."
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#7567F5] placeholder-[#8A8F98] font-sans"
-              />
-              <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-                Explicit remediation expected from the organisation review team.
-              </p>
-            </div>
-
-            {/* Form Actions */}
-            <div className="pt-3 border-t border-[#F1F3F5] flex items-center justify-between">
-              <button
-                type="button"
-                onClick={() => navigateToScreen('32_evidence_trace', 'FLOW_F')}
-                className="enterprise-btn-secondary h-9 px-3.5 text-xs font-semibold"
-              >
-                Cancel
-              </button>
-
-              <button
-                type="submit"
-                disabled={submitting}
-                className="enterprise-btn-primary h-9 px-4 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
-              >
-                <Send className="w-3.5 h-3.5" />
-                <span>{submitting ? 'Submitting...' : 'Submit Query'}</span>
-              </button>
-            </div>
-          </form>
+          )}
         </div>
 
         {/* Right: Existing Engagement Queries Thread (5 cols on lg) */}
         <div className="lg:col-span-5 bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs space-y-0">
           <div className="px-4 py-3 border-b border-[#E5E7EB] bg-[#F4F5F6] flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <HelpCircle className="w-4 h-4 text-[#6254E8]" />
+              <HelpCircle className="w-4 h-4 text-[#01153C]" />
               <h3 className="text-xs font-semibold text-[#17181A] font-sans">Engagement Queries</h3>
             </div>
             <span className="text-[11px] text-[#5F6368] font-data">
@@ -325,7 +480,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
 
                   <div className="flex items-center justify-between text-[11px] text-[#8A8F98] pt-1">
                     <span className="font-data">{query.date || query.raisedAt}</span>
-                    <span className="text-[#6254E8] font-medium font-sans">{query.queryType}</span>
+                    <span className="text-[#01153C] font-medium font-sans">{query.queryType}</span>
                   </div>
 
                   {isExpanded && (
@@ -353,6 +508,43 @@ export const Screen33_VerifierQuery: React.FC = () => {
                           )}
                         </div>
                       )}
+
+                      {/* Verifier Sign-off Actions */}
+                      {currentRole === 'VERIFIER' && query.status === 'Answered' && (
+                        <div className="pt-2 border-t border-[#E5E7EB] flex items-center justify-end space-x-2">
+                          <button
+                            type="button"
+                            onClick={() => closeVerifierQuery(query.id, 'Resolved', 'Auditor noted observation and accepted remediation.')}
+                            className="px-2.5 py-1 text-[11px] text-[#5F6368] hover:bg-[#E5E7EB] border border-[#E5E7EB] rounded-md font-semibold transition-colors"
+                          >
+                            Mark Qualified
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => closeVerifierQuery(query.id, 'Closed')}
+                            className="px-2.5 py-1 text-[11px] text-white bg-[#027A48] hover:bg-[#05603A] rounded-md font-semibold transition-colors flex items-center space-x-1 shadow-xs"
+                          >
+                            <CheckCircle2 className="w-3 h-3" />
+                            <span>Accept & Close</span>
+                          </button>
+                        </div>
+                      )}
+
+                      {/* Reviewer / Tenant Admin Quick Action */}
+                      {(currentRole === 'REVIEWER' || currentRole === 'TENANT_ADMIN') && query.status === 'Open' && (
+                        <div className="pt-2 border-t border-[#E5E7EB] flex items-center justify-end">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedResponseQueryId(query.id);
+                              showToast('Query Selected', `Loaded ${query.id} into the response form.`, 'info');
+                            }}
+                            className="px-2.5 py-1 text-[11px] text-[#01153C] hover:bg-[#01153C]/10 border border-[#01153C]/30 rounded-md font-semibold transition-colors"
+                          >
+                            Respond to this Query →
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -364,7 +556,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
             <span>All queries are recorded in the audit trail</span>
             <button
               onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
-              className="text-[#6254E8] hover:underline font-semibold font-sans"
+              className="text-[#01153C] hover:underline font-semibold font-sans"
             >
               View Audit Log →
             </button>

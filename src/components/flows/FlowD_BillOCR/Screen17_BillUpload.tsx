@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
   Upload,
@@ -7,14 +7,28 @@ import {
   Sparkles,
   FileText,
   Info,
+  Lock,
+  ShieldAlert,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen17_BillUpload: React.FC = () => {
-  const { sites, navigateToScreen, showToast, runOcrExtraction } = useApp();
+  const { sites, navigateToScreen, showToast, runOcrExtraction, activePeriod, currentRole, currentUser } = useApp();
 
-  const [siteId, setSiteId] = useState('site-chennai-1');
+  const isPeriodLocked = Boolean(activePeriod?.locked);
+  const isVerifierReadOnly = currentRole === 'VERIFIER';
+
+  // Site scope filtering for data entry operators
+  const allowedSites = useMemo(() => {
+    if (currentUser?.siteScope && currentUser.siteScope.length > 0 && currentRole === 'DATA_ENTRY') {
+      const filtered = sites.filter((s) => currentUser.siteScope?.includes(s.id));
+      return filtered.length > 0 ? filtered : sites;
+    }
+    return sites;
+  }, [sites, currentUser, currentRole]);
+
+  const [siteId, setSiteId] = useState(allowedSites[0]?.id || 'site-chennai-1');
   const [selectedFile, setSelectedFile] = useState<{
     name: string;
     size: string;
@@ -26,6 +40,14 @@ export const Screen17_BillUpload: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSimulateFile = () => {
+    if (isPeriodLocked) {
+      showToast('Period Locked', `Reporting Period ${activePeriod.name} is permanently locked. OCR bill ingestion is disabled.`, 'error');
+      return;
+    }
+    if (isVerifierReadOnly) {
+      showToast('Auditor Read-Only', 'Independent auditors have read-only inspection access.', 'error');
+      return;
+    }
     setSelectedFile({
       name: 'TANGEDCO_HT_Bill_Jul_2025.pdf',
       size: '2.1 MB',
@@ -34,6 +56,14 @@ export const Screen17_BillUpload: React.FC = () => {
   };
 
   const handleExtractWithAI = () => {
+    if (isPeriodLocked) {
+      showToast('Period Locked', `Reporting Period ${activePeriod.name} is permanently locked. OCR bill ingestion is disabled.`, 'error');
+      return;
+    }
+    if (isVerifierReadOnly) {
+      showToast('Auditor Read-Only', 'Independent auditors cannot run bill extractions.', 'error');
+      return;
+    }
     if (!selectedFile) {
       showToast('No Document Selected', 'Please upload an electricity bill first.', 'error');
       return;
@@ -51,7 +81,7 @@ export const Screen17_BillUpload: React.FC = () => {
       runOcrExtraction({
         fileName: selectedFile.name,
         siteId,
-        siteName: 'Chennai Plant 1',
+        siteName: allowedSites.find((s) => s.id === siteId)?.name || 'Chennai Plant 1',
         billingPeriodStart: '2025-07-01',
         billingPeriodEnd: '2025-07-31',
         consumption_kwh: 48200,
@@ -84,25 +114,51 @@ export const Screen17_BillUpload: React.FC = () => {
         }
       />
 
+      {/* Period Locked Governance Banner */}
+      {isPeriodLocked && (
+        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-center space-x-3 text-xs text-[#ED2024] font-data shadow-2xs">
+          <Lock className="w-5 h-5 shrink-0 text-[#ED2024]" />
+          <div>
+            <strong className="font-semibold">Accounting Period {activePeriod.name} is Locked:</strong> New bill upload and automated OCR extraction are disabled for frozen accounting periods.
+          </div>
+        </div>
+      )}
+
+      {/* Verifier Read-Only Mode Banner */}
+      {isVerifierReadOnly && (
+        <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex items-center space-x-3 text-xs text-[#01153C] font-data shadow-2xs">
+          <ShieldAlert className="w-5 h-5 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="font-semibold">Third-Party Assurance Mode:</strong> Independent Auditors ({currentUser.name}) have read-only inspection access and cannot ingest raw utility bills.
+          </div>
+        </div>
+      )}
+
       {/* Facility / Site Selection Card */}
       <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-4">
         <h2 className="text-sm font-semibold text-[#17181A]">Target Facility</h2>
         <div className="max-w-md">
           <label className="block text-xs font-semibold text-[#17181A] mb-1">
-            Site <span className="text-[#D92D20]">*</span>
+            Site <span className="text-[#ED2024]">*</span>
           </label>
           <select
             id="ocr-site-select"
+            disabled={isPeriodLocked || isVerifierReadOnly}
             value={siteId}
             onChange={(e) => setSiteId(e.target.value)}
-            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#7567F5]"
+            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] disabled:bg-[#F4F5F6] disabled:cursor-not-allowed"
           >
-            {sites.map((s) => (
+            {allowedSites.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.name} ({s.location})
               </option>
             ))}
           </select>
+          {currentUser?.siteScope && currentUser.siteScope.length > 0 && currentRole === 'DATA_ENTRY' && (
+            <span className="text-[10px] text-[#5F6368] mt-1 block font-data">
+              Restricted to your assigned facility scope: {allowedSites.map((s) => s.name).join(', ')}
+            </span>
+          )}
         </div>
       </div>
 
@@ -143,7 +199,7 @@ export const Screen17_BillUpload: React.FC = () => {
         {selectedFile && (
           <div className="p-4 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-xl bg-[#6254E8]/10 text-[#6254E8] flex items-center justify-center shrink-0 border border-[#6254E8]/20">
+              <div className="w-9 h-9 rounded-xl bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0 border border-[#01153C]/20">
                 <FileText className="w-5 h-5" />
               </div>
               <div>
@@ -161,7 +217,7 @@ export const Screen17_BillUpload: React.FC = () => {
         {/* Feature Note Banner */}
         <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] space-y-1">
           <div className="flex items-center space-x-1.5 font-semibold text-[#17181A]">
-            <Info className="w-4 h-4 text-[#6254E8]" />
+            <Info className="w-4 h-4 text-[#01153C]" />
             <span>Optional feature — can be switched off per tenant. Manual entry (Screen 11) is always available.</span>
           </div>
           <p className="text-[11px] pl-5 text-[#8A8F98] font-data">
@@ -171,7 +227,7 @@ export const Screen17_BillUpload: React.FC = () => {
 
         {/* Build Notes */}
         <div className="p-3 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] space-y-1 shadow-2xs font-sans">
-          <div className="font-semibold text-[#6254E8]">Build Notes:</div>
+          <div className="font-semibold text-[#01153C]">Build Notes:</div>
           <ul className="list-disc list-inside text-[11px] space-y-0.5 pl-1 font-data">
             <li>Engine: Azure AI Document Intelligence, prebuilt invoice model</li>
             <li>Phase 1 scope covers one document type only: electricity utility bills</li>
@@ -184,7 +240,7 @@ export const Screen17_BillUpload: React.FC = () => {
           <button
             type="button"
             onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
-            className="text-xs text-[#6254E8] hover:underline font-semibold"
+            className="text-xs text-[#01153C] hover:underline font-semibold"
           >
             Prefer manual entry? Switch to Screen 11
           </button>
@@ -192,9 +248,9 @@ export const Screen17_BillUpload: React.FC = () => {
           <button
             id="btn-extract-with-ai"
             type="button"
-            disabled={isProcessing}
+            disabled={isProcessing || isPeriodLocked || isVerifierReadOnly}
             onClick={handleExtractWithAI}
-            className="enterprise-btn-primary h-9 px-6 text-xs font-semibold shadow-xs flex items-center space-x-2 disabled:opacity-50"
+            className="enterprise-btn-primary h-9 px-6 text-xs font-semibold shadow-xs flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Sparkles className="w-4 h-4" />
             <span>{isProcessing ? 'Extracting with AI...' : 'Extract with AI'}</span>

@@ -9,12 +9,16 @@ import {
   X,
   ArrowRight,
   FileSpreadsheet,
+  ShieldCheck,
+  ShieldAlert,
+  Lock,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen05_SitesFacilities: React.FC = () => {
-  const { sites, addSite, navigateToScreen, showToast } = useApp();
+  const { sites, addSite, navigateToScreen, showToast, currentRole, currentUser } = useApp();
+  const canManageSites = currentRole === 'TENANT_ADMIN';
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
@@ -87,25 +91,49 @@ export const Screen05_SitesFacilities: React.FC = () => {
         title="Sites & Facilities"
         description="Manage physical and operational locations included in your emissions accounting boundary."
         actions={
-          <div className="flex items-center space-x-2.5">
-            <button
-              onClick={() => setIsCsvModalOpen(true)}
-              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
-            >
-              <Upload className="w-3.5 h-3.5 text-[#5F6368]" />
-              <span>Import CSV</span>
-            </button>
+          canManageSites ? (
+            <div className="flex items-center space-x-2.5">
+              <button
+                onClick={() => setIsCsvModalOpen(true)}
+                className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
+              >
+                <Upload className="w-3.5 h-3.5 text-[#5F6368]" />
+                <span>Import CSV</span>
+              </button>
 
-            <button
-              onClick={() => setIsDrawerOpen(true)}
-              className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Add Site</span>
-            </button>
-          </div>
+              <button
+                onClick={() => setIsDrawerOpen(true)}
+                className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Site</span>
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-2 text-xs text-[#5F6368] font-data bg-[#FAFAFB] px-3 py-1.5 rounded-lg border border-[#E5E7EB]">
+              <Lock className="w-3.5 h-3.5 text-[#8A8F98]" />
+              <span>Boundary managed by Tenant Admin</span>
+            </div>
+          )
         }
       />
+
+      {/* Role Notice Banner */}
+      {!canManageSites && (
+        <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center space-x-3 text-xs text-[#5F6368] font-data shadow-2xs">
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="text-[#17181A] font-semibold">
+              {currentRole === 'VERIFIER'
+                ? 'Auditor Read-Only Assurance Mode'
+                : 'Operational Boundary View'}
+              :
+            </strong>{' '}
+            You are viewing organization accounting boundaries as{' '}
+            <strong className="text-[#17181A]">{currentUser.name} ({currentRole})</strong>. Adding, modifying, or deleting operational sites requires Tenant Administrator credentials.
+          </div>
+        </div>
+      )}
 
       {/* Filter Controls Bar */}
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 font-sans">

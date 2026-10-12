@@ -65,7 +65,7 @@ export const Screen30_VerifierLogin: React.FC = () => {
     <div id="screen-30-container" className="min-h-[80vh] flex flex-col justify-center max-w-lg mx-auto py-8 px-4 space-y-6">
       {/* Verifier Surface Branding (Separate from Main App Shell) */}
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#6254E8]/10 border border-[#6254E8]/20 text-[#6254E8] mb-1 shadow-2xs">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#01153C]/10 border border-[#01153C]/20 text-[#01153C] mb-1 shadow-2xs">
           <ShieldCheck className="w-6 h-6" />
         </div>
         <div className="text-xs route-path text-[#8A8F98] font-medium">
@@ -83,7 +83,7 @@ export const Screen30_VerifierLogin: React.FC = () => {
       <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl text-xs space-y-2.5 shadow-2xs">
         <div className="font-semibold text-[#17181A] flex items-center justify-between font-sans">
           <div className="flex items-center space-x-1.5">
-            <Info className="w-4 h-4 text-[#6254E8]" />
+            <Info className="w-4 h-4 text-[#01153C]" />
             <span>Assigned Verification Scope (FR-30.03 – FR-30.05)</span>
           </div>
           <StatusBadge status="Under Review" customLabel="Read-Only Scope" size="sm" />
@@ -108,7 +108,7 @@ export const Screen30_VerifierLogin: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@vvb-firm.com"
-            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:border-[#7567F5] focus:outline-none font-sans"
+            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:border-[#01153C] focus:outline-none font-sans"
           />
         </div>
 
@@ -122,7 +122,7 @@ export const Screen30_VerifierLogin: React.FC = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:border-[#7567F5] focus:outline-none"
+            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:border-[#01153C] focus:outline-none"
           />
         </div>
 

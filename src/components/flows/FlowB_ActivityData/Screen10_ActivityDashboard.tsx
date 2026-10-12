@@ -29,6 +29,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
     setActiveFilterStatus,
     searchQuery,
     setSearchQuery,
+    currentRole,
   } = useApp();
 
   // Metrics specified in PRD Screen 10:
@@ -122,13 +123,17 @@ export const Screen10_ActivityDashboard: React.FC = () => {
         <KpiCard
           label="Pending Review"
           value={pendingReviewCount.toString()}
-          subtext="Awaiting Reviewer approval"
+          subtext={currentRole === 'DATA_ENTRY' ? 'Submitted awaiting review' : 'Awaiting Reviewer approval'}
           statusDot="warning"
           icon={<Clock className="w-4 h-4 text-[#F59E0B]" />}
-          change="Review queue →"
+          change={currentRole === 'DATA_ENTRY' ? 'My submissions →' : 'Review queue →'}
           onClick={() => {
             setActiveFilterStatus('Submitted');
-            navigateToScreen('24_review_approve', 'FLOW_B');
+            if (currentRole === 'DATA_ENTRY') {
+              navigateToScreen('23_submission_queue', 'FLOW_B');
+            } else {
+              navigateToScreen('24_review_approve', 'FLOW_B');
+            }
           }}
         />
 

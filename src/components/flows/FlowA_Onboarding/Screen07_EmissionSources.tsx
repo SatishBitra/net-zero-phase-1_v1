@@ -7,12 +7,15 @@ import {
   ArrowRight,
   X,
   Building,
+  Lock,
+  ShieldCheck,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen07_EmissionSources: React.FC = () => {
-  const { emissionSources, sites, addEmissionSource, navigateToScreen } = useApp();
+  const { emissionSources, sites, addEmissionSource, navigateToScreen, showToast, currentRole, currentUser } = useApp();
+  const canConfigureSources = currentRole === 'TENANT_ADMIN';
 
   const [selectedSiteId, setSelectedSiteId] = useState<string>(sites[0]?.id || 'site-chennai-1');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -92,15 +95,39 @@ export const Screen07_EmissionSources: React.FC = () => {
         title="Emission Sources"
         description="Configure emission sources at each site. This determines which input fields and units are available in Data Entry."
         actions={
-          <button
-            onClick={() => setIsDrawerOpen(true)}
-            className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Add Emission Source</span>
-          </button>
+          canConfigureSources ? (
+            <button
+              onClick={() => setIsDrawerOpen(true)}
+              className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Add Emission Source</span>
+            </button>
+          ) : (
+            <div className="flex items-center space-x-2 text-xs text-[#5F6368] font-data bg-[#FAFAFB] px-3 py-1.5 rounded-lg border border-[#E5E7EB]">
+              <Lock className="w-3.5 h-3.5 text-[#8A8F98]" />
+              <span>Factor mapping governed by Tenant Admin</span>
+            </div>
+          )
         }
       />
+
+      {/* Role Notice Banner */}
+      {!canConfigureSources && (
+        <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center space-x-3 text-xs text-[#5F6368] font-data shadow-2xs">
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="text-[#17181A] font-semibold">
+              {currentRole === 'VERIFIER'
+                ? 'Auditor Read-Only Factors & Methodology View'
+                : 'Operational Factors Reference View'}
+              :
+            </strong>{' '}
+            You are viewing emission factors as{' '}
+            <strong className="text-[#17181A]">{currentUser.name} ({currentRole})</strong>. Modifying emission sources, activity methods, or regulatory factor sources requires Tenant Administrator authority.
+          </div>
+        </div>
+      )}
 
       {/* Site Selector Bar & Filter */}
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-2xl shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-3 font-sans">

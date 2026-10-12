@@ -10,6 +10,8 @@ import {
   Paperclip,
   Info,
   ExternalLink,
+  Lock,
+  ShieldAlert,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 
@@ -20,7 +22,13 @@ export const Screen16_AttachEvidence: React.FC = () => {
     navigateToScreen,
     showToast,
     attachEvidenceToRecord,
+    activePeriod,
+    currentRole,
+    currentUser,
   } = useApp();
+
+  const isPeriodLocked = Boolean(activePeriod?.locked);
+  const isVerifierReadOnly = currentRole === 'VERIFIER';
 
   const currentRecord = records.find((r) => r.id === selectedRecordId) || records[0];
 
@@ -38,6 +46,14 @@ export const Screen16_AttachEvidence: React.FC = () => {
   const [dragActive, setDragActive] = useState(false);
 
   const handleUploadFile = () => {
+    if (isPeriodLocked) {
+      showToast('Period Locked', `Reporting Period ${activePeriod.name} is sealed. Evidence cannot be modified.`, 'error');
+      return;
+    }
+    if (isVerifierReadOnly) {
+      showToast('Auditor Read-Only', 'Independent verifiers have read-only inspection access.', 'error');
+      return;
+    }
     const newDoc = {
       id: `doc-${Date.now()}`,
       file: `substation-meter-reading-${Date.now().toString().slice(-4)}.pdf`,
@@ -57,6 +73,14 @@ export const Screen16_AttachEvidence: React.FC = () => {
   };
 
   const handleRemoveDoc = (id: string) => {
+    if (isPeriodLocked) {
+      showToast('Period Locked', `Reporting Period ${activePeriod.name} is sealed. Evidence cannot be detached.`, 'error');
+      return;
+    }
+    if (isVerifierReadOnly) {
+      showToast('Auditor Read-Only', 'Independent verifiers cannot remove evidence.', 'error');
+      return;
+    }
     setAttachedDocs((prev) => prev.filter((d) => d.id !== id));
     showToast('Document Removed', 'File detached from line item.');
   };
@@ -87,6 +111,26 @@ export const Screen16_AttachEvidence: React.FC = () => {
           </button>
         }
       />
+
+      {/* Period Locked Governance Banner */}
+      {isPeriodLocked && (
+        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-center space-x-3 text-xs text-[#ED2024] font-data shadow-2xs">
+          <Lock className="w-5 h-5 shrink-0 text-[#ED2024]" />
+          <div>
+            <strong className="font-semibold">Accounting Period {activePeriod.name} is Locked:</strong> Supporting evidence cannot be attached, modified, or detached for sealed accounting periods.
+          </div>
+        </div>
+      )}
+
+      {/* Verifier Read-Only Mode Banner */}
+      {isVerifierReadOnly && (
+        <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex items-center space-x-3 text-xs text-[#01153C] font-data shadow-2xs">
+          <ShieldAlert className="w-5 h-5 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="font-semibold">Third-Party Assurance Mode:</strong> Independent Auditors ({currentUser.name}) have read-only inspection access and cannot modify attached primary evidence.
+          </div>
+        </div>
+      )}
 
       {/* Target Record Context Card */}
       <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs flex flex-wrap items-center justify-between gap-4 text-xs font-sans">

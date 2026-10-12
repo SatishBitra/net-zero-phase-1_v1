@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
   CheckCircle,
@@ -10,6 +10,9 @@ import {
   FileText,
   Trash2,
   Sparkles,
+  Lock,
+  AlertTriangle,
+  ShieldAlert,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
@@ -25,10 +28,24 @@ export const Screen11_EntryForm: React.FC = () => {
     showToast,
     ocrPrefillData,
     setOcrPrefillData,
+    currentRole,
+    currentUser,
   } = useApp();
 
-  // Find or default to Chennai Plant 1
-  const defaultSite = sites.find((s) => s.name.includes('Chennai')) || sites[0];
+  const isPeriodLocked = Boolean(activePeriod?.locked);
+  const isVerifierReadOnly = currentRole === 'VERIFIER';
+
+  // Respect user's assigned siteScope if configured (e.g. A. Kumar assigned to Chennai)
+  const allowedSites = useMemo(() => {
+    if (currentUser?.siteScope && currentUser.siteScope.length > 0 && currentRole === 'DATA_ENTRY') {
+      const filtered = sites.filter((s) => currentUser.siteScope?.includes(s.id));
+      return filtered.length > 0 ? filtered : sites;
+    }
+    return sites;
+  }, [sites, currentUser, currentRole]);
+
+  // Find or default to Chennai Plant 1 or first allowed site
+  const defaultSite = allowedSites.find((s) => s.name.includes('Chennai')) || allowedSites[0] || sites[0];
   const [siteId, setSiteId] = useState(ocrPrefillData?.siteId || defaultSite?.id || 'site-chennai-1');
 
   const availableSources = emissionSources.filter((s) => s.siteId === siteId);
@@ -98,6 +115,14 @@ export const Screen11_EntryForm: React.FC = () => {
   };
 
   const handleSave = (targetStatus: 'Draft' | 'Submitted') => {
+    if (isPeriodLocked) {
+      showToast('Period Locked', `Reporting Period ${activePeriod.name} is sealed and read-only. Entries cannot be created.`, 'error');
+      return;
+    }
+    if (isVerifierReadOnly) {
+      showToast('Auditor Read-Only', 'Independent verifiers cannot submit activity records.', 'error');
+      return;
+    }
     if (!currentSource || numQuantity <= 0) {
       showToast('Validation Error', 'Please enter a valid positive quantity.', 'error');
       return;
@@ -124,7 +149,7 @@ export const Screen11_EntryForm: React.FC = () => {
         name: f.name,
         size: f.size,
         uploadDate: f.uploadDate,
-        uploadedBy: 'A. Kumar (Data Entry)',
+        uploadedBy: `${currentUser.name} (${currentRole === 'DATA_ENTRY' ? 'Data Entry' : currentRole})`,
         url: '#',
       })),
     });
@@ -164,6 +189,26 @@ export const Screen11_EntryForm: React.FC = () => {
         }
       />
 
+      {/* Period Locked Governance Banner */}
+      {isPeriodLocked && (
+        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-center space-x-3 text-xs text-[#ED2024] font-data shadow-2xs">
+          <Lock className="w-5 h-5 shrink-0 text-[#ED2024]" />
+          <div>
+            <strong className="font-semibold">Accounting Period {activePeriod.name} is Locked:</strong> New activity data entries and edits are strictly disabled. To record adjustments, submit to an open accounting period.
+          </div>
+        </div>
+      )}
+
+      {/* Verifier Read-Only Mode Banner */}
+      {isVerifierReadOnly && (
+        <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex items-center space-x-3 text-xs text-[#01153C] font-data shadow-2xs">
+          <ShieldAlert className="w-5 h-5 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="font-semibold">Third-Party Assurance Mode:</strong> External Verifiers ({currentUser.name}) have read-only inspection access and cannot submit operational activity records.
+          </div>
+        </div>
+      )}
+
       {/* AI Pre-fill Banner if coming from Screen 18 */}
       {entryMethod === 'AI Extracted' && (
         <div className="p-3 bg-[#01153C]/10 border border-[#01153C]/20 rounded-xl flex items-center justify-between text-xs text-[#01153C] font-sans">
@@ -196,16 +241,22 @@ export const Screen11_EntryForm: React.FC = () => {
                 </label>
                 <select
                   id="entry-site-select"
+                  disabled={isPeriodLocked || isVerifierReadOnly}
                   value={siteId}
                   onChange={(e) => handleSiteChange(e.target.value)}
-                  className="w-full px-4 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C]"
+                  className="w-full px-4 py-2 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] disabled:bg-[#F4F5F6] disabled:cursor-not-allowed"
                 >
-                  {sites.map((s) => (
+                  {allowedSites.map((s) => (
                     <option key={s.id} value={s.id}>
                       {s.name} ({s.location})
                     </option>
                   ))}
                 </select>
+                {currentUser?.siteScope && currentUser.siteScope.length > 0 && currentRole === 'DATA_ENTRY' && (
+                  <span className="text-[10px] text-[#5F6368] mt-1 block">
+                    Restricted to your assigned facility scope: {allowedSites.map((s) => s.name).join(', ')}
+                  </span>
+                )}
               </div>
 
               <div>
@@ -390,8 +441,9 @@ export const Screen11_EntryForm: React.FC = () => {
             <button
               id="btn-save-as-draft"
               type="button"
+              disabled={isPeriodLocked || isVerifierReadOnly}
               onClick={() => handleSave('Draft')}
-              className="enterprise-btn-secondary h-9 px-5 text-xs font-semibold rounded-full"
+              className="enterprise-btn-secondary h-9 px-5 text-xs font-semibold rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Save as Draft
             </button>
@@ -399,8 +451,9 @@ export const Screen11_EntryForm: React.FC = () => {
             <button
               id="btn-submit-for-review"
               type="button"
+              disabled={isPeriodLocked || isVerifierReadOnly}
               onClick={() => handleSave('Submitted')}
-              className="enterprise-btn-primary h-9 px-6 text-xs font-semibold shadow-xs flex items-center justify-center space-x-1.5 rounded-full"
+              className="enterprise-btn-primary h-9 px-6 text-xs font-semibold shadow-xs flex items-center justify-center space-x-1.5 rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <CheckCircle className="w-3.5 h-3.5" />
               <span>Submit for Review</span>

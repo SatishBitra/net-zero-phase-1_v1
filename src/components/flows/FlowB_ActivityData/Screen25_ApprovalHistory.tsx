@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
   Calendar,
@@ -7,6 +7,8 @@ import {
   ArrowLeft,
   Lock,
   ExternalLink,
+  HelpCircle,
+  Activity,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
@@ -21,13 +23,13 @@ interface ApprovalHistoryRow {
 }
 
 export const Screen25_ApprovalHistory: React.FC = () => {
-  const { navigateToScreen } = useApp();
+  const { navigateToScreen, currentRole, currentUser, auditTrail } = useApp();
 
   const [siteFilter, setSiteFilter] = useState('All Sites');
   const [periodFilter, setPeriodFilter] = useState('FY 2025–26');
 
-  // Exact data from Screen 25 PRD specification
-  const historyData: ApprovalHistoryRow[] = [
+  // Exact base data from Screen 25 PRD specification
+  const baseHistoryData: ApprovalHistoryRow[] = [
     {
       batchId: '#204',
       siteName: 'Chennai Plant 1',
@@ -53,6 +55,25 @@ export const Screen25_ApprovalHistory: React.FC = () => {
       comment: 'Missing evidence for 2 rows',
     },
   ];
+
+  // Merge live audit trail events for batches
+  const historyData = useMemo<ApprovalHistoryRow[]>(() => {
+    const liveBatchEvents: ApprovalHistoryRow[] = auditTrail
+      .filter((log) => log.source?.includes('Screen 24') || log.lineItemId?.includes('Batch'))
+      .map((log) => ({
+        batchId: log.lineItemId || '#204',
+        siteName: 'Chennai Plant 1',
+        reviewedBy: log.userName,
+        date: log.timestamp.split(' ')[0] || 'Today',
+        outcome: log.status === 'Approved' ? 'Approved' : log.status === 'Returned' ? 'Returned' : 'Rejected',
+        comment: log.reason || '—',
+      }));
+
+    // Put live events first, avoid duplicates for batch-204
+    const existingBatchIds = new Set(liveBatchEvents.map((e) => e.batchId));
+    const dedupedBase = baseHistoryData.filter((b) => !existingBatchIds.has(b.batchId));
+    return [...liveBatchEvents, ...dedupedBase];
+  }, [auditTrail]);
 
   const filteredHistory = historyData.filter((item) => {
     if (siteFilter !== 'All Sites' && item.siteName !== siteFilter) return false;
@@ -87,14 +108,33 @@ export const Screen25_ApprovalHistory: React.FC = () => {
               <span>Back to Queue</span>
             </button>
 
-            <button
-              onClick={() => navigateToScreen('26_period_lock', 'FLOW_B')}
-              className="enterprise-btn-primary h-9 px-3.5 flex items-center space-x-1.5 text-xs shadow-xs"
-            >
-              <Lock className="w-3.5 h-3.5" />
-              <span>Period Lock</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            {currentRole === 'TENANT_ADMIN' ? (
+              <button
+                onClick={() => navigateToScreen('26_period_lock', 'FLOW_B')}
+                className="enterprise-btn-primary h-9 px-3.5 flex items-center space-x-1.5 text-xs shadow-xs"
+              >
+                <Lock className="w-3.5 h-3.5" />
+                <span>Period Lock</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            ) : currentRole === 'REVIEWER' ? (
+              <button
+                onClick={() => navigateToScreen('33_raise_query', 'FLOW_F')}
+                className="enterprise-btn-primary h-9 px-3.5 flex items-center space-x-1.5 text-xs shadow-xs"
+              >
+                <HelpCircle className="w-3.5 h-3.5" />
+                <span>Verifier Queries</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            ) : (
+              <button
+                onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}
+                className="enterprise-btn-secondary h-9 px-3.5 flex items-center space-x-1.5 text-xs"
+              >
+                <Activity className="w-3.5 h-3.5 text-[#01153C]" />
+                <span>Activity Dashboard</span>
+              </button>
+            )}
           </div>
         }
       />

@@ -150,7 +150,13 @@ export const Sidebar: React.FC = () => {
           },
           { id: '23_submission_queue', label: 'Submission Queue', icon: Inbox },
           { id: '25_approval_history', label: 'Approval History', icon: History },
-          { id: '26_period_lock', label: 'Period Governance', icon: Calendar },
+          {
+            id: '33_raise_query',
+            label: 'Verifier Queries',
+            icon: HelpCircle,
+            badge: openQueriesCount > 0 ? `${openQueriesCount} open` : undefined,
+            badgeColor: 'bg-[#FEF1F1] text-[#ED2024]',
+          },
         ],
       },
       {

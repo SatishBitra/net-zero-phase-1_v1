@@ -181,7 +181,7 @@ export const Screen31_FindingsLog: React.FC = () => {
                     <span
                       className={`text-[10px] px-2 py-0.5 rounded font-medium ${
                         f.severity === 'High'
-                          ? 'bg-[#FEF0EF] text-[#B42318]'
+                          ? 'bg-[#FEF1F1] text-[#ED2024]'
                           : f.severity === 'Medium'
                           ? 'bg-[#FEF7EC] text-[#B54708]'
                           : 'bg-[#F1F3F5] text-[#5E6672]'

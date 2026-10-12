@@ -22,7 +22,7 @@ interface SubmissionBatch {
 }
 
 export const Screen23_SubmissionQueue: React.FC = () => {
-  const { navigateToScreen, showToast } = useApp();
+  const { navigateToScreen, showToast, currentRole, currentUser } = useApp();
 
   // Summary metrics from PRD specification (FR-23.01, 23.02, 23.03)
   const metrics = {
@@ -52,7 +52,13 @@ export const Screen23_SubmissionQueue: React.FC = () => {
   ];
 
   const handleReviewBatch = (batchId: string) => {
-    showToast('Opening Review Batch', `Loading batch #${batchId.replace('batch-', '')} for Four-Eye verification.`);
+    if (currentRole === 'DATA_ENTRY') {
+      showToast('Read-Only View', `Viewing submission #${batchId.replace('batch-', '')}. Self-approval is blocked under Segregation of Duties.`, 'info');
+    } else if (currentRole === 'VERIFIER') {
+      showToast('Auditing Batch', `Viewing submission #${batchId.replace('batch-', '')} in third-party verification mode.`, 'info');
+    } else {
+      showToast('Opening Review Batch', `Loading batch #${batchId.replace('batch-', '')} for Four-Eye verification.`);
+    }
     // Navigates to Screen 24
     navigateToScreen('24_review_approve', 'FLOW_B');
   };
@@ -163,9 +169,21 @@ export const Screen23_SubmissionQueue: React.FC = () => {
                     id={`btn-review-${item.id}`}
                     type="button"
                     onClick={() => handleReviewBatch(item.id)}
-                    className="enterprise-btn-primary h-8 px-3 text-xs inline-flex items-center space-x-1 shadow-2xs"
+                    className={`h-8 px-3 text-xs inline-flex items-center space-x-1 shadow-2xs font-semibold rounded-lg transition-colors ${
+                      currentRole === 'DATA_ENTRY'
+                        ? 'bg-[#F4F5F6] text-[#17181A] hover:bg-[#E5E7EB] border border-[#D9DDE3]'
+                        : currentRole === 'VERIFIER'
+                        ? 'bg-[#01153C]/10 text-[#01153C] hover:bg-[#01153C]/20 border border-[#01153C]/30'
+                        : 'enterprise-btn-primary'
+                    }`}
                   >
-                    <span>Review</span>
+                    <span>
+                      {currentRole === 'DATA_ENTRY'
+                        ? 'View Submission'
+                        : currentRole === 'VERIFIER'
+                        ? 'Audit Batch'
+                        : 'Review'}
+                    </span>
                     <ArrowRight className="w-3 h-3" />
                   </button>
                 </td>
@@ -175,13 +193,32 @@ export const Screen23_SubmissionQueue: React.FC = () => {
         </table>
       </div>
 
-      {/* RBAC Notice */}
-      <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
-        <ShieldCheck className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
-        <div>
-          <strong className="text-[#17181A] font-semibold">Role-Based Access Control (FR-23.09):</strong> The submission queue is accessible exclusively to Reviewers/Approvers and Tenant Admins. Data entry submitters cannot approve their own submissions.
+      {/* Role Notice & Segregation of Duties */}
+      {currentRole === 'DATA_ENTRY' ? (
+        <div className="p-3.5 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl text-xs text-[#ED2024] flex items-start space-x-2.5 shadow-2xs font-data">
+          <ShieldCheck className="w-4 h-4 text-[#ED2024] shrink-0 mt-0.5" />
+          <div>
+            <strong className="font-semibold">Four-Eye Segregation of Duties Enforced:</strong> You are logged in as{' '}
+            <span className="font-semibold underline">{currentUser.name} (Data Entry Operator)</span>. You can inspect
+            your submitted batches in read-only mode. Approval and return actions are restricted to independent reviewers (S. Iyer) and Tenant Administrators.
+          </div>
         </div>
-      </div>
+      ) : currentRole === 'VERIFIER' ? (
+        <div className="p-3.5 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl text-xs text-[#01153C] flex items-start space-x-2.5 shadow-2xs font-data">
+          <ShieldCheck className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
+          <div>
+            <strong className="font-semibold">Independent Assurance Mode:</strong> You are logged in as{' '}
+            <span className="font-semibold underline">{currentUser.name} (Third-Party Verifier)</span>. All batches are available for sampling and evidence tracing.
+          </div>
+        </div>
+      ) : (
+        <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
+          <ShieldCheck className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
+          <div>
+            <strong className="text-[#17181A] font-semibold">Role-Based Access Control (FR-23.09):</strong> Authorized Reviewer queue. Evaluating batches against primary source evidence before committing to GHG inventory.
+          </div>
+        </div>
+      )}
     </div>
   );
 };

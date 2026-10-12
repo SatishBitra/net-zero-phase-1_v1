@@ -23,11 +23,19 @@ interface BatchItem {
 }
 
 export const Screen24_ReviewApprove: React.FC = () => {
-  const { navigateToScreen, showToast, addAuditLog } = useApp();
+  const {
+    navigateToScreen,
+    showToast,
+    addAuditLog,
+    currentRole,
+    currentUser,
+  } = useApp();
 
   const [comment, setComment] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [activeEvidenceModal, setActiveEvidenceModal] = useState<string | null>(null);
+
+  const canApprove = currentRole === 'REVIEWER' || currentRole === 'TENANT_ADMIN';
 
   // Exact data from Screen 24 PRD specification
   const batchDetails = {
@@ -58,12 +66,16 @@ export const Screen24_ReviewApprove: React.FC = () => {
   };
 
   const handleApprove = () => {
+    if (!canApprove) {
+      setErrorMessage('Segregation of duties: only Reviewers and Tenant Admins can approve batches.');
+      return;
+    }
     setErrorMessage(null);
 
     // Audit event requirement: Who, When, What, Why
     addAuditLog({
-      userName: 'S. Iyer',
-      role: 'Reviewer',
+      userName: currentUser.name,
+      role: currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : 'Reviewer',
       action: 'Approved Batch #204',
       previousValue: 'Batch #204: Awaiting Review (2 activity records)',
       newValue: 'Batch #204: Approved and Committed to GHG Inventory',
@@ -79,6 +91,10 @@ export const Screen24_ReviewApprove: React.FC = () => {
   };
 
   const handleReturnForCorrection = () => {
+    if (!canApprove) {
+      setErrorMessage('Segregation of duties: only Reviewers and Tenant Admins can return batches.');
+      return;
+    }
     if (!comment.trim()) {
       setErrorMessage('Comment required before returning this submission.');
       return;
@@ -86,8 +102,8 @@ export const Screen24_ReviewApprove: React.FC = () => {
     setErrorMessage(null);
 
     addAuditLog({
-      userName: 'S. Iyer',
-      role: 'Reviewer',
+      userName: currentUser.name,
+      role: currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : 'Reviewer',
       action: 'Returned Batch #204 for correction',
       previousValue: 'Batch #204: Awaiting Review',
       newValue: 'Batch #204: Returned for correction to A. Kumar',
@@ -102,6 +118,10 @@ export const Screen24_ReviewApprove: React.FC = () => {
   };
 
   const handleReject = () => {
+    if (!canApprove) {
+      setErrorMessage('Segregation of duties: only Reviewers and Tenant Admins can reject batches.');
+      return;
+    }
     if (!comment.trim()) {
       setErrorMessage('Comment required before rejecting this submission.');
       return;
@@ -109,8 +129,8 @@ export const Screen24_ReviewApprove: React.FC = () => {
     setErrorMessage(null);
 
     addAuditLog({
-      userName: 'S. Iyer',
-      role: 'Reviewer',
+      userName: currentUser.name,
+      role: currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : 'Reviewer',
       action: 'Rejected Batch #204',
       previousValue: 'Batch #204: Awaiting Review',
       newValue: 'Batch #204: Rejected',
@@ -153,6 +173,19 @@ export const Screen24_ReviewApprove: React.FC = () => {
           </button>
         }
       />
+
+      {/* Segregation of Duties Notice when role is DATA_ENTRY or VERIFIER */}
+      {!canApprove && (
+        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-start space-x-3 text-xs">
+          <AlertTriangle className="w-4 h-4 text-[#ED2024] shrink-0 mt-0.5" />
+          <div className="space-y-0.5">
+            <div className="font-bold text-[#ED2024]">Segregation of Duties Enforced (Read-Only Mode)</div>
+            <p className="text-[#5E6672]">
+              As a <strong>{currentRole === 'DATA_ENTRY' ? 'Data Entry Submitter' : 'Independent Verifier'}</strong> ({currentUser.name}), you are restricted from approving, returning, or rejecting operational activity batches. Only designated Reviewers or Tenant Admins possess sign-off authority under four-eye governance.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Review Table (FR Section 9.1) */}
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
@@ -252,7 +285,12 @@ export const Screen24_ReviewApprove: React.FC = () => {
               id="btn-reject-batch"
               type="button"
               onClick={handleReject}
-              className="px-4 py-2 bg-white border border-[#ED2024] text-[#ED2024] hover:bg-[#FEF0EF] text-xs font-semibold rounded-lg transition-colors text-center"
+              disabled={!canApprove}
+              className={`px-4 py-2 text-xs font-semibold rounded-lg transition-colors text-center ${
+                canApprove
+                  ? 'bg-white border border-[#ED2024] text-[#ED2024] hover:bg-[#FEF0EF]'
+                  : 'bg-[#F4F5F6] border border-[#E5E7EB] text-[#8A8F98] cursor-not-allowed opacity-60'
+              }`}
             >
               Reject
             </button>
@@ -262,7 +300,12 @@ export const Screen24_ReviewApprove: React.FC = () => {
               id="btn-return-correction"
               type="button"
               onClick={handleReturnForCorrection}
-              className="px-4 py-2 bg-white border border-[#F79009] text-[#B54708] hover:bg-[#FEF0C7] text-xs font-semibold rounded-lg transition-colors text-center"
+              disabled={!canApprove}
+              className={`px-4 py-2 text-xs font-semibold rounded-lg transition-colors text-center ${
+                canApprove
+                  ? 'bg-white border border-[#F79009] text-[#B54708] hover:bg-[#FEF0C7]'
+                  : 'bg-[#F4F5F6] border border-[#E5E7EB] text-[#8A8F98] cursor-not-allowed opacity-60'
+              }`}
             >
               Return for Correction
             </button>
@@ -273,7 +316,12 @@ export const Screen24_ReviewApprove: React.FC = () => {
             id="btn-approve-batch"
             type="button"
             onClick={handleApprove}
-            className="enterprise-btn-primary h-9 px-6 text-xs inline-flex items-center justify-center space-x-1.5 shadow-xs font-semibold"
+            disabled={!canApprove}
+            className={`h-9 px-6 text-xs inline-flex items-center justify-center space-x-1.5 shadow-xs font-semibold rounded-lg transition-colors ${
+              canApprove
+                ? 'enterprise-btn-primary'
+                : 'bg-[#E5E7EB] text-[#8A8F98] cursor-not-allowed opacity-60'
+            }`}
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Approve</span>
@@ -286,7 +334,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
         <ShieldCheck className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
         <div>
-          <strong className="text-[#17181A] font-semibold">Audit Requirement:</strong> Every workflow action writes to an append-only audit trail recording: <em>Who (S. Iyer), When, What, and Why</em>. Recorded events are permanently preserved for verifier inspection.
+          <strong className="text-[#17181A] font-semibold">Audit Requirement:</strong> Every workflow action writes to an append-only audit trail recording: <em>Who ({currentUser.name} as {currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : 'Reviewer'}), When, What, and Why</em>. Recorded events are permanently preserved for verifier inspection.
         </div>
       </div>
 

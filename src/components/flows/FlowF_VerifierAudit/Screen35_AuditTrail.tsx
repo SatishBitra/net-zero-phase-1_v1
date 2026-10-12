@@ -129,7 +129,7 @@ export const Screen35_AuditTrail: React.FC = () => {
       {/* Immutability Guarantee Banner */}
       <div className="bg-white text-[#17181A] px-4 py-3 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#E5E7EB] shadow-2xs font-data">
         <div className="flex items-center space-x-2.5">
-          <div className="w-7 h-7 rounded-full bg-[#6254E8]/10 text-[#6254E8] flex items-center justify-center shrink-0">
+          <div className="w-7 h-7 rounded-full bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0">
             <Lock className="w-3.5 h-3.5" />
           </div>
           <span className="font-semibold text-[#17181A] font-sans">Immutable Audit Trail</span>
@@ -139,7 +139,7 @@ export const Screen35_AuditTrail: React.FC = () => {
           </span>
         </div>
         <div className="flex items-center space-x-2 text-[11px]">
-          <span className="route-path text-[#6254E8] font-semibold bg-[#6254E8]/10 px-2.5 py-1 rounded-full border border-[#6254E8]/20">
+          <span className="route-path text-[#01153C] font-semibold bg-[#01153C]/10 px-2.5 py-1 rounded-full border border-[#01153C]/20">
             ISO 14064-3 / SOC 2 Type II Certified
           </span>
         </div>
@@ -177,7 +177,7 @@ export const Screen35_AuditTrail: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3 font-sans">
         <div className="flex items-center justify-between text-xs font-semibold text-[#17181A] border-b border-[#F1F3F5] pb-2">
           <div className="flex items-center space-x-2">
-            <Filter className="w-3.5 h-3.5 text-[#6254E8]" />
+            <Filter className="w-3.5 h-3.5 text-[#01153C]" />
             <span>Audit Trail Filter Matrix</span>
           </div>
           <span className="text-[11px] text-[#5F6368] font-data">
@@ -276,7 +276,7 @@ export const Screen35_AuditTrail: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs">
         <div className="px-4 py-3 border-b border-[#E5E7EB] bg-[#F4F5F6] flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Activity className="w-4 h-4 text-[#6254E8]" />
+            <Activity className="w-4 h-4 text-[#01153C]" />
             <h2 className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
               Chronological Audit Trail Table
             </h2>
@@ -312,7 +312,7 @@ export const Screen35_AuditTrail: React.FC = () => {
                       isCorrection
                         ? 'bg-[#FEF7EC]/40 hover:bg-[#FEF7EC]/70'
                         : isFlagged
-                        ? 'bg-[#FEF3F2]/30 hover:bg-[#FEF3F2]/50'
+                        ? 'bg-[#FEF1F1]/30 hover:bg-[#FEF1F1]/50'
                         : 'hover:bg-[#FAFAFB]'
                     }`}
                   >
@@ -330,7 +330,7 @@ export const Screen35_AuditTrail: React.FC = () => {
                             <span>System</span>
                           </span>
                         ) : (
-                          <div className="w-5 h-5 rounded-full bg-[#6254E8] text-white flex items-center justify-center text-[10px] font-semibold shrink-0">
+                          <div className="w-5 h-5 rounded-full bg-[#01153C] text-white flex items-center justify-center text-[10px] font-semibold shrink-0">
                             {item.userName.slice(0, 2).toUpperCase()}
                           </div>
                         )}

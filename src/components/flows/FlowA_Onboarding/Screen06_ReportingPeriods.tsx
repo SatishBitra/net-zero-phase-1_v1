@@ -15,8 +15,20 @@ import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen06_ReportingPeriods: React.FC = () => {
-  const { periods, addPeriod, lockPeriod, activePeriod, setActivePeriodId, navigateToScreen, showToast } = useApp();
+  const {
+    periods,
+    addPeriod,
+    lockPeriod,
+    activePeriod,
+    setActivePeriodId,
+    navigateToScreen,
+    showToast,
+    addAuditLog,
+    currentRole,
+    currentUser,
+  } = useApp();
 
+  const canManagePeriods = currentRole === 'TENANT_ADMIN';
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [periodName, setPeriodName] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -27,6 +39,10 @@ export const Screen06_ReportingPeriods: React.FC = () => {
 
   const handleCreatePeriod = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canManagePeriods) {
+      showToast('Unauthorized', 'Only Tenant Administrators can create reporting periods.', 'error');
+      return;
+    }
     if (!periodName || !startDate || !endDate) return;
 
     addPeriod({
@@ -43,7 +59,22 @@ export const Screen06_ReportingPeriods: React.FC = () => {
   };
 
   const handleConfirmLock = () => {
+    if (!canManagePeriods) {
+      showToast('Unauthorized', 'Only Tenant Administrators can lock reporting periods.', 'error');
+      return;
+    }
     if (!lockingPeriod) return;
+    addAuditLog({
+      userName: currentUser.name,
+      role: 'Tenant Admin',
+      action: `Locked Reporting Period ${lockingPeriod.name}`,
+      previousValue: 'Period Status: Open (Active Ingestion)',
+      newValue: 'Period Status: Permanently Locked (Read-Only)',
+      source: 'Reporting Periods Governance (Screen 06)',
+      reason: 'Administrative period lock checkpoint executed.',
+      status: 'Locked',
+      lineItemId: lockingPeriod.name,
+    });
     lockPeriod(lockingPeriod.id);
     setLockingPeriod(null);
   };
@@ -59,15 +90,39 @@ export const Screen06_ReportingPeriods: React.FC = () => {
         title="Reporting Periods"
         description="Configure fiscal accounting windows for greenhouse gas inventories and compliance lock governance."
         actions={
-          <button
-            onClick={() => setIsDrawerOpen(true)}
-            className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>New Reporting Period</span>
-          </button>
+          canManagePeriods ? (
+            <button
+              onClick={() => setIsDrawerOpen(true)}
+              className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>New Reporting Period</span>
+            </button>
+          ) : (
+            <div className="flex items-center space-x-2 text-xs text-[#5F6368] font-data bg-[#FAFAFB] px-3 py-1.5 rounded-lg border border-[#E5E7EB]">
+              <Lock className="w-3.5 h-3.5 text-[#8A8F98]" />
+              <span>Period governance managed by Tenant Admin</span>
+            </div>
+          )
         }
       />
+
+      {/* Role Notice Banner */}
+      {!canManagePeriods && (
+        <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center space-x-3 text-xs text-[#5F6368] font-data shadow-2xs">
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="text-[#17181A] font-semibold">
+              {currentRole === 'VERIFIER'
+                ? 'Auditor Read-Only Accounting Windows'
+                : 'Fiscal Period View'}
+              :
+            </strong>{' '}
+            You are viewing reporting periods as{' '}
+            <strong className="text-[#17181A]">{currentUser.name} ({currentRole})</strong>. Creating new accounting periods and executing permanent period locks require Tenant Administrator authority.
+          </div>
+        </div>
+      )}
 
       {/* Periods Table */}
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs font-sans">
@@ -140,12 +195,16 @@ export const Screen06_ReportingPeriods: React.FC = () => {
                       )}
 
                       {!period.locked ? (
-                        <button
-                          onClick={() => setLockingPeriod(period)}
-                          className="px-2.5 py-1 text-[11px] text-[#ED2024] hover:bg-[#FEF1F1] border border-[#FED2D3] rounded-md transition-colors font-medium"
-                        >
-                          Lock Period
-                        </button>
+                        canManagePeriods ? (
+                          <button
+                            onClick={() => setLockingPeriod(period)}
+                            className="px-2.5 py-1 text-[11px] text-[#ED2024] hover:bg-[#FEF1F1] border border-[#FED2D3] rounded-md transition-colors font-medium"
+                          >
+                            Lock Period
+                          </button>
+                        ) : (
+                          <span className="text-[11px] text-[#027A48] font-data">Open</span>
+                        )
                       ) : (
                         <span className="text-[10px] text-[#8A8F98] italic font-data">Sealed</span>
                       )}

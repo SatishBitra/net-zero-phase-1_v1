@@ -7,12 +7,14 @@ import {
   ArrowRight,
   ArrowLeft,
   Info,
+  Lock,
+  ShieldAlert,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen12_ImportUpload: React.FC = () => {
-  const { navigateToScreen, showToast } = useApp();
+  const { navigateToScreen, showToast, activePeriod, currentRole, currentUser } = useApp();
   const [dragActive, setDragActive] = useState(false);
   const [selectedFile, setSelectedFile] = useState<{
     name: string;
@@ -24,7 +26,18 @@ export const Screen12_ImportUpload: React.FC = () => {
     rows: 1842,
   });
 
+  const isPeriodLocked = Boolean(activePeriod?.locked);
+  const isVerifierReadOnly = currentRole === 'VERIFIER';
+
   const handleUploadSimulate = () => {
+    if (isPeriodLocked) {
+      showToast('Period Locked', `Reporting Period ${activePeriod.name} is permanently locked. Bulk import is disabled.`, 'error');
+      return;
+    }
+    if (isVerifierReadOnly) {
+      showToast('Auditor Read-Only', 'Independent auditors have read-only inspection access.', 'error');
+      return;
+    }
     setSelectedFile({
       name: 'activity-data-q2-fy26.xlsx',
       size: '1.8 MB',
@@ -34,6 +47,14 @@ export const Screen12_ImportUpload: React.FC = () => {
   };
 
   const handleContinueToMapping = () => {
+    if (isPeriodLocked) {
+      showToast('Period Locked', `Reporting Period ${activePeriod.name} is permanently locked. Bulk import is disabled.`, 'error');
+      return;
+    }
+    if (isVerifierReadOnly) {
+      showToast('Auditor Read-Only', 'Independent auditors cannot run bulk imports.', 'error');
+      return;
+    }
     if (!selectedFile) {
       showToast('No File Selected', 'Please upload a .xlsx or .csv file to proceed.', 'error');
       return;
@@ -65,6 +86,26 @@ export const Screen12_ImportUpload: React.FC = () => {
           </button>
         }
       />
+
+      {/* Period Locked Governance Banner */}
+      {isPeriodLocked && (
+        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-center space-x-3 text-xs text-[#ED2024] font-data shadow-2xs">
+          <Lock className="w-5 h-5 shrink-0 text-[#ED2024]" />
+          <div>
+            <strong className="font-semibold">Reporting Period {activePeriod.name} is Permanently Locked:</strong> Bulk spreadsheet ingestion and data mapping are disabled for sealed accounting windows.
+          </div>
+        </div>
+      )}
+
+      {/* Verifier Read-Only Mode Banner */}
+      {isVerifierReadOnly && (
+        <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex items-center space-x-3 text-xs text-[#01153C] font-data shadow-2xs">
+          <ShieldAlert className="w-5 h-5 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="font-semibold">Third-Party Assurance Mode:</strong> Independent Verifiers have read-only inspection access and cannot ingest raw operational datasets.
+          </div>
+        </div>
+      )}
 
       {/* 4-Step Import Progress */}
       <div className="flex items-center space-x-2 text-xs font-data bg-white p-3 rounded-xl border border-[#E5E7EB] shadow-2xs">
@@ -174,8 +215,9 @@ export const Screen12_ImportUpload: React.FC = () => {
           <button
             id="btn-continue-to-mapping"
             type="button"
+            disabled={isPeriodLocked || isVerifierReadOnly}
             onClick={handleContinueToMapping}
-            className="enterprise-btn-primary h-9 px-5 text-xs font-semibold shadow-xs flex items-center space-x-1.5"
+            className="enterprise-btn-primary h-9 px-5 text-xs font-semibold shadow-xs flex items-center space-x-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span>Continue</span>
             <ArrowRight className="w-3.5 h-3.5" />

@@ -7,12 +7,15 @@ import {
   Check,
   X,
   ArrowRight,
+  Lock,
+  ShieldCheck,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
 
 export const Screen08_UsersRoles: React.FC = () => {
-  const { users, inviteUser, sites, navigateToScreen } = useApp();
+  const { users, inviteUser, sites, navigateToScreen, showToast, currentRole, currentUser } = useApp();
+  const canInvite = currentRole === 'TENANT_ADMIN';
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [userName, setUserName] = useState('');
@@ -22,6 +25,10 @@ export const Screen08_UsersRoles: React.FC = () => {
 
   const handleInvite = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canInvite) {
+      showToast('Unauthorized', 'Only Tenant Administrators can invite users.', 'error');
+      return;
+    }
     if (!userName || !email) return;
 
     inviteUser({
@@ -113,15 +120,39 @@ export const Screen08_UsersRoles: React.FC = () => {
         title="Users & Roles"
         description="Manage enterprise team access, assign specific roles, and constrain site scopes."
         actions={
-          <button
-            onClick={() => setIsDrawerOpen(true)}
-            className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
-          >
-            <UserPlus className="w-3.5 h-3.5" />
-            <span>Invite User</span>
-          </button>
+          canInvite ? (
+            <button
+              onClick={() => setIsDrawerOpen(true)}
+              className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+            >
+              <UserPlus className="w-3.5 h-3.5" />
+              <span>Invite User</span>
+            </button>
+          ) : (
+            <div className="flex items-center space-x-2 text-xs text-[#5F6368] font-data bg-[#FAFAFB] px-3 py-1.5 rounded-lg border border-[#E5E7EB]">
+              <Lock className="w-3.5 h-3.5 text-[#8A8F98]" />
+              <span>User directory managed by Tenant Admin</span>
+            </div>
+          )
         }
       />
+
+      {/* Role Notice Banner */}
+      {!canInvite && (
+        <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center space-x-3 text-xs text-[#5F6368] font-data shadow-2xs">
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
+          <div>
+            <strong className="text-[#17181A] font-semibold">
+              {currentRole === 'VERIFIER'
+                ? 'Auditor Read-Only Team & RBAC Directory'
+                : 'Team Directory View'}
+              :
+            </strong>{' '}
+            You are viewing platform users and site scope assignments as{' '}
+            <strong className="text-[#17181A]">{currentUser.name} ({currentRole})</strong>. Inviting users and changing platform roles require Tenant Administrator privileges.
+          </div>
+        </div>
+      )}
 
       {/* Users Table */}
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs font-sans">

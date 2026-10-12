@@ -23,6 +23,8 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
     activeTraceContext,
     setActiveTraceContext,
     showToast,
+    currentRole,
+    currentUser,
   } = useApp();
 
   // Active drilldown state
@@ -120,7 +122,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
       date: selectedRecord.date,
       quantity: `${selectedRecord.quantity.toLocaleString()} ${selectedRecord.unit}`,
       evidenceRef: selectedRecord.evidenceFilename,
-      verifier: 'M. Singh',
+      verifier: currentRole === 'VERIFIER' ? currentUser.name : 'M. Singh',
     });
     navigateToScreen('33_raise_query', 'FLOW_F');
   };
@@ -161,7 +163,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
         title={`Evidence Trace: ${traceLineage.category} (${traceLineage.site})`}
         description="Unbroken lineage trace from aggregate reported inventory down to primary DISCOM utility bill."
         badge={
-          <span className="period-code font-medium text-xs px-2.5 py-1 bg-[#6254E8]/10 text-[#6254E8] rounded-md border border-[#6254E8]/20">
+          <span className="period-code font-medium text-xs px-2.5 py-1 bg-[#01153C]/10 text-[#01153C] rounded-md border border-[#01153C]/20">
             {traceLineage.period}
           </span>
         }
@@ -180,7 +182,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
               className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
             >
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>Raise a query</span>
+              <span>{currentRole === 'VERIFIER' ? 'Raise a query' : 'Verifier Queries'}</span>
             </button>
           </div>
         }
@@ -199,7 +201,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
               1. Scope Total
             </div>
             <div className="text-xs font-semibold text-[#17181A] mt-1 font-sans">{traceLineage.scope}</div>
-            <div className="text-sm emission-factor text-[#6254E8] mt-0.5 font-medium">
+            <div className="text-sm emission-factor text-[#01153C] mt-0.5 font-medium">
               {traceLineage.scopeTotal}
             </div>
           </div>
@@ -210,7 +212,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
               2. Category Total
             </div>
             <div className="text-xs font-semibold text-[#17181A] mt-1 font-sans">{traceLineage.category}</div>
-            <div className="text-sm emission-factor text-[#6254E8] mt-0.5 font-medium">
+            <div className="text-sm emission-factor text-[#01153C] mt-0.5 font-medium">
               {traceLineage.categoryTotal}
             </div>
           </div>
@@ -221,14 +223,14 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
               3. Site Allocation
             </div>
             <div className="text-xs font-semibold text-[#17181A] mt-1 font-sans">{traceLineage.site}</div>
-            <div className="text-sm emission-factor text-[#6254E8] mt-0.5 font-medium">
+            <div className="text-sm emission-factor text-[#01153C] mt-0.5 font-medium">
               {traceLineage.siteTotal}
             </div>
           </div>
 
           {/* 4. Activity Row */}
-          <div className="p-3 bg-[#6254E8]/5 rounded-xl border border-[#6254E8]/30">
-            <div className="text-[10px] uppercase text-[#6254E8] tracking-wider font-semibold font-sans">
+          <div className="p-3 bg-[#01153C]/5 rounded-xl border border-[#01153C]/30">
+            <div className="text-[10px] uppercase text-[#01153C] tracking-wider font-semibold font-sans">
               4. Active Row
             </div>
             <div className="text-xs activity-id font-medium text-[#17181A] mt-1">{selectedRecord.rowRef}</div>
@@ -269,7 +271,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
         <div className="lg:col-span-5 bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs space-y-0">
           <div className="px-4 py-3 border-b border-[#E5E7EB] bg-[#F4F5F6] flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <FileText className="w-4 h-4 text-[#6254E8]" />
+              <FileText className="w-4 h-4 text-[#01153C]" />
               <span className="text-xs font-semibold text-[#17181A] font-sans">Activity Data Rows</span>
             </div>
             <span className="text-[11px] text-[#5F6368] font-data">
@@ -286,7 +288,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
                   onClick={() => setSelectedRowId(row.id)}
                   className={`p-3.5 transition-colors cursor-pointer text-xs ${
                     isSelected
-                      ? 'bg-[#6254E8]/5 border-l-4 border-l-[#6254E8]'
+                      ? 'bg-[#01153C]/5 border-l-4 border-l-[#01153C]'
                       : 'hover:bg-[#FAFAFB] border-l-4 border-l-transparent'
                   }`}
                 >
@@ -307,7 +309,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
                     </div>
                     <div>
                       <span className="text-[#8A8F98]">Emissions:</span>
-                      <span className="font-medium text-[#6254E8] ml-1 emission-factor">
+                      <span className="font-medium text-[#01153C] ml-1 emission-factor">
                         {row.calculatedEmissions.toFixed(3)} tCO2e
                       </span>
                     </div>
@@ -337,7 +339,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
           <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3">
             <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2">
               <div className="flex items-center space-x-2">
-                <Activity className="w-4 h-4 text-[#6254E8]" />
+                <Activity className="w-4 h-4 text-[#01153C]" />
                 <h3 className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
                   Verified Calculation Formula
                 </h3>
@@ -349,9 +351,9 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
               <div className="text-[11px] text-[#5F6368] font-sans">
                 Emissions (tCO2e) = Activity Data (kWh) × Emission Factor (kg CO2e/kWh) ÷ 1,000
               </div>
-              <div className="text-[#6254E8] font-medium text-sm">
+              <div className="text-[#01153C] font-medium text-sm">
                 {selectedRecord.quantity.toLocaleString()} × {selectedRecord.factorValue} ÷ 1,000 ={' '}
-                <span className="underline decoration-[#6254E8] font-medium">{selectedRecord.calculatedEmissions.toFixed(3)} tCO2e</span>
+                <span className="underline decoration-[#01153C] font-medium">{selectedRecord.calculatedEmissions.toFixed(3)} tCO2e</span>
               </div>
             </div>
 
@@ -416,7 +418,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
                 onClick={() => setActiveTab('preview')}
                 className={`py-2.5 px-3 border-b-2 transition-colors ${
                   activeTab === 'preview'
-                    ? 'border-[#6254E8] text-[#6254E8]'
+                    ? 'border-[#01153C] text-[#01153C]'
                     : 'border-transparent text-[#5F6368] hover:text-[#17181A]'
                 }`}
               >
@@ -426,7 +428,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
                 onClick={() => setActiveTab('ocr')}
                 className={`py-2.5 px-3 border-b-2 transition-colors ${
                   activeTab === 'ocr'
-                    ? 'border-[#6254E8] text-[#6254E8]'
+                    ? 'border-[#01153C] text-[#01153C]'
                     : 'border-transparent text-[#5F6368] hover:text-[#17181A]'
                 }`}
               >
@@ -436,7 +438,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
                 onClick={() => setActiveTab('metadata')}
                 className={`py-2.5 px-3 border-b-2 transition-colors ${
                   activeTab === 'metadata'
-                    ? 'border-[#6254E8] text-[#6254E8]'
+                    ? 'border-[#01153C] text-[#01153C]'
                     : 'border-transparent text-[#5F6368] hover:text-[#17181A]'
                 }`}
               >
@@ -466,7 +468,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
                       </div>
                     </div>
                     <div className="text-right text-[11px]">
-                      <div className="font-bold text-[#6254E8] font-sans">HT BILL CARD</div>
+                      <div className="font-bold text-[#01153C] font-sans">HT BILL CARD</div>
                       <div className="text-[10px] text-[#5F6368] activity-id">Inv #: TN-2025-08-9812</div>
                     </div>
                   </div>
@@ -487,8 +489,8 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
                   </div>
 
                   {/* Highlighted Meter Consumption */}
-                  <div className="border border-[#6254E8]/40 bg-[#6254E8]/5 rounded-lg p-3 text-xs space-y-1">
-                    <div className="flex items-center justify-between font-semibold text-[#6254E8]">
+                  <div className="border border-[#01153C]/40 bg-[#01153C]/5 rounded-lg p-3 text-xs space-y-1">
+                    <div className="flex items-center justify-between font-semibold text-[#01153C]">
                       <span>Billed Consumption (Total kWh)</span>
                       <span className="text-base font-semibold underline">
                         {selectedRecord.quantity.toLocaleString()} kWh
@@ -547,7 +549,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
               {activeTab === 'metadata' && (
                 <div className="w-full bg-white border border-[#E5E7EB] rounded-xl p-4 text-xs space-y-3">
                   <div className="text-xs font-semibold text-[#17181A] font-sans flex items-center space-x-1.5">
-                    <Hash className="w-4 h-4 text-[#6254E8]" />
+                    <Hash className="w-4 h-4 text-[#01153C]" />
                     <span>Cryptographic Evidence Integrity Audit</span>
                   </div>
                   <div className="space-y-2 text-[11px]">
@@ -579,7 +581,7 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
               </span>
               <button
                 onClick={handleRaiseQuery}
-                className="text-xs text-[#6254E8] hover:underline font-semibold flex items-center space-x-1 font-sans"
+                className="text-xs text-[#01153C] hover:underline font-semibold flex items-center space-x-1 font-sans"
               >
                 <span>Have a question on this evidence? Raise a query</span>
                 <ArrowRight className="w-3.5 h-3.5" />

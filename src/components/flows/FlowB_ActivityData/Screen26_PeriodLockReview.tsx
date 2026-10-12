@@ -18,11 +18,15 @@ export const Screen26_PeriodLockReview: React.FC = () => {
     navigateToScreen,
     showToast,
     addAuditLog,
+    currentRole,
+    currentUser,
   } = useApp();
 
   const [confirmationInput, setConfirmationInput] = useState('');
   const [isLocking, setIsLocking] = useState(false);
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
+
+  const canLock = currentRole === 'TENANT_ADMIN';
 
   // Exact period string required by PRD Section 14
   const expectedText = 'FY 2025-26';
@@ -37,6 +41,10 @@ export const Screen26_PeriodLockReview: React.FC = () => {
 
   const handleLockPeriod = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canLock) {
+      showToast('Access Denied', 'Only Tenant Administrators can execute period lock governance.', 'error');
+      return;
+    }
     setAttemptedSubmit(true);
 
     if (!isMatch) {
@@ -48,8 +56,8 @@ export const Screen26_PeriodLockReview: React.FC = () => {
 
     // Audit event requirement (FR-26.11)
     addAuditLog({
-      userName: 'Tenant Admin',
-      role: 'TENANT_ADMIN',
+      userName: currentUser.name,
+      role: 'Tenant Admin',
       action: 'Locked Reporting Period FY 2025–26',
       previousValue: 'Period Status: Open (Active Ingestion)',
       newValue: 'Period Status: Permanently Locked (Read-Only)',
@@ -102,15 +110,28 @@ export const Screen26_PeriodLockReview: React.FC = () => {
       />
 
       {/* High-Risk Lock Warning Banner (Section 13) */}
-      <div className="p-4 bg-[#FEF0EF] border border-[#ED2024]/40 rounded-xl space-y-2 shadow-2xs">
-        <div className="flex items-center space-x-2 text-[#ED2024] font-semibold text-sm">
-          <ShieldAlert className="w-5 h-5 shrink-0" />
-          <span>Irreversible Governance Action Warning</span>
+      {!canLock ? (
+        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl space-y-2 shadow-2xs">
+          <div className="flex items-center space-x-2 text-[#ED2024] font-semibold text-sm">
+            <ShieldAlert className="w-5 h-5 shrink-0" />
+            <span>Unauthorized Governance Action: Tenant Admin Required</span>
+          </div>
+          <p className="text-xs text-[#7A271A] leading-relaxed font-data">
+            You are currently logged in as <strong className="underline">{currentUser.name} ({currentRole})</strong>.
+            Under enterprise segregation of duties, only designated <strong>Tenant Administrators</strong> have authority to permanently lock or seal reporting periods.
+          </p>
         </div>
-        <p className="text-xs text-[#7A271A] leading-relaxed font-data">
-          Locking this period makes all approved activity data, calculation results and reports permanently read-only. This cannot be undone. Any further changes require a new adjustment entry in the next open period.
-        </p>
-      </div>
+      ) : (
+        <div className="p-4 bg-[#FEF0EF] border border-[#ED2024]/40 rounded-xl space-y-2 shadow-2xs">
+          <div className="flex items-center space-x-2 text-[#ED2024] font-semibold text-sm">
+            <ShieldAlert className="w-5 h-5 shrink-0" />
+            <span>Irreversible Governance Action Warning</span>
+          </div>
+          <p className="text-xs text-[#7A271A] leading-relaxed font-data">
+            Locking this period makes all approved activity data, calculation results and reports permanently read-only. This cannot be undone. Any further changes require a new adjustment entry in the next open period.
+          </p>
+        </div>
+      )}
 
       {/* Summary Information Cards (Section 13.1) */}
       <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 space-y-4 shadow-2xs">
@@ -154,11 +175,14 @@ export const Screen26_PeriodLockReview: React.FC = () => {
           <input
             id="input-confirm-period-lock"
             type="text"
+            disabled={!canLock}
             value={confirmationInput}
             onChange={(e) => setConfirmationInput(e.target.value)}
-            placeholder="FY 2025-26"
+            placeholder={canLock ? "FY 2025-26" : "Action restricted to Tenant Admin"}
             className={`w-full max-w-md px-3.5 py-2 text-xs border rounded-lg period-code ${
-              attemptedSubmit && !isMatch
+              !canLock
+                ? 'bg-[#F4F5F6] text-[#8A8F98] border-[#E5E7EB] cursor-not-allowed'
+                : attemptedSubmit && !isMatch
                 ? 'border-[#ED2024] bg-[#FEF0EF]/40 focus:border-[#ED2024]'
                 : isMatch
                 ? 'border-[#0F6B48] bg-[#E8F5E9]/30 text-[#17181A]'
@@ -167,7 +191,7 @@ export const Screen26_PeriodLockReview: React.FC = () => {
           />
 
           {/* Explicit error validation message from PRD Section 31 */}
-          {attemptedSubmit && !isMatch && (
+          {attemptedSubmit && !isMatch && canLock && (
             <p className="text-xs text-[#ED2024] mt-1.5 flex items-center space-x-1 font-data">
               <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
               <span>Enter “FY 2025-26” to confirm the lock.</span>
@@ -188,9 +212,9 @@ export const Screen26_PeriodLockReview: React.FC = () => {
           <button
             id="btn-lock-period-confirm"
             type="submit"
-            disabled={!isMatch || isLocking}
+            disabled={!canLock || !isMatch || isLocking}
             className={`h-9 px-5 text-xs font-semibold rounded-lg transition-colors flex items-center space-x-2 shadow-xs ${
-              isMatch
+              canLock && isMatch
                 ? 'bg-[#ED2024] hover:bg-[#ED2024] text-white cursor-pointer'
                 : 'bg-[#F1F3F5] text-[#8A8F98] border border-[#E5E7EB] cursor-not-allowed'
             }`}
