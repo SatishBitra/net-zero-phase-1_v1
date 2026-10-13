@@ -28,6 +28,7 @@ import {
   INITIAL_AUDIT_TRAIL,
   INITIAL_NOTIFICATIONS,
 } from '../data/mockData';
+import { EmissionFactor } from '../data/emissionFactorsData';
 
 export interface ToastMessage {
   id: string;
@@ -205,6 +206,17 @@ interface AppContextType {
   setActiveFilterStatus: (status: string) => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+
+  // Emission Factor Helper
+  isFactorHelperOpen: boolean;
+  setIsFactorHelperOpen: (open: boolean) => void;
+  openFactorHelper: (prefillSearch?: string) => void;
+  closeFactorHelper: () => void;
+  selectedHelperFactor: EmissionFactor | null;
+  setSelectedHelperFactor: (factor: EmissionFactor | null) => void;
+  activeFactorHelperSearch: string;
+  setActiveFactorHelperSearch: (term: string) => void;
+  applyFactorToEntry: (factor: EmissionFactor) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -387,6 +399,29 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (!prev) setIsMobileMenuOpen(false);
       return !prev;
     });
+  };
+
+  // Emission Factor Helper states & handlers
+  const [isFactorHelperOpen, setIsFactorHelperOpen] = useState(false);
+  const [selectedHelperFactor, setSelectedHelperFactor] = useState<EmissionFactor | null>(null);
+  const [activeFactorHelperSearch, setActiveFactorHelperSearch] = useState('');
+
+  const openFactorHelper = (prefillSearch?: string) => {
+    if (prefillSearch) {
+      setActiveFactorHelperSearch(prefillSearch);
+    }
+    setIsFactorHelperOpen(true);
+  };
+
+  const closeFactorHelper = () => {
+    setIsFactorHelperOpen(false);
+  };
+
+  const applyFactorToEntry = (factor: EmissionFactor) => {
+    setSelectedHelperFactor(factor);
+    setIsFactorHelperOpen(false);
+    showToast('Factor Selected', `${factor.name} (${factor.value} ${factor.unit}) applied.`);
+    navigateToScreen('11_entry_form', 'FLOW_B');
   };
 
   // Persist important data
@@ -1193,6 +1228,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setActiveFilterStatus,
         searchQuery,
         setSearchQuery,
+        isFactorHelperOpen,
+        setIsFactorHelperOpen,
+        openFactorHelper,
+        closeFactorHelper,
+        selectedHelperFactor,
+        setSelectedHelperFactor,
+        activeFactorHelperSearch,
+        setActiveFactorHelperSearch,
+        applyFactorToEntry,
       }}
     >
       {children}

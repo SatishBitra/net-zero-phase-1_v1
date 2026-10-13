@@ -14,6 +14,7 @@ import {
   Search,
   ArrowRight,
   Sparkles,
+  BookOpen,
 } from 'lucide-react';
 
 interface QuickActionsMenuProps {
@@ -27,7 +28,7 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
   className = '',
   buttonLabel = 'Quick Actions',
 }) => {
-  const { navigateToScreen, currentRole, activePeriod, showToast } = useApp();
+  const { navigateToScreen, currentRole, activePeriod, showToast, openFactorHelper } = useApp();
   const [isOpen, setIsOpen] = useState(false);
   const [searchFilter, setSearchFilter] = useState('');
   const menuRef = useRef<HTMLDivElement>(null);
@@ -73,6 +74,7 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
     badgeColor?: string;
     roles?: string[];
     priority?: boolean;
+    onExecute?: () => void;
   }
 
   const actions: ActionItem[] = [
@@ -152,9 +154,21 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
       roles: ['VERIFIER', 'REVIEWER', 'TENANT_ADMIN'],
     },
     {
+      id: 'factor-helper',
+      title: 'Emission Factor Helper',
+      description: 'Search & verify latest IPCC AR6 and IEA emission conversion factors',
+      icon: BookOpen,
+      screenId: '22_factors_library',
+      flowId: 'FLOW_E',
+      badge: 'IPCC · IEA',
+      badgeColor: 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]',
+      priority: true,
+      onExecute: () => openFactorHelper(),
+    },
+    {
       id: 'factors-library',
-      title: 'Emission Factors',
-      description: 'Browse CEA Baseline, IPCC 2006, and DEFRA conversion factors',
+      title: 'Emission Factors Library',
+      description: 'Browse CEA Baseline, IPCC 2006, and DEFRA conversion factors table',
       icon: Database,
       screenId: '22_factors_library',
       flowId: 'FLOW_E',
@@ -176,8 +190,12 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
   const handleActionClick = (action: ActionItem) => {
     setIsOpen(false);
     setSearchFilter('');
-    showToast('Navigating', `Opening ${action.title}...`);
-    navigateToScreen(action.screenId, action.flowId);
+    if (action.onExecute) {
+      action.onExecute();
+    } else {
+      showToast('Navigating', `Opening ${action.title}...`);
+      navigateToScreen(action.screenId, action.flowId);
+    }
   };
 
   // Button styles depending on variant

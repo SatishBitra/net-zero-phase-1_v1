@@ -49,6 +49,7 @@ import { Screen32_EvidenceTraceView } from './components/flows/FlowF_VerifierAud
 import { Screen33_VerifierQuery } from './components/flows/FlowF_VerifierAudit/Screen33_VerifierQuery';
 import { Screen34_NotificationCenter } from './components/flows/FlowF_VerifierAudit/Screen34_NotificationCenter';
 import { Screen35_AuditTrail } from './components/flows/FlowF_VerifierAudit/Screen35_AuditTrail';
+import { EmissionFactorHelperModal } from './components/common/EmissionFactorHelperModal';
 
 const MainAppContent: React.FC = () => {
   const { currentScreen } = useApp();
@@ -164,6 +165,9 @@ const MainAppContent: React.FC = () => {
           {renderActiveScreen()}
         </main>
       </div>
+
+      {/* Global Search-Based Emission Factor Helper Modal */}
+      <EmissionFactorHelperModal />
     </div>
   );
 };

@@ -13,6 +13,7 @@ import {
   Lock,
   AlertTriangle,
   ShieldAlert,
+  BookOpen,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
@@ -30,6 +31,9 @@ export const Screen11_EntryForm: React.FC = () => {
     setOcrPrefillData,
     currentRole,
     currentUser,
+    openFactorHelper,
+    selectedHelperFactor,
+    setSelectedHelperFactor,
   } = useApp();
 
   const isPeriodLocked = Boolean(activePeriod?.locked);
@@ -88,7 +92,15 @@ export const Screen11_EntryForm: React.FC = () => {
 
   // Calculation computation
   const numQuantity = parseFloat(quantity) || 0;
-  const factor = currentSource ? currentSource.emissionFactor : 0.82;
+  const factor = selectedHelperFactor
+    ? selectedHelperFactor.value
+    : (currentSource ? currentSource.emissionFactor : 0.82);
+  const factorUnit = selectedHelperFactor
+    ? selectedHelperFactor.unit
+    : (currentSource?.factorUnit || 'kg CO2e / kWh');
+  const factorSource = selectedHelperFactor
+    ? selectedHelperFactor.citation
+    : (currentSource?.factorSource || 'CEA CO2 Baseline Database v19 (India)');
   const emissions_tCO2e = (numQuantity * factor) / 1000;
 
   const handleSiteChange = (newSiteId: string) => {
@@ -139,8 +151,8 @@ export const Screen11_EntryForm: React.FC = () => {
       quantity: numQuantity,
       unit: unit || currentSource.unit,
       emissionFactor: factor,
-      factorUnit: currentSource.factorUnit || 'kg CO2e / kWh',
-      factorSource: currentSource.factorSource || 'CEA CO2 Baseline Database v19 (India)',
+      factorUnit: factorUnit,
+      factorSource: factorSource,
       emissions_tCO2e,
       status: targetStatus,
       notes: notes || (entryMethod === 'AI Extracted' ? 'Extracted via OCR Review #8821. Human-confirmed.' : 'Manual entry'),
@@ -178,16 +190,52 @@ export const Screen11_EntryForm: React.FC = () => {
         title="New Activity Data Entry"
         description="Enter operational activity measurements for GHG calculation and compliance evidence."
         actions={
-          <button
-            id="back-to-activity-dashboard"
-            onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}
-            className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Dashboard</span>
-          </button>
+          <div className="flex items-center space-x-2">
+            <button
+              id="btn-entry-factor-helper"
+              type="button"
+              onClick={() => openFactorHelper(currentSource?.name || '')}
+              className="px-3.5 py-2 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-full hover:bg-[#DCE5F5] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-[#01153C]" />
+              <span>Factor Helper (IPCC / IEA)</span>
+            </button>
+
+            <button
+              id="back-to-activity-dashboard"
+              onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}
+              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to Dashboard</span>
+            </button>
+          </div>
         }
       />
+
+      {/* Selected Factor Indicator Banner */}
+      {selectedHelperFactor && (
+        <div className="p-3.5 bg-[#EDF2FA] border border-[#DCE5F5] rounded-xl flex items-center justify-between text-xs text-[#01153C] shadow-2xs animate-in fade-in duration-150">
+          <div className="flex items-center space-x-2.5 min-w-0">
+            <BookOpen className="w-4 h-4 text-[#01153C] shrink-0" />
+            <div className="min-w-0">
+              <span className="font-semibold">
+                Applied Authoritative Factor: {selectedHelperFactor.name} ({selectedHelperFactor.value} {selectedHelperFactor.unit})
+              </span>
+              <div className="text-[11px] text-[#5F6368] font-data truncate mt-0.5">
+                {selectedHelperFactor.citation}
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setSelectedHelperFactor(null)}
+            className="text-[11px] text-[#5F6368] hover:text-[#ED2024] font-semibold underline shrink-0 ml-3"
+          >
+            Reset
+          </button>
+        </div>
+      )}
 
       {/* Period Locked Governance Banner */}
       {isPeriodLocked && (
@@ -494,11 +542,21 @@ export const Screen11_EntryForm: React.FC = () => {
 
             <div className="text-[11px] text-[#5F6368] space-y-1">
               <div className="font-semibold text-[#17181A]">Emission Factor Authority:</div>
-              <div className="font-data">{currentSource?.factorSource || 'CEA CO2 Baseline Database v19 (India)'}</div>
+              <div className="font-data">{factorSource}</div>
               <div className="text-[#5F6368] font-data text-[11px] pt-1 formula-text">
                 Formula: (Activity × EF) ÷ 1,000 = tCO2e
               </div>
             </div>
+
+            <button
+              id="btn-lookup-factor-card"
+              type="button"
+              onClick={() => openFactorHelper(currentSource?.name || '')}
+              className="w-full mt-2 py-2 px-3 bg-[#EDF2FA] text-[#01153C] rounded-xl text-xs font-semibold hover:bg-[#DCE5F5] transition-colors flex items-center justify-center space-x-1.5 border border-[#DCE5F5]"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Look up IPCC / IEA Factors</span>
+            </button>
           </div>
 
           <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2 shadow-2xs font-sans">

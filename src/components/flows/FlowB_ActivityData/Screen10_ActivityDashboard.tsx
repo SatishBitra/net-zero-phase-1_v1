@@ -13,6 +13,7 @@ import {
   Database,
   ShieldCheck,
   Files,
+  BookOpen,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { KpiCard } from '../../common/KpiCard';
@@ -33,6 +34,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
     searchQuery,
     setSearchQuery,
     currentRole,
+    openFactorHelper,
   } = useApp();
 
   // Metrics specified in PRD Screen 10:
@@ -118,6 +120,20 @@ export const Screen10_ActivityDashboard: React.FC = () => {
               >
                 <ScanLine className="w-3.5 h-3.5 text-[#01153C]" />
                 <span>Upload Bill OCR</span>
+              </button>
+
+              <button
+                id="btn-factor-helper"
+                type="button"
+                onClick={() => openFactorHelper()}
+                className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+                title="Search and verify IPCC and IEA emission factors"
+              >
+                <BookOpen className="w-3.5 h-3.5 text-[#01153C]" />
+                <span>Factor Helper</span>
+                <span className="text-[10px] bg-[#EDF2FA] text-[#01153C] px-1.5 py-0.2 rounded font-bold">
+                  IPCC/IEA
+                </span>
               </button>
 
               <QuickActionsMenu variant="page" />

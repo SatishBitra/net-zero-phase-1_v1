@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
   ArrowLeft,
@@ -7,55 +7,38 @@ import {
   Info,
   Calendar,
   Filter,
+  Search,
+  BookOpen,
+  Calculator,
+  Sparkles,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
-
-interface EmissionFactorRow {
-  factor: string;
-  value: number | string;
-  unit: string;
-  publishingBody: string;
-  effectiveFrom: string;
-  gwpMethodology?: string;
-}
+import { AUTHORITATIVE_EMISSION_FACTORS, EmissionFactor } from '../../../data/emissionFactorsData';
 
 export const Screen22_EmissionFactors: React.FC = () => {
-  const { navigateToScreen } = useApp();
+  const { navigateToScreen, openFactorHelper } = useApp();
 
   const [publishingBodyFilter, setPublishingBodyFilter] = useState('All');
   const [financialYearFilter, setFinancialYearFilter] = useState('FY 2025–26');
+  const [tableSearch, setTableSearch] = useState('');
 
-  // Exact factor table data from Screen 22 PRD specification
-  const factors: EmissionFactorRow[] = [
-    {
-      factor: 'Grid electricity (India, national avg)',
-      value: '0.708',
-      unit: 'kgCO2e/kWh',
-      publishingBody: 'CEA',
-      effectiveFrom: '01-Apr-2025',
-    },
-    {
-      factor: 'Diesel (stationary combustion)',
-      value: '2.68',
-      unit: 'kgCO2e/litre',
-      publishingBody: 'IPCC / DEFRA',
-      effectiveFrom: '01-Apr-2025',
-    },
-    {
-      factor: 'R-410A refrigerant',
-      value: '2,088',
-      unit: 'kgCO2e/kg (GWP)',
-      publishingBody: 'IPCC AR6',
-      effectiveFrom: '01-Apr-2025',
-      gwpMethodology: '100-year GWP time horizon',
-    },
-  ];
+  const filteredFactors = useMemo(() => {
+    return AUTHORITATIVE_EMISSION_FACTORS.filter((item) => {
+      const matchBody =
+        publishingBodyFilter === 'All' ||
+        item.publishingBody.toLowerCase().includes(publishingBodyFilter.toLowerCase());
 
-  const filteredFactors = factors.filter((item) => {
-    if (publishingBodyFilter === 'All') return true;
-    return item.publishingBody.toLowerCase().includes(publishingBodyFilter.toLowerCase());
-  });
+      const matchSearch =
+        !tableSearch.trim() ||
+        item.name.toLowerCase().includes(tableSearch.toLowerCase()) ||
+        item.category.toLowerCase().includes(tableSearch.toLowerCase()) ||
+        item.region.toLowerCase().includes(tableSearch.toLowerCase()) ||
+        item.citation.toLowerCase().includes(tableSearch.toLowerCase());
+
+      return matchBody && matchSearch;
+    });
+  }, [publishingBodyFilter, tableSearch]);
 
   return (
     <div id="screen-22-container" className="max-w-6xl mx-auto space-y-6">
@@ -78,19 +61,21 @@ export const Screen22_EmissionFactors: React.FC = () => {
         actions={
           <div className="flex items-center space-x-2">
             <button
+              id="btn-launch-factor-helper"
+              type="button"
+              onClick={() => openFactorHelper()}
+              className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm flex items-center space-x-1.5 transition-all"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#FFD166]" />
+              <span>Launch Factor Helper</span>
+            </button>
+
+            <button
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
               className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs flex items-center space-x-1.5 transition-all"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Drill-Down</span>
-            </button>
-
-            <button
-              onClick={() => navigateToScreen('23_submission_queue', 'FLOW_B')}
-              className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm flex items-center space-x-1.5 transition-all"
-            >
-              <span>Submission Queue</span>
-              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         }
@@ -110,8 +95,20 @@ export const Screen22_EmissionFactors: React.FC = () => {
       </div>
 
       {/* Filter Toolbar */}
-      <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xs">
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-2xs">
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Quick Search */}
+          <div className="relative min-w-[240px]">
+            <Search className="w-3.5 h-3.5 text-[#8A8F98] absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={tableSearch}
+              onChange={(e) => setTableSearch(e.target.value)}
+              placeholder="Filter factors..."
+              className="w-full pl-8 pr-3 py-1.5 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-full text-[#17181A] placeholder-[#8A8F98] focus:outline-none focus:border-[#01153C]"
+            />
+          </div>
+
           <div className="flex items-center space-x-2">
             <Filter className="w-3.5 h-3.5 text-[#5F6368]" />
             <label className="text-xs font-semibold text-[#5F6368] font-sans">Publishing body:</label>
@@ -120,10 +117,11 @@ export const Screen22_EmissionFactors: React.FC = () => {
               onChange={(e) => setPublishingBodyFilter(e.target.value)}
               className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
             >
-              <option value="All">All</option>
-              <option value="CEA">CEA (Central Electricity Authority)</option>
-              <option value="IPCC / DEFRA">IPCC / DEFRA</option>
-              <option value="IPCC AR6">IPCC AR6</option>
+              <option value="All">All Bodies</option>
+              <option value="IPCC">IPCC (AR6 / 2006)</option>
+              <option value="IEA">IEA (2024)</option>
+              <option value="CEA">CEA (India)</option>
+              <option value="DEFRA">DEFRA / DESNZ</option>
             </select>
           </div>
 
@@ -151,27 +149,29 @@ export const Screen22_EmissionFactors: React.FC = () => {
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[#FAFAFB] border-b border-[#E5E7EB] text-[#5F6368]">
-              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Factor</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Factor / Activity</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Scope & Region</th>
               <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-right">Value</th>
               <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Unit</th>
               <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Publishing Body</th>
-              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Effective From</th>
-              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-center">Status</th>
+              <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-right">Action</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#E5E7EB]">
-            {filteredFactors.map((row, idx) => (
-              <tr key={idx} className="hover:bg-[#FAFAFB] transition-colors">
+            {filteredFactors.map((row) => (
+              <tr key={row.id} className="hover:bg-[#FAFAFB] transition-colors">
                 <td className="py-3.5 px-4 font-semibold text-[#17181A]">
-                  <div>{row.factor}</div>
-                  {row.gwpMethodology && (
-                    <div className="text-[11px] text-[#8A8F98] font-data">{row.gwpMethodology}</div>
-                  )}
+                  <div>{row.name}</div>
+                  <div className="text-[11px] text-[#8A8F98] font-data line-clamp-1 mt-0.5">{row.citation}</div>
                 </td>
-                <td className="py-3.5 px-4 text-right emission-factor font-medium text-[#17181A]">
+                <td className="py-3.5 px-4 text-[#5F6368]">
+                  <span className="font-semibold text-[#17181A]">{row.scope}</span>
+                  <div className="text-[10px] text-[#8A8F98]">{row.region}</div>
+                </td>
+                <td className="py-3.5 px-4 text-right emission-factor font-bold text-[#01153C] font-mono text-sm">
                   {row.value}
                 </td>
-                <td className="py-3.5 px-4 emission-factor text-[#5F6368]">
+                <td className="py-3.5 px-4 emission-factor text-[#5F6368] font-data">
                   {row.unit}
                 </td>
                 <td className="py-3.5 px-4 font-semibold text-[#01153C]">
@@ -179,11 +179,14 @@ export const Screen22_EmissionFactors: React.FC = () => {
                     {row.publishingBody}
                   </span>
                 </td>
-                <td className="py-3.5 px-4 period-code text-[#5F6368]">
-                  {row.effectiveFrom}
-                </td>
-                <td className="py-3.5 px-4 text-center">
-                  <StatusBadge status="Approved" customLabel="Published" size="sm" />
+                <td className="py-3.5 px-4 text-right">
+                  <button
+                    type="button"
+                    onClick={() => openFactorHelper(row.name)}
+                    className="px-3 py-1.5 rounded-full bg-[#EDF2FA] hover:bg-[#01153C] text-[#01153C] hover:text-white font-semibold text-xs transition-colors shadow-2xs"
+                  >
+                    Calculate
+                  </button>
                 </td>
               </tr>
             ))}

@@ -20,6 +20,7 @@ import {
   ScanLine,
   PlusCircle,
   FileBarChart,
+  BookOpen,
 } from 'lucide-react';
 import { QuickActionsMenu } from '../common/QuickActionsMenu';
 
@@ -46,6 +47,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
     isMobileRightNavOpen,
     setIsMobileRightNavOpen,
     toggleMobileRightNav,
+    openFactorHelper,
   } = useApp();
 
   const [tenantDropdownOpen, setTenantDropdownOpen] = useState(false);
@@ -310,10 +312,25 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             </div>
           </div>
 
-          {/* Right: Quick Actions, Role Switcher, Direct Notification Center, User */}
+          {/* Right: Quick Actions, Factor Helper, Role Switcher, Direct Notification Center, User */}
           <div className="flex items-center space-x-2 md:space-x-3 shrink-0">
             {/* Quick Actions Menu */}
             <QuickActionsMenu variant="header" />
+
+            {/* Emission Factor Helper Button */}
+            <button
+              id="btn-header-factor-helper"
+              type="button"
+              onClick={() => openFactorHelper()}
+              className="hidden lg:flex items-center space-x-1.5 px-3 py-1.5 text-xs rounded-full bg-white border border-[#E5E7EB] hover:border-[#01153C]/40 hover:bg-[#FAFAFB] text-[#17181A] transition-colors shadow-2xs font-semibold"
+              title="Search official IPCC, IEA, and CEA Emission Factors"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-[#01153C]" />
+              <span>Factor Helper</span>
+              <span className="text-[10px] px-1.5 py-0.2 bg-[#EDF2FA] text-[#01153C] rounded-full font-bold">
+                IPCC/IEA
+              </span>
+            </button>
 
             {/* Role Switcher Pill */}
             <div className="relative">
@@ -508,6 +525,26 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                   <div>
                     <div className="font-semibold text-[#17181A]">Start New Report</div>
                     <div className="text-[10px] text-[#5F6368]">GHG Disclosure Builder</div>
+                  </div>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98]" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileRightNavOpen(false);
+                  openFactorHelper();
+                }}
+                className="w-full p-2.5 rounded-lg border border-[#DCE5F5] bg-[#EDF2FA]/60 hover:bg-[#EDF2FA] text-left flex items-center justify-between text-xs transition-colors"
+              >
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-7 h-7 rounded-md bg-[#01153C] text-white flex items-center justify-center shrink-0">
+                    <BookOpen className="w-3.5 h-3.5" />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[#17181A]">Factor Helper</div>
+                    <div className="text-[10px] text-[#01153C] font-semibold">IPCC AR6 & IEA 2024 Lookup</div>
                   </div>
                 </div>
                 <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98]" />

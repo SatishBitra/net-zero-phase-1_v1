@@ -43,6 +43,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
     addAuditLog,
     currentRole,
     currentUser,
+    openFactorHelper,
   } = useApp();
 
   const canRunCalculation = currentRole === 'TENANT_ADMIN' || currentRole === 'REVIEWER';
@@ -263,6 +264,20 @@ export const Screen20_CalculationRuns: React.FC = () => {
             >
               <Eye className="w-3.5 h-3.5" />
               <span>Results Drill-Down</span>
+            </button>
+
+            <button
+              id="btn-calc-factor-helper"
+              type="button"
+              onClick={() => openFactorHelper()}
+              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              title="Look up official IPCC and IEA factors"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-[#01153C]" />
+              <span>Factor Helper</span>
+              <span className="text-[10px] bg-[#EDF2FA] text-[#01153C] px-1.5 py-0.2 rounded font-bold">
+                IPCC/IEA
+              </span>
             </button>
 
             <QuickActionsMenu variant="page" />
