@@ -199,18 +199,19 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <div className="relative min-w-0">
               <button
                 onClick={() => setTenantDropdownOpen(!tenantDropdownOpen)}
-                className="flex items-center space-x-1.5 px-3.5 py-1.5 text-xs text-[#17181A] hover:bg-[#FAFAFB] rounded-full border border-[#E5E7EB] hover:border-[#D5D8DD] transition-colors max-w-[200px]"
+                className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#101828] hover:bg-[#F9FAFB] rounded-lg border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors max-w-[200px]"
                 title="Switch Tenant Organization"
+                aria-expanded={tenantDropdownOpen}
               >
-                <Building2 className="w-3.5 h-3.5 text-[#5F6368] shrink-0" />
+                <Building2 className="w-3.5 h-3.5 text-[#344054] shrink-0" aria-hidden="true" />
                 <span className="font-medium truncate">{currentTenant.name}</span>
-                <ChevronDown className="w-3 h-3 text-[#8A8F98] shrink-0" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#475467] shrink-0" aria-hidden="true" />
               </button>
 
               {tenantDropdownOpen && (
-                <div className="absolute left-0 mt-1.5 w-64 bg-white rounded-xl shadow-xl border border-[#E5E7EB] py-1.5 z-50">
-                  <div className="px-3 py-1.5 border-b border-[#F1F3F5] text-[11px] font-semibold text-[#8A8F98] uppercase tracking-wider">
-                    SELECT ORGANISATION CONTEXT
+                <div className="absolute left-0 mt-1.5 w-64 bg-white rounded-xl shadow-xl border border-[#D0D5DD] py-1.5 z-50">
+                  <div className="px-3 py-1.5 border-b border-[#F2F4F7] text-[11px] font-semibold text-[#475467] uppercase tracking-wider">
+                    Select Organisation Context
                   </div>
                   {tenants.map((t) => (
                     <button
@@ -219,26 +220,26 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                         setCurrentTenant(t);
                         setTenantDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#FAFAFB] ${
-                        t.id === currentTenant.id ? 'bg-[#EDF2FA] text-[#01153C] font-medium' : 'text-[#17181A]'
+                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none ${
+                        t.id === currentTenant.id ? 'bg-[#EDF2FA] text-[#01153C] font-semibold' : 'text-[#101828]'
                       }`}
                     >
                       <div className="truncate">
                         <div className="font-semibold truncate">{t.name}</div>
-                        <div className="text-[11px] text-[#5F6368] font-data">{t.legalEntityName}</div>
+                        <div className="text-[11px] text-[#475467] font-data">{t.legalEntityName}</div>
                       </div>
                       {t.id === currentTenant.id && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#01153C]" />
+                        <Check className="w-4 h-4 text-[#01153C] shrink-0" aria-hidden="true" />
                       )}
                     </button>
                   ))}
-                  <div className="border-t border-[#F1F3F5] p-1.5">
+                  <div className="border-t border-[#F2F4F7] p-1.5">
                     <button
                       onClick={() => {
                         setTenantDropdownOpen(false);
                         navigateToScreen('03_tenant_selector');
                       }}
-                      className="w-full text-center py-1 text-xs text-[#01153C] font-semibold hover:underline"
+                      className="w-full text-center py-1 text-xs text-[#01153C] font-semibold hover:underline focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none"
                     >
                       View Tenant Directory →
                     </button>
@@ -251,26 +252,27 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <div className="relative shrink-0">
               <button
                 onClick={() => setPeriodDropdownOpen(!periodDropdownOpen)}
-                className="flex items-center space-x-1.5 px-3.5 py-1.5 text-xs text-[#5F6368] hover:bg-[#FAFAFB] rounded-full border border-[#E5E7EB] hover:border-[#D5D8DD] transition-colors"
+                className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#344054] hover:bg-[#F9FAFB] rounded-lg border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors"
+                aria-expanded={periodDropdownOpen}
               >
-                <Calendar className="w-3.5 h-3.5 text-[#5F6368]" />
-                <span className="font-medium text-[#17181A]">{activePeriod.name}</span>
+                <Calendar className="w-3.5 h-3.5 text-[#344054] shrink-0" aria-hidden="true" />
+                <span className="font-medium text-[#101828]">{activePeriod.name}</span>
                 {activePeriod.locked ? (
-                  <span className="text-[10px] px-1.5 py-0.5 bg-[#F1F3F5] text-[#59616B] rounded-full border border-[#E5E7EB] font-semibold">
+                  <span className="text-[11px] px-1.5 py-0.5 bg-[#F2F4F7] text-[#344054] rounded border border-[#D0D5DD] font-semibold">
                     Locked
                   </span>
                 ) : (
-                  <span className="text-[10px] px-1.5 py-0.5 bg-[#EEF9F1] text-[#26783B] rounded-full border border-[#DDF3E3] font-semibold">
+                  <span className="text-[11px] px-1.5 py-0.5 bg-[#F0FDF4] text-[#166534] rounded border border-[#BBF7D0] font-semibold">
                     Active
                   </span>
                 )}
-                <ChevronDown className="w-3 h-3 text-[#8A8F98]" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#475467] shrink-0" aria-hidden="true" />
               </button>
 
               {periodDropdownOpen && (
-                <div className="absolute left-0 mt-1.5 w-56 bg-white rounded-xl shadow-xl border border-[#E5E7EB] py-1.5 z-50">
-                  <div className="px-3 py-1.5 border-b border-[#F1F3F5] text-[11px] font-semibold text-[#8A8F98] uppercase tracking-wider">
-                    REPORTING PERIOD
+                <div className="absolute left-0 mt-1.5 w-60 bg-white rounded-xl shadow-xl border border-[#D0D5DD] py-1.5 z-50">
+                  <div className="px-3 py-1.5 border-b border-[#F2F4F7] text-[11px] font-semibold text-[#475467] uppercase tracking-wider">
+                    Reporting Period
                   </div>
                   {periods.map((p) => (
                     <button
@@ -279,30 +281,30 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                         setActivePeriodId(p.id);
                         setPeriodDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#FAFAFB] ${
-                        p.id === activePeriod.id ? 'bg-[#EDF2FA] text-[#01153C] font-medium' : 'text-[#17181A]'
+                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none ${
+                        p.id === activePeriod.id ? 'bg-[#EDF2FA] text-[#01153C] font-semibold' : 'text-[#101828]'
                       }`}
                     >
                       <div>
                         <div className="font-semibold">{p.name}</div>
-                        <div className="text-[11px] text-[#5F6368] font-mono">
+                        <div className="text-[11px] text-[#475467] font-mono">
                           {p.startDate} to {p.endDate}
                         </div>
                       </div>
                       {p.locked && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-[#F1F3F5] text-[#8A8F98] rounded-full">
+                        <span className="text-[11px] px-1.5 py-0.5 bg-[#F2F4F7] text-[#344054] rounded border border-[#D0D5DD]">
                           Locked
                         </span>
                       )}
                     </button>
                   ))}
-                  <div className="border-t border-[#F1F3F5] p-1.5">
+                  <div className="border-t border-[#F2F4F7] p-1.5">
                     <button
                       onClick={() => {
                         setPeriodDropdownOpen(false);
                         navigateToScreen('06_periods');
                       }}
-                      className="w-full text-center py-1 text-xs text-[#01153C] font-semibold hover:underline"
+                      className="w-full text-center py-1 text-xs text-[#01153C] font-semibold hover:underline focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none"
                     >
                       Manage Reporting Periods →
                     </button>
@@ -322,36 +324,37 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               id="btn-header-factor-helper"
               type="button"
               onClick={() => openFactorHelper()}
-              className="hidden lg:flex items-center space-x-1.5 px-3 py-1.5 text-xs rounded-full bg-white border border-[#E5E7EB] hover:border-[#01153C]/40 hover:bg-[#FAFAFB] text-[#17181A] transition-colors shadow-2xs font-semibold"
+              className="hidden lg:flex items-center space-x-1.5 px-3 py-1.5 text-xs rounded-lg bg-white border border-[#D0D5DD] hover:border-[#01153C]/40 hover:bg-[#F9FAFB] text-[#101828] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors shadow-2xs font-semibold"
               title="Search official IPCC, IEA, and CEA Emission Factors"
             >
-              <BookOpen className="w-3.5 h-3.5 text-[#01153C]" />
+              <BookOpen className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
               <span>Factor Helper</span>
-              <span className="text-[10px] px-1.5 py-0.2 bg-[#EDF2FA] text-[#01153C] rounded-full font-bold">
+              <span className="text-[11px] px-1.5 py-0.5 bg-[#EDF2FA] text-[#01153C] rounded font-semibold border border-[#DCE5F5]">
                 IPCC/IEA
               </span>
             </button>
 
-            {/* Role Switcher Pill */}
+            {/* Role Switcher */}
             <div className="relative">
               <button
                 onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                className="flex items-center space-x-1.5 px-3.5 py-1.5 text-xs rounded-full bg-white border border-[#E5E7EB] hover:border-[#D5D8DD] hover:bg-[#FAFAFB] transition-colors shadow-2xs"
+                className="flex items-center space-x-1.5 px-3 py-1.5 text-xs rounded-lg bg-white border border-[#D0D5DD] hover:border-[#98A2B3] hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors shadow-2xs"
                 title="Switch active user role"
+                aria-expanded={roleDropdownOpen}
               >
-                <UserCheck className="w-3.5 h-3.5 text-[#01153C] shrink-0" />
-                <span className="text-[11px] text-[#5F6368]">Role:</span>
-                <span className="font-semibold text-[#17181A]">
+                <UserCheck className="w-3.5 h-3.5 text-[#01153C] shrink-0" aria-hidden="true" />
+                <span className="text-xs text-[#475467]">Role:</span>
+                <span className="font-semibold text-[#101828]">
                   {roles.find((r) => r.role === currentRole)?.shortLabel || currentRole}
                 </span>
-                <ChevronDown className="w-3 h-3 text-[#8A8F98] shrink-0" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#475467] shrink-0" aria-hidden="true" />
               </button>
 
               {roleDropdownOpen && (
-                <div className="absolute right-0 mt-1.5 w-72 bg-white rounded-xl shadow-xl border border-[#E5E7EB] py-1.5 z-50">
-                  <div className="px-3 py-2 border-b border-[#F1F3F5] text-[11px] text-[#5F6368]">
-                    <span className="font-semibold text-[#17181A]">SWITCH ACTIVE ROLE PERSPECTIVE</span>
-                    <p className="text-[10px] text-[#8A8F98] mt-0.5 font-data">
+                <div className="absolute right-0 mt-1.5 w-72 bg-white rounded-xl shadow-xl border border-[#D0D5DD] py-1.5 z-50">
+                  <div className="px-3 py-2 border-b border-[#F2F4F7] text-[11px] text-[#475467]">
+                    <span className="font-semibold text-[#101828]">Switch Active Role Perspective</span>
+                    <p className="text-[11px] text-[#475467] mt-0.5 font-data">
                       Experience carbon accounting workflows across operational personas.
                     </p>
                   </div>
@@ -359,17 +362,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                     <button
                       key={r.role}
                       onClick={() => handleRoleSelect(r.role)}
-                      className={`w-full text-left px-3 py-2 text-xs flex flex-col hover:bg-[#FAFAFB] transition-colors ${
-                        currentRole === r.role ? 'bg-[#EDF2FA] border-l-3 border-[#01153C]' : ''
+                      className={`w-full text-left px-3 py-2 text-xs flex flex-col hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors ${
+                        currentRole === r.role ? 'bg-[#EDF2FA] border-l-2 border-[#01153C]' : ''
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-[#17181A]">{r.label}</span>
+                        <span className="font-semibold text-[#101828]">{r.label}</span>
                         {currentRole === r.role && (
-                          <span className="text-[10px] text-[#01153C] font-semibold">Active</span>
+                          <span className="text-[11px] text-[#01153C] font-semibold">Active</span>
                         )}
                       </div>
-                      <span className="text-[11px] text-[#5F6368] font-data mt-0.5">{r.desc}</span>
+                      <span className="text-[11px] text-[#475467] font-data mt-0.5">{r.desc}</span>
                     </button>
                   ))}
                 </div>
@@ -380,28 +383,32 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <button
               id="btn-nav-notifications"
               onClick={() => navigateToScreen('34_reviewer_notification', 'FLOW_F')}
-              className="p-2 text-[#5F6368] hover:text-[#17181A] hover:bg-[#EDF2FA] rounded-lg transition-colors relative"
+              className="p-2 text-[#344054] hover:text-[#101828] hover:bg-[#EDF2FA] rounded-lg focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors relative"
               title="Notification Center"
               aria-label="Notification Center"
             >
-              <Bell className="w-4 h-4" />
+              <Bell className="w-4 h-4" aria-hidden="true" />
               {unreadNotificationsCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#ED2024] rounded-full ring-2 ring-white" />
+                <span className="absolute top-1 right-1 px-1 min-w-[14px] h-[14px] text-[9px] font-bold bg-[#D92D20] text-white rounded flex items-center justify-center leading-none" aria-label={`${unreadNotificationsCount} unread notifications`}>
+                  {unreadNotificationsCount}
+                </span>
               )}
             </button>
 
-            {/* User Component: Avatar + Name + Chevron per Section 9 */}
+            {/* User Component: Avatar + Name */}
             <div
               onClick={() => navigateToScreen('01_login', 'FLOW_A')}
-              className="flex items-center space-x-2 px-2 py-1 rounded-lg hover:bg-[#FAFAFB] cursor-pointer transition-colors border border-transparent hover:border-[#E5E7EB]"
+              className="flex items-center space-x-2 px-2 py-1 rounded-lg hover:bg-[#F9FAFB] cursor-pointer transition-colors border border-transparent hover:border-[#D0D5DD] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none"
               title="Account Settings / Log out"
+              tabIndex={0}
+              role="button"
             >
-              <div className="w-8 h-8 rounded-full bg-[#EDF2FA] text-[#01153C] font-semibold text-xs flex items-center justify-center shrink-0 border border-[#DCE5F5]">
+              <div className="w-8 h-8 rounded-lg bg-[#EDF2FA] text-[#01153C] font-semibold text-xs flex items-center justify-center shrink-0 border border-[#DCE5F5]">
                 {getUserInitials()}
               </div>
               <div className="hidden lg:flex items-center space-x-1">
-                <span className="text-xs font-semibold text-[#17181A]">{getUserName()}</span>
-                <ChevronDown className="w-3 h-3 text-[#8A8F98]" />
+                <span className="text-xs font-semibold text-[#101828]">{getUserName()}</span>
+                <ChevronDown className="w-3.5 h-3.5 text-[#475467]" aria-hidden="true" />
               </div>
             </div>
           </div>

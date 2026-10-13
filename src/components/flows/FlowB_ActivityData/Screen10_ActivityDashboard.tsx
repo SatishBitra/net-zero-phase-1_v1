@@ -14,6 +14,9 @@ import {
   ShieldCheck,
   Files,
   BookOpen,
+  SlidersHorizontal,
+  Target,
+  ArrowRight,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { KpiCard } from '../../common/KpiCard';
@@ -189,6 +192,51 @@ export const Screen10_ActivityDashboard: React.FC = () => {
             navigateToScreen('15_fix_detail_view', 'FLOW_C');
           }}
         />
+      </div>
+
+      {/* Decarbonization Intelligence & Strategy Quick Access */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div className="p-4 bg-gradient-to-r from-[#EDF2FA] to-white border border-[#DCE5F5] rounded-2xl flex items-center justify-between gap-3 shadow-2xs">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-[#01153C] text-white flex items-center justify-center shrink-0 mt-0.5">
+              <SlidersHorizontal className="w-4 h-4 text-[#0F6B48]" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-[#01153C]">What-If Decarbonization Simulator</div>
+              <div className="text-[11px] text-[#5F6368] mt-0.5">
+                Model 2030 pathways with renewable power, solar, and site efficiency.
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => navigateToScreen('36_scenario_builder', 'FLOW_E')}
+            className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-colors shrink-0 flex items-center gap-1 shadow-2xs"
+          >
+            <span>Model</span>
+            <ArrowRight className="w-3 h-3" />
+          </button>
+        </div>
+
+        <div className="p-3.5 sm:p-4 bg-gradient-to-r from-[#EDF2FA] to-white border border-[#DCE5F5] rounded-2xl flex items-center justify-between gap-3 shadow-2xs">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-[#01153C] text-white flex items-center justify-center shrink-0 mt-0.5">
+              <Target className="w-4 h-4 text-[#38BDF8]" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-[#01153C]">Industry Carbon Benchmark</div>
+              <div className="text-[11px] text-[#5F6368] mt-0.5">
+                Compare intensity against peer averages on multi-axis radar chart.
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => navigateToScreen('37_benchmarking', 'FLOW_E')}
+            className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white hover:bg-[#F1F3F5] border border-[#E5E7EB] rounded-lg transition-colors shrink-0 flex items-center gap-1 shadow-2xs"
+          >
+            <span>Benchmark</span>
+            <ArrowRight className="w-3 h-3" />
+          </button>
+        </div>
       </div>
 
       {/* Persistent Filters Bar */}

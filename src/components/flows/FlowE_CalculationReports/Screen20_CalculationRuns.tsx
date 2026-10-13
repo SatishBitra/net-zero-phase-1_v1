@@ -24,11 +24,14 @@ import {
   Building2,
   TrendingUp,
   Lock,
+  SlidersHorizontal,
+  Target,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { KpiCard } from '../../common/KpiCard';
 import { StatusBadge } from '../../common/StatusBadge';
 import { QuickActionsMenu } from '../../common/QuickActionsMenu';
+import { CalculationEngineHub } from './CalculationEngineHub';
 
 export const Screen20_CalculationRuns: React.FC = () => {
   const {
@@ -245,14 +248,14 @@ export const Screen20_CalculationRuns: React.FC = () => {
         badge={<StatusBadge status="Approved" customLabel="Engine v1.4.2" size="sm" />}
         description="Deterministic GHG accounting book and batch execution ledger. Auditable reconciliation of activity records, emission factors, and verified tCO2e balances."
         actions={
-          <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2">
             <button
               id="btn-export-ledger"
               type="button"
               onClick={handleExportLedgerCSV}
-              className="px-4 py-2 text-xs font-semibold text-[#17181A] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] hover:border-[#D5D8DD] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              className="px-3.5 py-1.5 text-xs font-semibold text-[#101828] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
             >
-              <Download className="w-3.5 h-3.5 text-[#5F6368]" />
+              <Download className="w-3.5 h-3.5 text-[#344054]" aria-hidden="true" />
               <span>Export Ledger (CSV)</span>
             </button>
 
@@ -260,9 +263,9 @@ export const Screen20_CalculationRuns: React.FC = () => {
               id="btn-drilldown-shortcut"
               type="button"
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
-              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-full hover:bg-[#DCE5F5] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-lg hover:bg-[#DCE5F5] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
             >
-              <Eye className="w-3.5 h-3.5" />
+              <Eye className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Results Drill-Down</span>
             </button>
 
@@ -270,14 +273,47 @@ export const Screen20_CalculationRuns: React.FC = () => {
               id="btn-calc-factor-helper"
               type="button"
               onClick={() => openFactorHelper()}
-              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
               title="Look up official IPCC and IEA factors"
             >
-              <BookOpen className="w-3.5 h-3.5 text-[#01153C]" />
+              <BookOpen className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
               <span>Factor Helper</span>
-              <span className="text-[10px] bg-[#EDF2FA] text-[#01153C] px-1.5 py-0.2 rounded font-bold">
+              <span className="text-[11px] bg-[#EDF2FA] text-[#01153C] px-1.5 py-0.5 rounded font-semibold border border-[#DCE5F5]">
                 IPCC/IEA
               </span>
+            </button>
+
+            <button
+              id="btn-whatif-simulator"
+              type="button"
+              onClick={() => navigateToScreen('36_scenario_builder', 'FLOW_E')}
+              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              title="Project emissions trajectories with hypothetical energy levers"
+            >
+              <SlidersHorizontal className="w-3.5 h-3.5 text-[#166534]" aria-hidden="true" />
+              <span>What-If Simulator</span>
+            </button>
+
+            <button
+              id="btn-benchmarking-radar"
+              type="button"
+              onClick={() => navigateToScreen('37_benchmarking', 'FLOW_E')}
+              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              title="Compare carbon intensity against peer averages"
+            >
+              <Target className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
+              <span>Radar Benchmark</span>
+            </button>
+
+            <button
+              id="btn-engine-formulas-hub"
+              type="button"
+              onClick={() => setActiveTab('methodology')}
+              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              title="Open TC-DOM-002a Calculation Engine & Formulas Hub"
+            >
+              <Calculator className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
+              <span>Engine Hub (C-01 to C-12)</span>
             </button>
 
             <QuickActionsMenu variant="page" />
@@ -287,14 +323,14 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 id="btn-trigger-run-modal"
                 type="button"
                 onClick={() => setIsRunModalOpen(true)}
-                className="px-5 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm inline-flex items-center space-x-1.5 transition-all"
+                className="px-4 py-1.5 text-xs font-semibold text-white bg-[#01153C] rounded-lg hover:bg-[#02215c] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-xs inline-flex items-center space-x-1.5 transition-all"
               >
-                <Play className="w-3.5 h-3.5 fill-current" />
+                <Play className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                 <span>Run Calculation</span>
               </button>
             ) : (
-              <div className="flex items-center space-x-2 text-xs text-[#5F6368] font-data bg-[#FAFAFB] px-3.5 py-1.5 rounded-full border border-[#E5E7EB]">
-                <Lock className="w-3.5 h-3.5 text-[#8A8F98]" />
+              <div className="flex items-center space-x-2 text-xs text-[#475467] font-data bg-[#F9FAFB] px-3 py-1.5 rounded-lg border border-[#D0D5DD]">
+                <Lock className="w-3.5 h-3.5 text-[#475467]" aria-hidden="true" />
                 <span>Calculation trigger governed by Reviewer & Admin</span>
               </div>
             )}
@@ -410,7 +446,40 @@ export const Screen20_CalculationRuns: React.FC = () => {
           }`}
         >
           <BookOpen className="w-4 h-4" />
-          <span>Methodology & Factor Registry</span>
+          <span>Engine & Formulas (TC-DOM-002a)</span>
+          <span
+            className={`ml-1 px-2 py-0.5 rounded-full text-[11px] font-data font-semibold ${
+              activeTab === 'methodology' ? 'bg-[#EDF2FA] text-[#01153C]' : 'bg-[#F1F3F5] text-[#5F6368]'
+            }`}
+          >
+            C-01 to C-12
+          </span>
+        </button>
+
+        <button
+          id="tab-whatif-scenarios"
+          type="button"
+          onClick={() => navigateToScreen('36_scenario_builder', 'FLOW_E')}
+          className="pb-3 font-semibold transition-all flex items-center space-x-2 border-b-2 font-sans border-transparent text-[#5F6368] hover:text-[#01153C] hover:border-[#D5D8DD]"
+        >
+          <SlidersHorizontal className="w-4 h-4 text-[#0F6B48]" />
+          <span>What-If Scenarios</span>
+          <span className="ml-1 px-2 py-0.5 rounded-full text-[11px] font-data font-semibold bg-[#E8F8EE] text-[#0F6B48]">
+            Simulator
+          </span>
+        </button>
+
+        <button
+          id="tab-benchmarking"
+          type="button"
+          onClick={() => navigateToScreen('37_benchmarking', 'FLOW_E')}
+          className="pb-3 font-semibold transition-all flex items-center space-x-2 border-b-2 font-sans border-transparent text-[#5F6368] hover:text-[#01153C] hover:border-[#D5D8DD]"
+        >
+          <Target className="w-4 h-4 text-[#01153C]" />
+          <span>Industry Benchmarking</span>
+          <span className="ml-1 px-2 py-0.5 rounded-full text-[11px] font-data font-semibold bg-[#EDF2FA] text-[#01153C]">
+            Radar
+          </span>
         </button>
       </div>
 
@@ -736,97 +805,9 @@ export const Screen20_CalculationRuns: React.FC = () => {
       )}
 
       {/* TAB 3: METHODOLOGY & FACTOR REGISTRY */}
+      {/* TAB 3: CALCULATION ENGINE & METHODOLOGY (TC-DOM-002a) */}
       {activeTab === 'methodology' && (
-        <div className="space-y-6">
-          {/* Mathematical Formulation Card */}
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl p-5 sm:p-6 shadow-2xs space-y-4">
-            <h2 className="text-base font-semibold text-[#17181A] flex items-center space-x-2 font-sans">
-              <Sparkles className="w-4 h-4 text-[#01153C]" />
-              <span>Deterministic GHG Protocol Calculation Engine</span>
-            </h2>
-            <p className="text-xs text-[#5F6368] leading-relaxed font-sans max-w-3xl">
-              Emissions in this ledger are computed strictly adhering to the GHG Protocol Corporate Standard (WBCSD & WRI) and ISO 14064-1 specification.
-            </p>
-
-            <div className="p-4 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl font-data text-xs text-[#17181A] space-y-2">
-              <div className="font-semibold text-[#01153C] font-sans uppercase tracking-wider text-[11px]">
-                General Mathematical Formulation:
-              </div>
-              <div className="bg-white p-3 rounded-lg border border-[#E5E7EB] font-bold text-xs">
-                Emissions (tCO2e) = [ Activity Data (Quantity in Unit) × Emission Factor (kg CO2e / Unit) × GWP ] ÷ 1,000
-              </div>
-              <div className="text-[11px] text-[#5F6368] font-sans">
-                • GWP Basis: IPCC Fifth Assessment Report (AR5) 100-year time horizon (CO2 = 1, CH4 = 28, N2O = 265).
-              </div>
-            </div>
-          </div>
-
-          {/* Active Factor Registry Table */}
-          <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-2xs">
-            <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#FAFAFB]">
-              <h3 className="text-sm font-semibold text-[#17181A] font-sans">Applied Emission Factor Library</h3>
-              <button
-                type="button"
-                onClick={() => navigateToScreen('22_factors_reference', 'FLOW_E')}
-                className="text-xs text-[#01153C] hover:underline font-semibold flex items-center space-x-1"
-              >
-                <span>Full Applied Factor Library</span>
-                <ArrowRight className="w-3 h-3" />
-              </button>
-            </div>
-
-            <table className="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr className="bg-[#FAFAFB] border-b border-[#E5E7EB] text-[#5F6368]">
-                  <th className="py-3 px-4 font-semibold uppercase tracking-wider font-sans">Source / Fuel</th>
-                  <th className="py-3 px-4 font-semibold uppercase tracking-wider font-sans">Scope</th>
-                  <th className="py-3 px-4 font-semibold uppercase tracking-wider font-sans">Factor Value</th>
-                  <th className="py-3 px-4 font-semibold uppercase tracking-wider font-sans">Unit</th>
-                  <th className="py-3 px-4 font-semibold uppercase tracking-wider font-sans">Authority & Version</th>
-                  <th className="py-3 px-4 font-semibold uppercase tracking-wider font-sans">Tier & Uncertainty</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#F1F3F5]">
-                <tr>
-                  <td className="py-3.5 px-4 font-semibold text-[#17181A] font-sans">Grid Electricity (Southern Region)</td>
-                  <td className="py-3.5 px-4 text-[#01153C] font-semibold font-sans">Scope 2</td>
-                  <td className="py-3.5 px-4 font-data font-bold text-[#17181A]">0.7080</td>
-                  <td className="py-3.5 px-4 text-[#5F6368] font-data">kg CO2e / kWh</td>
-                  <td className="py-3.5 px-4 text-[#5F6368] font-sans">Central Electricity Authority (CEA) Baseline v19 (2024)</td>
-                  <td className="py-3.5 px-4">
-                    <span className="px-2.5 py-1 bg-[#EDF2FA] text-[#01153C] rounded-full text-[11px] font-semibold font-data">
-                      Tier 2 · ±3.5%
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 px-4 font-semibold text-[#17181A] font-sans">Diesel Fuel (Stationary DG Sets)</td>
-                  <td className="py-3.5 px-4 text-[#17181A] font-semibold font-sans">Scope 1</td>
-                  <td className="py-3.5 px-4 font-data font-bold text-[#17181A]">2.6800</td>
-                  <td className="py-3.5 px-4 text-[#5F6368] font-data">kg CO2e / Liter</td>
-                  <td className="py-3.5 px-4 text-[#5F6368] font-sans">IPCC 2006 Guidelines for National GHG Inventories</td>
-                  <td className="py-3.5 px-4">
-                    <span className="px-2.5 py-1 bg-[#EDF2FA] text-[#01153C] rounded-full text-[11px] font-semibold font-data">
-                      Tier 1 · ±2.0%
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 px-4 font-semibold text-[#17181A] font-sans">Natural Gas (Stationary Heating)</td>
-                  <td className="py-3.5 px-4 text-[#17181A] font-semibold font-sans">Scope 1</td>
-                  <td className="py-3.5 px-4 font-data font-bold text-[#17181A]">1.9800</td>
-                  <td className="py-3.5 px-4 text-[#5F6368] font-data">kg CO2e / m³</td>
-                  <td className="py-3.5 px-4 text-[#5F6368] font-sans">UK DEFRA / BEIS Voluntary Reporting Standards</td>
-                  <td className="py-3.5 px-4">
-                    <span className="px-2.5 py-1 bg-[#EDF2FA] text-[#01153C] rounded-full text-[11px] font-semibold font-data">
-                      Tier 1 · ±4.0%
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <CalculationEngineHub />
       )}
 
       {/* EXECUTE CALCULATION RUN MODAL */}

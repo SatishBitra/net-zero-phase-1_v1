@@ -41,6 +41,8 @@ import { Screen22_EmissionFactors } from './components/flows/FlowE_CalculationRe
 import { Screen27_ReportBuilder } from './components/flows/FlowE_CalculationReports/Screen27_ReportBuilder';
 import { Screen28_ReportPreview } from './components/flows/FlowE_CalculationReports/Screen28_ReportPreview';
 import { Screen29_ReportExport } from './components/flows/FlowE_CalculationReports/Screen29_ReportExport';
+import { WhatIfScenarioBuilder } from './components/flows/FlowE_CalculationReports/WhatIfScenarioBuilder';
+import { BenchmarkingRadarModule } from './components/flows/FlowE_CalculationReports/BenchmarkingRadarModule';
 
 // Flow F — Verifier Evidence Trace & Forensic Audit
 import { Screen30_VerifierLogin } from './components/flows/FlowF_VerifierAudit/Screen30_VerifierLogin';
@@ -126,6 +128,10 @@ const MainAppContent: React.FC = () => {
         return <Screen28_ReportPreview />;
       case '29_export_download':
         return <Screen29_ReportExport />;
+      case '36_scenario_builder':
+        return <WhatIfScenarioBuilder />;
+      case '37_benchmarking':
+        return <BenchmarkingRadarModule />;
 
       // Flow F
       case '30_verifier_login':
@@ -161,7 +167,7 @@ const MainAppContent: React.FC = () => {
       <div className="flex-1 flex overflow-hidden min-h-0">
         <Sidebar />
 
-        <main className="flex-1 overflow-y-auto p-3.5 sm:p-5 md:p-6 lg:p-8 min-w-0 w-full">
+        <main className="flex-1 overflow-y-auto p-3.5 sm:p-4 md:p-5 lg:p-7 min-w-0 w-full">
           {renderActiveScreen()}
         </main>
       </div>

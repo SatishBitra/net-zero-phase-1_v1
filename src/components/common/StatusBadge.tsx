@@ -2,14 +2,11 @@ import React from 'react';
 import {
   CheckCircle2,
   Clock,
-  AlertTriangle,
-  XCircle,
+  RotateCcw,
+  AlertCircle,
   Lock,
   FileCheck,
-  AlertCircle,
   HelpCircle,
-  RotateCcw,
-  Sparkles,
 } from 'lucide-react';
 
 export type StatusType =
@@ -49,14 +46,12 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   status,
   size = 'md',
   customLabel,
-  showDot = true,
   className = '',
 }) => {
   const normStatus = (status || '').toLowerCase().trim();
 
-  let bgClass = 'bg-[#F1F3F5] text-[#59616B] border-[#E7E9EC]';
-  let dotColor = '#858C96';
-  let IconComponent: React.ElementType | null = null;
+  let colorClasses = 'bg-[#F3F4F6] text-[#374151] border-[#E5E7EB]';
+  let IconComponent: React.ElementType = FileCheck;
 
   if (
     normStatus === 'approved' ||
@@ -68,23 +63,18 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'resolved' ||
     normStatus === 'closed'
   ) {
-    bgClass = 'bg-[#EEF9F1] text-[#26783B] border-[#DDF3E3]';
-    dotColor = '#43A65C';
+    colorClasses = 'bg-[#F0FDF4] text-[#166534] border-[#BBF7D0]';
     IconComponent = CheckCircle2;
   } else if (
     normStatus === 'pending' ||
     normStatus === 'submitted' ||
     normStatus === 'under review' ||
     normStatus === 'in review' ||
-    normStatus === 'in progress'
+    normStatus === 'in progress' ||
+    normStatus === 'initiated'
   ) {
-    bgClass = 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]';
-    dotColor = '#1E499F';
+    colorClasses = 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]';
     IconComponent = Clock;
-  } else if (normStatus === 'initiated') {
-    bgClass = 'bg-[#EDF2FA] text-[#01153C] border-[#B9CCE9]';
-    dotColor = '#01153C';
-    IconComponent = Sparkles;
   } else if (
     normStatus === 'returned' ||
     normStatus === 'sent back' ||
@@ -93,8 +83,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'needs review' ||
     normStatus === 'correction'
   ) {
-    bgClass = 'bg-[#FFF8E8] text-[#956817] border-[#FFF0C7]';
-    dotColor = '#D79A24';
+    colorClasses = 'bg-[#FEFCE8] text-[#854D0E] border-[#FEF08A]';
     IconComponent = RotateCcw;
   } else if (
     normStatus === 'flagged' ||
@@ -104,38 +93,27 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'urgent' ||
     normStatus === 'action required'
   ) {
-    bgClass = 'bg-[#FEF1F1] text-[#ED2024] border-[#FED2D3]';
-    dotColor = '#ED2024';
+    colorClasses = 'bg-[#FEF2F2] text-[#991B1B] border-[#FECACA]';
     IconComponent = AlertCircle;
-  } else if (normStatus === 'default' || normStatus === 'info') {
-    bgClass = 'bg-[#EEF5FF] text-[#2D61AC] border-[#DFECFF]';
-    dotColor = '#4C83D6';
-    IconComponent = HelpCircle;
   } else if (normStatus === 'locked') {
-    bgClass = 'bg-[#F1F3F5] text-[#59616B] border-[#E5E7EB]';
-    dotColor = '#858C96';
+    colorClasses = 'bg-[#F3F4F6] text-[#374151] border-[#E5E7EB]';
     IconComponent = Lock;
-  } else {
-    // Default neutral (Draft, etc.)
-    bgClass = 'bg-[#F1F3F5] text-[#59616B] border-[#E5E7EB]';
-    dotColor = '#858C96';
-    IconComponent = FileCheck;
+  } else if (normStatus === 'default' || normStatus === 'info') {
+    colorClasses = 'bg-[#EFF6FF] text-[#1E40AF] border-[#BFDBFE]';
+    IconComponent = HelpCircle;
   }
 
-  const heightClass = size === 'sm' ? 'h-6 px-2 text-[11px]' : 'h-7 px-2.5 text-xs';
+  const heightClass = size === 'sm' ? 'h-5 px-1.5 text-[11px]' : 'h-6 px-2 text-xs';
   const iconSize = size === 'sm' ? 'w-3 h-3' : 'w-3.5 h-3.5';
+  const labelText = customLabel || status;
 
   return (
     <span
-      className={`inline-flex items-center space-x-1.5 rounded-full font-semibold border font-sans select-none tracking-tight whitespace-nowrap ${heightClass} ${bgClass} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-md font-medium border select-none whitespace-nowrap ${heightClass} ${colorClasses} ${className}`}
+      role="status"
     >
-      {showDot && (
-        <span
-          className="w-1.5 h-1.5 rounded-full shrink-0"
-          style={{ backgroundColor: dotColor }}
-        />
-      )}
-      <span>{customLabel || status}</span>
+      <IconComponent className={`${iconSize} shrink-0`} aria-hidden="true" />
+      <span>{labelText}</span>
     </span>
   );
 };

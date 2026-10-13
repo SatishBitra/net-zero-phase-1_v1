@@ -249,6 +249,8 @@ export type ScreenId =
   | '32_evidence_trace'
   | '33_raise_query'
   | '34_reviewer_notification'
-  | '35_audit_trail';
+  | '35_audit_trail'
+  | '36_scenario_builder'
+  | '37_benchmarking';
 
 export type FlowId = 'FLOW_A' | 'FLOW_B' | 'FLOW_C' | 'FLOW_D' | 'FLOW_E' | 'FLOW_F';

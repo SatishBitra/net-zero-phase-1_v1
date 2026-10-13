@@ -69,7 +69,11 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           {contextInfo && <div className="mt-2">{contextInfo}</div>}
         </div>
 
-        {actions && <div className="flex items-center space-x-2.5 shrink-0">{actions}</div>}
+        {actions && (
+          <div className="flex flex-wrap items-center gap-2 sm:shrink-0 mt-1 sm:mt-0">
+            {actions}
+          </div>
+        )}
       </div>
     </div>
   );

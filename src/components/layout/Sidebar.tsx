@@ -25,6 +25,9 @@ import {
   HelpCircle,
   Eye,
   X,
+  SlidersHorizontal,
+  Target,
+  Play,
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -79,6 +82,7 @@ export const Sidebar: React.FC = () => {
         title: 'Governance & Evidence',
         items: [
           { id: '22_factors_reference', label: 'Emission Factors Library', icon: BookOpen },
+          { id: '37_benchmarking', label: 'Sector Benchmark Radar', icon: Target },
           { id: '35_audit_trail', label: 'Immutable Audit Trail', icon: History },
           {
             id: '34_reviewer_notification',
@@ -162,8 +166,11 @@ export const Sidebar: React.FC = () => {
       {
         title: 'Calculations & Reports',
         items: [
+          { id: '19_run_calculation', label: 'Run Calculation Engine', icon: Play },
           { id: '20_results_summary', label: 'Calculations Ledger', icon: Calculator },
           { id: '21_drill_down', label: 'Results Drill-Down', icon: Eye },
+          { id: '36_scenario_builder', label: 'What-If Scenarios', icon: SlidersHorizontal },
+          { id: '37_benchmarking', label: 'Industry Benchmarking', icon: Target },
           { id: '27_report_builder', label: 'Reports & Export', icon: FileText },
           { id: '22_factors_reference', label: 'Emission Factors', icon: BookOpen },
         ],
@@ -203,8 +210,11 @@ export const Sidebar: React.FC = () => {
       {
         title: 'Calculations & Reports',
         items: [
+          { id: '19_run_calculation', label: 'Run Calculation Engine', icon: Play },
           { id: '20_results_summary', label: 'Calculations Ledger', icon: Calculator },
           { id: '21_drill_down', label: 'Results Drill-Down', icon: Eye },
+          { id: '36_scenario_builder', label: 'What-If Scenarios', icon: SlidersHorizontal },
+          { id: '37_benchmarking', label: 'Industry Benchmarking', icon: Target },
           { id: '22_factors_reference', label: 'Emission Factors', icon: BookOpen },
           { id: '27_report_builder', label: 'Reports & Export', icon: FileText },
         ],
@@ -398,7 +408,7 @@ export const Sidebar: React.FC = () => {
       {/* Desktop Persistent Sidebar */}
       <aside
         id="app-sidebar"
-        className="hidden md:flex w-60 shrink-0 bg-white border-r border-[#ECEDEF] flex-col justify-between select-none sticky top-16 h-[calc(100vh-4rem)] z-20 shadow-[1px_0_2px_rgba(0,0,0,0.02)]"
+        className="hidden md:flex md:w-52 lg:w-60 shrink-0 bg-white border-r border-[#ECEDEF] flex-col justify-between select-none sticky top-16 h-[calc(100vh-4rem)] z-20 shadow-[1px_0_2px_rgba(0,0,0,0.02)]"
       >
         {/* Role Perspective Ribbon */}
         <div className="px-3.5 py-2 border-b border-[#ECEDEF] bg-[#FAFAFB] flex items-center justify-between text-xs">

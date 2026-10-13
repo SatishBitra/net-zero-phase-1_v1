@@ -14,6 +14,7 @@ import {
   AlertTriangle,
   ShieldAlert,
   BookOpen,
+  Scale,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { StatusBadge } from '../../common/StatusBadge';
@@ -61,6 +62,7 @@ export const Screen11_EntryForm: React.FC = () => {
   const [unit, setUnit] = useState<string>(ocrPrefillData?.unit || 'kWh');
   const [entryMethod, setEntryMethod] = useState<string>(ocrPrefillData?.entryMethod || 'Manual');
   const [notes, setNotes] = useState(ocrPrefillData?.notes || '');
+  const [testedDensity, setTestedDensity] = useState<string>('0.84');
 
   // Attached evidence in-line support
   const [attachedFiles, setAttachedFiles] = useState<Array<{ name: string; size: string; uploadDate: string }>>(
@@ -90,8 +92,28 @@ export const Screen11_EntryForm: React.FC = () => {
   const currentSource = availableSources.find((s) => s.id === sourceId) || availableSources[0] || defaultSource;
   const selectedSite = sites.find((s) => s.id === siteId) || defaultSite;
 
-  // Calculation computation
+  const isLiquidFuel = useMemo(() => {
+    const srcName = (currentSource?.name || '').toLowerCase();
+    return srcName.includes('diesel') || srcName.includes('oil') || srcName.includes('petrol') || srcName.includes('hfo');
+  }, [currentSource]);
+
+  const isVolumeUnit = useMemo(() => {
+    const u = (unit || '').toLowerCase();
+    return u === 'l' || u === 'litre' || u === 'litres' || u === 'kl' || u === 'kilolitre' || u === 'm3';
+  }, [unit]);
+
+  const formulaApplied = useMemo(() => {
+    const srcName = (currentSource?.name || '').toLowerCase();
+    if (srcName.includes('electricity') || currentSource?.category === 'Scope 2') return 'C-06 (Scope 2 Grid)';
+    if (srcName.includes('vehicle') || srcName.includes('fleet') || srcName.includes('truck')) return 'C-03 (Mobile Combustion)';
+    if (srcName.includes('refrigerant') || srcName.includes('chiller') || srcName.includes('hfc')) return 'C-05 (Fugitive Refrigerants)';
+    if (srcName.includes('biomass') || srcName.includes('husk')) return 'C-02 (Biomass Segregated)';
+    return 'C-01 (Stationary Combustion)';
+  }, [currentSource]);
+
+  // Calculation computation with TC-DOM-002a density handling
   const numQuantity = parseFloat(quantity) || 0;
+  const numDensity = parseFloat(testedDensity) || 0;
   const factor = selectedHelperFactor
     ? selectedHelperFactor.value
     : (currentSource ? currentSource.emissionFactor : 0.82);
@@ -101,7 +123,14 @@ export const Screen11_EntryForm: React.FC = () => {
   const factorSource = selectedHelperFactor
     ? selectedHelperFactor.citation
     : (currentSource?.factorSource || 'CEA CO2 Baseline Database v19 (India)');
-  const emissions_tCO2e = (numQuantity * factor) / 1000;
+
+  // If liquid volume is provided and density is missing, block calculation per Sheet 10
+  const isDensityMissing = isLiquidFuel && isVolumeUnit && numDensity <= 0;
+  const effectiveMassOrEnergy = isLiquidFuel && isVolumeUnit
+    ? (unit.toLowerCase().includes('kl') || unit.toLowerCase().includes('m3') ? numQuantity * 1000 * numDensity : numQuantity * numDensity)
+    : numQuantity;
+
+  const emissions_tCO2e = isDensityMissing ? 0 : (numQuantity * factor) / 1000;
 
   const handleSiteChange = (newSiteId: string) => {
     setSiteId(newSiteId);
@@ -370,6 +399,30 @@ export const Screen11_EntryForm: React.FC = () => {
                   className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg font-data bg-[#FAFAFB] text-[#17181A] focus:outline-none font-medium"
                 />
               </div>
+
+              {/* Lab-tested density field for liquid fuel volumes per Sheet 03 / Sheet 10 */}
+              {isLiquidFuel && isVolumeUnit && (
+                <div className="col-span-1 sm:col-span-3 p-3 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <label className="font-semibold text-[#17181A] flex items-center gap-1.5">
+                      <Scale className="w-3.5 h-3.5 text-[#01153C]" />
+                      <span>Certified Liquid Density (kg / L) <span className="text-[#ED2024]">*</span></span>
+                    </label>
+                    <span className="text-[10px] text-[#5F6368] font-data">Sheet 03 Normalization Rule</span>
+                  </div>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={testedDensity}
+                    onChange={(e) => setTestedDensity(e.target.value)}
+                    placeholder="0.84"
+                    className="w-full px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-md font-mono bg-white text-[#17181A] focus:outline-none focus:border-[#01153C]"
+                  />
+                  <p className="text-[10px] text-[#5F6368] leading-tight">
+                    Required property: Do not assume default density. Lab test certificate reference required for audit assurance.
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Entry Method Selector */}
@@ -532,19 +585,44 @@ export const Screen11_EntryForm: React.FC = () => {
                 </span>
               </div>
 
-              <div className="pt-2 border-t border-[#E5E7EB] flex justify-between items-baseline">
-                <span className="font-sans text-xs text-[#5F6368]">Computed Emissions:</span>
-                <span className="text-base font-bold text-[#01153C]">
-                  {emissions_tCO2e.toFixed(3)} tCO2e
+              <div className="flex justify-between text-[#5F6368]">
+                <span>Calculation Logic:</span>
+                <span className="font-semibold text-[#01153C] font-mono">
+                  {formulaApplied}
                 </span>
               </div>
+
+              <div className="flex justify-between text-[#5F6368]">
+                <span>Factor Precedence:</span>
+                <span className="font-semibold text-[#0F6B48]">
+                  {factorSource.includes('CEA')
+                    ? 'Tier 2 (National Baseline)'
+                    : selectedHelperFactor?.citation?.includes('SGS') || selectedHelperFactor?.citation?.includes('Lab')
+                    ? 'Tier 3 (Site Lab Analysis)'
+                    : 'Tier 1 (IPCC Default)'}
+                </span>
+              </div>
+
+              {isDensityMissing ? (
+                <div className="p-2 bg-[#FEF1F1] border border-[#ED2024]/30 rounded-lg text-[11px] text-[#ED2024] font-semibold flex items-center gap-1.5">
+                  <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                  <span>Blocked: Missing density for liquid fuel volume (Sheet 10 Rule).</span>
+                </div>
+              ) : (
+                <div className="pt-2 border-t border-[#E5E7EB] flex justify-between items-baseline">
+                  <span className="font-sans text-xs text-[#5F6368]">Computed Emissions:</span>
+                  <span className="text-base font-bold text-[#01153C]">
+                    {emissions_tCO2e.toFixed(3)} tCO2e
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="text-[11px] text-[#5F6368] space-y-1">
               <div className="font-semibold text-[#17181A]">Emission Factor Authority:</div>
               <div className="font-data">{factorSource}</div>
               <div className="text-[#5F6368] font-data text-[11px] pt-1 formula-text">
-                Formula: (Activity × EF) ÷ 1,000 = tCO2e
+                Formula: (Activity × EF) ÷ 1,000 = tCO2e · Multi-gas GWP100 AR5
               </div>
             </div>
 
