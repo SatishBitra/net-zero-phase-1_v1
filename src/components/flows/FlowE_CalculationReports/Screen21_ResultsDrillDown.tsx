@@ -125,7 +125,7 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
       {/* Core Product Principle Banner */}
       <div className="p-3.5 bg-[#F0EEFF] border border-[#D8D3FF] rounded-xl text-xs text-[#5144C9] flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#181B27]" />
           <span>
             <strong className="font-semibold text-[#17181A]">Primary Product Principle:</strong> Every number should have a path.
             Trace from result → site → activity rows → individual record → source evidence.
@@ -160,12 +160,7 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
       {/* Site Breakdown Table */}
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
         <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between">
-          <div>
-            <h2 className="text-sm font-semibold text-[#17181A] font-sans">Contributing Sites Breakdown</h2>
-            <p className="text-xs text-[#5F6368] font-data">
-              Click a row to trace to individual activity data entries and their source documents.
-            </p>
-          </div>
+          <h2 className="text-sm font-semibold text-[#17181A] font-sans">Contributing Sites Breakdown</h2>
           <span className="text-xs font-medium text-[#5F6368]">
             {drillDownData.length} sites contributing
           </span>
@@ -201,7 +196,7 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
                         }`}
                       >
                         <td className="py-3.5 px-4 font-medium text-[#17181A] flex items-center space-x-2">
-                          <Building2 className="w-4 h-4 text-[#01153C] shrink-0" />
+                          <Building2 className="w-4 h-4 text-[#181B27] shrink-0" />
                           <span>{row.siteName}</span>
                         </td>
                         <td className="py-3.5 px-4 text-right period-code text-[#5F6368]">
@@ -213,11 +208,11 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
                         <td className="py-3.5 px-4 emission-factor text-xs text-[#5F6368]">
                           {row.emissionFactor}
                         </td>
-                        <td className="py-3.5 px-4 text-right emission-factor font-medium text-[#01153C]">
+                        <td className="py-3.5 px-4 text-right emission-factor font-medium text-[#181B27]">
                           {row.tCO2e.toFixed(1)}
                         </td>
                         <td className="py-3.5 px-4 text-center">
-                          <span className="text-xs text-[#01153C] hover:underline font-semibold inline-flex items-center space-x-1">
+                          <span className="text-xs text-[#5141FF] hover:underline font-semibold inline-flex items-center space-x-1">
                             <span>{isExpanded ? 'Hide trail' : 'Trace lineage'}</span>
                             <ArrowRight className="w-3 h-3" />
                           </span>
@@ -243,22 +238,22 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
                                   <tr className="bg-[#F4F5F6] text-[#5F6368] border-b border-[#E5E7EB]">
                                     <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider">Record ID</th>
                                     <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider">Activity Date</th>
-                                    <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider text-right">Quantity (kWh)</th>
+                                    <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider text-left">Quantity (kWh)</th>
                                     <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider">Primary Evidence</th>
-                                    <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider text-right">Emissions (tCO2e)</th>
-                                    <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider text-right">Action</th>
+                                    <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider text-left">Emissions (tCO2e)</th>
+                                    <th className="py-2 px-3 font-semibold text-[11px] uppercase tracking-wider text-left">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody className="divide-y divide-[#F1F3F5]">
                                   {row.contributingRecords.map((rec) => (
                                     <tr key={rec.id} className="hover:bg-[#FAFAFB]">
-                                      <td className="py-2 px-3 activity-id font-medium text-[#01153C]">
+                                      <td className="py-2 px-3 activity-id font-medium text-[#181B27]">
                                         {rec.id}
                                       </td>
                                       <td className="py-2 px-3 period-code text-[#5F6368]">
                                         {rec.date}
                                       </td>
-                                      <td className="py-2 px-3 text-right period-code">
+                                      <td className="py-2 px-3 text-left period-code">
                                         {rec.quantity.toLocaleString()}
                                       </td>
                                       <td className="py-2 px-3 file-hash text-xs text-[#5144C9] flex items-center space-x-1">
@@ -271,14 +266,14 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
                                           {rec.evidence}
                                         </button>
                                       </td>
-                                      <td className="py-2 px-3 text-right emission-factor font-medium text-[#17181A]">
+                                      <td className="py-2 px-3 text-left emission-factor font-medium text-[#17181A]">
                                         {rec.tCO2e.toFixed(2)}
                                       </td>
-                                      <td className="py-2 px-3 text-right">
+                                      <td className="py-2 px-3 text-left">
                                         <button
                                           type="button"
                                           onClick={() => handleInspectRecord(rec.id)}
-                                          className="text-xs text-[#01153C] hover:underline inline-flex items-center space-x-0.5 font-semibold"
+                                          className="text-xs text-[#5141FF] hover:underline inline-flex items-center space-x-0.5 font-semibold"
                                         >
                                           <span>Inspect Row</span>
                                           <ExternalLink className="w-3 h-3" />
@@ -303,7 +298,7 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
 
       {/* Traceability Guarantee Footnote */}
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
-        <Info className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
+        <Info className="w-4 h-4 text-[#181B27] shrink-0 mt-0.5" />
         <div>
           <strong className="text-[#17181A] font-semibold">Functional Traceability:</strong> Results drill-down is read-only. Clicking any site row reveals the contributing activity data rows with direct links to primary PDF utility invoices stored in TC-ARC-002, allowing third-party verifiers to validate data lineage without interruption.
         </div>

@@ -84,7 +84,7 @@ export const Screen14_ValidationResults: React.FC = () => {
           2. Map Columns
         </span>
         <span className="text-[#8A8F98]">→</span>
-        <span className="px-2.5 py-1 rounded-lg bg-[#01153C]/10 text-[#01153C] font-bold border border-[#01153C]/20">
+        <span className="px-2.5 py-1 rounded-lg bg-[#5141FF]/10 text-[#181B27] font-bold border border-[#5141FF]/20">
           3. Validate
         </span>
         <span className="text-[#8A8F98]">→</span>
@@ -127,10 +127,10 @@ export const Screen14_ValidationResults: React.FC = () => {
       </div>
 
       {/* Prominent Warning Message Banner */}
-      <div className="p-4 bg-[#ED2024]/5 border border-[#ED2024]/20 rounded-xl flex items-start space-x-3 text-xs">
-        <AlertCircle className="w-5 h-5 text-[#ED2024] shrink-0 mt-0.5" />
+      <div className="p-4 bg-[#FB3256]/5 border border-[#FB3256]/20 rounded-xl flex items-start space-x-3 text-xs">
+        <AlertCircle className="w-5 h-5 text-[#FB3256] shrink-0 mt-0.5" />
         <div className="text-[#17181A]">
-          <p className="font-semibold text-[#ED2024]">
+          <p className="font-semibold text-[#FB3256]">
             44 rows will be skipped unless corrected. You can still import the 1,798 valid rows now and fix the rest later.
           </p>
           <p className="text-[#5F6368] mt-1 font-data">
@@ -142,16 +142,11 @@ export const Screen14_ValidationResults: React.FC = () => {
       {/* Error Breakdown Table */}
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs space-y-0">
         <div className="p-4 border-b border-[#E5E7EB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <h2 className="text-sm font-semibold text-[#17181A]">Flagged Error Sample (Showing 3 of 44 rows)</h2>
-            <p className="text-xs text-[#5F6368] font-data">
-              Click any flagged row to open the Activity Data Detail / Edit view.
-            </p>
-          </div>
+          <h2 className="text-sm font-semibold text-[#17181A]">Flagged Error Sample (Showing 3 of 44 rows)</h2>
           <button
             type="button"
             onClick={handleDownloadErrorReport}
-            className="enterprise-btn-secondary h-8 px-3 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#01153C] shrink-0"
+            className="enterprise-btn-secondary h-8 px-3 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#181B27] shrink-0"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Download error report (import_errors_job88.csv)</span>
@@ -181,7 +176,7 @@ export const Screen14_ValidationResults: React.FC = () => {
                   {err.field}
                 </td>
                 <td className="py-3 px-4 font-data text-[11px] text-[#17181A]">
-                  <code className="bg-[#FAFAFB] border border-[#E5E7EB] px-2 py-0.5 rounded text-[#ED2024] font-data">
+                  <code className="bg-[#FAFAFB] border border-[#E5E7EB] px-2 py-0.5 rounded text-[#FB3256] font-data">
                     {err.value}
                   </code>
                 </td>
@@ -189,7 +184,7 @@ export const Screen14_ValidationResults: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => navigateToScreen('15_fix_detail_view', 'FLOW_C')}
-                    className="inline-flex items-center space-x-1 text-[#01153C] hover:underline font-semibold text-xs"
+                    className="inline-flex items-center space-x-1 text-[#5141FF] hover:underline font-semibold text-xs"
                   >
                     <span>Fix Row</span>
                     <ExternalLink className="w-3 h-3" />
@@ -216,7 +211,7 @@ export const Screen14_ValidationResults: React.FC = () => {
             id="btn-fix-flagged-rows"
             type="button"
             onClick={() => navigateToScreen('15_fix_detail_view', 'FLOW_C')}
-            className="enterprise-btn-secondary h-9 px-4 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#01153C]"
+            className="enterprise-btn-secondary h-9 px-4 text-xs font-semibold inline-flex items-center space-x-1.5 text-[#181B27]"
           >
             <Wrench className="w-3.5 h-3.5" />
             <span>Fix Flagged Rows</span>

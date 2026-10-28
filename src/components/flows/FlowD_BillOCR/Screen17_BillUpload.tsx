@@ -115,21 +115,17 @@ export const Screen17_BillUpload: React.FC = () => {
 
       {/* Period Locked Governance Banner */}
       {isPeriodLocked && (
-        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-center space-x-3 text-xs text-[#ED2024] font-data shadow-2xs">
-          <Lock className="w-5 h-5 shrink-0 text-[#ED2024]" />
-          <div>
-            <strong className="font-semibold">Accounting Period {activePeriod.name} is Locked:</strong> New bill upload and automated OCR extraction are disabled for frozen accounting periods.
-          </div>
+        <div className="p-3 bg-[#FFF0F3] border border-[#FFDCE4] rounded-xl flex items-center space-x-2.5 text-xs text-[#FB3256] font-medium">
+          <Lock className="w-4 h-4 shrink-0 text-[#FB3256]" />
+          <span>Accounting Period {activePeriod.name} is locked. Bill upload disabled.</span>
         </div>
       )}
 
       {/* Verifier Read-Only Mode Banner */}
       {isVerifierReadOnly && (
-        <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex items-center space-x-3 text-xs text-[#01153C] font-data shadow-2xs">
-          <ShieldAlert className="w-5 h-5 shrink-0 text-[#01153C]" />
-          <div>
-            <strong className="font-semibold">Third-Party Assurance Mode:</strong> Independent Auditors ({currentUser.name}) have read-only inspection access and cannot ingest raw utility bills.
-          </div>
+        <div className="p-3 bg-[#5141FF]/5 border border-[#5141FF]/20 rounded-xl flex items-center space-x-2.5 text-xs text-[#5141FF] font-medium">
+          <ShieldAlert className="w-4 h-4 shrink-0 text-[#5141FF]" />
+          <span>Verifier Assurance Mode: Read-only access enabled.</span>
         </div>
       )}
 
@@ -138,14 +134,14 @@ export const Screen17_BillUpload: React.FC = () => {
         <h2 className="text-sm font-semibold text-[#17181A]">Target Facility</h2>
         <div className="max-w-md">
           <label className="block text-xs font-semibold text-[#17181A] mb-1">
-            Site <span className="text-[#ED2024]">*</span>
+            Site <span className="text-[#FB3256]">*</span>
           </label>
           <select
             id="ocr-site-select"
             disabled={isPeriodLocked || isVerifierReadOnly}
             value={siteId}
             onChange={(e) => setSiteId(e.target.value)}
-            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] disabled:bg-[#F4F5F6] disabled:cursor-not-allowed"
+            className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] disabled:bg-[#F4F5F6] disabled:cursor-not-allowed"
           >
             {allowedSites.map((s) => (
               <option key={s.id} value={s.id}>
@@ -153,11 +149,6 @@ export const Screen17_BillUpload: React.FC = () => {
               </option>
             ))}
           </select>
-          {currentUser?.siteScope && currentUser.siteScope.length > 0 && currentRole === 'DATA_ENTRY' && (
-            <span className="text-[10px] text-[#5F6368] mt-1 block font-data">
-              Restricted to your assigned facility scope: {allowedSites.map((s) => s.name).join(', ')}
-            </span>
-          )}
         </div>
       </div>
 
@@ -177,7 +168,7 @@ export const Screen17_BillUpload: React.FC = () => {
           }}
           onClick={handleSimulateFile}
           className={`p-10 border-2 border-dashed rounded-xl text-center cursor-pointer transition-colors ${
-            dragActive ? 'border-[#01153C] bg-[#01153C]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#01153C]'
+            dragActive ? 'border-[#5141FF] bg-[#5141FF]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#5141FF]'
           }`}
         >
           <Upload className="w-10 h-10 text-[#8A8F98] mx-auto mb-3" />
@@ -198,7 +189,7 @@ export const Screen17_BillUpload: React.FC = () => {
         {selectedFile && (
           <div className="p-4 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-xl bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0 border border-[#01153C]/20">
+              <div className="w-9 h-9 rounded-xl bg-[#5141FF]/10 text-[#5141FF] flex items-center justify-center shrink-0 border border-[#5141FF]/20">
                 <FileText className="w-5 h-5" />
               </div>
               <div>
@@ -216,7 +207,7 @@ export const Screen17_BillUpload: React.FC = () => {
         {/* Feature Note Banner */}
         <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] space-y-1">
           <div className="flex items-center space-x-1.5 font-semibold text-[#17181A]">
-            <Info className="w-4 h-4 text-[#01153C]" />
+            <Info className="w-4 h-4 text-[#181B27]" />
             <span>Assurance Policy: Human review is mandatory before any extracted utility bill data can be approved or ingested.</span>
           </div>
           <p className="text-[11px] pl-5 text-[#8A8F98] font-data">
@@ -229,7 +220,7 @@ export const Screen17_BillUpload: React.FC = () => {
           <button
             type="button"
             onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
-            className="text-xs text-[#01153C] hover:underline font-semibold"
+            className="text-xs text-[#5141FF] hover:underline font-semibold"
           >
             Prefer manual entry? Switch to Manual Data Entry
           </button>

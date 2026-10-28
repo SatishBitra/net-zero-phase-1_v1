@@ -426,7 +426,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
         title="Industry Decarbonization Radar"
         contextInfo={
           <div className="flex items-center gap-2 text-xs text-[#4B5563]">
-            <span className="font-semibold text-[#01153C]">{activeSector.sectorName}</span>
+            <span className="font-semibold text-[#181B27]">{activeSector.sectorName}</span>
             <span>·</span>
             <span>{activeSector.peerCount} Peers</span>
             <span>·</span>
@@ -437,7 +437,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={handleExportReport}
-              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#5141FF] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5141FF]"
               aria-label="Export benchmark scorecard to CSV"
             >
               <Download className="w-3.5 h-3.5" />
@@ -445,7 +445,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
             </button>
             <button
               onClick={() => navigateToScreen('36_scenario_builder', 'FLOW_E')}
-              className="h-9 px-4 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-4 text-xs font-semibold text-white bg-[#5141FF] hover:bg-[#4232E8] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5141FF]"
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
               <span>What-If Simulator</span>
@@ -457,7 +457,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
       {/* Cohort Selector Bar */}
       <section aria-labelledby="cohort-heading" className="bg-white border border-[#E5E7EB] rounded-xl p-3 md:p-3.5 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2 flex-wrap">
-          <Factory className="w-4 h-4 text-[#01153C] shrink-0" />
+          <Factory className="w-4 h-4 text-[#181B27] shrink-0" />
           <span id="cohort-heading" className="text-xs font-bold text-[#171A1F] uppercase tracking-wider">
             Sector Cohort:
           </span>
@@ -466,10 +466,10 @@ export const BenchmarkingRadarModule: React.FC = () => {
               <button
                 key={sec.sectorId}
                 onClick={() => setSelectedSectorKey(sec.sectorId)}
-                className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[#01153C] ${
+                className={`px-2.5 py-1 text-xs rounded-md font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[#5141FF] ${
                   selectedSectorKey === sec.sectorId
-                    ? 'bg-[#01153C] text-white shadow-2xs'
-                    : 'bg-[#F8F9FB] text-[#4B5563] hover:text-[#01153C] hover:bg-[#F1F3F5] border border-[#E5E7EB]'
+                    ? 'bg-[#5141FF] text-white shadow-2xs'
+                    : 'bg-[#F8F9FB] text-[#4B5563] hover:text-[#5141FF] hover:bg-[#F1F3F5] border border-[#E5E7EB]'
                 }`}
               >
                 {sec.shortName}
@@ -487,7 +487,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
       <section aria-label="Cohort standing metrics" className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-3">
         <div className="bg-white border border-[#E5E7EB] rounded-xl p-3.5 shadow-2xs">
           <div className="text-[11px] text-[#4B5563] font-medium">Decarbonization Percentile</div>
-          <div className="text-xl font-bold text-[#01153C] mt-1 font-mono flex items-center gap-1">
+          <div className="text-xl font-bold text-[#181B27] mt-1 font-mono flex items-center gap-1">
             <Award className="w-4 h-4 text-[#D97706]" />
             {activeSector.percentileOverall}th
           </div>
@@ -496,7 +496,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
 
         <div className="bg-white border border-[#E5E7EB] rounded-xl p-3.5 shadow-2xs">
           <div className="text-[11px] text-[#4B5563] font-medium">Cohort Standing</div>
-          <div className="text-xl font-bold text-[#01153C] mt-1 font-mono">
+          <div className="text-xl font-bold text-[#181B27] mt-1 font-mono">
             #{activeSector.cohortRank} <span className="text-xs font-normal text-[#4B5563]">/ {activeSector.peerCount}</span>
           </div>
           <div className="text-[10px] text-[#4B5563]">In {activeSector.shortName} cohort</div>
@@ -525,7 +525,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
         <div className="lg:col-span-7 bg-white border border-[#E5E7EB] rounded-xl p-4 md:p-5 shadow-2xs space-y-4">
           <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2.5">
             <div className="flex items-center gap-1.5 text-xs font-bold text-[#171A1F] uppercase tracking-wider">
-              <Compass className="w-3.5 h-3.5 text-[#01153C]" />
+              <Compass className="w-3.5 h-3.5 text-[#181B27]" />
               Comparative Radar (Scores 0–100)
             </div>
           </div>
@@ -590,9 +590,9 @@ export const BenchmarkingRadarModule: React.FC = () => {
                   <button
                     key={dim.id}
                     onClick={() => setSelectedDimensionId(dim.id)}
-                    className={`px-2.5 py-1 text-xs rounded-md transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#01153C] ${
+                    className={`px-2.5 py-1 text-xs rounded-md transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#5141FF] ${
                       isSelected
-                        ? 'bg-[#01153C] text-white font-semibold shadow-2xs'
+                        ? 'bg-[#5141FF] text-white font-semibold shadow-2xs'
                         : 'bg-[#F8F9FB] text-[#171A1F] hover:bg-[#F1F3F5] border border-[#E5E7EB]'
                     }`}
                   >
@@ -615,7 +615,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
         <div className="lg:col-span-5 space-y-4">
           <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 md:p-5 shadow-2xs space-y-4">
             <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2.5">
-              <span className="text-[10px] font-bold text-[#01153C] uppercase tracking-wider bg-[#EDF2FA] px-2 py-0.5 rounded">
+              <span className="text-[10px] font-bold text-[#181B27] uppercase tracking-wider bg-[#F2F0FF] px-2 py-0.5 rounded">
                 {activeDimension.category}
               </span>
               <span
@@ -623,7 +623,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
                   activeDimension.quartile === 'Top 10%'
                     ? 'bg-[#E8F8EE] text-[#0F6B48]'
                     : activeDimension.quartile === 'Top 25%'
-                    ? 'bg-[#EDF2FA] text-[#01153C]'
+                    ? 'bg-[#F2F0FF] text-[#5141FF]'
                     : 'bg-[#FEF6EE] text-[#D97706]'
                 }`}
               >
@@ -639,9 +639,9 @@ export const BenchmarkingRadarModule: React.FC = () => {
 
             {/* 3 Metrics Strip */}
             <div className="grid grid-cols-3 gap-2">
-              <div className="p-2.5 bg-[#EDF2FA] rounded-lg">
-                <div className="text-[10px] font-bold text-[#01153C]">Your Org</div>
-                <div className="text-base font-bold text-[#01153C] mt-0.5 font-mono">
+              <div className="p-2.5 bg-[#F2F0FF] rounded-lg">
+                <div className="text-[10px] font-bold text-[#181B27]">Your Org</div>
+                <div className="text-base font-bold text-[#181B27] mt-0.5 font-mono">
                   {activeDimension.yourRawValue}
                 </div>
                 <div className="text-[10px] text-[#4B5563]">{activeDimension.unit}</div>
@@ -668,12 +668,12 @@ export const BenchmarkingRadarModule: React.FC = () => {
             <div className="space-y-2 pt-1">
               <div className="space-y-1">
                 <div className="flex justify-between text-[11px]">
-                  <span className="text-[#01153C] font-semibold">Your Org</span>
-                  <span className="font-mono font-bold text-[#01153C]">{activeDimension.yourScore}</span>
+                  <span className="text-[#5141FF] font-semibold">Your Org</span>
+                  <span className="font-mono font-bold text-[#181B27]">{activeDimension.yourScore}</span>
                 </div>
                 <div className="w-full bg-[#E5E7EB] h-1.5 rounded-full overflow-hidden">
                   <div
-                    className="bg-[#01153C] h-full rounded-full transition-all"
+                    className="bg-[#5141FF] h-full rounded-full transition-all"
                     style={{ width: `${activeDimension.yourScore}%` }}
                   />
                 </div>
@@ -708,13 +708,13 @@ export const BenchmarkingRadarModule: React.FC = () => {
 
             {/* Direct Action Card */}
             <div className="p-3 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg space-y-1 text-xs">
-              <div className="font-semibold text-[#01153C]">{activeDimension.gapToLeader}</div>
+              <div className="font-semibold text-[#181B27]">{activeDimension.gapToLeader}</div>
               <div className="text-[#4B5563]">{activeDimension.recommendation}</div>
             </div>
 
             <button
               onClick={() => navigateToScreen('36_scenario_builder', 'FLOW_E')}
-              className="w-full py-2.5 px-3 text-xs font-bold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="w-full py-2.5 px-3 text-xs font-bold text-white bg-[#5141FF] hover:bg-[#4232E8] rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#5141FF]"
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
               <span>Simulate Closing Gap in What-If Builder</span>
@@ -727,14 +727,14 @@ export const BenchmarkingRadarModule: React.FC = () => {
       <section aria-labelledby="scorecard-heading" className="bg-white border border-[#E5E7EB] rounded-xl p-4 md:p-5 shadow-2xs space-y-3">
         <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2.5">
           <div className="flex items-center gap-1.5 text-xs font-bold text-[#171A1F] uppercase tracking-wider">
-            <BarChart2 className="w-3.5 h-3.5 text-[#01153C]" />
+            <BarChart2 className="w-3.5 h-3.5 text-[#181B27]" />
             <h2 id="scorecard-heading" className="text-xs font-bold text-[#171A1F] uppercase tracking-wider">
               Complete Benchmark Scorecard
             </h2>
           </div>
           <button
             onClick={handleExportReport}
-            className="text-xs font-semibold text-[#01153C] hover:underline flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-[#01153C]"
+            className="text-xs font-semibold text-[#5141FF] hover:underline flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-[#5141FF]"
           >
             <Download className="w-3 h-3" />
             <span>Download CSV</span>
@@ -762,12 +762,12 @@ export const BenchmarkingRadarModule: React.FC = () => {
                     key={dim.id}
                     onClick={() => setSelectedDimensionId(dim.id)}
                     className={`cursor-pointer transition-colors ${
-                      isSelected ? 'bg-[#EDF2FA]/60 font-medium' : 'hover:bg-[#FAFAFB]'
+                      isSelected ? 'bg-[#F2F0FF]/60 font-medium' : 'hover:bg-[#FAFAFB]'
                     }`}
                   >
                     <td className="py-2.5 px-3 font-semibold text-[#171A1F]">{dim.shortName}</td>
                     <td className="py-2.5 px-3 text-[#4B5563]">{dim.category}</td>
-                    <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">
+                    <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">
                       {dim.yourRawValue} {dim.unit}
                     </td>
                     <td className="py-2.5 px-3 font-mono text-[#4B5563]">
@@ -776,7 +776,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
                     <td className="py-2.5 px-3 font-mono font-semibold text-[#0F6B48]">
                       {dim.leaderRaw} {dim.unit}
                     </td>
-                    <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">
+                    <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">
                       {dim.yourScore} / 100
                     </td>
                     <td className="py-2.5 px-3">
@@ -785,7 +785,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
                           dim.quartile === 'Top 10%'
                             ? 'bg-[#E8F8EE] text-[#0F6B48]'
                             : dim.quartile === 'Top 25%'
-                            ? 'bg-[#EDF2FA] text-[#01153C]'
+                            ? 'bg-[#F2F0FF] text-[#5141FF]'
                             : 'bg-[#FEF6EE] text-[#D97706]'
                         }`}
                       >

@@ -88,7 +88,7 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
       screenId: '17_bill_upload',
       flowId: 'FLOW_D',
       badge: 'AI OCR',
-      badgeColor: 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]',
+      badgeColor: 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]',
       priority: true,
     },
     {
@@ -141,7 +141,7 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
       screenId: '24_review_approve',
       flowId: 'FLOW_B',
       badge: 'Approvals',
-      badgeColor: 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]',
+      badgeColor: 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]',
       roles: ['REVIEWER', 'TENANT_ADMIN'],
     },
     {
@@ -163,7 +163,7 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
       screenId: '22_factors_library',
       flowId: 'FLOW_E',
       badge: 'IPCC · IEA',
-      badgeColor: 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]',
+      badgeColor: 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]',
       priority: true,
       onExecute: () => openFactorHelper(),
     },
@@ -175,7 +175,7 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
       screenId: '20_results_summary',
       flowId: 'FLOW_E',
       badge: 'C-01 to C-12',
-      badgeColor: 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]',
+      badgeColor: 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]',
       roles: ['TENANT_ADMIN', 'REVIEWER', 'VERIFIER', 'DATA_ENTRY'],
     },
     {
@@ -197,7 +197,7 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
       screenId: '37_benchmarking',
       flowId: 'FLOW_E',
       badge: 'Radar',
-      badgeColor: 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]',
+      badgeColor: 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]',
       roles: ['TENANT_ADMIN', 'REVIEWER', 'VERIFIER'],
     },
     {
@@ -233,13 +233,13 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
     }
   };
 
-  // Button styles depending on variant (standardized rounded-lg 36px CTA)
+  // Button styles depending on variant (standardized rounded-xl 38px CTA)
   const buttonClasses =
     variant === 'header'
-      ? 'enterprise-btn-primary h-9 px-3.5 text-xs font-semibold rounded-lg shadow-xs flex items-center space-x-1.5 focus-visible:ring-2 focus-visible:ring-[#01153C]'
+      ? 'enterprise-btn-primary h-9 px-3.5 text-xs font-semibold rounded-xl shadow-xs flex items-center space-x-1.5 focus-visible:ring-2 focus-visible:ring-[#5141FF]'
       : variant === 'page'
-      ? 'enterprise-btn-secondary h-9 px-3.5 text-xs font-semibold rounded-lg shadow-2xs flex items-center space-x-1.5 focus-visible:ring-2 focus-visible:ring-[#01153C]'
-      : 'w-full h-9 flex items-center justify-between px-3 rounded-lg bg-[#01153C] text-white text-xs font-semibold';
+      ? 'enterprise-btn-secondary h-9 px-3.5 text-xs font-semibold rounded-xl shadow-2xs flex items-center space-x-1.5 focus-visible:ring-2 focus-visible:ring-[#5141FF]'
+      : 'w-full h-9 flex items-center justify-between px-3 rounded-xl bg-[#5141FF] text-white text-xs font-semibold';
 
   return (
     <div className={`relative ${className}`} ref={menuRef}>
@@ -253,54 +253,54 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
         title="Jump directly to common tasks"
       >
         <div className="flex items-center space-x-1.5">
-          <Zap className={`w-3.5 h-3.5 ${variant === 'header' ? 'text-[#FFD166]' : 'text-[#01153C]'}`} />
+          <Zap className={`w-3.5 h-3.5 ${variant === 'header' ? 'text-[#FFD166]' : 'text-[#5141FF]'}`} />
           <span>{buttonLabel}</span>
         </div>
         <ChevronDown
           className={`w-3 h-3 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
-          } ${variant === 'header' ? 'text-white/80' : 'text-[#5F6368]'}`}
+          } ${variant === 'header' ? 'text-white/80' : 'text-[#62697C]'}`}
         />
       </button>
 
       {isOpen && (
         <div
           id="quick-actions-dropdown"
-          className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-[#E5E7EB] py-2 z-50 animate-in fade-in zoom-in-95 duration-100"
+          className="absolute right-0 mt-2 w-80 sm:w-96 glass-card-strong bg-white/95 rounded-2xl shadow-2xl border border-[#E2E5EF] py-2 z-50 animate-in fade-in zoom-in-95 duration-100"
           role="menu"
         >
           {/* Header & Quick Search */}
-          <div className="px-3.5 pt-2 pb-2.5 border-b border-[#F1F3F5]">
+          <div className="px-3.5 pt-2 pb-2.5 border-b border-[#F0F2F7]">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#01153C]" />
-                <span className="text-[11px] font-bold text-[#17181A] uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-[#5141FF]" />
+                <span className="text-[11px] font-bold text-[#181B27] uppercase tracking-wider">
                   Quick Actions
                 </span>
               </div>
-              <span className="text-[10px] text-[#5F6368] font-data bg-[#F1F3F5] px-2 py-0.5 rounded-full">
+              <span className="text-[10px] text-[#62697C] font-data bg-[#F0F2F7] px-2 py-0.5 rounded-full">
                 Period: {activePeriod?.name || 'Active'}
               </span>
             </div>
 
             {/* Quick Search Filter */}
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-[#8A8F98] absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-[#858CA0] absolute left-2.5 top-1/2 -translate-y-1/2" />
               <input
                 ref={searchInputRef}
                 type="text"
                 placeholder="Search action (e.g. Bill, Emission, Report)..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] focus:bg-white text-[#17181A] placeholder-[#8A8F98]"
+                className="w-full pl-8 pr-3 py-1.5 text-xs bg-[#F7F8FC] border border-[#E2E5EF] rounded-xl focus:outline-none focus:border-[#5141FF] focus:bg-white text-[#181B27] placeholder-[#858CA0]"
               />
             </div>
           </div>
 
           {/* Action Items List */}
-          <div className="max-h-80 overflow-y-auto p-1.5 space-y-1 divide-y divide-[#F8F9FA]">
+          <div className="max-h-80 overflow-y-auto p-1.5 space-y-1 divide-y divide-[#F0F2F7]">
             {filteredActions.length === 0 ? (
-              <div className="py-6 text-center text-xs text-[#8A8F98]">
+              <div className="py-6 text-center text-xs text-[#858CA0]">
                 No quick actions found matching "{searchFilter}"
               </div>
             ) : (
@@ -313,39 +313,39 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
                     key={action.id}
                     type="button"
                     onClick={() => handleActionClick(action)}
-                    className="w-full text-left p-2.5 rounded-xl hover:bg-[#FAFAFB] transition-all group flex items-start space-x-3 border border-transparent hover:border-[#E5E7EB]"
+                    className="w-full text-left p-2.5 rounded-xl hover:bg-[#F2F0FF]/50 transition-all group flex items-start space-x-3 border border-transparent hover:border-[#E5E0FF]"
                     role="menuitem"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-[#EDF2FA] group-hover:bg-[#01153C] text-[#01153C] group-hover:text-white flex items-center justify-center shrink-0 transition-colors">
+                    <div className="w-8 h-8 rounded-lg bg-[#F2F0FF] group-hover:bg-[#5141FF] text-[#5141FF] group-hover:text-white flex items-center justify-center shrink-0 transition-colors">
                       <IconComponent className="w-4 h-4" />
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-semibold text-[#17181A] group-hover:text-[#01153C]">
+                        <span className="text-xs font-semibold text-[#181B27] group-hover:text-[#5141FF]">
                           {action.title}
                         </span>
                         <div className="flex items-center space-x-1 shrink-0 ml-2">
                           {isRoleRecommended && (
-                            <span className="text-[9px] px-1.5 py-0.2 bg-[#EEF9F1] text-[#26783B] rounded-full border border-[#DDF3E3] font-semibold">
+                            <span className="text-[9px] px-1.5 py-0.2 bg-[#E8F7EF] text-[#16845B] rounded-full border border-[#16845B]/20 font-semibold">
                               For You
                             </span>
                           )}
                           <span
                             className={`text-[9px] px-1.5 py-0.2 rounded-full border font-medium ${
-                              action.badgeColor || 'bg-[#F1F3F5] text-[#5F6368] border-[#E5E7EB]'
+                              action.badgeColor || 'bg-[#F0F2F7] text-[#62697C] border-[#E2E5EF]'
                             }`}
                           >
                             {action.badge}
                           </span>
                         </div>
                       </div>
-                      <p className="text-[11px] text-[#5F6368] line-clamp-1 mt-0.5 font-data">
+                      <p className="text-[11px] text-[#62697C] line-clamp-1 mt-0.5 font-data">
                         {action.description}
                       </p>
                     </div>
 
-                    <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98] group-hover:text-[#01153C] group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#858CA0] group-hover:text-[#5141FF] group-hover:translate-x-0.5 transition-all shrink-0 mt-1" />
                   </button>
                 );
               })

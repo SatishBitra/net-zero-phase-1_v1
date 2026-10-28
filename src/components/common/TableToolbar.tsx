@@ -42,7 +42,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           value={searchValue ?? ''}
           onChange={(e) => onSearchChange?.(e.target.value)}
           placeholder={searchPlaceholder}
-          className="w-full h-9 pl-9 pr-3 text-xs sm:text-[13px] bg-white border border-[#E2E4E8] rounded-full text-[#17181A] placeholder-[#8A8F98] focus:outline-none focus:border-[#01153C] focus:ring-2 focus:ring-[#01153C]/10 transition-all"
+          className="w-full h-9 pl-9 pr-3 text-xs sm:text-[13px] bg-white border border-[#E2E4E8] rounded-full text-[#17181A] placeholder-[#8A8F98] focus:outline-none focus:border-[#5141FF] focus:ring-2 focus:ring-[#5141FF]/10 transition-all"
         />
       </div>
 
@@ -54,7 +54,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
             onClick={onFilterClick}
             className={`h-9 px-3.5 text-xs font-semibold rounded-full border flex items-center space-x-1.5 transition-colors ${
               filterActive
-                ? 'bg-[#EDF2FA] border-[#01153C] text-[#01153C]'
+                ? 'bg-[#F2F0FF] border-[#5141FF] text-[#181B27]'
                 : 'bg-white border-[#DCDFE4] text-[#5F6368] hover:bg-[#F8F9FB] hover:text-[#17181A]'
             }`}
           >
@@ -102,7 +102,7 @@ export const TableToolbar: React.FC<TableToolbarProps> = ({
           <button
             type="button"
             onClick={onAddClick}
-            className="h-9 px-4 text-xs font-semibold rounded-full bg-[#01153C] hover:bg-[#0A2352] text-white flex items-center space-x-1.5 transition-colors shadow-xs"
+            className="h-9 px-4 text-xs font-semibold rounded-full bg-[#5141FF] hover:bg-[#4232E8] text-white flex items-center space-x-1.5 transition-colors shadow-xs"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>{addLabel}</span>

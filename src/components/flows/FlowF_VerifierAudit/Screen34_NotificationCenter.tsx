@@ -51,7 +51,7 @@ export const Screen34_NotificationCenter: React.FC = () => {
     switch (type) {
       case 'verifier_query':
         return (
-          <div className="w-8 h-8 rounded-lg bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0 border border-[#01153C]/20">
+          <div className="w-8 h-8 rounded-lg bg-[#5141FF]/10 text-[#5141FF] flex items-center justify-center shrink-0 border border-[#5141FF]/20">
             <HelpCircle className="w-4 h-4" />
           </div>
         );
@@ -63,7 +63,7 @@ export const Screen34_NotificationCenter: React.FC = () => {
         );
       case 'import_failure':
         return (
-          <div className="w-8 h-8 rounded-lg bg-[#FEF1F1] text-[#ED2024] flex items-center justify-center shrink-0 border border-[#FED2D3]/40">
+          <div className="w-8 h-8 rounded-lg bg-[#FFF0F3] text-[#FB3256] flex items-center justify-center shrink-0 border border-[#FFDCE4]/40">
             <AlertOctagon className="w-4 h-4" />
           </div>
         );
@@ -128,7 +128,7 @@ export const Screen34_NotificationCenter: React.FC = () => {
             onClick={() => setActiveFilter(tab.key as any)}
             className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors whitespace-nowrap ${
               activeFilter === tab.key
-                ? 'bg-[#01153C] text-white shadow-xs'
+                ? 'bg-[#5141FF] text-white shadow-xs'
                 : 'bg-white border border-[#E5E7EB] text-[#5F6368] hover:text-[#17181A] hover:bg-[#FAFAFB]'
             }`}
           >
@@ -152,7 +152,7 @@ export const Screen34_NotificationCenter: React.FC = () => {
               key={item.id}
               onClick={() => handleNotificationClick(item)}
               className={`p-4 flex items-start justify-between gap-3 text-xs transition-colors cursor-pointer group ${
-                !item.isRead ? 'bg-[#01153C]/5 hover:bg-[#01153C]/10' : 'bg-white hover:bg-[#FAFAFB]'
+                !item.isRead ? 'bg-[#5141FF]/5 hover:bg-[#5141FF]/10' : 'bg-white hover:bg-[#FAFAFB]'
               }`}
             >
               <div className="flex items-start space-x-3.5">
@@ -163,13 +163,13 @@ export const Screen34_NotificationCenter: React.FC = () => {
                     <span
                       className={`text-xs ${
                         !item.isRead ? 'font-bold text-[#17181A]' : 'font-medium text-[#5F6368]'
-                      } group-hover:text-[#01153C] transition-colors`}
+                      } group-hover:text-[#5141FF] transition-colors`}
                     >
                       {item.title}
                     </span>
                     {!item.isRead && (
                       <span
-                        className="w-2 h-2 rounded-full bg-[#01153C] shrink-0"
+                        className="w-2 h-2 rounded-full bg-[#5141FF] shrink-0"
                         title="Unread notification"
                       />
                     )}
@@ -208,7 +208,7 @@ export const Screen34_NotificationCenter: React.FC = () => {
         <span>Retention: 90 Days</span>
         <button
           onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
-          className="text-[#01153C] hover:underline font-semibold flex items-center space-x-1"
+          className="text-[#5141FF] hover:underline font-semibold flex items-center space-x-1"
         >
           <span>View Complete Audit Trail</span>
           <ArrowRight className="w-3.5 h-3.5" />

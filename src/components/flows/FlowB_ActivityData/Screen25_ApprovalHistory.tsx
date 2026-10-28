@@ -130,7 +130,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
                 onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}
                 className="enterprise-btn-secondary h-9 px-3.5 flex items-center space-x-1.5 text-xs"
               >
-                <Activity className="w-3.5 h-3.5 text-[#01153C]" />
+                <Activity className="w-3.5 h-3.5 text-[#181B27]" />
                 <span>Activity Dashboard</span>
               </button>
             )}
@@ -147,7 +147,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
             <select
               value={siteFilter}
               onChange={(e) => setSiteFilter(e.target.value)}
-              className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
+              className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] font-sans"
             >
               <option value="All Sites">All Sites</option>
               <option value="Chennai Plant 1">Chennai Plant 1</option>
@@ -161,7 +161,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
             <select
               value={periodFilter}
               onChange={(e) => setPeriodFilter(e.target.value)}
-              className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
+              className="px-3 py-1.5 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] font-sans"
             >
               <option value="FY 2025–26">FY 2025–26</option>
               <option value="FY 2024–25">FY 2024–25</option>
@@ -171,7 +171,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
 
         <button
           onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
-          className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
+          className="text-xs text-[#5141FF] hover:underline flex items-center space-x-1 font-semibold"
         >
           <span>View Comprehensive Audit Trail</span>
           <ExternalLink className="w-3 h-3" />
@@ -194,7 +194,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
           <tbody className="divide-y divide-[#F1F3F5]">
             {filteredHistory.map((item, idx) => (
               <tr key={idx} className="hover:bg-[#FAFAFB] transition-colors">
-                <td className="py-3.5 px-4 activity-id font-medium text-[#01153C]">
+                <td className="py-3.5 px-4 activity-id font-medium text-[#181B27]">
                   {item.batchId}
                 </td>
                 <td className="py-3.5 px-4 text-[#17181A] font-semibold">

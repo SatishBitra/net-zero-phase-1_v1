@@ -50,7 +50,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
 }) => {
   const normStatus = (status || '').toLowerCase().trim();
 
-  let colorClasses = 'bg-[#F3F4F6] text-[#374151] border-[#E5E7EB]';
+  let colorClasses = 'bg-[#F0F2F7] text-[#42485A] border-[#E2E5EF]';
   let IconComponent: React.ElementType = FileCheck;
 
   if (
@@ -63,7 +63,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'resolved' ||
     normStatus === 'closed'
   ) {
-    colorClasses = 'bg-[#F0FDF4] text-[#166534] border-[#BBF7D0]';
+    colorClasses = 'bg-[#E8F7EF] text-[#16845B] border-[#16845B]/25';
     IconComponent = CheckCircle2;
   } else if (
     normStatus === 'pending' ||
@@ -73,7 +73,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'in progress' ||
     normStatus === 'initiated'
   ) {
-    colorClasses = 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]';
+    colorClasses = 'bg-[#F2F0FF] text-[#5141FF] border-[#5141FF]/25';
     IconComponent = Clock;
   } else if (
     normStatus === 'returned' ||
@@ -83,7 +83,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'needs review' ||
     normStatus === 'correction'
   ) {
-    colorClasses = 'bg-[#FEFCE8] text-[#854D0E] border-[#FEF08A]';
+    colorClasses = 'bg-[#FFF5D9] text-[#946200] border-[#946200]/25';
     IconComponent = RotateCcw;
   } else if (
     normStatus === 'flagged' ||
@@ -93,23 +93,23 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     normStatus === 'urgent' ||
     normStatus === 'action required'
   ) {
-    colorClasses = 'bg-[#FEF2F2] text-[#991B1B] border-[#FECACA]';
+    colorClasses = 'bg-[#FFF0F1] text-[#C52238] border-[#C52238]/25';
     IconComponent = AlertCircle;
   } else if (normStatus === 'locked') {
-    colorClasses = 'bg-[#F3F4F6] text-[#374151] border-[#E5E7EB]';
+    colorClasses = 'bg-[#F0F2F7] text-[#42485A] border-[#E2E5EF]';
     IconComponent = Lock;
   } else if (normStatus === 'default' || normStatus === 'info') {
-    colorClasses = 'bg-[#EFF6FF] text-[#1E40AF] border-[#BFDBFE]';
+    colorClasses = 'bg-[#EBF2FF] text-[#2859C5] border-[#2859C5]/25';
     IconComponent = HelpCircle;
   }
 
-  const heightClass = size === 'sm' ? 'h-5 px-1.5 text-[11px]' : 'h-6 px-2 text-xs';
+  const heightClass = size === 'sm' ? 'h-5 px-2 text-[11px]' : 'h-6 px-2.5 text-xs';
   const iconSize = size === 'sm' ? 'w-3 h-3' : 'w-3.5 h-3.5';
   const labelText = customLabel || status;
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-md font-medium border select-none whitespace-nowrap ${heightClass} ${colorClasses} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full font-semibold border select-none whitespace-nowrap ${heightClass} ${colorClasses} ${className}`}
       role="status"
     >
       <IconComponent className={`${iconSize} shrink-0`} aria-hidden="true" />

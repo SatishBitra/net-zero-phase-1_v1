@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../../context/AppContext';
 import { Shield, Lock, Mail, ArrowRight, UserCheck } from 'lucide-react';
-import zeLogo from '../../../assets/ze.png';
+import tulaLogo from '../../../assets/Tula_Carbon_red.png';
 import { UserRole } from '../../../types';
 
 export const Screen01_Login: React.FC = () => {
@@ -52,17 +52,11 @@ export const Screen01_Login: React.FC = () => {
     <div id="screen-01-login" className="max-w-md mx-auto my-10 p-6 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
       {/* Header */}
       <div className="flex items-center justify-between pb-5 mb-6 border-b border-[#F1F3F5]">
-        <div className="flex items-center space-x-3">
-          <img
-            src={zeLogo}
-            alt="Zenith Energy Logo"
-            className="w-9 h-9 object-contain rounded-lg"
-          />
-          <div>
-            <div className="text-base font-bold text-[#01153C] leading-none">Tula Carbon</div>
-            <div className="text-[11px] text-[#5F6368] font-medium mt-1">Enterprise Emission Accounting</div>
-          </div>
-        </div>
+        <img
+          src={tulaLogo}
+          alt="Tula Carbon"
+          className="h-12 sm:h-14 w-auto max-w-[220px] object-contain"
+        />
         <span className="text-[11px] font-semibold text-[#027A48] flex items-center space-x-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#027A48]"></span>
           <span>Online</span>
@@ -70,7 +64,7 @@ export const Screen01_Login: React.FC = () => {
       </div>
 
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-[#01153C] tracking-tight">Sign In</h1>
+        <h1 className="text-xl font-bold text-[#181B27] tracking-tight">Sign In</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -86,7 +80,7 @@ export const Screen01_Login: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-3 py-2.5 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C] bg-white text-[#17181A]"
+              className="w-full pl-10 pr-3 py-2.5 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF] bg-white text-[#17181A]"
               placeholder="name@company.com"
             />
           </div>
@@ -100,7 +94,7 @@ export const Screen01_Login: React.FC = () => {
             <button
               type="button"
               onClick={() => showToast('Password Reset', 'Reset link dispatched to registered email.')}
-              className="text-[11px] text-[#01153C] hover:underline font-semibold"
+              className="text-[11px] text-[#5141FF] hover:underline font-semibold"
             >
               Forgot password?
             </button>
@@ -113,7 +107,7 @@ export const Screen01_Login: React.FC = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-3 py-2.5 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C] bg-white text-[#17181A]"
+              className="w-full pl-10 pr-3 py-2.5 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF] bg-white text-[#17181A]"
               placeholder="••••••••••••"
             />
           </div>
@@ -144,21 +138,21 @@ export const Screen01_Login: React.FC = () => {
         disabled={loading}
         className="enterprise-btn-secondary w-full h-10 text-xs font-semibold flex items-center justify-center space-x-2 rounded-xl"
       >
-        <Shield className="w-4 h-4 text-[#01153C]" />
+        <Shield className="w-4 h-4 text-[#181B27]" />
         <span>Continue with Enterprise SSO (Okta / SAML)</span>
       </button>
 
       {/* Quick Role Select for UX / DX / AX Testing */}
       <div className="mt-6 pt-5 border-t border-[#F1F3F5]">
         <div className="text-[11px] font-semibold text-[#5F6368] mb-2 flex items-center space-x-1.5">
-          <UserCheck className="w-3.5 h-3.5 text-[#01153C]" />
+          <UserCheck className="w-3.5 h-3.5 text-[#181B27]" />
           <span>Quick Sign In by Role</span>
         </div>
         <div className="grid grid-cols-2 gap-2 text-xs">
           <button
             type="button"
             onClick={() => handleQuickLoginAs('TENANT_ADMIN', 'j.rao@zenith.in', 'Jayant Rao')}
-            className="p-2 border border-[#E5E7EB] hover:border-[#01153C] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
+            className="p-2 border border-[#E5E7EB] hover:border-[#5141FF] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
           >
             <div className="font-semibold text-[#17181A]">Jayant Rao</div>
             <div className="text-[10px] text-[#5F6368]">Admin / Director</div>
@@ -166,7 +160,7 @@ export const Screen01_Login: React.FC = () => {
           <button
             type="button"
             onClick={() => handleQuickLoginAs('VERIFIER', 'audit@sgs-vvb.com', 'Dr. V. Raman')}
-            className="p-2 border border-[#E5E7EB] hover:border-[#01153C] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
+            className="p-2 border border-[#E5E7EB] hover:border-[#5141FF] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
           >
             <div className="font-semibold text-[#17181A]">Dr. V. Raman</div>
             <div className="text-[10px] text-[#5F6368]">External Verifier (VVB)</div>
@@ -174,7 +168,7 @@ export const Screen01_Login: React.FC = () => {
           <button
             type="button"
             onClick={() => handleQuickLoginAs('DATA_ENTRY', 'p.nair@zenith.in', 'P. Nair')}
-            className="p-2 border border-[#E5E7EB] hover:border-[#01153C] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
+            className="p-2 border border-[#E5E7EB] hover:border-[#5141FF] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
           >
             <div className="font-semibold text-[#17181A]">P. Nair</div>
             <div className="text-[10px] text-[#5F6368]">Site Operator / Data Entry</div>
@@ -182,7 +176,7 @@ export const Screen01_Login: React.FC = () => {
           <button
             type="button"
             onClick={() => handleQuickLoginAs('REVIEWER', 's.iyer@zenith.in', 'S. Iyer')}
-            className="p-2 border border-[#E5E7EB] hover:border-[#01153C] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
+            className="p-2 border border-[#E5E7EB] hover:border-[#5141FF] rounded-lg text-left hover:bg-[#FAFAFB] transition-colors"
           >
             <div className="font-semibold text-[#17181A]">S. Iyer</div>
             <div className="text-[10px] text-[#5F6368]">Internal Reviewer</div>

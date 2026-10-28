@@ -129,7 +129,7 @@ export const Screen35_AuditTrail: React.FC = () => {
       {/* Immutability Assurance Bar */}
       <div className="bg-white text-[#17181A] px-4 py-3 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#E5E7EB] shadow-xs">
         <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-[#5141FF]/10 text-[#5141FF] flex items-center justify-center shrink-0">
             <Lock className="w-4 h-4" />
           </div>
           <div>
@@ -139,7 +139,7 @@ export const Screen35_AuditTrail: React.FC = () => {
           </div>
         </div>
         <div className="flex items-center space-x-2 text-xs">
-          <span className="font-semibold text-[#01153C]">
+          <span className="font-semibold text-[#181B27]">
             ISO 14064-3 · SOC-2 Type II Certified
           </span>
         </div>
@@ -265,8 +265,8 @@ export const Screen35_AuditTrail: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xs">
         <div className="px-4 py-3.5 border-b border-[#E5E7EB] bg-[#FAFAFB] flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Activity className="w-4 h-4 text-[#01153C]" />
-            <h2 className="text-xs font-bold text-[#01153C] uppercase tracking-wider">
+            <Activity className="w-4 h-4 text-[#181B27]" />
+            <h2 className="text-xs font-bold text-[#181B27] uppercase tracking-wider">
               Chronological Audit Trail
             </h2>
           </div>
@@ -301,7 +301,7 @@ export const Screen35_AuditTrail: React.FC = () => {
                       isCorrection
                         ? 'bg-[#FEF7EC]/40 hover:bg-[#FEF7EC]/70'
                         : isFlagged
-                        ? 'bg-[#FEF1F1]/30 hover:bg-[#FEF1F1]/50'
+                        ? 'bg-[#FFF0F3]/30 hover:bg-[#FFF0F3]/50'
                         : 'hover:bg-[#FAFAFB]'
                     }`}
                   >
@@ -319,7 +319,7 @@ export const Screen35_AuditTrail: React.FC = () => {
                             <span>System</span>
                           </span>
                         ) : (
-                          <div className="w-5 h-5 rounded-full bg-[#01153C] text-white flex items-center justify-center text-[10px] font-semibold shrink-0">
+                          <div className="w-5 h-5 rounded-full bg-[#5141FF] text-white flex items-center justify-center text-[10px] font-semibold shrink-0">
                             {item.userName.slice(0, 2).toUpperCase()}
                           </div>
                         )}

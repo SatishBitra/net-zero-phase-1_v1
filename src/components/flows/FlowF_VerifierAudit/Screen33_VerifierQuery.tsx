@@ -137,7 +137,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
   return (
     <div id="screen-33-verifier-query" className="w-full space-y-6 font-sans">
       {/* Verifier Query Header Bar */}
-      <div className="bg-[#01153C] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#01153C]">
+      <div className="bg-[#5141FF] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#5141FF]">
         <div className="flex items-center space-x-2">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
           <span className="font-semibold text-white">Verifier Query Module</span>
@@ -174,8 +174,8 @@ export const Screen33_VerifierQuery: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 shadow-xs space-y-3">
         <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2">
           <div className="flex items-center space-x-2">
-            <FileCheck className="w-4 h-4 text-[#01153C]" />
-            <h2 className="text-xs font-bold text-[#01153C] uppercase tracking-wider">
+            <FileCheck className="w-4 h-4 text-[#181B27]" />
+            <h2 className="text-xs font-bold text-[#181B27] uppercase tracking-wider">
               Bound Line-Item Context
             </h2>
           </div>
@@ -205,8 +205,8 @@ export const Screen33_VerifierQuery: React.FC = () => {
             <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Site</div>
             <div className="font-semibold text-[#17181A] mt-0.5">{context.site}</div>
           </div>
-          <div className="p-2.5 bg-[#01153C]/5 rounded-xl border border-[#01153C]/30">
-            <div className="text-[10px] uppercase text-[#01153C] font-semibold">Quantity</div>
+          <div className="p-2.5 bg-[#5141FF]/5 rounded-xl border border-[#5141FF]/30">
+            <div className="text-[10px] uppercase text-[#5141FF] font-semibold">Quantity</div>
             <div className="font-bold text-[#17181A] mt-0.5">
               {context.quantity}
             </div>
@@ -232,13 +232,13 @@ export const Screen33_VerifierQuery: React.FC = () => {
           {currentRole === 'VERIFIER' ? (
             <>
               <div className="flex items-center space-x-2 border-b border-[#F1F3F5] pb-3">
-                <MessageSquare className="w-4 h-4 text-[#01153C]" />
+                <MessageSquare className="w-4 h-4 text-[#181B27]" />
                 <h3 className="text-sm font-semibold text-[#17181A] font-sans">Raise Verification Clarification</h3>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 {formError && (
-                  <div className="p-3 bg-[#FEF1F1] border border-[#FED2D3] rounded-lg text-[#ED2024] flex items-center space-x-2 font-data">
+                  <div className="p-3 bg-[#FFF0F3] border border-[#FFDCE4] rounded-lg text-[#FB3256] flex items-center space-x-2 font-data">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{formError}</span>
                   </div>
@@ -247,13 +247,13 @@ export const Screen33_VerifierQuery: React.FC = () => {
                 {/* Query Category */}
                 <div>
                   <label htmlFor="query-category" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
-                    Query Category <span className="text-[#ED2024]">*</span>
+                    Query Category <span className="text-[#FB3256]">*</span>
                   </label>
                   <select
                     id="query-category"
                     value={queryCategory}
                     onChange={(e) => setQueryCategory(e.target.value as any)}
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] font-sans"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#5141FF] font-sans"
                   >
                     <option value="Meter Anomaly">Meter Anomaly</option>
                     <option value="Missing Evidence">Missing Evidence</option>
@@ -262,15 +262,12 @@ export const Screen33_VerifierQuery: React.FC = () => {
                     <option value="Boundary Question">Boundary Question</option>
                     <option value="Other">Other</option>
                   </select>
-                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-                    Categorize the finding to route it directly to the designated facility reviewer.
-                  </p>
                 </div>
 
                 {/* Query Clarification Question */}
                 <div>
                   <label htmlFor="query-text" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
-                    Clarification Question <span className="text-[#ED2024]">*</span>
+                    Clarification Question <span className="text-[#FB3256]">*</span>
                   </label>
                   <textarea
                     id="query-text"
@@ -278,12 +275,9 @@ export const Screen33_VerifierQuery: React.FC = () => {
                     value={queryText}
                     onChange={(e) => setQueryText(e.target.value)}
                     placeholder="Can you confirm this meter reading covers the full billing cycle for Chennai Plant 1?"
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#5141FF] placeholder-[#8A8F98] font-sans"
                     required
                   />
-                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-                    Provide precise inquiry describing any discrepancy, date mismatch, or evidence gap.
-                  </p>
                 </div>
 
                 {/* Required Action */}
@@ -297,11 +291,8 @@ export const Screen33_VerifierQuery: React.FC = () => {
                     value={requiredAction}
                     onChange={(e) => setRequiredAction(e.target.value)}
                     placeholder="Cross-verify meter multiplier and billing start/end dates against DISCOM HT consumer card."
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#5141FF] placeholder-[#8A8F98] font-sans"
                   />
-                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-                    Explicit remediation expected from the organisation review team.
-                  </p>
                 </div>
 
                 {/* Form Actions */}
@@ -328,7 +319,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
           ) : currentRole === 'REVIEWER' || currentRole === 'TENANT_ADMIN' ? (
             <>
               <div className="flex items-center space-x-2 border-b border-[#F1F3F5] pb-3">
-                <FileCheck className="w-4 h-4 text-[#01153C]" />
+                <FileCheck className="w-4 h-4 text-[#181B27]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[#17181A] font-sans">
                     Respond to Verifier Clarification
@@ -341,7 +332,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
 
               <form onSubmit={handleReviewerResponse} className="space-y-4 text-xs">
                 {responseError && (
-                  <div className="p-3 bg-[#FEF1F1] border border-[#FED2D3] rounded-lg text-[#ED2024] flex items-center space-x-2 font-data">
+                  <div className="p-3 bg-[#FFF0F3] border border-[#FFDCE4] rounded-lg text-[#FB3256] flex items-center space-x-2 font-data">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{responseError}</span>
                   </div>
@@ -350,13 +341,13 @@ export const Screen33_VerifierQuery: React.FC = () => {
                 {/* Select Query */}
                 <div>
                   <label htmlFor="select-query-response" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
-                    Target Verifier Query <span className="text-[#ED2024]">*</span>
+                    Target Verifier Query <span className="text-[#FB3256]">*</span>
                   </label>
                   <select
                     id="select-query-response"
                     value={selectedResponseQueryId}
                     onChange={(e) => setSelectedResponseQueryId(e.target.value)}
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] font-sans"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#5141FF] font-sans"
                   >
                     {verifierQueries.map((q) => (
                       <option key={q.id} value={q.id}>
@@ -369,7 +360,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
                 {/* Response Text */}
                 <div>
                   <label htmlFor="reviewer-response-text" className="block text-xs font-semibold text-[#17181A] mb-1 font-sans">
-                    Clarification Explanation / Remediation Details <span className="text-[#ED2024]">*</span>
+                    Clarification Explanation / Remediation Details <span className="text-[#FB3256]">*</span>
                   </label>
                   <textarea
                     id="reviewer-response-text"
@@ -377,7 +368,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
                     value={responseText}
                     onChange={(e) => setResponseText(e.target.value)}
                     placeholder="e.g. Verified with plant facility engineer that billing cycle covers 01-Jul-2025 through 31-Jul-2025. Attached certified consumer ledger."
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#5141FF] placeholder-[#8A8F98] font-sans"
                     required
                   />
                 </div>
@@ -393,11 +384,8 @@ export const Screen33_VerifierQuery: React.FC = () => {
                     value={evidenceDocRef}
                     onChange={(e) => setEvidenceDocRef(e.target.value)}
                     placeholder="TANGEDCO_HT_Bill_Jul_2025.pdf"
-                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#01153C] placeholder-[#8A8F98] font-sans"
+                    className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] text-xs focus:outline-none focus:border-[#5141FF] placeholder-[#8A8F98] font-sans"
                   />
-                  <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-                    Cross-referenced file in organization evidence repository for third-party audit validation.
-                  </p>
                 </div>
 
                 {/* Form Actions */}
@@ -423,8 +411,8 @@ export const Screen33_VerifierQuery: React.FC = () => {
             </>
           ) : (
             <div className="space-y-3 py-4">
-              <div className="flex items-center space-x-2 text-[#01153C] font-semibold">
-                <ShieldCheck className="w-5 h-5 text-[#01153C]" />
+              <div className="flex items-center space-x-2 text-[#5141FF] font-semibold">
+                <ShieldCheck className="w-5 h-5 text-[#181B27]" />
                 <h3 className="text-sm">Assurance Query Channel</h3>
               </div>
               <p className="text-xs text-[#5F6368] leading-relaxed">
@@ -444,7 +432,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
         <div className="lg:col-span-5 bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs space-y-0">
           <div className="px-4 py-3 border-b border-[#E5E7EB] bg-[#F4F5F6] flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <HelpCircle className="w-4 h-4 text-[#01153C]" />
+              <HelpCircle className="w-4 h-4 text-[#181B27]" />
               <h3 className="text-xs font-semibold text-[#17181A] font-sans">Engagement Queries</h3>
             </div>
             <span className="text-[11px] text-[#5F6368] font-data">
@@ -481,7 +469,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
 
                   <div className="flex items-center justify-between text-[11px] text-[#8A8F98] pt-1">
                     <span className="font-data">{query.date || query.raisedAt}</span>
-                    <span className="text-[#01153C] font-medium font-sans">{query.queryType}</span>
+                    <span className="text-[#181B27] font-medium font-sans">{query.queryType}</span>
                   </div>
 
                   {isExpanded && (
@@ -540,7 +528,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
                               setSelectedResponseQueryId(query.id);
                               showToast('Query Selected', `Loaded ${query.id} into the response form.`, 'info');
                             }}
-                            className="px-2.5 py-1 text-[11px] text-[#01153C] hover:bg-[#01153C]/10 border border-[#01153C]/30 rounded-md font-semibold transition-colors"
+                            className="px-2.5 py-1 text-[11px] text-[#181B27] hover:bg-[#5141FF]/10 border border-[#5141FF]/30 rounded-md font-semibold transition-colors"
                           >
                             Respond to this Query →
                           </button>
@@ -557,7 +545,7 @@ export const Screen33_VerifierQuery: React.FC = () => {
             <span>All queries are recorded in the audit trail</span>
             <button
               onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
-              className="text-[#01153C] hover:underline font-semibold font-sans"
+              className="text-[#5141FF] hover:underline font-semibold font-sans"
             >
               View Audit Log →
             </button>

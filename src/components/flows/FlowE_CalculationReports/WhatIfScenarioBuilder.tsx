@@ -72,7 +72,7 @@ const PRESET_SCENARIOS: ScenarioPreset[] = [
     id: 're100-fast',
     name: '100% RE Transition',
     tag: 'RE100',
-    tagColor: 'bg-[#EDF2FA] text-[#01153C]',
+    tagColor: 'bg-[#F2F0FF] text-[#5141FF]',
     summary: '100% Green Power · 7.0 MWp Solar · Fleet EV',
     reShare: 100,
     solarCapacity: 7.0,
@@ -354,7 +354,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
         title="What-If Decarbonization Simulator"
         contextInfo={
           <div className="flex items-center gap-2 text-xs text-[#4B5563]">
-            <span className="font-semibold text-[#01153C]">{baseline.period} Baseline</span>
+            <span className="font-semibold text-[#181B27]">{baseline.period} Baseline</span>
             <span>·</span>
             <span>{baseline.total.toLocaleString()} tCO2e</span>
             <span>·</span>
@@ -365,7 +365,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={handleResetToBaseline}
-              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#5141FF] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5141FF]"
               aria-label="Reset scenario levers to baseline"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -373,7 +373,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
             </button>
             <button
               onClick={handleExportCsv}
-              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#5141FF] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5141FF]"
               aria-label="Export scenario data to CSV"
             >
               <Download className="w-3.5 h-3.5" />
@@ -381,14 +381,14 @@ export const WhatIfScenarioBuilder: React.FC = () => {
             </button>
             <button
               onClick={() => navigateToScreen('37_benchmarking', 'FLOW_E')}
-              className="h-9 px-3.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] hover:bg-[#E2EAF7] border border-[#01153C]/20 rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#5141FF] bg-[#F2F0FF] hover:bg-[#E2EAF7] border border-[#5141FF]/20 rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5141FF]"
             >
               <Target className="w-3.5 h-3.5" />
               <span>Benchmark Radar</span>
             </button>
             <button
               onClick={handleSaveScenario}
-              className="h-9 px-4 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-4 text-xs font-semibold text-white bg-[#5141FF] hover:bg-[#4232E8] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5141FF]"
             >
               <Save className="w-3.5 h-3.5" />
               <span>Save Scenario</span>
@@ -401,7 +401,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
       <section aria-labelledby="preset-heading" className="bg-white border border-[#E5E7EB] rounded-xl p-3.5 md:p-4 shadow-2xs space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F1F3F5] pb-2">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-[#01153C]" />
+            <Sparkles className="w-4 h-4 text-[#181B27]" />
             <h2 id="preset-heading" className="text-xs font-bold text-[#171A1F] uppercase tracking-wider">
               Select Preset Pathway
             </h2>
@@ -414,7 +414,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               id="target-year-select"
               value={targetYear}
               onChange={(e) => setTargetYear(e.target.value)}
-              className="px-2.5 py-1 text-xs font-semibold text-[#01153C] bg-[#F8F9FB] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#01153C]"
+              className="px-2.5 py-1 text-xs font-semibold text-[#181B27] bg-[#F8F9FB] border border-[#E5E7EB] rounded-md focus:outline-none focus:ring-2 focus:ring-[#5141FF]"
             >
               <option value="2026">2026</option>
               <option value="2028">2028</option>
@@ -432,9 +432,9 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               <button
                 key={preset.id}
                 onClick={() => handleSelectPreset(preset)}
-                className={`text-left p-3 rounded-xl border transition-all focus-visible:ring-2 focus-visible:ring-[#01153C] outline-none ${
+                className={`text-left p-3 rounded-xl border transition-all focus-visible:ring-2 focus-visible:ring-[#5141FF] outline-none ${
                   isSelected
-                    ? 'border-[#01153C] bg-[#EDF2FA]/60 ring-1 ring-[#01153C]'
+                    ? 'border-[#5141FF] bg-[#F2F0FF]/60 ring-1 ring-[#01153C]'
                     : 'border-[#E5E7EB] bg-white hover:border-[#D1D5DB] hover:bg-[#FAFAFB]'
                 }`}
               >
@@ -445,7 +445,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
                   </span>
                 </div>
                 <div className="text-[11px] text-[#4B5563] line-clamp-1">{preset.summary}</div>
-                <div className="mt-2 flex items-center gap-1.5 text-[10px] font-mono text-[#01153C] font-semibold">
+                <div className="mt-2 flex items-center gap-1.5 text-[10px] font-mono text-[#5141FF] font-semibold">
                   <span>{preset.reShare}% RE</span>
                   <span>·</span>
                   <span>{preset.solarCapacity}MW Solar</span>
@@ -462,7 +462,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
       <section aria-label="Key scenario projection metrics" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-2.5 md:gap-3">
         <div className="bg-white border border-[#E5E7EB] rounded-xl p-3 md:p-3.5 shadow-2xs">
           <div className="text-[11px] text-[#4B5563] font-medium">Projected Total</div>
-          <div className="text-lg md:text-xl font-bold text-[#01153C] mt-1 font-mono">
+          <div className="text-lg md:text-xl font-bold text-[#181B27] mt-1 font-mono">
             {projections.projectedTotal.toLocaleString()}
           </div>
           <div className="text-[10px] text-[#4B5563]">tCO2e in {targetYear}</div>
@@ -497,7 +497,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
 
         <div className="bg-white border border-[#E5E7EB] rounded-xl p-3 md:p-3.5 shadow-2xs">
           <div className="text-[11px] text-[#4B5563] font-medium">Carbon Intensity</div>
-          <div className="text-lg md:text-xl font-bold text-[#01153C] mt-1 font-mono">
+          <div className="text-lg md:text-xl font-bold text-[#181B27] mt-1 font-mono">
             {projections.projectedIntensity}
           </div>
           <div className="text-[10px] text-[#4B5563]">tCO2e / $M Rev</div>
@@ -519,7 +519,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
           <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 md:p-5 shadow-2xs space-y-4">
             <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2.5">
               <div className="flex items-center gap-1.5 text-xs font-bold text-[#171A1F] uppercase tracking-wider">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-[#01153C]" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#181B27]" />
                 Transition Levers
               </div>
               <span className="text-[10px] font-mono font-bold text-[#0F6B48] bg-[#E8F8EE] px-2 py-0.5 rounded">
@@ -529,7 +529,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
 
             {/* Lever Group 1: Renewable Power */}
             <div className="space-y-3">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#01153C]">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#181B27]">
                 <Zap className="w-3.5 h-3.5 text-[#D97706]" />
                 Renewable Power (Scope 2)
               </div>
@@ -538,7 +538,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <label htmlFor="lever-re-share" className="font-medium text-[#171A1F]">Grid RE PPA Share</label>
-                  <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                  <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                     {reShare}%
                   </span>
                 </div>
@@ -562,7 +562,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <label htmlFor="lever-solar-cap" className="font-medium text-[#171A1F]">On-Site Solar Rooftop</label>
-                  <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                  <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                     {solarCapacity} MWp
                   </span>
                 </div>
@@ -586,7 +586,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
             {/* Lever Group 2: Site Efficiency */}
             <div className="space-y-3 pt-3 border-t border-[#F1F3F5]">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#01153C]">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#181B27]">
                   <Building2 className="w-3.5 h-3.5 text-[#0F6B48]" />
                   Site Efficiency Improvements
                 </div>
@@ -598,7 +598,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
                 <div className="space-y-1">
                   <div className="flex justify-between text-xs">
                     <label htmlFor="lever-chennai" className="font-medium text-[#171A1F]">Chennai Plant 1</label>
-                    <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                    <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                       {chennaiEfficiency}%
                     </span>
                   </div>
@@ -622,7 +622,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
                 <div className="space-y-1">
                   <div className="flex justify-between text-xs">
                     <label htmlFor="lever-pune" className="font-medium text-[#171A1F]">Pune Warehouse</label>
-                    <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                    <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                       {puneEfficiency}%
                     </span>
                   </div>
@@ -646,7 +646,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
                 <div className="space-y-1">
                   <div className="flex justify-between text-xs">
                     <label htmlFor="lever-ahmedabad" className="font-medium text-[#171A1F]">Ahmedabad Unit</label>
-                    <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                    <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                       {ahmedabadEfficiency}%
                     </span>
                   </div>
@@ -670,8 +670,8 @@ export const WhatIfScenarioBuilder: React.FC = () => {
 
             {/* Lever Group 3: Scope 1 Electrification */}
             <div className="space-y-3 pt-3 border-t border-[#F1F3F5]">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-[#01153C]">
-                <Flame className="w-3.5 h-3.5 text-[#ED2024]" />
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#181B27]">
+                <Flame className="w-3.5 h-3.5 text-[#FB3256]" />
                 Thermal & Fleet Electrification (Scope 1)
               </div>
 
@@ -679,7 +679,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <label htmlFor="lever-diesel" className="font-medium text-[#171A1F]">Diesel GenSet Battery (BESS)</label>
-                  <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                  <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                     {dieselReduction}%
                   </span>
                 </div>
@@ -703,7 +703,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <label htmlFor="lever-boiler" className="font-medium text-[#171A1F]">Boiler Heat Pumps</label>
-                  <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                  <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                     {boilerElectrification}%
                   </span>
                 </div>
@@ -727,7 +727,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               <div className="space-y-1">
                 <div className="flex justify-between text-xs">
                   <label htmlFor="lever-fleet" className="font-medium text-[#171A1F]">Commercial Fleet EV</label>
-                  <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                  <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                     {fleetEv}%
                   </span>
                 </div>
@@ -752,7 +752,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
             <div className="space-y-2 pt-3 border-t border-[#F1F3F5]">
               <div className="flex justify-between text-xs">
                 <label htmlFor="lever-growth" className="font-medium text-[#171A1F]">Production Growth Target</label>
-                <span className="font-mono font-bold text-[#01153C] bg-[#EDF2FA] px-1.5 py-0.5 rounded text-[11px]">
+                <span className="font-mono font-bold text-[#5141FF] bg-[#F2F0FF] px-1.5 py-0.5 rounded text-[11px]">
                   {productionGrowth > 0 ? `+${productionGrowth}%` : `${productionGrowth}%`}
                 </span>
               </div>
@@ -782,30 +782,30 @@ export const WhatIfScenarioBuilder: React.FC = () => {
               <div className="flex items-center space-x-1">
                 <button
                   onClick={() => setActiveTab('projections')}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#01153C] ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#5141FF] ${
                     activeTab === 'projections'
-                      ? 'bg-[#01153C] text-white'
-                      : 'text-[#4B5563] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                      ? 'bg-[#5141FF] text-white'
+                      : 'text-[#4B5563] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
                   }`}
                 >
                   Emissions Trajectory
                 </button>
                 <button
                   onClick={() => setActiveTab('sites')}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#01153C] ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#5141FF] ${
                     activeTab === 'sites'
-                      ? 'bg-[#01153C] text-white'
-                      : 'text-[#4B5563] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                      ? 'bg-[#5141FF] text-white'
+                      : 'text-[#4B5563] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
                   }`}
                 >
                   Site Impact
                 </button>
                 <button
                   onClick={() => setActiveTab('financials')}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#01153C] ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#5141FF] ${
                     activeTab === 'financials'
-                      ? 'bg-[#01153C] text-white'
-                      : 'text-[#4B5563] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                      ? 'bg-[#5141FF] text-white'
+                      : 'text-[#4B5563] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
                   }`}
                 >
                   Financial ROI
@@ -923,8 +923,8 @@ export const WhatIfScenarioBuilder: React.FC = () => {
                           <tr key={s.name} className="hover:bg-[#FAFAFB]">
                             <td className="py-2.5 px-3 font-semibold text-[#171A1F]">{s.name}</td>
                             <td className="py-2.5 px-3 font-mono text-[#4B5563]">{s.base.toLocaleString()} t</td>
-                            <td className="py-2.5 px-3 font-mono font-semibold text-[#01153C]">{s.eff}%</td>
-                            <td className="py-2.5 px-3 font-mono font-semibold text-[#01153C]">
+                            <td className="py-2.5 px-3 font-mono font-semibold text-[#181B27]">{s.eff}%</td>
+                            <td className="py-2.5 px-3 font-mono font-semibold text-[#181B27]">
                               {s.projected.toLocaleString()} t
                             </td>
                             <td className="py-2.5 px-3 text-right font-mono font-bold text-[#0F6B48]">
@@ -945,7 +945,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div className="p-3 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl">
                     <div className="text-[11px] text-[#4B5563] font-medium">Est. CapEx Deployment</div>
-                    <div className="text-lg font-bold text-[#01153C] mt-0.5 font-mono">
+                    <div className="text-lg font-bold text-[#181B27] mt-0.5 font-mono">
                       ${(projections.totalEstCapexUSD / 1000).toFixed(0)}k
                     </div>
                   </div>
@@ -959,7 +959,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
 
                   <div className="p-3 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl">
                     <div className="text-[11px] text-[#4B5563] font-medium">Simple Payback</div>
-                    <div className="text-lg font-bold text-[#01153C] mt-0.5 font-mono">
+                    <div className="text-lg font-bold text-[#181B27] mt-0.5 font-mono">
                       {projections.simplePaybackYears} Years
                     </div>
                   </div>

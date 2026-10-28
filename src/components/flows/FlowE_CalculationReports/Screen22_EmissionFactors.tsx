@@ -63,7 +63,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
               id="btn-launch-factor-helper"
               type="button"
               onClick={() => openFactorHelper()}
-              className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] rounded-full hover:bg-[#02215c] shadow-sm flex items-center space-x-1.5 transition-all"
+              className="px-4 py-2 text-xs font-semibold text-white bg-[#5141FF] rounded-full hover:bg-[#4232E8] shadow-sm flex items-center space-x-1.5 transition-all"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#FFD166]" />
               <span>Launch Factor Helper</span>
@@ -71,7 +71,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
 
             <button
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
-              className="px-4 py-2 text-xs font-semibold text-[#01153C] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs flex items-center space-x-1.5 transition-all"
+              className="px-4 py-2 text-xs font-semibold text-[#181B27] bg-white border border-[#E5E7EB] rounded-full hover:bg-[#FAFAFB] shadow-2xs flex items-center space-x-1.5 transition-all"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Drill-Down</span>
@@ -81,14 +81,14 @@ export const Screen22_EmissionFactors: React.FC = () => {
       />
 
       {/* Core Business Rule Banner */}
-      <div className="p-4 bg-[#EDF2FA] border border-[#DCE5F5] rounded-2xl text-xs text-[#01153C] flex items-center justify-between shadow-2xs">
+      <div className="p-4 bg-[#F2F0FF] border border-[#E5E0FF] rounded-2xl text-xs text-[#5141FF] flex items-center justify-between shadow-2xs">
         <div className="flex items-center space-x-2.5">
-          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
+          <ShieldCheck className="w-4 h-4 shrink-0 text-[#181B27]" />
           <span>
-            <strong className="font-semibold text-[#01153C]">Core Business Rule:</strong> Emission factors are read-only, versioned by financial year, and never overwritten. <em>A 2026 result stays reproducible in 2029.</em>
+            <strong className="font-semibold text-[#181B27]">Core Business Rule:</strong> Emission factors are read-only, versioned by financial year, and never overwritten. <em>A 2026 result stays reproducible in 2029.</em>
           </span>
         </div>
-        <span className="text-[11px] font-sans font-semibold text-[#01153C] bg-white px-3 py-1 rounded-full border border-[#DCE5F5]">
+        <span className="text-[11px] font-sans font-semibold text-[#181B27] bg-white px-3 py-1 rounded-full border border-[#E5E0FF]">
           Zero silent modifications
         </span>
       </div>
@@ -104,7 +104,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
               value={tableSearch}
               onChange={(e) => setTableSearch(e.target.value)}
               placeholder="Filter factors..."
-              className="w-full pl-8 pr-3 py-1.5 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-full text-[#17181A] placeholder-[#8A8F98] focus:outline-none focus:border-[#01153C]"
+              className="w-full pl-8 pr-3 py-1.5 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-full text-[#17181A] placeholder-[#8A8F98] focus:outline-none focus:border-[#5141FF]"
             />
           </div>
 
@@ -114,7 +114,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
             <select
               value={publishingBodyFilter}
               onChange={(e) => setPublishingBodyFilter(e.target.value)}
-              className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
+              className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] font-sans"
             >
               <option value="All">All Bodies</option>
               <option value="IPCC">IPCC (AR6 / 2006)</option>
@@ -130,7 +130,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
             <select
               value={financialYearFilter}
               onChange={(e) => setFinancialYearFilter(e.target.value)}
-              className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
+              className="px-3.5 py-1.5 text-xs border border-[#E5E7EB] rounded-full bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] font-sans"
             >
               <option value="FY 2025–26">FY 2025–26 (Active)</option>
               <option value="FY 2024–25">FY 2024–25 (Historical Snapshot)</option>
@@ -167,14 +167,14 @@ export const Screen22_EmissionFactors: React.FC = () => {
                   <span className="font-semibold text-[#17181A]">{row.scope}</span>
                   <div className="text-[10px] text-[#8A8F98]">{row.region}</div>
                 </td>
-                <td className="py-3.5 px-4 text-right emission-factor font-bold text-[#01153C] font-mono text-sm">
+                <td className="py-3.5 px-4 text-right emission-factor font-bold text-[#181B27] font-mono text-sm">
                   {row.value}
                 </td>
                 <td className="py-3.5 px-4 emission-factor text-[#5F6368] font-data">
                   {row.unit}
                 </td>
-                <td className="py-3.5 px-4 font-semibold text-[#01153C]">
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#EDF2FA] border border-[#DCE5F5] text-xs">
+                <td className="py-3.5 px-4 font-semibold text-[#181B27]">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#F2F0FF] border border-[#E5E0FF] text-xs">
                     {row.publishingBody}
                   </span>
                 </td>
@@ -182,7 +182,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => openFactorHelper(row.name)}
-                    className="px-3 py-1.5 rounded-full bg-[#EDF2FA] hover:bg-[#01153C] text-[#01153C] hover:text-white font-semibold text-xs transition-colors shadow-2xs"
+                    className="px-3 py-1.5 rounded-full bg-[#F2F0FF] hover:bg-[#5141FF] text-[#181B27] hover:text-white font-semibold text-xs transition-colors shadow-2xs"
                   >
                     Calculate
                   </button>
@@ -196,7 +196,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
       {/* Compliance & Functional Notes */}
       <div className="p-4 bg-white border border-[#E5E7EB] rounded-2xl text-xs text-[#5F6368] space-y-1.5 shadow-2xs font-data">
         <div className="font-semibold text-[#17181A] flex items-center space-x-1.5">
-          <Info className="w-3.5 h-3.5 text-[#01153C]" />
+          <Info className="w-3.5 h-3.5 text-[#181B27]" />
           <span>Functional Requirements (FR-22.01 – FR-22.05):</span>
         </div>
         <ul className="list-disc list-inside space-y-1 pl-1 text-[11px] text-[#5F6368]">

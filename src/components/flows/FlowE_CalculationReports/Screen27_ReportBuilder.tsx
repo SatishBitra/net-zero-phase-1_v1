@@ -85,15 +85,12 @@ export const Screen27_ReportBuilder: React.FC = () => {
               <select
                 value={reportingPeriod}
                 onChange={(e) => setReportingPeriod(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
+                className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] font-sans"
               >
                 <option value="FY 2025–26">FY 2025–26 (Apr 2025 – Mar 2026) — Default</option>
                 <option value="FY 2024–25">FY 2024–25 (Historical Snapshot)</option>
               </select>
             </div>
-            <p className="text-[11px] text-[#5F6368] mt-1 font-data">
-              Uses the relevant locked and versioned calculation ledger.
-            </p>
           </div>
 
           {/* Report Type */}
@@ -104,7 +101,7 @@ export const Screen27_ReportBuilder: React.FC = () => {
             <select
               value={reportType}
               onChange={(e) => setReportType(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
+              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] font-sans"
             >
               <option value="GHG Inventory (Scope 1+2)">
                 GHG Inventory (Scope 1+2) — Phase 1 Standard
@@ -129,7 +126,7 @@ export const Screen27_ReportBuilder: React.FC = () => {
             <select
               value={sitesIncluded}
               onChange={(e) => setSitesIncluded(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#01153C] font-sans"
+              className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg bg-white text-[#17181A] focus:outline-none focus:border-[#5141FF] font-sans"
             >
               <option value="All Sites">All Sites (Chennai Plant 1, Pune Warehouse, Hyderabad HQ)</option>
               <option value="Chennai Plant 1">Chennai Plant 1 Only</option>
@@ -146,7 +143,7 @@ export const Screen27_ReportBuilder: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <label
                 className={`p-3 border rounded-xl flex items-center space-x-3 cursor-pointer transition-all ${
-                  format === 'PDF' ? 'border-[#01153C] bg-[#01153C]/5 shadow-2xs' : 'border-[#E5E7EB] hover:bg-[#FAFAFB]'
+                  format === 'PDF' ? 'border-[#5141FF] bg-[#5141FF]/5 shadow-2xs' : 'border-[#E5E7EB] hover:bg-[#FAFAFB]'
                 }`}
               >
                 <input
@@ -155,7 +152,7 @@ export const Screen27_ReportBuilder: React.FC = () => {
                   value="PDF"
                   checked={format === 'PDF'}
                   onChange={() => setFormat('PDF')}
-                  className="text-[#01153C] accent-[#01153C]"
+                  className="text-[#181B27] accent-[#01153C]"
                 />
                 <div>
                   <div className="text-xs font-semibold text-[#17181A] font-sans">PDF Document</div>
@@ -167,7 +164,7 @@ export const Screen27_ReportBuilder: React.FC = () => {
 
               <label
                 className={`p-3 border rounded-xl flex items-center space-x-3 cursor-pointer transition-all ${
-                  format === 'Excel' ? 'border-[#01153C] bg-[#01153C]/5 shadow-2xs' : 'border-[#E5E7EB] hover:bg-[#FAFAFB]'
+                  format === 'Excel' ? 'border-[#5141FF] bg-[#5141FF]/5 shadow-2xs' : 'border-[#E5E7EB] hover:bg-[#FAFAFB]'
                 }`}
               >
                 <input
@@ -176,7 +173,7 @@ export const Screen27_ReportBuilder: React.FC = () => {
                   value="Excel"
                   checked={format === 'Excel'}
                   onChange={() => setFormat('Excel')}
-                  className="text-[#01153C] accent-[#01153C]"
+                  className="text-[#181B27] accent-[#01153C]"
                 />
                 <div>
                   <div className="text-xs font-semibold text-[#17181A] font-sans">Excel / CSV Workbook</div>

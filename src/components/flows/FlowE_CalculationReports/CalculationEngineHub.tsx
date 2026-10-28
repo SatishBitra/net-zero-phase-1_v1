@@ -154,8 +154,8 @@ export const CalculationEngineHub: React.FC = () => {
             onClick={() => setActiveHubView('calculator')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5 ${
               activeHubView === 'calculator'
-                ? 'bg-[#01153C] text-white shadow-2xs'
-                : 'text-[#5F6368] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                ? 'bg-[#5141FF] text-white shadow-2xs'
+                : 'text-[#5F6368] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
             }`}
           >
             <Calculator className="w-3.5 h-3.5" />
@@ -166,8 +166,8 @@ export const CalculationEngineHub: React.FC = () => {
             onClick={() => setActiveHubView('workflow')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5 ${
               activeHubView === 'workflow'
-                ? 'bg-[#01153C] text-white shadow-2xs'
-                : 'text-[#5F6368] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                ? 'bg-[#5141FF] text-white shadow-2xs'
+                : 'text-[#5F6368] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
@@ -178,8 +178,8 @@ export const CalculationEngineHub: React.FC = () => {
             onClick={() => setActiveHubView('units')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5 ${
               activeHubView === 'units'
-                ? 'bg-[#01153C] text-white shadow-2xs'
-                : 'text-[#5F6368] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                ? 'bg-[#5141FF] text-white shadow-2xs'
+                : 'text-[#5F6368] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
             }`}
           >
             <Scale className="w-3.5 h-3.5" />
@@ -190,8 +190,8 @@ export const CalculationEngineHub: React.FC = () => {
             onClick={() => setActiveHubView('hierarchy')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5 ${
               activeHubView === 'hierarchy'
-                ? 'bg-[#01153C] text-white shadow-2xs'
-                : 'text-[#5F6368] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                ? 'bg-[#5141FF] text-white shadow-2xs'
+                : 'text-[#5F6368] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -202,8 +202,8 @@ export const CalculationEngineHub: React.FC = () => {
             onClick={() => setActiveHubView('validation')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5 ${
               activeHubView === 'validation'
-                ? 'bg-[#01153C] text-white shadow-2xs'
-                : 'text-[#5F6368] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                ? 'bg-[#5141FF] text-white shadow-2xs'
+                : 'text-[#5F6368] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
             }`}
           >
             <ShieldCheck className="w-3.5 h-3.5" />
@@ -214,8 +214,8 @@ export const CalculationEngineHub: React.FC = () => {
             onClick={() => setActiveHubView('sections')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5 ${
               activeHubView === 'sections'
-                ? 'bg-[#01153C] text-white shadow-2xs'
-                : 'text-[#5F6368] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                ? 'bg-[#5141FF] text-white shadow-2xs'
+                : 'text-[#5F6368] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
             }`}
           >
             <FileSpreadsheet className="w-3.5 h-3.5" />
@@ -226,8 +226,8 @@ export const CalculationEngineHub: React.FC = () => {
             onClick={() => setActiveHubView('tests')}
             className={`px-3 py-1.5 rounded-lg font-semibold transition-colors flex items-center gap-1.5 ${
               activeHubView === 'tests'
-                ? 'bg-[#01153C] text-white shadow-2xs'
-                : 'text-[#5F6368] hover:text-[#01153C] hover:bg-[#F8F9FB]'
+                ? 'bg-[#5141FF] text-white shadow-2xs'
+                : 'text-[#5F6368] hover:text-[#5141FF] hover:bg-[#F8F9FB]'
             }`}
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
@@ -236,7 +236,7 @@ export const CalculationEngineHub: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-1.5">
-          <span className="text-[10px] font-mono text-[#01153C] font-semibold bg-[#EDF2FA] px-2 py-0.5 rounded border border-[#01153C]/10">
+          <span className="text-[10px] font-mono text-[#5141FF] font-semibold bg-[#F2F0FF] px-2 py-0.5 rounded border border-[#5141FF]/10">
             TC-DOM-002a Engine v1.4.2
           </span>
         </div>
@@ -250,7 +250,7 @@ export const CalculationEngineHub: React.FC = () => {
             <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 sm:p-5 shadow-2xs space-y-4">
               <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2.5">
                 <span className="text-xs font-bold text-[#171A1F] uppercase tracking-wider flex items-center gap-1.5">
-                  <Calculator className="w-4 h-4 text-[#01153C]" />
+                  <Calculator className="w-4 h-4 text-[#181B27]" />
                   Select Formula (C-01 to C-12)
                 </span>
                 <span className="text-[11px] font-semibold text-[#0F6B48] bg-[#E8F8EE] px-2 py-0.5 rounded">
@@ -267,7 +267,7 @@ export const CalculationEngineHub: React.FC = () => {
                     const found = FORMULA_CATALOGUE.find((f) => f.id === e.target.value);
                     if (found) handleSelectFormula(found);
                   }}
-                  className="w-full px-3 py-2 text-xs font-semibold text-[#01153C] bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C]"
+                  className="w-full px-3 py-2 text-xs font-semibold text-[#181B27] bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#5141FF]"
                 >
                   {FORMULA_CATALOGUE.map((f) => (
                     <option key={f.id} value={f.id}>
@@ -280,7 +280,7 @@ export const CalculationEngineHub: React.FC = () => {
               {/* LaTeX & Definition Card */}
               <div className="p-3 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg space-y-1.5">
                 <div className="text-[10px] font-semibold text-[#5F6368] uppercase tracking-wider">Formula Equation:</div>
-                <div className="font-mono text-xs font-bold text-[#01153C] bg-white p-2 rounded border border-[#E5E7EB]">
+                <div className="font-mono text-xs font-bold text-[#181B27] bg-white p-2 rounded border border-[#E5E7EB]">
                   {activeFormula.formulaDisplay}
                 </div>
                 <p className="text-[11px] text-[#5F6368] leading-relaxed">{activeFormula.description}</p>
@@ -293,7 +293,7 @@ export const CalculationEngineHub: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleLoadWorkedExample}
-                    className="text-[11px] font-semibold text-[#01153C] hover:underline flex items-center gap-1"
+                    className="text-[11px] font-semibold text-[#5141FF] hover:underline flex items-center gap-1"
                   >
                     <RotateCcw className="w-3 h-3" />
                     Load Golden Example
@@ -312,7 +312,7 @@ export const CalculationEngineHub: React.FC = () => {
                         <select
                           value={formData[inp.key] || ''}
                           onChange={(e) => setFormData({ ...formData, [inp.key]: e.target.value })}
-                          className="w-full px-2.5 py-1.5 text-xs text-[#171A1F] bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#01153C]"
+                          className="w-full px-2.5 py-1.5 text-xs text-[#171A1F] bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#5141FF]"
                         >
                           {inp.options?.map((opt) => (
                             <option key={opt} value={opt}>
@@ -326,7 +326,7 @@ export const CalculationEngineHub: React.FC = () => {
                           step="any"
                           value={formData[inp.key] ?? ''}
                           onChange={(e) => setFormData({ ...formData, [inp.key]: parseFloat(e.target.value) || 0 })}
-                          className="w-full px-2.5 py-1.5 text-xs font-mono text-[#171A1F] bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#01153C]"
+                          className="w-full px-2.5 py-1.5 text-xs font-mono text-[#171A1F] bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#5141FF]"
                         />
                       )}
                     </div>
@@ -341,7 +341,7 @@ export const CalculationEngineHub: React.FC = () => {
                       type="button"
                       onClick={() => setSelectedGwpVersion('AR5')}
                       className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-colors ${
-                        selectedGwpVersion === 'AR5' ? 'bg-[#01153C] text-white' : 'bg-[#F1F3F5] text-[#5F6368]'
+                        selectedGwpVersion === 'AR5' ? 'bg-[#5141FF] text-white' : 'bg-[#F1F3F5] text-[#5F6368]'
                       }`}
                     >
                       IPCC AR5 (Default)
@@ -350,7 +350,7 @@ export const CalculationEngineHub: React.FC = () => {
                       type="button"
                       onClick={() => setSelectedGwpVersion('AR6')}
                       className={`px-2 py-0.5 rounded text-[11px] font-semibold transition-colors ${
-                        selectedGwpVersion === 'AR6' ? 'bg-[#01153C] text-white' : 'bg-[#F1F3F5] text-[#5F6368]'
+                        selectedGwpVersion === 'AR6' ? 'bg-[#5141FF] text-white' : 'bg-[#F1F3F5] text-[#5F6368]'
                       }`}
                     >
                       IPCC AR6
@@ -376,19 +376,19 @@ export const CalculationEngineHub: React.FC = () => {
               </div>
 
               {/* Primary Total Output Tile */}
-              <div className="p-4 bg-gradient-to-r from-[#EDF2FA] to-white border border-[#DCE5F5] rounded-xl flex items-center justify-between gap-3">
+              <div className="p-4 bg-gradient-to-r from-[#EDF2FA] to-white border border-[#E5E0FF] rounded-xl flex items-center justify-between gap-3">
                 <div>
                   <div className="text-[11px] font-semibold text-[#5F6368] uppercase tracking-wider">
                     Calculated Carbon Total
                   </div>
-                  <div className="text-2xl sm:text-3xl font-bold text-[#01153C] mt-1 font-mono">
+                  <div className="text-2xl sm:text-3xl font-bold text-[#181B27] mt-1 font-mono">
                     {calculationResult.emissions_tCO2e.toLocaleString()} <span className="text-base font-normal text-[#5F6368]">tCO2e</span>
                   </div>
                 </div>
 
                 <div className="text-right">
                   <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${
-                    calculationResult.success ? 'bg-[#E8F8EE] text-[#0F6B48]' : 'bg-[#FEF1F1] text-[#ED2024]'
+                    calculationResult.success ? 'bg-[#E8F8EE] text-[#0F6B48]' : 'bg-[#FFF0F3] text-[#FB3256]'
                   }`}>
                     {calculationResult.success ? 'Validation Passed' : 'Blocked by Rules'}
                   </span>
@@ -416,14 +416,14 @@ export const CalculationEngineHub: React.FC = () => {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                   <div className="p-2.5 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg">
                     <span className="text-[10px] text-[#5F6368]">Pure Fossil CO2</span>
-                    <div className="text-base font-bold font-mono text-[#01153C] mt-0.5">
+                    <div className="text-base font-bold font-mono text-[#181B27] mt-0.5">
                       {calculationResult.gasBreakdown.co2_tonnes} <span className="text-[10px]">t</span>
                     </div>
                   </div>
 
                   <div className="p-2.5 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg">
                     <span className="text-[10px] text-[#5F6368]">Methane (CH4)</span>
-                    <div className="text-base font-bold font-mono text-[#01153C] mt-0.5">
+                    <div className="text-base font-bold font-mono text-[#181B27] mt-0.5">
                       {calculationResult.gasBreakdown.ch4_tonnes} <span className="text-[10px]">t</span>
                     </div>
                     <span className="text-[9px] text-[#8A8F98]">× {GWP_FACTORS[selectedGwpVersion].CH4} GWP</span>
@@ -431,7 +431,7 @@ export const CalculationEngineHub: React.FC = () => {
 
                   <div className="p-2.5 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg">
                     <span className="text-[10px] text-[#5F6368]">Nitrous Oxide (N2O)</span>
-                    <div className="text-base font-bold font-mono text-[#01153C] mt-0.5">
+                    <div className="text-base font-bold font-mono text-[#181B27] mt-0.5">
                       {calculationResult.gasBreakdown.n2o_tonnes} <span className="text-[10px]">t</span>
                     </div>
                     <span className="text-[9px] text-[#8A8F98]">× {GWP_FACTORS[selectedGwpVersion].N2O} GWP</span>
@@ -449,14 +449,14 @@ export const CalculationEngineHub: React.FC = () => {
 
               {/* Validation Issues / Rules Triggered */}
               {calculationResult.issues.length > 0 && (
-                <div className="p-3 bg-[#FEF1F1] border border-[#ED2024]/20 rounded-lg space-y-1.5">
-                  <div className="text-xs font-bold text-[#ED2024] flex items-center gap-1.5">
+                <div className="p-3 bg-[#FFF0F3] border border-[#FB3256]/20 rounded-lg space-y-1.5">
+                  <div className="text-xs font-bold text-[#FB3256] flex items-center gap-1.5">
                     <AlertTriangle className="w-3.5 h-3.5" />
                     Validation Rule Flagged:
                   </div>
                   {calculationResult.issues.map((iss, i) => (
                     <div key={i} className="text-xs text-[#171A1F]">
-                      <span className="font-semibold text-[#ED2024]">[{iss.severity.toUpperCase()} - {iss.code}]</span> {iss.message}
+                      <span className="font-semibold text-[#FB3256]">[{iss.severity.toUpperCase()} - {iss.code}]</span> {iss.message}
                       <div className="text-[11px] text-[#5F6368] mt-0.5">Resolution: {iss.expectedResolution}</div>
                     </div>
                   ))}
@@ -469,7 +469,7 @@ export const CalculationEngineHub: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => openFactorHelper()}
-                  className="font-semibold text-[#01153C] hover:underline flex items-center gap-1"
+                  className="font-semibold text-[#5141FF] hover:underline flex items-center gap-1"
                 >
                   <BookOpen className="w-3.5 h-3.5" />
                   <span>Open Emission Factor Helper (IPCC / IEA / CEA)</span>
@@ -487,85 +487,82 @@ export const CalculationEngineHub: React.FC = () => {
             <h3 className="text-sm font-bold text-[#171A1F]">
               The 6-Step End-to-End Calculation Engine Workflow
             </h3>
-            <p className="text-xs text-[#5F6368] mt-0.5">
-              Governs the transformation of raw operational activity measurements into traceable, auditor-verified GHG inventory results.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="w-6 h-6 rounded-full bg-[#01153C] text-white flex items-center justify-center font-bold text-xs">1</span>
+                <span className="w-6 h-6 rounded-full bg-[#5141FF] text-white flex items-center justify-center font-bold text-xs">1</span>
                 <span className="text-[10px] font-semibold text-[#5F6368] uppercase">Ingestion</span>
               </div>
               <h4 className="text-xs font-bold text-[#171A1F]">Activity Data Capture</h4>
               <p className="text-[11px] text-[#5F6368] leading-relaxed">
                 Captures metered fuel combustion (coal, oil, gas), purchased electricity, refrigerant top-ups, production output, and certified removals.
               </p>
-              <div className="text-[10px] font-mono text-[#01153C] bg-white p-2 rounded border border-[#E5E7EB]">
+              <div className="text-[10px] font-mono text-[#181B27] bg-white p-2 rounded border border-[#E5E7EB]">
                 Sources: Utility Invoices, IoT SCADA, ERP Freight Logs
               </div>
             </div>
 
             <div className="p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="w-6 h-6 rounded-full bg-[#01153C] text-white flex items-center justify-center font-bold text-xs">2</span>
+                <span className="w-6 h-6 rounded-full bg-[#5141FF] text-white flex items-center justify-center font-bold text-xs">2</span>
                 <span className="text-[10px] font-semibold text-[#5F6368] uppercase">Normalization</span>
               </div>
               <h4 className="text-xs font-bold text-[#171A1F]">Validation & Unit Normalization</h4>
               <p className="text-[11px] text-[#5F6368] leading-relaxed">
                 Validates reporting period bounds and normalizes physical units (kg, t, L, kL, kWh, MWh, GJ, TJ). Enforces liquid fuel density checks.
               </p>
-              <div className="text-[10px] font-mono text-[#01153C] bg-white p-2 rounded border border-[#E5E7EB]">
+              <div className="text-[10px] font-mono text-[#181B27] bg-white p-2 rounded border border-[#E5E7EB]">
                 Block Rule: Density missing for liquid fuels rejects run
               </div>
             </div>
 
             <div className="p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="w-6 h-6 rounded-full bg-[#01153C] text-white flex items-center justify-center font-bold text-xs">3</span>
+                <span className="w-6 h-6 rounded-full bg-[#5141FF] text-white flex items-center justify-center font-bold text-xs">3</span>
                 <span className="text-[10px] font-semibold text-[#5F6368] uppercase">Selection</span>
               </div>
               <h4 className="text-xs font-bold text-[#171A1F]">Emission Factor Hierarchy</h4>
               <p className="text-[11px] text-[#5F6368] leading-relaxed">
                 Strict 4-tier selection: Tier 3 (Site lab cert) &gt; Tier 2 (National / CEA India) &gt; Tier 1 (IPCC default) &gt; Fail Safely Halt.
               </p>
-              <div className="text-[10px] font-mono text-[#01153C] bg-white p-2 rounded border border-[#E5E7EB]">
+              <div className="text-[10px] font-mono text-[#181B27] bg-white p-2 rounded border border-[#E5E7EB]">
                 Frozen CEA v19 vintage pinned to FY 2025–26
               </div>
             </div>
 
             <div className="p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="w-6 h-6 rounded-full bg-[#01153C] text-white flex items-center justify-center font-bold text-xs">4</span>
+                <span className="w-6 h-6 rounded-full bg-[#5141FF] text-white flex items-center justify-center font-bold text-xs">4</span>
                 <span className="text-[10px] font-semibold text-[#5F6368] uppercase">Execution</span>
               </div>
               <h4 className="text-xs font-bold text-[#171A1F]">Formula Execution (C-01 to C-12)</h4>
               <p className="text-[11px] text-[#5F6368] leading-relaxed">
                 Runs deterministic formulas calculating pure CO2, CH4, and N2O; converts to CO2e via AR5/AR6 GWP; and isolates biogenic emissions.
               </p>
-              <div className="text-[10px] font-mono text-[#01153C] bg-white p-2 rounded border border-[#E5E7EB]">
+              <div className="text-[10px] font-mono text-[#181B27] bg-white p-2 rounded border border-[#E5E7EB]">
                 Biogenic CO2 segregated per GHG Protocol
               </div>
             </div>
 
             <div className="p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="w-6 h-6 rounded-full bg-[#01153C] text-white flex items-center justify-center font-bold text-xs">5</span>
+                <span className="w-6 h-6 rounded-full bg-[#5141FF] text-white flex items-center justify-center font-bold text-xs">5</span>
                 <span className="text-[10px] font-semibold text-[#5F6368] uppercase">Roll-Up</span>
               </div>
               <h4 className="text-xs font-bold text-[#171A1F]">Aggregation & Reconciliation</h4>
               <p className="text-[11px] text-[#5F6368] leading-relaxed">
                 Rolls up activity records &rarr; site totals &rarr; corporate organization without double counting. Accounts for dual Scope 2 reporting.
               </p>
-              <div className="text-[10px] font-mono text-[#01153C] bg-white p-2 rounded border border-[#E5E7EB]">
+              <div className="text-[10px] font-mono text-[#181B27] bg-white p-2 rounded border border-[#E5E7EB]">
                 Reconciliation: Operational Control consolidation
               </div>
             </div>
 
             <div className="p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="w-6 h-6 rounded-full bg-[#01153C] text-white flex items-center justify-center font-bold text-xs">6</span>
+                <span className="w-6 h-6 rounded-full bg-[#5141FF] text-white flex items-center justify-center font-bold text-xs">6</span>
                 <span className="text-[10px] font-semibold text-[#0F6B48] uppercase">Assurance</span>
               </div>
               <h4 className="text-xs font-bold text-[#171A1F]">Immutable Snapshot Seal</h4>
@@ -587,16 +584,13 @@ export const CalculationEngineHub: React.FC = () => {
             <h3 className="text-sm font-bold text-[#171A1F]">
               Unit Normalization Matrix & Physical Property Gate (Sheet 03)
             </h3>
-            <p className="text-xs text-[#5F6368] mt-0.5">
-              The engine normalizes all activity inputs to canonical base units before running formulas. Physical property checks (e.g., fuel density for liquid volume) are strictly enforced.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
             {/* Interactive Normalization Tester */}
             <div className="lg:col-span-6 p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-4">
-              <span className="text-xs font-bold text-[#01153C] uppercase tracking-wider flex items-center gap-1.5">
-                <Scale className="w-4 h-4 text-[#01153C]" />
+              <span className="text-xs font-bold text-[#181B27] uppercase tracking-wider flex items-center gap-1.5">
+                <Scale className="w-4 h-4 text-[#181B27]" />
                 Interactive Normalization Tester
               </span>
 
@@ -607,7 +601,7 @@ export const CalculationEngineHub: React.FC = () => {
                     type="number"
                     value={unitValue}
                     onChange={(e) => setUnitValue(parseFloat(e.target.value) || 0)}
-                    className="w-full mt-1 px-3 py-1.5 text-xs font-mono bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#01153C]"
+                    className="w-full mt-1 px-3 py-1.5 text-xs font-mono bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#5141FF]"
                   />
                 </div>
 
@@ -616,7 +610,7 @@ export const CalculationEngineHub: React.FC = () => {
                   <select
                     value={fromUnit}
                     onChange={(e) => setFromUnit(e.target.value)}
-                    className="w-full mt-1 px-3 py-1.5 text-xs font-semibold bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#01153C]"
+                    className="w-full mt-1 px-3 py-1.5 text-xs font-semibold bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#5141FF]"
                   >
                     <option value="litre">Litre (L)</option>
                     <option value="kilolitre">Kilolitre (kL)</option>
@@ -636,7 +630,7 @@ export const CalculationEngineHub: React.FC = () => {
                   <select
                     value={targetUnit}
                     onChange={(e) => setTargetUnit(e.target.value)}
-                    className="w-full mt-1 px-3 py-1.5 text-xs font-semibold bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#01153C]"
+                    className="w-full mt-1 px-3 py-1.5 text-xs font-semibold bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#5141FF]"
                   >
                     <option value="tonne">Tonne (Canonical Mass)</option>
                     <option value="kg">Kilogram (kg)</option>
@@ -651,7 +645,7 @@ export const CalculationEngineHub: React.FC = () => {
                   <select
                     value={liquidFuelType}
                     onChange={(e) => setLiquidFuelType(e.target.value)}
-                    className="w-full mt-1 px-3 py-1.5 text-xs bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#01153C]"
+                    className="w-full mt-1 px-3 py-1.5 text-xs bg-white border border-[#E5E7EB] rounded-md focus:outline-none focus:border-[#5141FF]"
                   >
                     <option value="Furnace Oil (Heavy Fuel Oil)">Furnace Oil (0.95 kg/L)</option>
                     <option value="Diesel (HSD)">Diesel HSD (0.84 kg/L)</option>
@@ -674,13 +668,13 @@ export const CalculationEngineHub: React.FC = () => {
                   />
                 </div>
 
-                <div className="flex items-center space-x-2 text-xs text-[#ED2024] pt-1 border-t border-[#F1F3F5]">
+                <div className="flex items-center space-x-2 text-xs text-[#FB3256] pt-1 border-t border-[#F1F3F5]">
                   <input
                     type="checkbox"
                     id="chk-omit-density"
                     checked={enforceMissingDensity}
                     onChange={(e) => setEnforceMissingDensity(e.target.checked)}
-                    className="rounded text-[#ED2024] focus:ring-[#ED2024]"
+                    className="rounded text-[#FB3256] focus:ring-[#ED2024]"
                   />
                   <label htmlFor="chk-omit-density" className="cursor-pointer font-medium">
                     Simulate Missing Density (Workbook Failure Trigger)
@@ -691,8 +685,8 @@ export const CalculationEngineHub: React.FC = () => {
               {/* Conversion Result Box */}
               <div className={`p-3.5 rounded-xl border text-xs space-y-1.5 ${
                 unitNormalizationResult.error
-                  ? 'bg-[#FEF1F1] border-[#ED2024]/30 text-[#ED2024]'
-                  : 'bg-[#EDF2FA] border-[#01153C]/20 text-[#01153C]'
+                  ? 'bg-[#FFF0F3] border-[#FB3256]/30 text-[#FB3256]'
+                  : 'bg-[#F2F0FF] border-[#5141FF]/20 text-[#181B27]'
               }`}>
                 <div className="font-bold flex items-center justify-between">
                   <span>{unitNormalizationResult.error ? 'Engine Blocked' : 'Normalized Metric Output:'}</span>
@@ -704,7 +698,7 @@ export const CalculationEngineHub: React.FC = () => {
                   {unitNormalizationResult.conversionTrace}
                 </div>
                 {unitNormalizationResult.error && (
-                  <p className="text-[10px] text-[#ED2024] font-sans font-semibold mt-1">
+                  <p className="text-[10px] text-[#FB3256] font-sans font-semibold mt-1">
                     Workbook Rule: &quot;If the required property is missing, the calculation should fail rather than guessing a default density.&quot;
                   </p>
                 )}
@@ -730,7 +724,7 @@ export const CalculationEngineHub: React.FC = () => {
                   <tbody className="divide-y divide-[#E5E7EB]">
                     {UNIT_CONVERSION_RULES.map((rule, idx) => (
                       <tr key={idx} className="hover:bg-[#F8F9FB]">
-                        <td className="py-2 px-3 font-semibold text-[#01153C]">{rule.fromUnit}</td>
+                        <td className="py-2 px-3 font-semibold text-[#181B27]">{rule.fromUnit}</td>
                         <td className="py-2 px-3 text-[#171A1F]">{rule.baseUnit}</td>
                         <td className="py-2 px-3 font-mono text-[#5F6368]">&times; {rule.factor}</td>
                         <td className="py-2 px-3">
@@ -755,9 +749,6 @@ export const CalculationEngineHub: React.FC = () => {
             <h3 className="text-sm font-bold text-[#171A1F]">
               Emission Factor Selection Engine (Sheet 05 Hierarchy)
             </h3>
-            <p className="text-xs text-[#5F6368] mt-0.5">
-              Strict tier precedence applied automatically to every activity record before formula execution.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
@@ -773,16 +764,16 @@ export const CalculationEngineHub: React.FC = () => {
               <div className="text-[10px] text-[#0F6B48] font-semibold">Ex: Lab test NCV for captive boiler coal</div>
             </div>
 
-            <div className="p-4 bg-white border border-[#01153C] rounded-xl space-y-2">
+            <div className="p-4 bg-white border border-[#5141FF] rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#01153C]">Priority 2: Tier 2</span>
-                <span className="text-[10px] font-semibold bg-[#EDF2FA] text-[#01153C] px-2 py-0.5 rounded">National</span>
+                <span className="text-xs font-bold text-[#181B27]">Priority 2: Tier 2</span>
+                <span className="text-[10px] font-semibold bg-[#F2F0FF] text-[#5141FF] px-2 py-0.5 rounded">National</span>
               </div>
               <div className="text-xs font-bold text-[#171A1F]">Country-Specific Baseline</div>
               <p className="text-[11px] text-[#5F6368] leading-relaxed">
                 Authoritative published national databases (e.g. CEA Baseline Database v19 for Indian grid electricity).
               </p>
-              <div className="text-[10px] text-[#01153C] font-semibold">Ex: 0.708 kg/kWh CEA combined margin</div>
+              <div className="text-[10px] text-[#5141FF] font-semibold">Ex: 0.708 kg/kWh CEA combined margin</div>
             </div>
 
             <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl space-y-2">
@@ -797,23 +788,23 @@ export const CalculationEngineHub: React.FC = () => {
               <div className="text-[10px] text-[#5F6368] font-semibold">Ex: IPCC default 94,600 kg CO2 / TJ coal</div>
             </div>
 
-            <div className="p-4 bg-[#FEF1F1] border border-[#ED2024]/30 rounded-xl space-y-2">
+            <div className="p-4 bg-[#FFF0F3] border border-[#FB3256]/30 rounded-xl space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#ED2024]">Priority 4: Fail Safely</span>
-                <span className="text-[10px] font-semibold bg-white text-[#ED2024] px-2 py-0.5 rounded">Stop Run</span>
+                <span className="text-xs font-bold text-[#FB3256]">Priority 4: Fail Safely</span>
+                <span className="text-[10px] font-semibold bg-white text-[#FB3256] px-2 py-0.5 rounded">Stop Run</span>
               </div>
-              <div className="text-xs font-bold text-[#ED2024]">Deterministic Block</div>
+              <div className="text-xs font-bold text-[#FB3256]">Deterministic Block</div>
               <p className="text-[11px] text-[#5F6368] leading-relaxed">
                 If no permitted factor matches activity metadata, calculation halts immediately rather than using arbitrary fallbacks.
               </p>
-              <div className="text-[10px] text-[#ED2024] font-semibold">Auditor assurance guarantee</div>
+              <div className="text-[10px] text-[#FB3256] font-semibold">Auditor assurance guarantee</div>
             </div>
           </div>
 
           {/* Interactive Tier Precedence Simulator */}
           <div className="p-4 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#01153C] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#181B27] uppercase tracking-wider">
                 Interactive Precedence Selector Simulation
               </span>
               <span className="text-[11px] text-[#5F6368]">
@@ -840,7 +831,7 @@ export const CalculationEngineHub: React.FC = () => {
                   type="checkbox"
                   checked={simTier2Checked}
                   onChange={(e) => setSimTier2Checked(e.target.checked)}
-                  className="rounded text-[#01153C] focus:ring-[#01153C]"
+                  className="rounded text-[#181B27] focus:ring-[#5141FF]"
                 />
                 <div>
                   <div className="font-bold text-[#171A1F]">Tier 2: CEA v19 National Database</div>
@@ -865,13 +856,13 @@ export const CalculationEngineHub: React.FC = () => {
             {/* Simulated Resolution Output Card */}
             <div className={`p-4 rounded-xl border text-xs space-y-1.5 ${
               factorSelectionResult.isBlocked
-                ? 'bg-[#FEF1F1] border-[#ED2024]/30'
-                : 'bg-[#EDF2FA] border-[#01153C]/20'
+                ? 'bg-[#FFF0F3] border-[#FB3256]/30'
+                : 'bg-[#F2F0FF] border-[#5141FF]/20'
             }`}>
               <div className="flex items-center justify-between">
                 <span className="font-bold text-[#171A1F]">Engine Decision:</span>
                 <span className={`px-2 py-0.5 rounded text-[11px] font-bold ${
-                  factorSelectionResult.isBlocked ? 'bg-[#ED2024] text-white' : 'bg-[#01153C] text-white'
+                  factorSelectionResult.isBlocked ? 'bg-[#FB3256] text-white' : 'bg-[#5141FF] text-white'
                 }`}>
                   {factorSelectionResult.selectedTier}
                 </span>
@@ -896,9 +887,6 @@ export const CalculationEngineHub: React.FC = () => {
             <h3 className="text-sm font-bold text-[#171A1F]">
               Validation Rules Matrix (Sheet 10)
             </h3>
-            <p className="text-xs text-[#5F6368] mt-0.5">
-              Automated gatekeeper rules enforcing data integrity and preventing invalid or suspicious inputs.
-            </p>
           </div>
 
           <div className="overflow-x-auto border border-[#E5E7EB] rounded-xl">
@@ -913,49 +901,49 @@ export const CalculationEngineHub: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-[#E5E7EB]">
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">UNIT_MISSING</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">UNIT_MISSING</td>
                   <td className="py-2.5 px-3">Quantity entered without physical measurement unit</td>
-                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF1F1] text-[#ED2024] rounded">Block</span></td>
+                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FFF0F3] text-[#FB3256] rounded">Block</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Reject calculation line item immediately.</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">CARBON_ORIGIN_MISSING</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">CARBON_ORIGIN_MISSING</td>
                   <td className="py-2.5 px-3">Biomass vs fossil fuel origin not classified</td>
-                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF1F1] text-[#ED2024] rounded">Block</span></td>
+                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FFF0F3] text-[#FB3256] rounded">Block</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Require carbon origin classification before execution.</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">NO_APPLICABLE_FACTOR</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">NO_APPLICABLE_FACTOR</td>
                   <td className="py-2.5 px-3">Factor hierarchy fails to find matching record</td>
-                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF1F1] text-[#ED2024] rounded">Block</span></td>
+                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FFF0F3] text-[#FB3256] rounded">Block</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Fail safely. Stop run and request resolution.</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">LIQUID_DENSITY_MISSING</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">LIQUID_DENSITY_MISSING</td>
                   <td className="py-2.5 px-3">Liquid fuel (furnace oil, diesel) volume without density</td>
-                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF1F1] text-[#ED2024] rounded">Block</span></td>
+                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FFF0F3] text-[#FB3256] rounded">Block</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Fail calculation. Do not guess default density.</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">PERIOD_OVERLAP</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">PERIOD_OVERLAP</td>
                   <td className="py-2.5 px-3">Activity date falls within a submitted/locked period</td>
-                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF1F1] text-[#ED2024] rounded">Block</span></td>
+                  <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FFF0F3] text-[#FB3256] rounded">Block</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Prevent duplicate submission and double counting.</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">FACTOR_NOT_FROZEN</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">FACTOR_NOT_FROZEN</td>
                   <td className="py-2.5 px-3">Reporting period has floating/unfrozen factor version</td>
                   <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF6EE] text-[#D97706] rounded">Warn</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Flag reporting version drift risk to Reviewer.</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">OUTLIER_VARIANCE</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">OUTLIER_VARIANCE</td>
                   <td className="py-2.5 px-3">Activity &gt;25% variance vs trailing 12-month average</td>
                   <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF6EE] text-[#D97706] rounded">Warn</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Request confirmation with mandatory justification note.</td>
                 </tr>
                 <tr>
-                  <td className="py-2.5 px-3 font-mono font-bold text-[#01153C]">REMOVAL_UNMETERED</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-[#181B27]">REMOVAL_UNMETERED</td>
                   <td className="py-2.5 px-3">Carbon removal claim lacks certified meter serial</td>
                   <td className="py-2.5 px-3"><span className="px-2 py-0.5 text-[10px] font-semibold bg-[#FEF6EE] text-[#D97706] rounded">Warn</span></td>
                   <td className="py-2.5 px-3 text-[#5F6368]">Flag for Verifier review prior to assurance sign-off.</td>
@@ -973,19 +961,16 @@ export const CalculationEngineHub: React.FC = () => {
             <h3 className="text-sm font-bold text-[#171A1F]">
               TC-DOM-002a Calculation Engine Workbook Specification Sections
             </h3>
-            <p className="text-xs text-[#5F6368] mt-0.5">
-              The 12 domain specification sheets governing activity data ingestion, normalisation, formulae, and auditability.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {WORKBOOK_SECTIONS.map((sec) => (
               <div key={sec.id} className="p-3.5 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#01153C]">{sec.title}</span>
+                  <span className="text-xs font-bold text-[#181B27]">{sec.title}</span>
                   <span className={`text-[10px] font-semibold px-1.5 py-0.2 rounded ${
                     sec.status === 'Approved' ? 'bg-[#E8F8EE] text-[#0F6B48]' :
-                    sec.status === 'Verified' ? 'bg-[#EDF2FA] text-[#01153C]' : 'bg-[#FEF6EE] text-[#D97706]'
+                    sec.status === 'Verified' ? 'bg-[#F2F0FF] text-[#5141FF]' : 'bg-[#FEF6EE] text-[#D97706]'
                   }`}>
                     {sec.status}
                   </span>
@@ -1012,7 +997,7 @@ export const CalculationEngineHub: React.FC = () => {
             <button
               onClick={handleRunAllWorkedExamples}
               disabled={isRunningTests}
-              className="px-4 py-2 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs disabled:opacity-50"
+              className="px-4 py-2 text-xs font-semibold text-white bg-[#5141FF] hover:bg-[#4232E8] rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs disabled:opacity-50"
             >
               <Play className="w-3.5 h-3.5" />
               <span>{isRunningTests ? 'Running Suite...' : 'Execute All 12 Test Cases'}</span>
@@ -1027,12 +1012,12 @@ export const CalculationEngineHub: React.FC = () => {
               return (
                 <div key={formula.id} className="p-3.5 bg-[#F8F9FB] border border-[#E5E7EB] rounded-xl space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#01153C]">
+                    <span className="text-xs font-bold text-[#181B27]">
                       {formula.id}: {formula.title}
                     </span>
                     {isTested && (
                       <span className={`text-[10px] font-semibold px-2 py-0.5 rounded flex items-center gap-1 ${
-                        isPass ? 'bg-[#E8F8EE] text-[#0F6B48]' : 'bg-[#FEF1F1] text-[#ED2024]'
+                        isPass ? 'bg-[#E8F8EE] text-[#0F6B48]' : 'bg-[#FFF0F3] text-[#FB3256]'
                       }`}>
                         {isPass ? <Check className="w-3 h-3" /> : <AlertTriangle className="w-3 h-3" />}
                         {isPass ? 'PASS' : 'FAIL'}
@@ -1041,7 +1026,7 @@ export const CalculationEngineHub: React.FC = () => {
                   </div>
                   <p className="text-[11px] text-[#5F6368]">{formula.workedExample.description}</p>
                   <div className="p-2 bg-white rounded border border-[#E5E7EB] font-mono text-[11px] text-[#171A1F] break-all">
-                    Expected: <span className="font-bold text-[#01153C]">{formula.workedExample.expectedOutput_tCO2e}</span> tCO2e
+                    Expected: <span className="font-bold text-[#181B27]">{formula.workedExample.expectedOutput_tCO2e}</span> tCO2e
                     <div className="text-[10px] text-[#8A8F98] mt-0.5">{formula.workedExample.workedMath}</div>
                   </div>
                 </div>

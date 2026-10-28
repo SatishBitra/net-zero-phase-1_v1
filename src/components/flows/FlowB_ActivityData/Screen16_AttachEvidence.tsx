@@ -113,21 +113,17 @@ export const Screen16_AttachEvidence: React.FC = () => {
 
       {/* Period Locked Governance Banner */}
       {isPeriodLocked && (
-        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-center space-x-3 text-xs text-[#ED2024] font-data shadow-2xs">
-          <Lock className="w-5 h-5 shrink-0 text-[#ED2024]" />
-          <div>
-            <strong className="font-semibold">Accounting Period {activePeriod.name} is Locked:</strong> Supporting evidence cannot be attached, modified, or detached for sealed accounting periods.
-          </div>
+        <div className="p-3 bg-[#FFF0F3] border border-[#FFDCE4] rounded-xl flex items-center space-x-2.5 text-xs text-[#FB3256] font-medium">
+          <Lock className="w-4 h-4 shrink-0 text-[#FB3256]" />
+          <span>Accounting Period {activePeriod.name} is locked. Evidence modifications are disabled.</span>
         </div>
       )}
 
       {/* Verifier Read-Only Mode Banner */}
       {isVerifierReadOnly && (
-        <div className="p-4 bg-[#01153C]/5 border border-[#01153C]/20 rounded-xl flex items-center space-x-3 text-xs text-[#01153C] font-data shadow-2xs">
-          <ShieldAlert className="w-5 h-5 shrink-0 text-[#01153C]" />
-          <div>
-            <strong className="font-semibold">Third-Party Assurance Mode:</strong> Independent Auditors ({currentUser.name}) have read-only inspection access and cannot modify attached primary evidence.
-          </div>
+        <div className="p-3 bg-[#5141FF]/5 border border-[#5141FF]/20 rounded-xl flex items-center space-x-2.5 text-xs text-[#5141FF] font-medium">
+          <ShieldAlert className="w-4 h-4 shrink-0 text-[#5141FF]" />
+          <span>Verifier Assurance Mode: Read-only access enabled.</span>
         </div>
       )}
 
@@ -135,7 +131,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
       <div className="p-4 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs flex flex-wrap items-center justify-between gap-4 text-xs font-sans">
         <div>
           <span className="text-[#8A8F98] block text-[10px] uppercase font-data font-semibold">Target Record</span>
-          <span className="activity-id font-medium text-[#01153C] text-sm">Row #998 ({currentRecord?.id || 'ACT-2025-0812'})</span>
+          <span className="activity-id font-medium text-[#181B27] text-sm">Row #998 ({currentRecord?.id || 'ACT-2025-0812'})</span>
         </div>
         <div>
           <span className="text-[#8A8F98] block text-[10px] uppercase font-data font-semibold">Site</span>
@@ -167,7 +163,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
           }}
           onClick={handleUploadFile}
           className={`p-8 border-2 border-dashed rounded-xl text-center cursor-pointer transition-colors ${
-            dragActive ? 'border-[#01153C] bg-[#01153C]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#01153C]'
+            dragActive ? 'border-[#5141FF] bg-[#5141FF]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#5141FF]'
           }`}
         >
           <Upload className="w-8 h-8 text-[#8A8F98] mx-auto mb-2" />
@@ -193,7 +189,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
             <button
               type="button"
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
-              className="text-xs text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
+              className="text-xs text-[#5141FF] hover:underline flex items-center space-x-1 font-semibold"
             >
               <span>View in Results Drill-Down</span>
               <ExternalLink className="w-3 h-3" />
@@ -215,12 +211,12 @@ export const Screen16_AttachEvidence: React.FC = () => {
                 <tr key={doc.id} className="hover:bg-[#FAFAFB]">
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-2 font-semibold text-[#17181A]">
-                      <FileText className="w-4 h-4 text-[#01153C] shrink-0" />
+                      <FileText className="w-4 h-4 text-[#181B27] shrink-0" />
                       <span>{doc.file}</span>
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    <span className="bg-[#01153C]/10 text-[#01153C] px-2 py-0.5 rounded-md font-data text-[10px] font-semibold border border-[#01153C]/20">
+                    <span className="bg-[#5141FF]/10 text-[#181B27] px-2 py-0.5 rounded-md font-data text-[10px] font-semibold border border-[#5141FF]/20">
                       {doc.type}
                     </span>
                   </td>
@@ -235,7 +231,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => showToast('Evidence Preview', `Viewing ${doc.file}`)}
-                        className="p-1 text-[#5F6368] hover:text-[#01153C]"
+                        className="p-1 text-[#5F6368] hover:text-[#5141FF]"
                         title="Preview Document"
                       >
                         <Eye className="w-3.5 h-3.5" />
@@ -243,7 +239,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => handleRemoveDoc(doc.id)}
-                        className="p-1 text-[#5F6368] hover:text-[#ED2024]"
+                        className="p-1 text-[#5F6368] hover:text-[#FB3256]"
                         title="Detach Document"
                       >
                         <Trash2 className="w-3.5 h-3.5" />

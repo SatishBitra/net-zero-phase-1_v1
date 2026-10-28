@@ -87,10 +87,10 @@ export const Screen02_MFA: React.FC = () => {
       </div>
 
       <div className="text-center mb-6">
-        <div className="w-12 h-12 bg-[#01153C]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 text-[#01153C]">
+        <div className="w-12 h-12 bg-[#5141FF]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 text-[#181B27]">
           <KeyRound className="w-6 h-6" />
         </div>
-        <h1 className="text-xl font-bold text-[#01153C]">Two-Factor Verification</h1>
+        <h1 className="text-xl font-bold text-[#181B27]">Two-Factor Verification</h1>
       </div>
 
       <form onSubmit={handleVerify} className="space-y-6">
@@ -107,7 +107,7 @@ export const Screen02_MFA: React.FC = () => {
               aria-label={`Digit ${idx + 1}`}
               onChange={(e) => handleChange(idx, e.target.value)}
               onKeyDown={(e) => handleKeyDown(idx, e)}
-              className="w-11 h-12 text-center text-lg font-bold font-mono border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C] bg-[#FAFAFB] text-[#17181A]"
+              className="w-11 h-12 text-center text-lg font-bold font-mono border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF] bg-[#FAFAFB] text-[#17181A]"
             />
           ))}
         </div>
@@ -129,9 +129,9 @@ export const Screen02_MFA: React.FC = () => {
         <button
           type="button"
           onClick={handleQuickFill}
-          className="text-[#01153C] hover:text-[#02215c] font-semibold flex items-center space-x-1"
+          className="text-[#181B27] hover:text-[#02215c] font-semibold flex items-center space-x-1"
         >
-          <Zap className="w-3.5 h-3.5 text-[#01153C]" />
+          <Zap className="w-3.5 h-3.5 text-[#181B27]" />
           <span>Autofill Demo Code</span>
         </button>
 
@@ -140,7 +140,7 @@ export const Screen02_MFA: React.FC = () => {
           onClick={handleResend}
           disabled={countdown > 0}
           className={`flex items-center space-x-1 font-semibold ${
-            countdown > 0 ? 'text-[#8A8F98] cursor-not-allowed' : 'text-[#01153C] hover:underline'
+            countdown > 0 ? 'text-[#8A8F98] cursor-not-allowed' : 'text-[#5141FF] hover:underline'
           }`}
         >
           <RefreshCw className="w-3 h-3" />

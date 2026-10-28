@@ -175,14 +175,9 @@ export const Screen24_ReviewApprove: React.FC = () => {
 
       {/* Segregation of Duties Notice when role is DATA_ENTRY or VERIFIER */}
       {!canApprove && (
-        <div className="p-4 bg-[#FEF1F1] border border-[#FED2D3] rounded-xl flex items-start space-x-3 text-xs">
-          <AlertTriangle className="w-4 h-4 text-[#ED2024] shrink-0 mt-0.5" />
-          <div className="space-y-0.5">
-            <div className="font-bold text-[#ED2024]">Segregation of Duties Enforced (Read-Only Mode)</div>
-            <p className="text-[#5E6672]">
-              As a <strong>{currentRole === 'DATA_ENTRY' ? 'Data Entry Submitter' : 'Independent Verifier'}</strong> ({currentUser.name}), you are restricted from approving, returning, or rejecting operational activity batches. Only designated Reviewers or Tenant Admins possess sign-off authority under four-eye governance.
-            </p>
-          </div>
+        <div className="p-3 bg-[#FFF0F3] border border-[#FFDCE4] rounded-xl flex items-center space-x-2.5 text-xs text-[#FB3256] font-medium">
+          <AlertTriangle className="w-4 h-4 text-[#FB3256] shrink-0" />
+          <span>Read-Only: Batch sign-off requires Reviewer or Tenant Admin permissions.</span>
         </div>
       )}
 
@@ -190,7 +185,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-[0_1px_2px_rgba(20,20,20,0.04)]">
         <div className="p-4 border-b border-[#E5E7EB] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center space-x-2">
-            <Building2 className="w-4 h-4 text-[#01153C]" />
+            <Building2 className="w-4 h-4 text-[#181B27]" />
             <h2 className="text-sm font-semibold text-[#17181A] font-sans">Submitted Activity Rows</h2>
           </div>
           <span className="text-xs text-[#5F6368] font-sans">
@@ -204,7 +199,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
               <tr className="bg-[#F4F5F6] border-b border-[#E5E7EB] text-[#5F6368]">
                 <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Date</th>
                 <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Source</th>
-                <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-right">Quantity</th>
+                <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider text-left">Quantity</th>
                 <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Unit</th>
                 <th className="py-3 px-4 font-semibold text-[11px] uppercase tracking-wider">Evidence</th>
               </tr>
@@ -218,7 +213,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
                   <td className="py-3.5 px-4 font-semibold text-[#17181A]">
                     {item.source}
                   </td>
-                  <td className="py-3.5 px-4 text-right period-code font-medium text-[#17181A]">
+                  <td className="py-3.5 px-4 text-left period-code font-medium text-[#17181A]">
                     {item.quantity.toLocaleString()}
                   </td>
                   <td className="py-3.5 px-4 emission-factor text-[#5F6368]">
@@ -228,7 +223,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setActiveEvidenceModal(item.evidenceName)}
-                      className="inline-flex items-center space-x-1.5 text-xs text-[#01153C] hover:underline font-semibold"
+                      className="inline-flex items-center space-x-1.5 text-xs text-[#5141FF] hover:underline font-semibold"
                     >
                       <FileText className="w-3.5 h-3.5 text-[#5F6368]" />
                       <span>{item.evidenceCount} file attached</span>
@@ -262,15 +257,15 @@ export const Screen24_ReviewApprove: React.FC = () => {
             placeholder="Add a note (required if returning for correction)"
             className={`w-full px-3 py-2 text-xs border rounded-lg text-[#17181A] focus:outline-none font-sans ${
               errorMessage
-                ? 'border-[#ED2024] bg-[#FEF0EF]/30 focus:border-[#ED2024]'
-                : 'border-[#E5E7EB] focus:border-[#01153C]'
+                ? 'border-[#FB3256] bg-[#FEF0EF]/30 focus:border-[#FB3256]'
+                : 'border-[#E5E7EB] focus:border-[#5141FF]'
             }`}
           />
         </div>
 
         {/* Validation error message */}
         {errorMessage && (
-          <div className="p-2.5 bg-[#FEF0EF] border border-[#ED2024]/30 rounded-lg text-xs text-[#ED2024] flex items-center space-x-2 font-data">
+          <div className="p-2.5 bg-[#FEF0EF] border border-[#FB3256]/30 rounded-lg text-xs text-[#FB3256] flex items-center space-x-2 font-data">
             <AlertTriangle className="w-4 h-4 shrink-0" />
             <span>{errorMessage}</span>
           </div>
@@ -287,7 +282,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
               disabled={!canApprove}
               className={`px-4 py-2 text-xs font-semibold rounded-lg transition-colors text-center ${
                 canApprove
-                  ? 'bg-white border border-[#ED2024] text-[#ED2024] hover:bg-[#FEF0EF]'
+                  ? 'bg-white border border-[#FB3256] text-[#FB3256] hover:bg-[#FEF0EF]'
                   : 'bg-[#F4F5F6] border border-[#E5E7EB] text-[#8A8F98] cursor-not-allowed opacity-60'
               }`}
             >
@@ -331,7 +326,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
 
       {/* Audit Requirement Note (Section 10.3) */}
       <div className="p-3.5 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2.5 shadow-2xs font-data">
-        <ShieldCheck className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
+        <ShieldCheck className="w-4 h-4 text-[#181B27] shrink-0 mt-0.5" />
         <div>
           <strong className="text-[#17181A] font-semibold">Audit Requirement:</strong> Every workflow action writes to an append-only audit trail recording: <em>Who ({currentUser.name} as {currentRole === 'TENANT_ADMIN' ? 'Tenant Admin' : 'Reviewer'}), When, What, and Why</em>. Recorded events are permanently preserved for verifier inspection.
         </div>
@@ -343,7 +338,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
           <div className="bg-white rounded-xl border border-[#E5E7EB] max-w-lg w-full p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between pb-2 border-b border-[#F1F3F5]">
               <div className="flex items-center space-x-2">
-                <FileText className="w-4 h-4 text-[#01153C]" />
+                <FileText className="w-4 h-4 text-[#181B27]" />
                 <h3 className="text-sm font-semibold text-[#17181A] font-sans">{activeEvidenceModal}</h3>
               </div>
               <button

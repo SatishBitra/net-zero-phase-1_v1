@@ -24,10 +24,10 @@ export const Screen03_TenantSelector: React.FC = () => {
     <div id="screen-03-tenant-selector" className="max-w-2xl mx-auto my-10 p-6 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
       <div className="flex items-center justify-between pb-5 mb-6 border-b border-[#F1F3F5]">
         <div className="flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#01153C]/10 text-[#01153C] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-[#5141FF]/10 text-[#5141FF] flex items-center justify-center">
             <Building2 className="w-4 h-4" />
           </div>
-          <span className="text-xs font-bold text-[#01153C] uppercase tracking-wider">Tenant Directory</span>
+          <span className="text-xs font-bold text-[#181B27] uppercase tracking-wider">Tenant Directory</span>
         </div>
         <span className="text-xs text-[#5F6368] font-medium">
           {tenants.length} available accounts
@@ -35,7 +35,7 @@ export const Screen03_TenantSelector: React.FC = () => {
       </div>
 
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-[#01153C] tracking-tight">Select Organization</h1>
+        <h1 className="text-xl font-bold text-[#181B27] tracking-tight">Select Organization</h1>
       </div>
 
       {/* Search Input */}
@@ -46,7 +46,7 @@ export const Screen03_TenantSelector: React.FC = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by company name, sector or CIN…"
-          className="w-full pl-10 pr-3 py-2.5 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C] bg-white text-[#17181A]"
+          className="w-full pl-10 pr-3 py-2.5 text-xs border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF] bg-white text-[#17181A]"
         />
       </div>
 
@@ -60,16 +60,16 @@ export const Screen03_TenantSelector: React.FC = () => {
               onClick={() => handleSelect(tenant)}
               className={`p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between group ${
                 isSelected
-                  ? 'border-[#01153C] bg-[#01153C]/5 shadow-xs ring-1 ring-[#01153C]'
-                  : 'border-[#E5E7EB] bg-white hover:border-[#01153C] hover:bg-[#FAFAFB]'
+                  ? 'border-[#5141FF] bg-[#5141FF]/5 shadow-xs ring-1 ring-[#01153C]'
+                  : 'border-[#E5E7EB] bg-white hover:border-[#5141FF] hover:bg-[#FAFAFB]'
               }`}
             >
               <div className="space-y-1.5 min-w-0 pr-4">
                 <div className="flex items-center space-x-2.5 flex-wrap">
-                  <h3 className="text-sm font-bold text-[#17181A] group-hover:text-[#01153C] transition-colors truncate">
+                  <h3 className="text-sm font-bold text-[#17181A] group-hover:text-[#5141FF] transition-colors truncate">
                     {tenant.name}
                   </h3>
-                  <span className="text-[11px] font-semibold text-[#01153C] bg-white px-2 py-0.5 rounded border border-[#E5E7EB]">
+                  <span className="text-[11px] font-semibold text-[#181B27] bg-white px-2 py-0.5 rounded border border-[#E5E7EB]">
                     {tenant.userRole.replace('_', ' ')}
                   </span>
                   {isSelected && (
@@ -94,11 +94,11 @@ export const Screen03_TenantSelector: React.FC = () => {
 
               <div className="shrink-0">
                 {isSelected ? (
-                  <div className="w-8 h-8 rounded-xl bg-[#01153C] text-white flex items-center justify-center shadow-xs">
+                  <div className="w-8 h-8 rounded-xl bg-[#5141FF] text-white flex items-center justify-center shadow-xs">
                     <Check className="w-4 h-4 stroke-[2.5]" />
                   </div>
                 ) : (
-                  <div className="w-8 h-8 rounded-xl border border-[#E5E7EB] group-hover:border-[#01153C] group-hover:bg-[#01153C] text-[#8A8F98] group-hover:text-white flex items-center justify-center transition-all">
+                  <div className="w-8 h-8 rounded-xl border border-[#E5E7EB] group-hover:border-[#5141FF] group-hover:bg-[#5141FF] text-[#8A8F98] group-hover:text-white flex items-center justify-center transition-all">
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 )}
@@ -121,7 +121,7 @@ export const Screen03_TenantSelector: React.FC = () => {
             showToast('Permission Request', 'Access request routed to Enterprise Super Admin.');
             navigateToScreen('04_org_profile', 'FLOW_A');
           }}
-          className="text-[#01153C] hover:underline font-semibold flex items-center space-x-1"
+          className="text-[#5141FF] hover:underline font-semibold flex items-center space-x-1"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Request Organization Access</span>

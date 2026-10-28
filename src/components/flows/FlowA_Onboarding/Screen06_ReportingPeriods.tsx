@@ -106,23 +106,6 @@ export const Screen06_ReportingPeriods: React.FC = () => {
         }
       />
 
-      {/* Role Notice Banner */}
-      {!canManagePeriods && (
-        <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center space-x-3 text-xs text-[#5F6368] font-data shadow-2xs">
-          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
-          <div>
-            <strong className="text-[#17181A] font-semibold">
-              {currentRole === 'VERIFIER'
-                ? 'Auditor Read-Only Accounting Windows'
-                : 'Fiscal Period View'}
-              :
-            </strong>{' '}
-            You are viewing reporting periods as{' '}
-            <strong className="text-[#17181A]">{currentUser.name} ({currentRole})</strong>. Creating new accounting periods and executing permanent period locks require Tenant Administrator authority.
-          </div>
-        </div>
-      )}
-
       {/* Periods Table */}
       <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs font-sans">
         <div className="overflow-x-auto">
@@ -144,15 +127,15 @@ export const Screen06_ReportingPeriods: React.FC = () => {
                   <tr
                     key={period.id}
                     className={`hover:bg-[#FAFAFB] transition-colors ${
-                      isActive ? 'bg-[#01153C]/5' : ''
+                      isActive ? 'bg-[#5141FF]/5' : ''
                     }`}
                   >
                     <td className="py-3 px-4">
                       <div className="flex items-center space-x-2">
-                        <Calendar className="w-3.5 h-3.5 text-[#01153C]" />
+                        <Calendar className="w-3.5 h-3.5 text-[#181B27]" />
                         <span className="font-semibold text-[#17181A] period-code font-medium">{period.name}</span>
                         {isActive && (
-                          <span className="text-[10px] px-2 py-0.5 bg-[#01153C]/10 text-[#01153C] rounded-md font-semibold border border-[#01153C]/20">
+                          <span className="text-[10px] px-2 py-0.5 bg-[#5141FF]/10 text-[#181B27] rounded-md font-semibold border border-[#5141FF]/20">
                             Active Window
                           </span>
                         )}
@@ -174,8 +157,8 @@ export const Screen06_ReportingPeriods: React.FC = () => {
                           <span className="text-[11px] font-medium">Locked (Immutable)</span>
                         </div>
                       ) : (
-                        <div className="flex items-center space-x-1.5 text-[#01153C]">
-                          <Unlock className="w-3.5 h-3.5 text-[#01153C]" />
+                        <div className="flex items-center space-x-1.5 text-[#181B27]">
+                          <Unlock className="w-3.5 h-3.5 text-[#181B27]" />
                           <span className="text-[11px] font-medium">Open for Data Entry</span>
                         </div>
                       )}
@@ -187,7 +170,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
                             setActivePeriodId(period.id);
                             showToast(`Active period set to ${period.name}`);
                           }}
-                          className="px-2 py-1 text-[11px] text-[#01153C] hover:underline font-semibold"
+                          className="px-2 py-1 text-[11px] text-[#5141FF] hover:underline font-semibold"
                         >
                           Select
                         </button>
@@ -197,7 +180,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
                         canManagePeriods ? (
                           <button
                             onClick={() => setLockingPeriod(period)}
-                            className="px-2.5 py-1 text-[11px] text-[#ED2024] hover:bg-[#FEF1F1] border border-[#FED2D3] rounded-md transition-colors font-medium"
+                            className="px-2.5 py-1 text-[11px] text-[#FB3256] hover:bg-[#FFF0F3] border border-[#FFDCE4] rounded-md transition-colors font-medium"
                           >
                             Lock Period
                           </button>
@@ -218,7 +201,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
 
       {/* Lock Guidance Panel */}
       <div className="p-4 bg-white rounded-xl border border-[#E5E7EB] text-xs text-[#5F6368] flex items-start space-x-3 shadow-2xs font-sans">
-        <ShieldCheck className="w-5 h-5 text-[#01153C] shrink-0 mt-0.5" />
+        <ShieldCheck className="w-5 h-5 text-[#181B27] shrink-0 mt-0.5" />
         <div>
           <span className="font-semibold text-[#17181A]">Period Lock Governance</span>
           <p className="mt-0.5 text-[11px] leading-relaxed font-data">
@@ -247,7 +230,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
           <div className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col border-l border-[#E5E7EB] font-sans animate-in slide-in-from-right duration-200">
             <div className="p-4 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F4F5F6]">
               <div className="flex items-center space-x-2">
-                <Calendar className="w-4 h-4 text-[#01153C]" />
+                <Calendar className="w-4 h-4 text-[#181B27]" />
                 <h3 className="text-sm font-semibold text-[#17181A]">New Reporting Period</h3>
               </div>
               <button
@@ -261,7 +244,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
             <form onSubmit={handleCreatePeriod} className="p-4 flex-1 overflow-y-auto space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                  Period Name <span className="text-[#ED2024]">*</span>
+                  Period Name <span className="text-[#FB3256]">*</span>
                 </label>
                 <input
                   type="text"
@@ -269,33 +252,33 @@ export const Screen06_ReportingPeriods: React.FC = () => {
                   value={periodName}
                   onChange={(e) => setPeriodName(e.target.value)}
                   placeholder="e.g. FY 2026–27"
-                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A] period-code font-medium"
+                  className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#5141FF] bg-white text-[#17181A] period-code font-medium"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                    Start Date <span className="text-[#ED2024]">*</span>
+                    Start Date <span className="text-[#FB3256]">*</span>
                   </label>
                   <input
                     type="date"
                     required
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A] font-data"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#5141FF] bg-white text-[#17181A] font-data"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-[#17181A] mb-1">
-                    End Date <span className="text-[#ED2024]">*</span>
+                    End Date <span className="text-[#FB3256]">*</span>
                   </label>
                   <input
                     type="date"
                     required
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#01153C] bg-white text-[#17181A] font-data"
+                    className="w-full px-3 py-2 text-xs border border-[#E5E7EB] rounded-lg focus:outline-none focus:border-[#5141FF] bg-white text-[#17181A] font-data"
                   />
                 </div>
               </div>
@@ -329,7 +312,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
         <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
           <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-[#E5E7EB] p-5 font-sans">
             <div className="flex items-start space-x-3 mb-4">
-              <div className="w-9 h-9 rounded-full bg-[#FEF1F1] text-[#ED2024] flex items-center justify-center shrink-0 border border-[#FED2D3]">
+              <div className="w-9 h-9 rounded-full bg-[#FFF0F3] text-[#FB3256] flex items-center justify-center shrink-0 border border-[#FFDCE4]">
                 <AlertTriangle className="w-5 h-5" />
               </div>
               <div>
@@ -355,7 +338,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
               </button>
               <button
                 onClick={handleConfirmLock}
-                className="px-4 py-2 bg-[#ED2024] hover:bg-[#ED2024] text-white text-xs font-semibold rounded-lg shadow-xs flex items-center space-x-1.5 transition-colors"
+                className="px-4 py-2 bg-[#FB3256] hover:bg-[#FB3256] text-white text-xs font-semibold rounded-lg shadow-xs flex items-center space-x-1.5 transition-colors"
               >
                 <Lock className="w-3.5 h-3.5" />
                 <span>Lock Period</span>

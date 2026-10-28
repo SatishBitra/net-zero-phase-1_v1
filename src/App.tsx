@@ -154,20 +154,20 @@ const MainAppContent: React.FC = () => {
 
   if (isAuthScreen) {
     return (
-      <div className="min-h-screen bg-[#F8F9FB]">
+      <div className="min-h-screen ambient-glow-bg">
         {renderActiveScreen()}
       </div>
     );
   }
 
   return (
-    <div className="h-screen bg-[#F8F9FB] flex flex-col overflow-hidden">
+    <div className="h-screen ambient-glow-bg flex flex-col overflow-hidden">
       <Header />
 
       <div className="flex-1 flex overflow-hidden min-h-0">
         <Sidebar />
 
-        <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 min-w-0 w-full bg-[#F8F9FB]">
+        <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 min-w-0 w-full">
           {renderActiveScreen()}
         </main>
       </div>

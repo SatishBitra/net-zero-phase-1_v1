@@ -150,9 +150,9 @@ export const EmissionFactorHelperModal: React.FC = () => {
         aria-labelledby="helper-title"
       >
         {/* Top Header Bar */}
-        <div className="px-6 py-4 border-b border-[#ECEDEF] bg-[#F8F9FB] flex items-center justify-between shrink-0">
+        <div className="px-6 py-4 border-b border-[#E2E5EF] bg-[#F8F9FB] flex items-center justify-between shrink-0">
           <div className="flex items-center space-x-3 min-w-0">
-            <div className="w-10 h-10 rounded-xl bg-[#01153C] text-white flex items-center justify-center shadow-2xs shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#5141FF] text-white flex items-center justify-center shadow-2xs shrink-0">
               <BookOpen className="w-5 h-5 text-[#FFD166]" />
             </div>
             <div className="min-w-0">
@@ -160,7 +160,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                 <h2 id="helper-title" className="text-base sm:text-lg font-bold text-[#17181A] tracking-tight">
                   Emission Factor Helper
                 </h2>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#EDF2FA] text-[#01153C] border border-[#DCE5F5]">
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#F2F0FF] text-[#5141FF] border border-[#E5E0FF]">
                   IPCC · IEA · CEA Library
                 </span>
               </div>
@@ -192,7 +192,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by fuel, gas, or body (e.g. 'IPCC diesel', 'IEA grid electricity', 'R-410A', 'Natural gas', 'India')..."
-              className="w-full pl-10 pr-9 py-2 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:bg-white text-[#17181A] placeholder-[#8A8F98] shadow-2xs"
+              className="w-full pl-10 pr-9 py-2 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#5141FF] focus:bg-white text-[#17181A] placeholder-[#8A8F98] shadow-2xs"
               autoFocus
             />
             {searchQuery && (
@@ -219,8 +219,8 @@ export const EmissionFactorHelperModal: React.FC = () => {
                   onClick={() => setSelectedBody(body)}
                   className={`px-2.5 py-1 rounded-full text-xs transition-colors font-medium ${
                     selectedBody === body
-                      ? 'bg-[#01153C] text-white shadow-2xs'
-                      : 'bg-[#FAFAFB] text-[#5F6368] border border-[#E5E7EB] hover:bg-[#EDF2FA] hover:text-[#01153C]'
+                      ? 'bg-[#5141FF] text-white shadow-2xs'
+                      : 'bg-[#FAFAFB] text-[#5F6368] border border-[#E5E7EB] hover:bg-[#F2F0FF] hover:text-[#5141FF]'
                   }`}
                 >
                   {body === 'All' ? 'All Bodies' : body}
@@ -239,8 +239,8 @@ export const EmissionFactorHelperModal: React.FC = () => {
                   onClick={() => setSelectedScope(scope)}
                   className={`px-2.5 py-1 rounded-full text-xs transition-colors font-medium ${
                     selectedScope === scope
-                      ? 'bg-[#01153C] text-white shadow-2xs'
-                      : 'bg-[#FAFAFB] text-[#5F6368] border border-[#E5E7EB] hover:bg-[#EDF2FA] hover:text-[#01153C]'
+                      ? 'bg-[#5141FF] text-white shadow-2xs'
+                      : 'bg-[#FAFAFB] text-[#5F6368] border border-[#E5E7EB] hover:bg-[#F2F0FF] hover:text-[#5141FF]'
                   }`}
                 >
                   {scope === 'All' ? 'All Scopes' : scope}
@@ -253,7 +253,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-2.5 py-1 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#01153C]"
+                className="px-2.5 py-1 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#5141FF]"
               >
                 <option value="All">All Categories</option>
                 <option value="Electricity & Steam">Electricity & Steam</option>
@@ -268,7 +268,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
               <select
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
-                className="px-2.5 py-1 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#01153C]"
+                className="px-2.5 py-1 text-xs bg-[#FAFAFB] border border-[#E5E7EB] rounded-lg text-[#17181A] focus:outline-none focus:border-[#5141FF]"
               >
                 <option value="All">All Regions</option>
                 <option value="India">India</option>
@@ -281,7 +281,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="text-xs text-[#01153C] hover:underline font-semibold px-1"
+                  className="text-xs text-[#5141FF] hover:underline font-semibold px-1"
                 >
                   Reset
                 </button>
@@ -309,7 +309,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="px-4 py-1.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] rounded-full hover:bg-[#DCE5F5]"
+                  className="px-4 py-1.5 text-xs font-semibold text-[#5141FF] bg-[#F2F0FF] rounded-full hover:bg-[#DCE5F5]"
                 >
                   Clear All Filters
                 </button>
@@ -323,7 +323,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                     onClick={() => setSelectedFactor(f)}
                     className={`p-3.5 rounded-xl border transition-all cursor-pointer text-left ${
                       isSelected
-                        ? 'bg-white border-[#01153C] shadow-md ring-1 ring-[#01153C]/20'
+                        ? 'bg-white border-[#5141FF] shadow-md ring-1 ring-[#01153C]/20'
                         : 'bg-white border-[#E5E7EB] hover:border-[#D5D8DD] hover:shadow-2xs'
                     }`}
                   >
@@ -335,7 +335,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                               f.publishingBody === 'IPCC'
                                 ? 'bg-[#F4EBFF] text-[#6927DA] border-[#D8B4FE]'
                                 : f.publishingBody === 'IEA'
-                                ? 'bg-[#EDF2FA] text-[#01153C] border-[#DCE5F5]'
+                                ? 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]'
                                 : f.publishingBody === 'CEA'
                                 ? 'bg-[#EEF9F1] text-[#26783B] border-[#DDF3E3]'
                                 : 'bg-[#FFF8E6] text-[#B54708] border-[#FEDF89]'
@@ -364,7 +364,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
 
                       {/* Factor Value Badge */}
                       <div className="text-right shrink-0">
-                        <div className="text-sm sm:text-base font-bold text-[#01153C] font-mono">
+                        <div className="text-sm sm:text-base font-bold text-[#181B27] font-mono">
                           {f.value}
                         </div>
                         <div className="text-[10px] text-[#5F6368] font-data">
@@ -383,7 +383,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
             {/* Factor Header */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#01153C] bg-[#EDF2FA] px-2.5 py-0.5 rounded-full border border-[#DCE5F5]">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#5141FF] bg-[#F2F0FF] px-2.5 py-0.5 rounded-full border border-[#E5E0FF]">
                   {selectedFactor.publishingBody} · {selectedFactor.scope}
                 </span>
                 <span className="text-[10px] font-semibold text-[#26783B] bg-[#EEF9F1] px-2 py-0.5 rounded-full border border-[#DDF3E3] flex items-center space-x-1">
@@ -407,7 +407,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                   <div className="text-[10px] uppercase font-bold tracking-wider text-[#8A8F98]">
                     Emission Factor Value
                   </div>
-                  <div className="text-2xl font-black text-[#01153C] font-mono mt-0.5">
+                  <div className="text-2xl font-black text-[#181B27] font-mono mt-0.5">
                     {selectedFactor.value}{' '}
                     <span className="text-xs font-semibold text-[#5F6368] font-sans">
                       {selectedFactor.unit}
@@ -443,15 +443,15 @@ export const EmissionFactorHelperModal: React.FC = () => {
             </div>
 
             {/* Interactive Calculation Accuracy Estimator */}
-            <div className="p-4 bg-[#EDF2FA] border border-[#DCE5F5] rounded-2xl space-y-3.5">
+            <div className="p-4 bg-[#F2F0FF] border border-[#E5E0FF] rounded-2xl space-y-3.5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-1.5">
-                  <Calculator className="w-4 h-4 text-[#01153C]" />
-                  <span className="text-xs font-bold text-[#01153C] uppercase tracking-wider">
+                  <Calculator className="w-4 h-4 text-[#181B27]" />
+                  <span className="text-xs font-bold text-[#181B27] uppercase tracking-wider">
                     Accuracy Estimator
                   </span>
                 </div>
-                <span className="text-[10px] text-[#01153C] font-semibold bg-white/70 px-2 py-0.5 rounded-full border border-[#DCE5F5]">
+                <span className="text-[10px] text-[#5141FF] font-semibold bg-white/70 px-2 py-0.5 rounded-full border border-[#E5E0FF]">
                   Deterministic tCO2e
                 </span>
               </div>
@@ -467,7 +467,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                     value={sampleQuantity}
                     onChange={(e) => setSampleQuantity(e.target.value)}
                     placeholder="Enter activity amount..."
-                    className="w-full px-3 py-1.5 text-xs bg-white border border-[#DCE5F5] rounded-lg font-mono text-[#17181A] focus:outline-none focus:border-[#01153C]"
+                    className="w-full px-3 py-1.5 text-xs bg-white border border-[#E5E0FF] rounded-lg font-mono text-[#17181A] focus:outline-none focus:border-[#5141FF]"
                   />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[11px] text-[#8A8F98] font-data">
                     {selectedFactor.unit.split('/')[1]?.trim() || 'units'}
@@ -476,7 +476,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
               </div>
 
               {/* Result computation */}
-              <div className="p-3 bg-white rounded-xl border border-[#DCE5F5] space-y-1.5 text-xs">
+              <div className="p-3 bg-white rounded-xl border border-[#E5E0FF] space-y-1.5 text-xs">
                 <div className="flex items-center justify-between text-[#5F6368] text-[11px]">
                   <span>Formula:</span>
                   <span className="font-mono text-[#17181A] text-[10px]">
@@ -486,14 +486,14 @@ export const EmissionFactorHelperModal: React.FC = () => {
 
                 <div className="flex items-center justify-between pt-1 border-t border-[#F1F3F5]">
                   <span className="font-semibold text-[#17181A]">Estimated Emissions:</span>
-                  <span className="text-base font-bold text-[#01153C] font-mono">
+                  <span className="text-base font-bold text-[#181B27] font-mono">
                     {calculatedEmissionsTons} <span className="text-xs font-semibold">tCO2e</span>
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between text-[10px] text-[#5F6368] pt-1">
                   <span>Accuracy Band ({selectedFactor.uncertainty}):</span>
-                  <span className="font-mono text-[#01153C]">
+                  <span className="font-mono text-[#181B27]">
                     {lowerBoundTons} – {upperBoundTons} tCO2e
                   </span>
                 </div>
@@ -509,7 +509,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleCopy(selectedFactor.citation, 'cit', 'Citation')}
-                  className="text-[11px] text-[#01153C] hover:underline flex items-center space-x-1 font-semibold"
+                  className="text-[11px] text-[#5141FF] hover:underline flex items-center space-x-1 font-semibold"
                 >
                   {copiedField === 'cit' ? <Check className="w-3 h-3 text-[#26783B]" /> : <Copy className="w-3 h-3" />}
                   <span>{copiedField === 'cit' ? 'Copied' : 'Copy'}</span>
@@ -529,7 +529,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => applyFactorToEntry(selectedFactor)}
-                className="w-full py-2.5 px-4 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#02215c] rounded-xl shadow-md transition-all flex items-center justify-center space-x-2"
+                className="w-full py-2.5 px-4 text-xs font-semibold text-white bg-[#5141FF] hover:bg-[#4232E8] rounded-xl shadow-md transition-all flex items-center justify-center space-x-2"
               >
                 <span>Use This Factor in Activity Entry</span>
                 <ArrowRight className="w-4 h-4" />
@@ -542,7 +542,7 @@ export const EmissionFactorHelperModal: React.FC = () => {
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3 border-t border-[#ECEDEF] bg-white flex flex-col sm:flex-row items-center justify-between gap-2 shrink-0 text-xs text-[#5F6368]">
+        <div className="px-6 py-3 border-t border-[#E2E5EF] bg-white flex flex-col sm:flex-row items-center justify-between gap-2 shrink-0 text-xs text-[#5F6368]">
           <div className="flex items-center space-x-2">
             <ShieldCheck className="w-4 h-4 text-[#26783B]" />
             <span>
