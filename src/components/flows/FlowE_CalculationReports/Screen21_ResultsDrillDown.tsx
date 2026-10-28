@@ -86,7 +86,7 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
   };
 
   return (
-    <div id="screen-21-container" className="max-w-6xl mx-auto space-y-6">
+    <div id="screen-21-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -95,7 +95,6 @@ export const Screen21_ResultsDrillDown: React.FC = () => {
           { label: 'Drill-Down' },
         ]}
         title="Drill-Down — Grid Electricity, Scope 2"
-        description="Allowing users to move from aggregated carbon results into underlying site and activity-level entries."
         contextInfo={
           <span className="route-path text-xs text-[#8A8F98] font-medium">
             /calculations/results/scope2/grid-electricity

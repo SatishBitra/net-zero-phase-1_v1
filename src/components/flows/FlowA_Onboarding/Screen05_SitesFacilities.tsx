@@ -81,7 +81,7 @@ export const Screen05_SitesFacilities: React.FC = () => {
   };
 
   return (
-    <div id="screen-05-sites-facilities" className="max-w-6xl mx-auto space-y-6">
+    <div id="screen-05-sites-facilities" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -89,7 +89,6 @@ export const Screen05_SitesFacilities: React.FC = () => {
           { label: 'Sites & Facilities' },
         ]}
         title="Sites & Facilities"
-        description="Manage physical and operational locations included in your emissions accounting boundary."
         actions={
           canManageSites ? (
             <div className="flex items-center space-x-2.5">

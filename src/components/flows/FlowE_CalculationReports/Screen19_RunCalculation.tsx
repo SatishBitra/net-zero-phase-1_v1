@@ -123,7 +123,7 @@ export const Screen19_RunCalculation: React.FC = () => {
   };
 
   return (
-    <div id="screen-19-container" className="max-w-5xl mx-auto space-y-6">
+    <div id="screen-19-container" className="w-full space-y-6">
       {/* Page Header */}
       <PageHeader
         breadcrumbs={[
@@ -133,7 +133,6 @@ export const Screen19_RunCalculation: React.FC = () => {
         ]}
         title="Execute GHG Protocol Calculation Run"
         badge={<StatusBadge status="Ready" customLabel="TC-DOM-002a Engine v1.4.2" size="sm" />}
-        description="Run the versioned deterministic calculation engine across approved activity records to generate an immutable carbon snapshot."
         actions={
           <button
             type="button"
@@ -150,8 +149,8 @@ export const Screen19_RunCalculation: React.FC = () => {
       <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 sm:p-5 shadow-2xs space-y-3">
         <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2.5">
           <span className="text-xs font-bold text-[#171A1F] uppercase tracking-wider flex items-center gap-1.5">
-            <Sparkles className="w-4 h-4 text-[#01153C]" />
-            TC-DOM-002a 6-Step Calculation Workflow Chain
+            <Calculator className="w-4 h-4 text-[#01153C]" />
+            Calculation Workflow (Steps 1–6)
           </span>
           <span className="text-[11px] font-mono text-[#01153C] bg-[#EDF2FA] px-2 py-0.5 rounded font-semibold">
             Deterministic &middot; Auditable Lineage

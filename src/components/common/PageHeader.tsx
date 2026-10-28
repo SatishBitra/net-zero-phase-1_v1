@@ -56,17 +56,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <div className="flex items-center space-x-3">
-            <h1 className="text-2xl sm:text-[28px] font-semibold tracking-tight text-[#17181A] font-sans">
+            <h1 className="text-2xl sm:text-[26px] font-semibold tracking-tight text-[#17181A] font-sans">
               {title}
             </h1>
             {badge}
           </div>
-          {description && (
-            <p className="text-xs sm:text-[13px] text-[#5F6368] font-data mt-1 max-w-3xl leading-relaxed">
-              {description}
-            </p>
-          )}
-          {contextInfo && <div className="mt-2">{contextInfo}</div>}
+          {contextInfo && <div className="mt-1.5">{contextInfo}</div>}
         </div>
 
         {actions && (

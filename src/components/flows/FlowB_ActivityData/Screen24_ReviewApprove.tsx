@@ -145,7 +145,7 @@ export const Screen24_ReviewApprove: React.FC = () => {
   };
 
   return (
-    <div id="screen-24-container" className="max-w-5xl mx-auto space-y-6">
+    <div id="screen-24-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -154,7 +154,6 @@ export const Screen24_ReviewApprove: React.FC = () => {
           { label: 'Batch #204' },
         ]}
         title="Review Batch #204 — Chennai Plant 1"
-        description="Inspect submitted activity rows and supporting evidence before making an approval decision."
         badge={
           <StatusBadge status="Pending" customLabel="Awaiting Review" size="sm" />
         }

@@ -91,7 +91,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
   };
 
   return (
-    <div id="screen-16-container" className="max-w-4xl mx-auto space-y-6 font-sans">
+    <div id="screen-16-container" className="w-full space-y-6 font-sans">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -100,7 +100,6 @@ export const Screen16_AttachEvidence: React.FC = () => {
           { label: 'Evidence' },
         ]}
         title="Attach Evidence"
-        description="Link original supporting documentation to verify activity consumption for audits."
         actions={
           <button
             onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}

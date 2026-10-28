@@ -93,7 +93,7 @@ export const Screen17_BillUpload: React.FC = () => {
   };
 
   return (
-    <div id="screen-17-container" className="max-w-4xl mx-auto space-y-6 font-sans">
+    <div id="screen-17-container" className="w-full space-y-6 font-sans">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -102,7 +102,6 @@ export const Screen17_BillUpload: React.FC = () => {
           { label: 'Upload Electricity Bill' },
         ]}
         title="Upload Electricity Bill"
-        description="AI will extract the reading, billing period and units automatically — you confirm before it’s saved"
         actions={
           <button
             onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}

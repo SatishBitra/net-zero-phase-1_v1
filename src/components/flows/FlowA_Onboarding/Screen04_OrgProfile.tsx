@@ -35,7 +35,7 @@ export const Screen04_OrgProfile: React.FC = () => {
   };
 
   return (
-    <div id="screen-04-org-profile" className="max-w-4xl mx-auto space-y-6">
+    <div id="screen-04-org-profile" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -44,17 +44,13 @@ export const Screen04_OrgProfile: React.FC = () => {
           { label: 'Profile' },
         ]}
         title="Organisation Profile"
-        description="Capture legal entity details and the organizational boundary approach used for GHG calculations."
         badge={<StatusBadge status="Approved" customLabel="Entity Baseline" size="sm" />}
       />
 
       <form onSubmit={handleSubmit} className="space-y-6 font-sans">
         {/* Section 1: Legal Entity Details */}
         <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs">
-          <h2 className="text-sm font-semibold text-[#17181A] mb-1">Legal entity details</h2>
-          <p className="text-xs text-[#5F6368] mb-4 font-data">
-            Official company registration details per corporate regulatory filings.
-          </p>
+          <h2 className="text-sm font-semibold text-[#17181A] mb-3">Legal entity details</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -153,10 +149,7 @@ export const Screen04_OrgProfile: React.FC = () => {
 
         {/* Section 2: Organisational Boundary & Consolidation Approach */}
         <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs">
-          <h2 className="text-sm font-semibold text-[#17181A] mb-1">Organisational boundary</h2>
-          <p className="text-xs text-[#5F6368] mb-4 font-data">
-            Under GHG Protocol standards, choose how emissions from subsidiary facilities, leases, and joint ventures are accounted.
-          </p>
+          <h2 className="text-sm font-semibold text-[#17181A] mb-3">Organisational boundary</h2>
 
           <div className="space-y-3">
             {[
@@ -164,24 +157,24 @@ export const Screen04_OrgProfile: React.FC = () => {
                 id: 'Operational control',
                 title: 'Operational Control (Recommended)',
                 description:
-                  'Your organisation accounts for 100% of emissions from facilities and operations over which it has full operational authority to introduce operating policies.',
+                  '100% of emissions from facilities and operations with full operational control.',
               },
               {
                 id: 'Financial control',
                 title: 'Financial Control',
                 description:
-                  'Your organisation accounts for 100% of emissions from operations over which it has the ability to direct financial and operating policies to gain economic benefits.',
+                  '100% of emissions from operations with financial and operating authority.',
               },
               {
                 id: 'Equity share',
                 title: 'Equity Share',
                 description:
-                  'Your organisation accounts for GHG emissions according to its economic equity percentage interest in joint-venture or shared facility assets.',
+                  'Emissions accounted according to economic equity interest in assets.',
               },
             ].map((option) => (
               <label
                 key={option.id}
-                className={`flex items-start p-3.5 rounded-2xl border cursor-pointer transition-all ${
+                className={`flex items-start p-3.5 rounded-xl border cursor-pointer transition-all ${
                   consolidationApproach === option.id
                     ? 'border-[#01153C] bg-[#EDF2FA]'
                     : 'border-[#E5E7EB] bg-white hover:border-[#01153C]/40'
@@ -196,17 +189,10 @@ export const Screen04_OrgProfile: React.FC = () => {
                 />
                 <div className="text-xs">
                   <div className="font-semibold text-[#17181A]">{option.title}</div>
-                  <div className="text-[#5F6368] mt-0.5 leading-relaxed font-data">{option.description}</div>
+                  <div className="text-[#5F6368] mt-0.5 font-data">{option.description}</div>
                 </div>
               </label>
             ))}
-          </div>
-
-          <div className="mt-4 p-3.5 bg-[#FAFAFB] rounded-2xl border border-[#E5E7EB] flex items-start space-x-2 text-xs text-[#5F6368]">
-            <Info className="w-4 h-4 text-[#01153C] shrink-0 mt-0.5" />
-            <span className="font-data">
-              This setting establishes the boundary baseline for all downstream activity ingestion, site additions, and BRSR / GHG Protocol verification filings.
-            </span>
           </div>
         </div>
 

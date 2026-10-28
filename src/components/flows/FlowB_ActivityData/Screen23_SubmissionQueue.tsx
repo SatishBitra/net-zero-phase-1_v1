@@ -64,7 +64,7 @@ export const Screen23_SubmissionQueue: React.FC = () => {
   };
 
   return (
-    <div id="screen-23-container" className="max-w-6xl mx-auto space-y-6">
+    <div id="screen-23-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -72,7 +72,6 @@ export const Screen23_SubmissionQueue: React.FC = () => {
           { label: 'Submission Queue' },
         ]}
         title="Submission Queue"
-        description="Reviewers and Tenant Admins verify submitted activity data batches before committing to the carbon inventory."
         badge={
           <StatusBadge status="Pending" customLabel="Four-Eye Workflow" size="sm" />
         }

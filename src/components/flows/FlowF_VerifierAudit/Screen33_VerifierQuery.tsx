@@ -135,35 +135,34 @@ export const Screen33_VerifierQuery: React.FC = () => {
   };
 
   return (
-    <div id="screen-33-verifier-query" className="max-w-6xl mx-auto space-y-6">
-      {/* Verifier Read-Only Assurance Notice */}
-      <div className="bg-[#01153C] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#01153C] shadow-2xs font-data">
+    <div id="screen-33-verifier-query" className="w-full space-y-6 font-sans">
+      {/* Verifier Query Header Bar */}
+      <div className="bg-[#01153C] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#01153C]">
         <div className="flex items-center space-x-2">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span className="font-semibold text-white font-sans">External Assurance Surface</span>
-          <span className="text-white/40">•</span>
-          <span className="text-white/90">Structured Query & Clarification Dispatch</span>
+          <span className="font-semibold text-white">Verifier Query Module</span>
+          <span className="text-white/40">·</span>
+          <span className="text-white/90">Line-Item Clarification Dispatch</span>
         </div>
         <div className="flex items-center space-x-2 text-[11px] text-white/70">
-          <span>Lead Verifier: M. Singh</span>
-          <span className="text-white/40">•</span>
-          <span className="route-path text-emerald-300 font-medium">ISO 14064-3 Verifier Docket</span>
+          <span>Lead Verifier: Dr. V. Raman</span>
+          <span className="text-white/40">·</span>
+          <span className="text-emerald-300 font-semibold">ISO 14064-3 Protocol</span>
         </div>
       </div>
 
       {/* Breadcrumb Navigation & Header */}
       <PageHeader
         breadcrumbs={[
-          { label: 'Dashboard', onClick: () => navigateToScreen('31_verifier_dashboard', 'FLOW_F') },
+          { label: 'Assigned Reviews', onClick: () => navigateToScreen('31_verifier_dashboard', 'FLOW_F') },
           { label: 'Evidence Trace', onClick: () => navigateToScreen('32_evidence_trace', 'FLOW_F') },
-          { label: 'Raise Query' },
+          { label: 'Queries' },
         ]}
-        title="Structured Query & Clarification"
-        description="Raise formal assurance clarification tied directly to a specific activity record and primary evidence."
+        title="Verifier Inquiries"
         actions={
           <button
             onClick={() => navigateToScreen('32_evidence_trace', 'FLOW_F')}
-            className="enterprise-btn-secondary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold"
+            className="enterprise-btn-secondary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold rounded-xl"
           >
             <ArrowLeft className="w-3.5 h-3.5 text-[#5F6368]" />
             <span>Return to Evidence Trace</span>
@@ -171,63 +170,65 @@ export const Screen33_VerifierQuery: React.FC = () => {
         }
       />
 
-      {/* Context Panel: Read-Only Context Display */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3">
+      {/* Context Panel: Bound Line Item */}
+      <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 shadow-xs space-y-3">
         <div className="flex items-center justify-between border-b border-[#F1F3F5] pb-2">
           <div className="flex items-center space-x-2">
             <FileCheck className="w-4 h-4 text-[#01153C]" />
-            <h2 className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
-              Query Context (Bound Line Item & Source Document)
+            <h2 className="text-xs font-bold text-[#01153C] uppercase tracking-wider">
+              Bound Line-Item Context
             </h2>
           </div>
-          <span className="text-[11px] activity-id text-[#5F6368] font-medium">
+          <span className="text-[11px] font-mono text-[#5F6368] font-medium">
             {context.activityRow}
           </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs font-sans">
-          <div className="p-2.5 bg-[#FAFAFB] rounded-lg border border-[#E5E7EB]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 text-xs">
+          <div className="p-2.5 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
             <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Client</div>
             <div className="font-semibold text-[#17181A] mt-0.5">{context.client}</div>
           </div>
-          <div className="p-2.5 bg-[#FAFAFB] rounded-lg border border-[#E5E7EB]">
+          <div className="p-2.5 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
             <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Report & Period</div>
             <div className="font-medium text-[#17181A] mt-0.5">
-              <span>{context.report}</span> • <span className="period-code font-medium">{context.period}</span>
+              <span>{context.report}</span> · <span className="font-semibold">{context.period}</span>
             </div>
           </div>
-          <div className="p-2.5 bg-[#FAFAFB] rounded-lg border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Scope & Category</div>
+          <div className="p-2.5 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
+            <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Category</div>
             <div className="font-medium text-[#17181A] mt-0.5">
-              {context.scope} › {context.category}
+              {context.category}
             </div>
           </div>
-          <div className="p-2.5 bg-[#FAFAFB] rounded-lg border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Facility Site</div>
+          <div className="p-2.5 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
+            <div className="text-[10px] uppercase text-[#8A8F98] font-semibold">Site</div>
             <div className="font-semibold text-[#17181A] mt-0.5">{context.site}</div>
           </div>
-          <div className="p-2.5 bg-[#01153C]/5 rounded-lg border border-[#01153C]/30">
-            <div className="text-[10px] uppercase text-[#01153C] font-semibold">Quantity & Date</div>
-            <div className="font-medium text-[#17181A] mt-0.5">
-              {context.quantity} ({context.date})
+          <div className="p-2.5 bg-[#01153C]/5 rounded-xl border border-[#01153C]/30">
+            <div className="text-[10px] uppercase text-[#01153C] font-semibold">Quantity</div>
+            <div className="font-bold text-[#17181A] mt-0.5">
+              {context.quantity}
             </div>
           </div>
         </div>
 
-        <div className="p-2.5 bg-[#FAFAFB] rounded-lg border border-[#E5E7EB] flex items-center justify-between text-xs">
+        <div className="p-2.5 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB] flex items-center justify-between text-xs">
           <div className="flex items-center space-x-2">
             <FileText className="w-3.5 h-3.5 text-[#027A48]" />
-            <span className="text-[#8A8F98]">Attached Primary Evidence:</span>
-            <span className="font-semibold text-[#17181A] font-sans">{context.evidence}</span>
+            <span className="text-[#8A8F98]">Source Document:</span>
+            <span className="font-semibold text-[#17181A]">{context.evidence}</span>
           </div>
-          <StatusBadge status="Approved" customLabel="SHA-256 Verified" size="sm" />
+          <span className="text-[11px] font-semibold text-[#027A48]">
+            SHA-256 Validated
+          </span>
         </div>
       </div>
 
       {/* Main Grid: Query Creation Form / Reviewer Response Form + Engagement Query History */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left: Role-Specific Action Panel (7 cols on lg) */}
-        <div className="lg:col-span-7 bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-2xs space-y-4">
+        <div className="lg:col-span-7 bg-white border border-[#E5E7EB] rounded-2xl p-5 shadow-xs space-y-4">
           {currentRole === 'VERIFIER' ? (
             <>
               <div className="flex items-center space-x-2 border-b border-[#F1F3F5] pb-3">

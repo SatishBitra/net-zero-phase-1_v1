@@ -86,7 +86,7 @@ export const Screen18_OCRReview: React.FC = () => {
   };
 
   return (
-    <div id="screen-18-container" className="max-w-6xl mx-auto space-y-6 font-sans">
+    <div id="screen-18-container" className="w-full space-y-6 font-sans">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -94,7 +94,6 @@ export const Screen18_OCRReview: React.FC = () => {
           { label: 'AI OCR Review' },
         ]}
         title="Confirm Extracted Data"
-        description="Review machine-extracted values against original source document before committing to activity records."
         actions={
           <div className="flex items-center space-x-2">
             <StatusBadge status="In Review" customLabel="AI-suggested" size="md" />

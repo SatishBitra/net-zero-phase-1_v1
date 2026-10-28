@@ -41,7 +41,7 @@ export const Screen22_EmissionFactors: React.FC = () => {
   }, [publishingBodyFilter, tableSearch]);
 
   return (
-    <div id="screen-22-container" className="max-w-6xl mx-auto space-y-6">
+    <div id="screen-22-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -49,7 +49,6 @@ export const Screen22_EmissionFactors: React.FC = () => {
           { label: 'Emission Factors Reference' },
         ]}
         title="Emission Factors Reference"
-        description="Transparent, versioned reference library for the emission factors used in Tula Carbon calculations."
         badge={
           <StatusBadge status="Locked" customLabel="Read-only platform library" size="sm" />
         }

@@ -33,7 +33,7 @@ export const Screen27_ReportBuilder: React.FC = () => {
   };
 
   return (
-    <div id="screen-27-container" className="max-w-4xl mx-auto space-y-6">
+    <div id="screen-27-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -41,7 +41,6 @@ export const Screen27_ReportBuilder: React.FC = () => {
           { label: 'Report Builder' },
         ]}
         title="Report Builder"
-        description="Define the reporting period, report standard, facility coverage, and export format before generating preview."
         badge={
           <StatusBadge status="Active" customLabel="Phase 1 Ready" size="sm" />
         }

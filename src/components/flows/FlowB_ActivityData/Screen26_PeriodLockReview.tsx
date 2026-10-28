@@ -81,7 +81,7 @@ export const Screen26_PeriodLockReview: React.FC = () => {
   };
 
   return (
-    <div id="screen-26-container" className="max-w-3xl mx-auto space-y-6">
+    <div id="screen-26-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -89,7 +89,6 @@ export const Screen26_PeriodLockReview: React.FC = () => {
           { label: 'Period Lock' },
         ]}
         title="Lock Reporting Period — FY 2025–26"
-        description="High-risk destructive workflow requiring explicit typed confirmation from Tenant Admin."
         badge={
           <StatusBadge status="Locked" customLabel="Admin Governance" size="sm" />
         }

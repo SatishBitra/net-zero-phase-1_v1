@@ -76,7 +76,7 @@ export const Screen09_TenantSettings: React.FC = () => {
   };
 
   return (
-    <div id="screen-09-tenant-settings" className="max-w-5xl mx-auto space-y-6">
+    <div id="screen-09-tenant-settings" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -85,7 +85,6 @@ export const Screen09_TenantSettings: React.FC = () => {
         ]}
         title="Tenant Settings"
         badge={<StatusBadge status="Approved" customLabel="Active Tenant" size="sm" />}
-        description="Configure tenant-level operational preferences, boundary consolidation approaches, notification dispatch rules, and verified compliance linkages."
         actions={
           <div className="flex items-center space-x-2">
             <button

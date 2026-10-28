@@ -106,7 +106,7 @@ export const Screen15_FixDetailView: React.FC = () => {
   };
 
   return (
-    <div id="screen-15-container" className="max-w-4xl mx-auto space-y-6 font-sans">
+    <div id="screen-15-container" className="w-full space-y-6 font-sans">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -114,7 +114,6 @@ export const Screen15_FixDetailView: React.FC = () => {
           { label: 'Row #1042' },
         ]}
         title="Activity Data — Row #1042"
-        description="Edit flagged row to resolve validation errors. Every edit creates an append-only audit trail entry."
         actions={
           <div className="flex items-center space-x-2">
             <StatusBadge

@@ -344,7 +344,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
   };
 
   return (
-    <div id="scenario-builder-container" className="max-w-7xl mx-auto space-y-4 md:space-y-5 pb-10">
+    <div id="scenario-builder-container" className="w-full space-y-5 pb-10">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -352,7 +352,6 @@ export const WhatIfScenarioBuilder: React.FC = () => {
           { label: 'What-If Decarbonization Simulator' },
         ]}
         title="What-If Decarbonization Simulator"
-        description="Model the emissions impact of renewable procurement, efficiency retrofits, and fleet electrification."
         contextInfo={
           <div className="flex items-center gap-2 text-xs text-[#4B5563]">
             <span className="font-semibold text-[#01153C]">{baseline.period} Baseline</span>
@@ -363,10 +362,10 @@ export const WhatIfScenarioBuilder: React.FC = () => {
           </div>
         }
         actions={
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={handleResetToBaseline}
-              className="px-3 py-1.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
               aria-label="Reset scenario levers to baseline"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -374,7 +373,7 @@ export const WhatIfScenarioBuilder: React.FC = () => {
             </button>
             <button
               onClick={handleExportCsv}
-              className="px-3 py-1.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
               aria-label="Export scenario data to CSV"
             >
               <Download className="w-3.5 h-3.5" />
@@ -382,14 +381,14 @@ export const WhatIfScenarioBuilder: React.FC = () => {
             </button>
             <button
               onClick={() => navigateToScreen('37_benchmarking', 'FLOW_E')}
-              className="px-3 py-1.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] hover:bg-[#E2EAF7] border border-[#01153C]/20 rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] hover:bg-[#E2EAF7] border border-[#01153C]/20 rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
             >
               <Target className="w-3.5 h-3.5" />
               <span>Benchmark Radar</span>
             </button>
             <button
               onClick={handleSaveScenario}
-              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-4 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
             >
               <Save className="w-3.5 h-3.5" />
               <span>Save Scenario</span>
@@ -936,11 +935,6 @@ export const WhatIfScenarioBuilder: React.FC = () => {
                       })}
                     </tbody>
                   </table>
-                </div>
-
-                <div className="p-3 bg-[#EDF2FA] rounded-xl text-xs text-[#01153C] flex items-center gap-2">
-                  <span className="font-bold">Key Driver:</span>
-                  <span>Chennai Plant 1 represents 54% of base footprint. High-efficiency upgrades deliver highest marginal ROI.</span>
                 </div>
               </div>
             )}

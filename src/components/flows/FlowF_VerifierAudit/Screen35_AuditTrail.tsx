@@ -125,22 +125,22 @@ export const Screen35_AuditTrail: React.FC = () => {
   };
 
   return (
-    <div id="screen-35-audit-trail-viewer" className="max-w-7xl mx-auto space-y-6">
-      {/* Immutability Guarantee Banner */}
-      <div className="bg-white text-[#17181A] px-4 py-3 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#E5E7EB] shadow-2xs font-data">
+    <div id="screen-35-audit-trail-viewer" className="w-full space-y-6">
+      {/* Immutability Assurance Bar */}
+      <div className="bg-white text-[#17181A] px-4 py-3 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#E5E7EB] shadow-xs">
         <div className="flex items-center space-x-2.5">
-          <div className="w-7 h-7 rounded-full bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0">
-            <Lock className="w-3.5 h-3.5" />
+          <div className="w-8 h-8 rounded-xl bg-[#01153C]/10 text-[#01153C] flex items-center justify-center shrink-0">
+            <Lock className="w-4 h-4" />
           </div>
-          <span className="font-semibold text-[#17181A] font-sans">Immutable Audit Trail</span>
-          <span className="text-[#8A8F98]">•</span>
-          <span className="text-[#5F6368]">
-            Append-only chronological ledger. Every mutation is sealed and cannot be modified or deleted.
-          </span>
+          <div>
+            <span className="font-bold text-[#17181A]">Immutable Audit Ledger</span>
+            <span className="text-[#8A8F98] mx-2">·</span>
+            <span className="text-[#5F6368]">Append-Only Chain</span>
+          </div>
         </div>
-        <div className="flex items-center space-x-2 text-[11px]">
-          <span className="route-path text-[#01153C] font-semibold bg-[#01153C]/10 px-2.5 py-1 rounded-full border border-[#01153C]/20">
-            ISO 14064-3 / SOC 2 Type II Certified
+        <div className="flex items-center space-x-2 text-xs">
+          <span className="font-semibold text-[#01153C]">
+            ISO 14064-3 · SOC-2 Type II Certified
           </span>
         </div>
       </div>
@@ -148,23 +148,22 @@ export const Screen35_AuditTrail: React.FC = () => {
       {/* Header & Export Actions */}
       <PageHeader
         breadcrumbs={[
-          { label: 'Dashboard', onClick: () => navigateToScreen('31_verifier_dashboard', 'FLOW_F') },
+          { label: 'Assigned Reviews', onClick: () => navigateToScreen('31_verifier_dashboard', 'FLOW_F') },
           { label: 'Audit Trail' },
         ]}
-        title="Audit Trail Viewer"
-        description="Immutable, chronological record of every change made to activity data, factors, approvals, or configurations."
+        title="Audit Trail Ledger"
         actions={
           <div className="flex items-center space-x-2.5">
             <button
               onClick={handleExportCSV}
-              className="enterprise-btn-secondary h-9 px-4 text-xs inline-flex items-center space-x-1.5 font-semibold rounded-full"
+              className="enterprise-btn-secondary h-9 px-4 text-xs inline-flex items-center space-x-1.5 font-semibold rounded-xl"
             >
               <FileSpreadsheet className="w-3.5 h-3.5 text-[#5F6368]" />
               <span>Export CSV</span>
             </button>
             <button
               onClick={handleExportJSON}
-              className="enterprise-btn-primary h-9 px-4 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs rounded-full"
+              className="enterprise-btn-primary h-9 px-4 text-xs inline-flex items-center space-x-1.5 font-semibold rounded-xl"
             >
               <FileCode className="w-3.5 h-3.5" />
               <span>Export JSON</span>
@@ -174,45 +173,35 @@ export const Screen35_AuditTrail: React.FC = () => {
       />
 
       {/* Filter Bar */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs space-y-3 font-sans">
-        <div className="flex items-center justify-between text-xs font-semibold text-[#17181A] border-b border-[#F1F3F5] pb-2">
-          <div className="flex items-center space-x-2">
-            <Filter className="w-3.5 h-3.5 text-[#01153C]" />
-            <span>Audit Trail Filter Matrix</span>
-          </div>
-          <span className="text-[11px] text-[#5F6368] font-data">
-            Showing {filteredEntries.length} of {auditTrail.length} recorded events
-          </span>
-        </div>
-
+      <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 shadow-xs space-y-3 font-sans">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
           {/* Date Range Start / End */}
           <div>
-            <label className="block text-[11px] font-semibold text-[#5F6368] mb-1">Date Range</label>
+            <label className="block text-xs font-semibold text-[#5F6368] mb-1.5">Date Range</label>
             <div className="flex items-center space-x-1.5">
               <input
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full px-2 py-1.5 border border-[#E5E7EB] rounded-lg text-xs bg-white text-[#17181A] font-data"
+                className="w-full px-2 py-1.5 border border-[#E5E7EB] rounded-xl text-xs bg-white text-[#17181A]"
               />
               <span className="text-[#8A8F98] text-xs">–</span>
               <input
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full px-2 py-1.5 border border-[#E5E7EB] rounded-lg text-xs bg-white text-[#17181A] font-data"
+                className="w-full px-2 py-1.5 border border-[#E5E7EB] rounded-xl text-xs bg-white text-[#17181A]"
               />
             </div>
           </div>
 
           {/* Actor Filter */}
           <div>
-            <label className="block text-[11px] font-semibold text-[#5F6368] mb-1">Actor</label>
+            <label className="block text-xs font-semibold text-[#5F6368] mb-1.5">Actor</label>
             <select
               value={actorFilter}
               onChange={(e) => setActorFilter(e.target.value)}
-              className="w-full px-3.5 py-1.5 border border-[#E5E7EB] rounded-full text-xs bg-white text-[#17181A]"
+              className="w-full px-3 py-1.5 border border-[#E5E7EB] rounded-xl text-xs bg-white text-[#17181A]"
             >
               <option value="ALL">All Actors</option>
               {actorsList.map((actor) => (
@@ -225,11 +214,11 @@ export const Screen35_AuditTrail: React.FC = () => {
 
           {/* Action Type Filter */}
           <div>
-            <label className="block text-[11px] font-semibold text-[#5F6368] mb-1">Action Type</label>
+            <label className="block text-xs font-semibold text-[#5F6368] mb-1.5">Action Type</label>
             <select
               value={actionFilter}
               onChange={(e) => setActionFilter(e.target.value)}
-              className="w-full px-3.5 py-1.5 border border-[#E5E7EB] rounded-full text-xs bg-white text-[#17181A]"
+              className="w-full px-3 py-1.5 border border-[#E5E7EB] rounded-xl text-xs bg-white text-[#17181A]"
             >
               <option value="ALL">All Actions</option>
               {actionsList.map((action) => (
@@ -242,11 +231,11 @@ export const Screen35_AuditTrail: React.FC = () => {
 
           {/* Entity Filter */}
           <div>
-            <label className="block text-[11px] font-semibold text-[#5F6368] mb-1">Target Entity</label>
+            <label className="block text-xs font-semibold text-[#5F6368] mb-1.5">Target Entity</label>
             <select
               value={entityFilter}
               onChange={(e) => setEntityFilter(e.target.value)}
-              className="w-full px-3.5 py-1.5 border border-[#E5E7EB] rounded-full text-xs bg-white text-[#17181A]"
+              className="w-full px-3 py-1.5 border border-[#E5E7EB] rounded-xl text-xs bg-white text-[#17181A]"
             >
               <option value="ALL">All Entities</option>
               <option value="Activity Data Row #1042">Activity Data Row #1042</option>
@@ -257,7 +246,7 @@ export const Screen35_AuditTrail: React.FC = () => {
 
           {/* Search Input */}
           <div>
-            <label className="block text-[11px] font-semibold text-[#5F6368] mb-1">Search Reason / Value</label>
+            <label className="block text-xs font-semibold text-[#5F6368] mb-1.5">Search Reason / Value</label>
             <div className="relative">
               <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-[#8A8F98]" />
               <input
@@ -265,7 +254,7 @@ export const Screen35_AuditTrail: React.FC = () => {
                 placeholder="Filter reason..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 border border-[#E5E7EB] rounded-full text-xs bg-white text-[#17181A]"
+                className="w-full pl-8 pr-3 py-1.5 border border-[#E5E7EB] rounded-xl text-xs bg-white text-[#17181A]"
               />
             </div>
           </div>
@@ -273,16 +262,16 @@ export const Screen35_AuditTrail: React.FC = () => {
       </div>
 
       {/* Audit Log Table */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs">
-        <div className="px-4 py-3 border-b border-[#E5E7EB] bg-[#F4F5F6] flex items-center justify-between">
+      <div className="bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xs">
+        <div className="px-4 py-3.5 border-b border-[#E5E7EB] bg-[#FAFAFB] flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Activity className="w-4 h-4 text-[#01153C]" />
-            <h2 className="text-xs font-semibold text-[#17181A] uppercase tracking-wider font-sans">
-              Chronological Audit Trail Table
+            <h2 className="text-xs font-bold text-[#01153C] uppercase tracking-wider">
+              Chronological Audit Trail
             </h2>
           </div>
-          <span className="text-[11px] text-[#5F6368] font-data">
-            Read-only • No records may be altered or deleted
+          <span className="text-[11px] font-semibold text-[#5F6368]">
+            {filteredEntries.length} events recorded
           </span>
         </div>
 

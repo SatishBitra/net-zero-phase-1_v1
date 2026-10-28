@@ -209,7 +209,7 @@ export const Screen11_EntryForm: React.FC = () => {
   };
 
   return (
-    <div id="screen-11-container" className="max-w-4xl mx-auto space-y-6">
+    <div id="screen-11-container" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -217,7 +217,6 @@ export const Screen11_EntryForm: React.FC = () => {
           { label: 'New Entry' },
         ]}
         title="New Activity Data Entry"
-        description="Enter operational activity measurements for GHG calculation and compliance evidence."
         actions={
           <div className="flex items-center space-x-2">
             <button

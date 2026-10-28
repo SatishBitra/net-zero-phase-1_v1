@@ -85,7 +85,7 @@ export const Screen07_EmissionSources: React.FC = () => {
   };
 
   return (
-    <div id="screen-07-emission-sources" className="max-w-6xl mx-auto space-y-6">
+    <div id="screen-07-emission-sources" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -93,7 +93,6 @@ export const Screen07_EmissionSources: React.FC = () => {
           { label: 'Emission Sources' },
         ]}
         title="Emission Sources"
-        description="Configure emission sources at each site. This determines which input fields and units are available in Data Entry."
         actions={
           canConfigureSources ? (
             <button

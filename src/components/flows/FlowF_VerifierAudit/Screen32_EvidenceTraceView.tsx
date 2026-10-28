@@ -136,42 +136,36 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
   };
 
   return (
-    <div id="screen-32-evidence-trace-view" className="max-w-7xl mx-auto space-y-6">
-      {/* Verifier Read-Only Notice Bar */}
-      <div className="bg-[#17181A] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#2D3339] shadow-2xs font-data">
+    <div id="screen-32-evidence-trace-view" className="w-full space-y-6">
+      {/* Verifier Read-Only Header Bar */}
+      <div className="bg-[#17181A] text-white px-4 py-2.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-2 border border-[#2D3339]">
         <div className="flex items-center space-x-2">
           <ShieldCheck className="w-4 h-4 text-[#9E77ED]" />
-          <span className="font-semibold text-white font-sans">External Assurance Surface</span>
-          <span className="text-[#8A8F98]">•</span>
-          <span className="text-[#D9DDE3]">Read-only trace mode. Every figure links to immutable evidence.</span>
+          <span className="font-semibold text-white">Verifier Trace View</span>
+          <span className="text-[#8A8F98]">·</span>
+          <span className="text-[#D9DDE3]">Read-Only Lineage</span>
         </div>
         <div className="flex items-center space-x-3 text-[11px] text-[#A2A9B4]">
-          <span>Lead Verifier: J. Rao / M. Singh</span>
-          <span className="text-[#8A8F98]">•</span>
-          <span className="route-path text-[#9E77ED] font-medium">ISO 14064-3 Verifiable Audit Line</span>
+          <span>Lead Verifier: Dr. V. Raman</span>
+          <span className="text-[#8A8F98]">·</span>
+          <span className="text-[#9E77ED] font-semibold">ISO 14064-3 Lineage</span>
         </div>
       </div>
 
       {/* Breadcrumb Navigation & Header */}
       <PageHeader
         breadcrumbs={[
-          { label: 'Dashboard', onClick: () => navigateToScreen('31_verifier_dashboard', 'FLOW_F') },
+          { label: 'Assigned Reviews', onClick: () => navigateToScreen('31_verifier_dashboard', 'FLOW_F') },
           { label: traceLineage.scope },
           { label: traceLineage.category },
           { label: traceLineage.site },
         ]}
         title={`Evidence Trace: ${traceLineage.category} (${traceLineage.site})`}
-        description="Unbroken lineage trace from aggregate reported inventory down to primary DISCOM utility bill."
-        badge={
-          <span className="period-code font-medium text-xs px-2.5 py-1 bg-[#01153C]/10 text-[#01153C] rounded-md border border-[#01153C]/20">
-            {traceLineage.period}
-          </span>
-        }
         actions={
           <div className="flex items-center space-x-2.5">
             <button
               onClick={handleDownloadEvidence}
-              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
+              className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold rounded-xl"
             >
               <Download className="w-3.5 h-3.5 text-[#5F6368]" />
               <span>Download Evidence</span>
@@ -179,87 +173,87 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
 
             <button
               onClick={handleRaiseQuery}
-              className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold shadow-xs"
+              className="enterprise-btn-primary h-9 px-3.5 text-xs inline-flex items-center space-x-1.5 font-semibold rounded-xl"
             >
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>{currentRole === 'VERIFIER' ? 'Raise a query' : 'Verifier Queries'}</span>
+              <span>Raise Query</span>
             </button>
           </div>
         }
       />
 
-      {/* Principle Banner: Continuous Audit Lineage */}
-      <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 shadow-2xs">
-        <div className="text-xs font-semibold text-[#5F6368] uppercase tracking-wider mb-3 font-sans">
-          Continuous Audit Lineage (Scope 2 &gt; Category &gt; Site &gt; Activity &gt; Factor &gt; Primary Evidence)
+      {/* Trace Lineage Chain */}
+      <div className="bg-white border border-[#E5E7EB] rounded-2xl p-4 shadow-xs">
+        <div className="text-xs font-bold text-[#01153C] uppercase tracking-wider mb-3">
+          Emission Lineage Trace
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {/* 1. Scope Total */}
           <div className="p-3 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">
+            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold">
               1. Scope Total
             </div>
-            <div className="text-xs font-semibold text-[#17181A] mt-1 font-sans">{traceLineage.scope}</div>
-            <div className="text-sm emission-factor text-[#01153C] mt-0.5 font-medium">
+            <div className="text-xs font-semibold text-[#17181A] mt-1">{traceLineage.scope}</div>
+            <div className="text-sm text-[#01153C] mt-0.5 font-bold">
               {traceLineage.scopeTotal}
             </div>
           </div>
 
           {/* 2. Category Total */}
           <div className="p-3 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">
+            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold">
               2. Category Total
             </div>
-            <div className="text-xs font-semibold text-[#17181A] mt-1 font-sans">{traceLineage.category}</div>
-            <div className="text-sm emission-factor text-[#01153C] mt-0.5 font-medium">
+            <div className="text-xs font-semibold text-[#17181A] mt-1">{traceLineage.category}</div>
+            <div className="text-sm text-[#01153C] mt-0.5 font-bold">
               {traceLineage.categoryTotal}
             </div>
           </div>
 
           {/* 3. Site Total */}
           <div className="p-3 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">
+            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold">
               3. Site Allocation
             </div>
-            <div className="text-xs font-semibold text-[#17181A] mt-1 font-sans">{traceLineage.site}</div>
-            <div className="text-sm emission-factor text-[#01153C] mt-0.5 font-medium">
+            <div className="text-xs font-semibold text-[#17181A] mt-1">{traceLineage.site}</div>
+            <div className="text-sm text-[#01153C] mt-0.5 font-bold">
               {traceLineage.siteTotal}
             </div>
           </div>
 
           {/* 4. Activity Row */}
           <div className="p-3 bg-[#01153C]/5 rounded-xl border border-[#01153C]/30">
-            <div className="text-[10px] uppercase text-[#01153C] tracking-wider font-semibold font-sans">
+            <div className="text-[10px] uppercase text-[#01153C] tracking-wider font-bold">
               4. Active Row
             </div>
-            <div className="text-xs activity-id font-medium text-[#17181A] mt-1">{selectedRecord.rowRef}</div>
-            <div className="text-sm font-medium text-[#17181A] mt-0.5 font-sans">
+            <div className="text-xs font-semibold text-[#17181A] mt-1">{selectedRecord.rowRef}</div>
+            <div className="text-sm font-bold text-[#17181A] mt-0.5">
               {selectedRecord.quantity.toLocaleString()} {selectedRecord.unit}
             </div>
           </div>
 
           {/* 5. Emission Factor */}
           <div className="p-3 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">
-              5. Official Factor
+            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold">
+              5. Emission Factor
             </div>
-            <div className="text-xs font-semibold text-[#17181A] mt-1 font-sans">CEA India v19</div>
-            <div className="text-sm emission-factor font-medium text-[#027A48] mt-0.5">
+            <div className="text-xs font-semibold text-[#17181A] mt-1">CEA India v19</div>
+            <div className="text-sm font-bold text-[#027A48] mt-0.5">
               {selectedRecord.factorValue} kg/kWh
             </div>
           </div>
 
           {/* 6. Primary Evidence */}
           <div className="p-3 bg-[#FAFAFB] rounded-xl border border-[#E5E7EB]">
-            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold font-sans">
-              6. Source Evidence
+            <div className="text-[10px] uppercase text-[#8A8F98] tracking-wider font-semibold">
+              6. Source Document
             </div>
-            <div className="text-xs font-semibold text-[#17181A] mt-1 truncate font-sans" title={selectedRecord.evidenceFilename}>
+            <div className="text-xs font-semibold text-[#17181A] mt-1 truncate" title={selectedRecord.evidenceFilename}>
               {selectedRecord.evidenceFilename}
             </div>
-            <div className="text-xs text-[#5F6368] mt-0.5 font-data">
-              {selectedRecord.fileSize} • Verified
+            <div className="text-xs text-[#027A48] font-semibold mt-0.5">
+              {selectedRecord.fileSize} · Verified
             </div>
           </div>
         </div>
@@ -268,14 +262,14 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
       {/* Main Split: Activity Rows Table + Evidence File Viewer */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left: Activity Records Table (5 cols on lg) */}
-        <div className="lg:col-span-5 bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs space-y-0">
-          <div className="px-4 py-3 border-b border-[#E5E7EB] bg-[#F4F5F6] flex items-center justify-between">
+        <div className="lg:col-span-5 bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-xs space-y-0">
+          <div className="px-4 py-3.5 border-b border-[#E5E7EB] bg-[#FAFAFB] flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <FileText className="w-4 h-4 text-[#01153C]" />
-              <span className="text-xs font-semibold text-[#17181A] font-sans">Activity Data Rows</span>
+              <span className="text-xs font-bold text-[#17181A]">Activity Records</span>
             </div>
-            <span className="text-[11px] text-[#5F6368] font-data">
-              Select row to verify source evidence
+            <span className="text-[11px] font-semibold text-[#5F6368]">
+              {activityRows.length} entries
             </span>
           </div>
 
@@ -575,15 +569,15 @@ export const Screen32_EvidenceTraceView: React.FC = () => {
             </div>
 
             {/* Evidence Footer */}
-            <div className="p-3 bg-[#FAFAFB] border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between text-xs gap-2">
-              <span className="text-[11px] text-[#5F6368] font-data">
-                File validated against tenant evidence policy (Resolution: 300 DPI, OCR Validated).
+            <div className="p-3 bg-[#FAFAFB] border-t border-[#E5E7EB] flex items-center justify-between text-xs">
+              <span className="text-[11px] font-semibold text-[#027A48]">
+                Resolution 300 DPI · Digitally Certified
               </span>
               <button
                 onClick={handleRaiseQuery}
-                className="text-xs text-[#01153C] hover:underline font-semibold flex items-center space-x-1 font-sans"
+                className="text-xs text-[#01153C] hover:underline font-semibold flex items-center space-x-1"
               >
-                <span>Have a question on this evidence? Raise a query</span>
+                <span>Raise Query on Evidence</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>

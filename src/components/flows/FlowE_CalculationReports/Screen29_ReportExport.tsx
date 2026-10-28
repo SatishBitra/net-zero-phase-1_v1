@@ -74,7 +74,7 @@ export const Screen29_ReportExport: React.FC = () => {
   };
 
   return (
-    <div id="screen-29-container" className="max-w-5xl mx-auto space-y-6">
+    <div id="screen-29-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -82,7 +82,6 @@ export const Screen29_ReportExport: React.FC = () => {
           { label: 'Export Report' },
         ]}
         title="Export Report"
-        description="Generate and download immutable disclosure snapshots for regulatory compliance and verification."
         badge={
           <StatusBadge status="Approved" customLabel="Immutable Snapshot" size="sm" />
         }

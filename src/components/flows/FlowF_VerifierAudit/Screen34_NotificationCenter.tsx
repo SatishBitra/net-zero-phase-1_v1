@@ -89,7 +89,7 @@ export const Screen34_NotificationCenter: React.FC = () => {
   };
 
   return (
-    <div id="screen-34-notification-center" className="max-w-5xl mx-auto space-y-6">
+    <div id="screen-34-notification-center" className="w-full space-y-6">
       {/* Header & Meta */}
       <PageHeader
         breadcrumbs={[
@@ -97,7 +97,6 @@ export const Screen34_NotificationCenter: React.FC = () => {
           { label: 'Notification Center' },
         ]}
         title="Notification Center"
-        description="Central inbox for verification inquiries, approvals, import failures, and system events."
         badge={
           unreadCount > 0 ? (
             <StatusBadge status="Under Review" customLabel={`${unreadCount} unread`} size="sm" />
@@ -116,20 +115,20 @@ export const Screen34_NotificationCenter: React.FC = () => {
       />
 
       {/* Filter Tabs */}
-      <div className="flex items-center space-x-2 border-b border-[#E5E7EB] pb-3 text-xs overflow-x-auto font-sans">
+      <div className="flex items-center space-x-2 border-b border-[#E5E7EB] pb-3 text-xs overflow-x-auto">
         {[
           { key: 'all', label: `All (${notifications.length})` },
           { key: 'unread', label: `Unread (${unreadCount})` },
           { key: 'queries', label: 'Verifier Queries' },
           { key: 'approvals', label: 'Approvals' },
-          { key: 'imports', label: 'Imports & Jobs' },
+          { key: 'imports', label: 'Imports' },
         ].map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveFilter(tab.key as any)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors whitespace-nowrap ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-colors whitespace-nowrap ${
               activeFilter === tab.key
-                ? 'bg-[#01153C] text-white shadow-2xs'
+                ? 'bg-[#01153C] text-white shadow-xs'
                 : 'bg-white border border-[#E5E7EB] text-[#5F6368] hover:text-[#17181A] hover:bg-[#FAFAFB]'
             }`}
           >
@@ -140,20 +139,14 @@ export const Screen34_NotificationCenter: React.FC = () => {
 
       {/* Notification List */}
       {filteredNotifications.length === 0 ? (
-        /* Empty State */
-        <div id="notifications-empty-state" className="bg-white border border-[#E5E7EB] rounded-xl p-12 text-center space-y-3 shadow-2xs">
-          <div className="w-12 h-12 rounded-full bg-[#F4F5F6] text-[#8A8F98] flex items-center justify-center mx-auto">
+        <div id="notifications-empty-state" className="bg-white border border-[#E5E7EB] rounded-2xl p-12 text-center space-y-2">
+          <div className="w-12 h-12 rounded-xl bg-[#F4F5F6] text-[#8A8F98] flex items-center justify-center mx-auto">
             <Inbox className="w-6 h-6" />
           </div>
-          <div className="space-y-1">
-            <h3 className="text-sm font-semibold text-[#17181A] font-sans">No notifications</h3>
-            <p className="text-xs text-[#5F6368] max-w-sm mx-auto font-data">
-              You are all caught up. New workflow and verification alerts will appear here.
-            </p>
-          </div>
+          <h3 className="text-sm font-semibold text-[#17181A]">No notifications</h3>
         </div>
       ) : (
-        <div className="bg-white border border-[#E5E7EB] rounded-xl divide-y divide-[#F1F3F5] shadow-2xs overflow-hidden">
+        <div className="bg-white border border-[#E5E7EB] rounded-2xl divide-y divide-[#F1F3F5] shadow-xs overflow-hidden">
           {filteredNotifications.map((item) => (
             <div
               key={item.id}
@@ -169,8 +162,8 @@ export const Screen34_NotificationCenter: React.FC = () => {
                   <div className="flex items-center space-x-2">
                     <span
                       className={`text-xs ${
-                        !item.isRead ? 'font-semibold text-[#17181A]' : 'font-medium text-[#5F6368]'
-                      } group-hover:text-[#01153C] transition-colors font-sans`}
+                        !item.isRead ? 'font-bold text-[#17181A]' : 'font-medium text-[#5F6368]'
+                      } group-hover:text-[#01153C] transition-colors`}
                     >
                       {item.title}
                     </span>
@@ -183,21 +176,21 @@ export const Screen34_NotificationCenter: React.FC = () => {
                   </div>
 
                   {item.description && (
-                    <p className="text-[11px] text-[#5F6368] line-clamp-2 leading-relaxed font-sans">
+                    <p className="text-[11px] text-[#5F6368] line-clamp-2 leading-relaxed">
                       {item.description}
                     </p>
                   )}
 
                   {item.entityRef && (
-                    <div className="text-[11px] activity-id text-[#8A8F98] pt-0.5 font-medium">
-                      Target: {item.entityRef}
+                    <div className="text-[11px] font-mono text-[#8A8F98] pt-0.5">
+                      {item.entityRef}
                     </div>
                   )}
                 </div>
               </div>
 
               <div className="flex items-center space-x-3 shrink-0 text-right">
-                <span className="text-[11px] text-[#8A8F98] whitespace-nowrap flex items-center space-x-1 font-data">
+                <span className="text-[11px] text-[#8A8F98] whitespace-nowrap flex items-center space-x-1">
                   <Clock className="w-3 h-3" />
                   <span>{item.relativeTime || item.timestamp}</span>
                 </span>
@@ -210,14 +203,15 @@ export const Screen34_NotificationCenter: React.FC = () => {
         </div>
       )}
 
-      {/* Information Note */}
-      <div className="p-3 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl text-[11px] text-[#5F6368] flex items-center justify-between font-data shadow-2xs">
-        <span>Notifications are retained for 90 days in accordance with organizational assurance policy.</span>
+      {/* Footer Navigation */}
+      <div className="p-3 bg-[#FAFAFB] border border-[#E5E7EB] rounded-2xl text-xs text-[#5F6368] flex items-center justify-between">
+        <span>Retention: 90 Days</span>
         <button
           onClick={() => navigateToScreen('35_audit_trail', 'FLOW_F')}
-          className="text-[#01153C] hover:underline font-semibold font-sans"
+          className="text-[#01153C] hover:underline font-semibold flex items-center space-x-1"
         >
-          Audit Trail Viewer →
+          <span>View Complete Audit Trail</span>
+          <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
     </div>

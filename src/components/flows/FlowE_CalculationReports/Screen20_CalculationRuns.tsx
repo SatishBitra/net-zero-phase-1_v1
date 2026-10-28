@@ -237,7 +237,7 @@ export const Screen20_CalculationRuns: React.FC = () => {
   };
 
   return (
-    <div id="calculations-ledger-container" className="space-y-6">
+    <div id="calculations-ledger-container" className="w-full space-y-6">
       {/* Top Header & Context Actions using standard PageHeader */}
       <PageHeader
         breadcrumbs={[
@@ -246,24 +246,23 @@ export const Screen20_CalculationRuns: React.FC = () => {
         ]}
         title="Calculations Ledger"
         badge={<StatusBadge status="Approved" customLabel="Engine v1.4.2" size="sm" />}
-        description="Deterministic GHG accounting book and batch execution ledger. Auditable reconciliation of activity records, emission factors, and verified tCO2e balances."
         actions={
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             <button
               id="btn-export-ledger"
               type="button"
               onClick={handleExportLedgerCSV}
-              className="px-3.5 py-1.5 text-xs font-semibold text-[#101828] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              className="h-9 px-3.5 text-xs font-semibold text-[#101828] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center gap-1.5 transition-all"
             >
               <Download className="w-3.5 h-3.5 text-[#344054]" aria-hidden="true" />
-              <span>Export Ledger (CSV)</span>
+              <span>Export Ledger</span>
             </button>
 
             <button
               id="btn-drilldown-shortcut"
               type="button"
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
-              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-lg hover:bg-[#DCE5F5] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              className="h-9 px-3.5 text-xs font-semibold text-[#01153C] bg-[#EDF2FA] border border-[#DCE5F5] rounded-lg hover:bg-[#DCE5F5] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center gap-1.5 transition-all"
             >
               <Eye className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Results Drill-Down</span>
@@ -273,47 +272,11 @@ export const Screen20_CalculationRuns: React.FC = () => {
               id="btn-calc-factor-helper"
               type="button"
               onClick={() => openFactorHelper()}
-              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
+              className="h-9 px-3.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center gap-1.5 transition-all"
               title="Look up official IPCC and IEA factors"
             >
               <BookOpen className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
               <span>Factor Helper</span>
-              <span className="text-[11px] bg-[#EDF2FA] text-[#01153C] px-1.5 py-0.5 rounded font-semibold border border-[#DCE5F5]">
-                IPCC/IEA
-              </span>
-            </button>
-
-            <button
-              id="btn-whatif-simulator"
-              type="button"
-              onClick={() => navigateToScreen('36_scenario_builder', 'FLOW_E')}
-              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
-              title="Project emissions trajectories with hypothetical energy levers"
-            >
-              <SlidersHorizontal className="w-3.5 h-3.5 text-[#166534]" aria-hidden="true" />
-              <span>What-If Simulator</span>
-            </button>
-
-            <button
-              id="btn-benchmarking-radar"
-              type="button"
-              onClick={() => navigateToScreen('37_benchmarking', 'FLOW_E')}
-              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
-              title="Compare carbon intensity against peer averages"
-            >
-              <Target className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
-              <span>Radar Benchmark</span>
-            </button>
-
-            <button
-              id="btn-engine-formulas-hub"
-              type="button"
-              onClick={() => setActiveTab('methodology')}
-              className="px-3.5 py-1.5 text-xs font-semibold text-[#01153C] bg-white border border-[#D0D5DD] rounded-lg hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center space-x-1.5 transition-all"
-              title="Open TC-DOM-002a Calculation Engine & Formulas Hub"
-            >
-              <Calculator className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
-              <span>Engine Hub (C-01 to C-12)</span>
             </button>
 
             <QuickActionsMenu variant="page" />
@@ -323,37 +286,20 @@ export const Screen20_CalculationRuns: React.FC = () => {
                 id="btn-trigger-run-modal"
                 type="button"
                 onClick={() => setIsRunModalOpen(true)}
-                className="px-4 py-1.5 text-xs font-semibold text-white bg-[#01153C] rounded-lg hover:bg-[#02215c] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-xs inline-flex items-center space-x-1.5 transition-all"
+                className="h-9 px-4 text-xs font-semibold text-white bg-[#01153C] rounded-lg hover:bg-[#02215c] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs inline-flex items-center gap-1.5 transition-all"
               >
                 <Play className="w-3.5 h-3.5 fill-current" aria-hidden="true" />
                 <span>Run Calculation</span>
               </button>
             ) : (
-              <div className="flex items-center space-x-2 text-xs text-[#475467] font-data bg-[#F9FAFB] px-3 py-1.5 rounded-lg border border-[#D0D5DD]">
+              <div className="h-9 flex items-center space-x-2 text-xs text-[#475467] font-data bg-[#F9FAFB] px-3.5 rounded-lg border border-[#D0D5DD]">
                 <Lock className="w-3.5 h-3.5 text-[#475467]" aria-hidden="true" />
-                <span>Calculation trigger governed by Reviewer & Admin</span>
+                <span>Reviewer & Admin only</span>
               </div>
             )}
           </div>
         }
       />
-
-      {/* Role Notice Banner */}
-      {!canRunCalculation && (
-        <div className="p-3.5 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center space-x-3 text-xs text-[#5F6368] font-data shadow-2xs">
-          <ShieldCheck className="w-4 h-4 shrink-0 text-[#01153C]" />
-          <div>
-            <strong className="text-[#17181A] font-semibold">
-              {currentRole === 'VERIFIER'
-                ? 'Auditor Independent Inspection Ledger'
-                : 'Data Entry Scoped View'}
-              :
-            </strong>{' '}
-            You are inspecting computed emission runs as{' '}
-            <strong className="text-[#17181A]">{currentUser.name} ({currentRole})</strong>. The ledger values are immutable. Triggering batch recalculations is restricted to Reviewer and Tenant Admin roles.
-          </div>
-        </div>
-      )}
 
       {/* Accounting Balance Strip & Assurance KPI Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

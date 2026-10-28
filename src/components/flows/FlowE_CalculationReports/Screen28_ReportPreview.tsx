@@ -19,7 +19,7 @@ export const Screen28_ReportPreview: React.FC = () => {
   };
 
   return (
-    <div id="screen-28-container" className="max-w-5xl mx-auto space-y-6">
+    <div id="screen-28-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -27,7 +27,6 @@ export const Screen28_ReportPreview: React.FC = () => {
           { label: 'Report Preview' },
         ]}
         title="Report Preview — GHG Inventory, FY 2025–26"
-        description="Inspect generated disclosure document, accounting methodology, and breakdown tables prior to final snapshot export."
         badge={
           <StatusBadge status="Approved" customLabel="Ready for Export" size="sm" />
         }

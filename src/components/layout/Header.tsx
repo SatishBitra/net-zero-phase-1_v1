@@ -111,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-30 h-16 bg-white border-b border-[#ECEDEF] px-3 sm:px-4 md:px-6 flex items-center justify-between shadow-[0_1px_2px_rgba(20,20,20,0.03)]">
+      <header className="sticky top-0 z-30 h-16 bg-white border-b border-[#ECEDEF] px-4 sm:px-6 lg:px-8 flex items-center justify-between shadow-[0_1px_2px_rgba(20,20,20,0.03)]">
         {/* ============================================================ */}
         {/* MOBILE HEADER (md:hidden): Left Menu Bar | Center Logo | Right Side Nav Bar */}
         {/* ============================================================ */}
@@ -173,11 +173,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
         <div className="hidden md:flex items-center justify-between w-full">
           {/* Left: Brand + Tenant Selector + Reporting Period */}
           <div className="flex items-center space-x-3 md:space-x-4 min-w-0">
-            {/* Brand Logo */}
+            {/* Brand Logo - Aligned with Sidebar width */}
             <div
               id="header-brand-logo"
               onClick={() => navigateToScreen('10_activity_dashboard')}
-              className="flex items-center space-x-2.5 cursor-pointer select-none group shrink-0"
+              className="flex items-center space-x-2.5 cursor-pointer select-none group shrink-0 w-52 lg:w-56"
             >
               <div className="flex items-center justify-center shrink-0">
                 <img
@@ -193,18 +193,18 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               </div>
             </div>
 
-            <div className="h-5 w-[1px] bg-[#ECEDEF] shrink-0" />
+            <div className="h-6 w-[1px] bg-[#ECEDEF] shrink-0" />
 
             {/* Tenant Selector (Screen 03 Trigger) */}
             <div className="relative min-w-0">
               <button
                 onClick={() => setTenantDropdownOpen(!tenantDropdownOpen)}
-                className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#101828] hover:bg-[#F9FAFB] rounded-lg border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors max-w-[200px]"
+                className="flex items-center space-x-1.5 px-3 h-9 text-xs text-[#101828] hover:bg-[#F9FAFB] rounded-lg border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors max-w-[210px]"
                 title="Switch Tenant Organization"
                 aria-expanded={tenantDropdownOpen}
               >
                 <Building2 className="w-3.5 h-3.5 text-[#344054] shrink-0" aria-hidden="true" />
-                <span className="font-medium truncate">{currentTenant.name}</span>
+                <span className="font-semibold truncate">{currentTenant.name}</span>
                 <ChevronDown className="w-3.5 h-3.5 text-[#475467] shrink-0" aria-hidden="true" />
               </button>
 
@@ -252,11 +252,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <div className="relative shrink-0">
               <button
                 onClick={() => setPeriodDropdownOpen(!periodDropdownOpen)}
-                className="flex items-center space-x-1.5 px-3 py-1.5 text-xs text-[#344054] hover:bg-[#F9FAFB] rounded-lg border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors"
+                className="flex items-center space-x-1.5 px-3 h-9 text-xs text-[#344054] hover:bg-[#F9FAFB] rounded-lg border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors shadow-2xs"
                 aria-expanded={periodDropdownOpen}
               >
                 <Calendar className="w-3.5 h-3.5 text-[#344054] shrink-0" aria-hidden="true" />
-                <span className="font-medium text-[#101828]">{activePeriod.name}</span>
+                <span className="font-semibold text-[#101828]">{activePeriod.name}</span>
                 {activePeriod.locked ? (
                   <span className="text-[11px] px-1.5 py-0.5 bg-[#F2F4F7] text-[#344054] rounded border border-[#D0D5DD] font-semibold">
                     Locked
@@ -315,7 +315,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
           </div>
 
           {/* Right: Quick Actions, Factor Helper, Role Switcher, Direct Notification Center, User */}
-          <div className="flex items-center space-x-2 md:space-x-3 shrink-0">
+          <div className="flex items-center space-x-2 md:space-x-2.5 shrink-0">
             {/* Quick Actions Menu */}
             <QuickActionsMenu variant="header" />
 
@@ -324,7 +324,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               id="btn-header-factor-helper"
               type="button"
               onClick={() => openFactorHelper()}
-              className="hidden lg:flex items-center space-x-1.5 px-3 py-1.5 text-xs rounded-lg bg-white border border-[#D0D5DD] hover:border-[#01153C]/40 hover:bg-[#F9FAFB] text-[#101828] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors shadow-2xs font-semibold"
+              className="hidden lg:flex items-center space-x-1.5 h-9 px-3 text-xs rounded-lg bg-white border border-[#D0D5DD] hover:border-[#01153C]/40 hover:bg-[#F9FAFB] text-[#101828] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors shadow-2xs font-semibold"
               title="Search official IPCC, IEA, and CEA Emission Factors"
             >
               <BookOpen className="w-3.5 h-3.5 text-[#01153C]" aria-hidden="true" />
@@ -338,7 +338,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <div className="relative">
               <button
                 onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                className="flex items-center space-x-1.5 px-3 py-1.5 text-xs rounded-lg bg-white border border-[#D0D5DD] hover:border-[#98A2B3] hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors shadow-2xs"
+                className="flex items-center space-x-1.5 h-9 px-3 text-xs rounded-lg bg-white border border-[#D0D5DD] hover:border-[#98A2B3] hover:bg-[#F9FAFB] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors shadow-2xs"
                 title="Switch active user role"
                 aria-expanded={roleDropdownOpen}
               >
@@ -383,13 +383,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <button
               id="btn-nav-notifications"
               onClick={() => navigateToScreen('34_reviewer_notification', 'FLOW_F')}
-              className="p-2 text-[#344054] hover:text-[#101828] hover:bg-[#EDF2FA] rounded-lg focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors relative"
+              className="h-9 w-9 flex items-center justify-center text-[#344054] hover:text-[#101828] hover:bg-[#EDF2FA] rounded-lg border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none transition-colors relative shadow-2xs"
               title="Notification Center"
               aria-label="Notification Center"
             >
               <Bell className="w-4 h-4" aria-hidden="true" />
               {unreadNotificationsCount > 0 && (
-                <span className="absolute top-1 right-1 px-1 min-w-[14px] h-[14px] text-[9px] font-bold bg-[#D92D20] text-white rounded flex items-center justify-center leading-none" aria-label={`${unreadNotificationsCount} unread notifications`}>
+                <span className="absolute top-1.5 right-1.5 px-1 min-w-[14px] h-[14px] text-[9px] font-bold bg-[#D92D20] text-white rounded flex items-center justify-center leading-none" aria-label={`${unreadNotificationsCount} unread notifications`}>
                   {unreadNotificationsCount}
                 </span>
               )}
@@ -398,12 +398,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             {/* User Component: Avatar + Name */}
             <div
               onClick={() => navigateToScreen('01_login', 'FLOW_A')}
-              className="flex items-center space-x-2 px-2 py-1 rounded-lg hover:bg-[#F9FAFB] cursor-pointer transition-colors border border-transparent hover:border-[#D0D5DD] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none"
+              className="flex items-center space-x-2 px-2.5 h-9 rounded-lg hover:bg-[#F9FAFB] cursor-pointer transition-colors border border-[#D0D5DD] hover:border-[#98A2B3] focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none shadow-2xs"
               title="Account Settings / Log out"
               tabIndex={0}
               role="button"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#EDF2FA] text-[#01153C] font-semibold text-xs flex items-center justify-center shrink-0 border border-[#DCE5F5]">
+              <div className="w-6 h-6 rounded bg-[#EDF2FA] text-[#01153C] font-semibold text-[11px] flex items-center justify-center shrink-0 border border-[#DCE5F5]">
                 {getUserInitials()}
               </div>
               <div className="hidden lg:flex items-center space-x-1">

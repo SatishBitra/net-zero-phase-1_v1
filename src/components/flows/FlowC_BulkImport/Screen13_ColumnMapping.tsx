@@ -75,7 +75,7 @@ export const Screen13_ColumnMapping: React.FC = () => {
   };
 
   return (
-    <div id="screen-13-container" className="max-w-4xl mx-auto space-y-6 font-sans">
+    <div id="screen-13-container" className="w-full space-y-6 font-sans">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -84,7 +84,6 @@ export const Screen13_ColumnMapping: React.FC = () => {
           { label: 'Map Columns' },
         ]}
         title="Map Columns"
-        description="Confirm how column headers in your file correspond to required Tula activity fields."
         actions={
           <button
             onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}

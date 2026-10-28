@@ -1,17 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../../context/AppContext';
-import { KeyRound, ArrowRight, ArrowLeft } from 'lucide-react';
-import { StatusBadge } from '../../common/StatusBadge';
+import { KeyRound, ArrowRight, ArrowLeft, RefreshCw, Zap } from 'lucide-react';
 
 export const Screen02_MFA: React.FC = () => {
   const { navigateToScreen, showToast } = useApp();
   const [digits, setDigits] = useState<string[]>(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
+  const [countdown, setCountdown] = useState(45);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
+
+  useEffect(() => {
+    if (countdown > 0) {
+      const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [countdown]);
 
   const handleChange = (index: number, val: string) => {
     if (!/^\d*$/.test(val)) return;
@@ -44,39 +51,46 @@ export const Screen02_MFA: React.FC = () => {
     inputRefs.current[Math.min(pasted.length, 5)]?.focus();
   };
 
+  const handleQuickFill = () => {
+    setDigits(['8', '4', '9', '2', '0', '1']);
+    showToast('Demo Code Populated', 'Filled 849201 for rapid verification.');
+  };
+
+  const handleResend = () => {
+    setCountdown(60);
+    showToast('Code Resent', 'New verification code dispatched to authenticator app.');
+  };
+
   const handleVerify = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      showToast('MFA Confirmed', 'Session verified with hardware token.');
+      showToast('Authentication Confirmed', 'Session verified with hardware security key.');
       navigateToScreen('03_tenant_selector', 'FLOW_A');
-    }, 600);
+    }, 450);
   };
 
   const isComplete = digits.every((d) => d.length === 1);
 
   return (
-    <div id="screen-02-mfa" className="max-w-md mx-auto my-12 p-6 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
-      <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#F1F3F5]">
+    <div id="screen-02-mfa" className="max-w-md mx-auto my-12 p-6 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
+      <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#F1F3F5]">
         <button
           onClick={() => navigateToScreen('01_login', 'FLOW_A')}
-          className="flex items-center space-x-1 text-xs text-[#5F6368] hover:text-[#17181A] font-semibold"
+          className="flex items-center space-x-1.5 text-xs text-[#5F6368] hover:text-[#17181A] font-semibold"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Login</span>
+          <span>Back</span>
         </button>
-        <StatusBadge status="Approved" customLabel="Two-Factor Authentication" size="sm" />
+        <span className="text-[11px] font-semibold text-[#5F6368]">Step 2 of 2</span>
       </div>
 
       <div className="text-center mb-6">
-        <div className="w-11 h-11 bg-[#01153C]/10 rounded-xl flex items-center justify-center mx-auto mb-3 text-[#01153C] border border-[#01153C]/20">
-          <KeyRound className="w-5 h-5" />
+        <div className="w-12 h-12 bg-[#01153C]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 text-[#01153C]">
+          <KeyRound className="w-6 h-6" />
         </div>
-        <h1 className="text-lg font-bold text-[#17181A]">Verify it's you</h1>
-        <p className="text-xs text-[#5F6368] mt-1 font-data">
-          Enter the 6-digit verification code from your authenticator app
-        </p>
+        <h1 className="text-xl font-bold text-[#01153C]">Two-Factor Verification</h1>
       </div>
 
       <form onSubmit={handleVerify} className="space-y-6">
@@ -90,9 +104,10 @@ export const Screen02_MFA: React.FC = () => {
               inputMode="numeric"
               maxLength={1}
               value={digit}
+              aria-label={`Digit ${idx + 1}`}
               onChange={(e) => handleChange(idx, e.target.value)}
               onKeyDown={(e) => handleKeyDown(idx, e)}
-              className="w-11 h-12 text-center text-lg font-mono border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C] bg-[#FAFAFB] text-[#17181A]"
+              className="w-11 h-12 text-center text-lg font-bold font-mono border border-[#E5E7EB] rounded-xl focus:outline-none focus:border-[#01153C] focus:ring-1 focus:ring-[#01153C] bg-[#FAFAFB] text-[#17181A]"
             />
           ))}
         </div>
@@ -100,14 +115,38 @@ export const Screen02_MFA: React.FC = () => {
         <button
           type="submit"
           disabled={loading || !isComplete}
-          className={`enterprise-btn-primary w-full h-10 text-xs font-semibold shadow-xs flex items-center justify-center space-x-1.5 ${
+          className={`enterprise-btn-primary w-full h-10 text-xs font-semibold flex items-center justify-center space-x-2 rounded-xl ${
             !isComplete || loading ? 'opacity-50 cursor-not-allowed' : ''
           }`}
         >
-          <span>{loading ? 'Verifying…' : 'Verify Code'}</span>
+          <span>{loading ? 'Verifying…' : 'Verify and Continue'}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </form>
+
+      {/* Resend and DX Quick Fill Controls */}
+      <div className="mt-6 pt-5 border-t border-[#F1F3F5] flex items-center justify-between text-xs">
+        <button
+          type="button"
+          onClick={handleQuickFill}
+          className="text-[#01153C] hover:text-[#02215c] font-semibold flex items-center space-x-1"
+        >
+          <Zap className="w-3.5 h-3.5 text-[#01153C]" />
+          <span>Autofill Demo Code</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleResend}
+          disabled={countdown > 0}
+          className={`flex items-center space-x-1 font-semibold ${
+            countdown > 0 ? 'text-[#8A8F98] cursor-not-allowed' : 'text-[#01153C] hover:underline'
+          }`}
+        >
+          <RefreshCw className="w-3 h-3" />
+          <span>{countdown > 0 ? `Resend code in ${countdown}s` : 'Resend code'}</span>
+        </button>
+      </div>
     </div>
   );
 };

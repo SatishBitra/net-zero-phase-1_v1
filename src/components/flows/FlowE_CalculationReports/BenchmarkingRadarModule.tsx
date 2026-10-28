@@ -416,7 +416,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
   };
 
   return (
-    <div id="benchmarking-module-container" className="max-w-7xl mx-auto space-y-4 md:space-y-5 pb-10">
+    <div id="benchmarking-module-container" className="w-full space-y-5 pb-10">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -424,7 +424,6 @@ export const BenchmarkingRadarModule: React.FC = () => {
           { label: 'Industry Decarbonization Benchmarking' },
         ]}
         title="Industry Decarbonization Radar"
-        description="Compare your carbon intensity and assurance metrics against peer averages and sector leaders."
         contextInfo={
           <div className="flex items-center gap-2 text-xs text-[#4B5563]">
             <span className="font-semibold text-[#01153C]">{activeSector.sectorName}</span>
@@ -435,10 +434,10 @@ export const BenchmarkingRadarModule: React.FC = () => {
           </div>
         }
         actions={
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={handleExportReport}
-              className="px-3 py-1.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-3.5 text-xs font-semibold text-[#4B5563] hover:text-[#01153C] bg-white border border-[#E5E7EB] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
               aria-label="Export benchmark scorecard to CSV"
             >
               <Download className="w-3.5 h-3.5" />
@@ -446,7 +445,7 @@ export const BenchmarkingRadarModule: React.FC = () => {
             </button>
             <button
               onClick={() => navigateToScreen('36_scenario_builder', 'FLOW_E')}
-              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-colors flex items-center gap-1.5 shadow-2xs focus-visible:ring-2 focus-visible:ring-[#01153C]"
+              className="h-9 px-4 text-xs font-semibold text-white bg-[#01153C] hover:bg-[#022365] rounded-lg transition-all flex items-center gap-1.5 shadow-2xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#01153C]"
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
               <span>What-If Simulator</span>
@@ -529,7 +528,6 @@ export const BenchmarkingRadarModule: React.FC = () => {
               <Compass className="w-3.5 h-3.5 text-[#01153C]" />
               Comparative Radar (Scores 0–100)
             </div>
-            <div className="text-[10px] text-[#4B5563]">Higher score = Cleaner performance</div>
           </div>
 
           <div className="h-64 sm:h-72 md:h-80 lg:h-96 w-full flex items-center justify-center">
@@ -637,9 +635,6 @@ export const BenchmarkingRadarModule: React.FC = () => {
               <h3 className="text-sm font-bold text-[#171A1F]">
                 {activeDimension.shortName}
               </h3>
-              <div className="text-[11px] text-[#4B5563]">
-                Benchmark against {activeSector.peerCount} companies in {activeSector.shortName}
-              </div>
             </div>
 
             {/* 3 Metrics Strip */}
@@ -671,8 +666,6 @@ export const BenchmarkingRadarModule: React.FC = () => {
 
             {/* Visual Progress Bar */}
             <div className="space-y-2 pt-1">
-              <div className="text-xs font-bold text-[#171A1F]">Relative Score (0–100):</div>
-
               <div className="space-y-1">
                 <div className="flex justify-between text-[11px]">
                   <span className="text-[#01153C] font-semibold">Your Org</span>
@@ -713,16 +706,10 @@ export const BenchmarkingRadarModule: React.FC = () => {
               </div>
             </div>
 
-            {/* Gap & Recommendation */}
-            <div className="p-3 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg space-y-1.5 text-xs">
-              <div>
-                <span className="font-bold text-[#01153C]">Gap to Leader:</span>{' '}
-                <span className="text-[#171A1F]">{activeDimension.gapToLeader}</span>
-              </div>
-              <div className="text-[#4B5563]">
-                <span className="font-bold text-[#171A1F]">Recommended Action:</span>{' '}
-                {activeDimension.recommendation}
-              </div>
+            {/* Direct Action Card */}
+            <div className="p-3 bg-[#F8F9FB] border border-[#E5E7EB] rounded-lg space-y-1 text-xs">
+              <div className="font-semibold text-[#01153C]">{activeDimension.gapToLeader}</div>
+              <div className="text-[#4B5563]">{activeDimension.recommendation}</div>
             </div>
 
             <button

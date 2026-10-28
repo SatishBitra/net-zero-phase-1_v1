@@ -167,7 +167,7 @@ const MainAppContent: React.FC = () => {
       <div className="flex-1 flex overflow-hidden min-h-0">
         <Sidebar />
 
-        <main className="flex-1 overflow-y-auto p-3.5 sm:p-4 md:p-5 lg:p-7 min-w-0 w-full">
+        <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 min-w-0 w-full bg-[#F8F9FB]">
           {renderActiveScreen()}
         </main>
       </div>

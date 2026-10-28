@@ -54,7 +54,7 @@ export const Screen14_ValidationResults: React.FC = () => {
   ];
 
   return (
-    <div id="screen-14-container" className="max-w-4xl mx-auto space-y-6 font-sans">
+    <div id="screen-14-container" className="w-full space-y-6 font-sans">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -63,7 +63,6 @@ export const Screen14_ValidationResults: React.FC = () => {
           { label: 'Validation Results' },
         ]}
         title="Validation Results"
-        description="Automated pre-flight schema, boundary site, unit, and date range verification checks."
         actions={
           <button
             onClick={() => navigateToScreen('13_column_mapping', 'FLOW_C')}

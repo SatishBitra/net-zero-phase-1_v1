@@ -80,7 +80,7 @@ export const Screen06_ReportingPeriods: React.FC = () => {
   };
 
   return (
-    <div id="screen-06-reporting-periods" className="max-w-5xl mx-auto space-y-6">
+    <div id="screen-06-reporting-periods" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -88,7 +88,6 @@ export const Screen06_ReportingPeriods: React.FC = () => {
           { label: 'Reporting Periods' },
         ]}
         title="Reporting Periods"
-        description="Configure fiscal accounting windows for greenhouse gas inventories and compliance lock governance."
         actions={
           canManagePeriods ? (
             <button

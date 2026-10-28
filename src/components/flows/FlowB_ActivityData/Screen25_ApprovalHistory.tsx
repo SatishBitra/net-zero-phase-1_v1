@@ -81,7 +81,7 @@ export const Screen25_ApprovalHistory: React.FC = () => {
   });
 
   return (
-    <div id="screen-25-container" className="max-w-6xl mx-auto space-y-6">
+    <div id="screen-25-container" className="w-full space-y-6">
       {/* Header & Hierarchy */}
       <PageHeader
         breadcrumbs={[
@@ -89,7 +89,6 @@ export const Screen25_ApprovalHistory: React.FC = () => {
           { label: 'Approval History' },
         ]}
         title="Approval History"
-        description="Immutable ledger of review decisions, timestamps, reviewer identities, and feedback comments."
         badge={
           <StatusBadge status="Locked" customLabel="Read-only historical ledger" size="sm" />
         }

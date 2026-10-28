@@ -67,7 +67,7 @@ export const Screen12_ImportUpload: React.FC = () => {
   };
 
   return (
-    <div id="screen-12-container" className="max-w-4xl mx-auto space-y-6">
+    <div id="screen-12-container" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -75,7 +75,6 @@ export const Screen12_ImportUpload: React.FC = () => {
           { label: 'Import' },
         ]}
         title="Import Activity Data"
-        description="Bulk upload operational energy, fuel, and activity records via spreadsheet."
         actions={
           <button
             onClick={() => navigateToScreen('10_activity_dashboard', 'FLOW_B')}

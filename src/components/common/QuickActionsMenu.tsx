@@ -233,13 +233,13 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
     }
   };
 
-  // Button styles depending on variant
+  // Button styles depending on variant (standardized rounded-lg 36px CTA)
   const buttonClasses =
     variant === 'header'
-      ? 'flex items-center space-x-1.5 px-3.5 py-1.5 text-xs rounded-full bg-[#01153C] text-white hover:bg-[#02215c] transition-colors shadow-2xs font-semibold'
+      ? 'enterprise-btn-primary h-9 px-3.5 text-xs font-semibold rounded-lg shadow-xs flex items-center space-x-1.5 focus-visible:ring-2 focus-visible:ring-[#01153C]'
       : variant === 'page'
-      ? 'flex items-center space-x-1.5 px-4 py-2 text-xs rounded-full bg-[#EDF2FA] text-[#01153C] border border-[#DCE5F5] hover:bg-[#DCE5F5] transition-colors shadow-2xs font-semibold'
-      : 'w-full flex items-center justify-between p-2.5 rounded-lg bg-[#01153C] text-white text-xs font-semibold';
+      ? 'enterprise-btn-secondary h-9 px-3.5 text-xs font-semibold rounded-lg shadow-2xs flex items-center space-x-1.5 focus-visible:ring-2 focus-visible:ring-[#01153C]'
+      : 'w-full h-9 flex items-center justify-between px-3 rounded-lg bg-[#01153C] text-white text-xs font-semibold';
 
   return (
     <div className={`relative ${className}`} ref={menuRef}>

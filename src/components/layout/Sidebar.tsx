@@ -262,27 +262,54 @@ export const Sidebar: React.FC = () => {
     ];
   }
 
-  const getRoleLabel = () => {
+  const getRoleBadgeMeta = () => {
     switch (currentRole) {
       case 'VERIFIER':
-        return 'Verifier / VVB Mode';
+        return {
+          title: 'External Verifier (VVB)',
+          subtitle: 'Read-only assurance docket',
+          icon: ShieldCheck,
+          bg: 'bg-[#EDF2FA]',
+          text: 'text-[#01153C]',
+        };
       case 'DATA_ENTRY':
-        return 'Data Entry Mode';
+        return {
+          title: 'Data Collection Operator',
+          subtitle: 'Facility emission logging',
+          icon: LayoutDashboard,
+          bg: 'bg-[#FEF7EC]',
+          text: 'text-[#B54708]',
+        };
       case 'REVIEWER':
-        return 'Reviewer Mode';
+        return {
+          title: 'Approver & Internal Reviewer',
+          subtitle: 'Quality verification queue',
+          icon: CheckCircle2,
+          bg: 'bg-[#EEF9F1]',
+          text: 'text-[#027A48]',
+        };
       default:
-        return 'Tenant Admin Mode';
+        return {
+          title: 'Tenant Administrator',
+          subtitle: 'Enterprise governance & boundary',
+          icon: Building,
+          bg: 'bg-[#EDF2FA]',
+          text: 'text-[#01153C]',
+        };
     }
   };
 
+  const roleMeta = getRoleBadgeMeta();
+  const RoleIcon = roleMeta.icon;
+
   const renderNavList = () => (
-    <div className="flex-1 overflow-y-auto py-3 overscroll-contain pr-0.5">
+    <div className="flex-1 overflow-y-auto py-2.5 px-3 space-y-4 overscroll-contain">
       {sections.map((section) => (
-        <div key={section.title} className="mb-4">
-          <div className="px-4 pb-1.5 text-[11px] font-semibold text-[#8A8F98] uppercase tracking-wider font-sans">
+        <div key={section.title} className="space-y-1">
+          <div className="px-2 pt-1 pb-1 text-[10px] font-bold text-[#8A8F98] uppercase tracking-wider font-sans">
             {section.title}
           </div>
-          <div className="space-y-0.5 px-2">
+          <div className="space-y-0.5">
             {section.items.map((item) => {
               const isActive = currentScreen === item.id;
               const Icon = item.icon;
@@ -290,22 +317,20 @@ export const Sidebar: React.FC = () => {
               return (
                 <button
                   key={item.id}
-                  onClick={() => navigateToScreen(item.id)}
-                  className={`w-full flex items-center justify-between px-3 py-2 text-[13px] rounded-lg transition-colors text-left relative group font-sans ${
+                  onClick={() => {
+                    navigateToScreen(item.id);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`w-full flex items-center justify-between px-3 py-2 text-xs rounded-lg transition-all text-left relative group font-sans focus-visible:ring-2 focus-visible:ring-[#01153C] focus-visible:outline-none ${
                     isActive
-                      ? 'bg-[#EDF2FA] text-[#01153C] font-semibold'
-                      : 'text-[#5F6368] hover:bg-[#FAFAFB] hover:text-[#17181A]'
+                      ? 'bg-[#01153C] text-white font-semibold shadow-xs'
+                      : 'text-[#475467] hover:bg-[#F2F4F7] hover:text-[#101828] font-medium'
                   }`}
                 >
-                  {/* Active left border indicator */}
-                  {isActive && (
-                    <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] bg-[#01153C] rounded-r" />
-                  )}
-
                   <div className="flex items-center space-x-2.5 truncate">
                     <Icon
                       className={`w-4 h-4 shrink-0 transition-colors ${
-                        isActive ? 'text-[#01153C]' : 'text-[#8A8F98] group-hover:text-[#5F6368]'
+                        isActive ? 'text-white' : 'text-[#8A8F98] group-hover:text-[#344054]'
                       }`}
                     />
                     <span className="truncate">{item.label}</span>
@@ -313,9 +338,9 @@ export const Sidebar: React.FC = () => {
 
                   {item.badge !== undefined && (
                     <span
-                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold shrink-0 ml-1.5 ${
+                      className={`text-[10px] px-1.5 py-0.5 rounded-md font-bold shrink-0 ml-1.5 ${
                         isActive
-                          ? 'bg-[#DCE5F5] text-[#01153C]'
+                          ? 'bg-white/20 text-white'
                           : item.badgeColor || 'bg-[#F1F3F5] text-[#59616B]'
                       }`}
                     >
@@ -343,10 +368,10 @@ export const Sidebar: React.FC = () => {
         />
       )}
 
-      {/* Mobile Drawer (Slide-out menu for mobile viewports) */}
+      {/* Mobile Drawer */}
       <aside
         id="mobile-app-sidebar"
-        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white border-r border-[#D9DDE3] flex flex-col justify-between shadow-2xl md:hidden transition-transform duration-200 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white border-r border-[#ECEDEF] flex flex-col justify-between shadow-2xl md:hidden transition-transform duration-200 ease-in-out ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -360,7 +385,7 @@ export const Sidebar: React.FC = () => {
             />
             <div>
               <div className="text-sm font-bold text-[#01153C]">Tula Carbon</div>
-              <div className="text-[11px] text-[#5F6368]">{getRoleLabel()}</div>
+              <div className="text-[11px] text-[#5F6368]">{roleMeta.title}</div>
             </div>
           </div>
           <button
@@ -374,70 +399,61 @@ export const Sidebar: React.FC = () => {
           </button>
         </div>
 
-        {/* Role Perspective Ribbon */}
-        <div className="px-3.5 py-2 border-b border-[#ECEDEF] bg-[#F7F7F8] flex items-center justify-between text-xs">
-          <div className="flex items-center space-x-1.5 truncate">
-            <span
-              className={`w-2 h-2 rounded-full shrink-0 ${
-                currentRole === 'VERIFIER'
-                  ? 'bg-[#01153C]'
-                  : currentRole === 'REVIEWER'
-                  ? 'bg-[#43A65C]'
-                  : currentRole === 'DATA_ENTRY'
-                  ? 'bg-[#D79A24]'
-                  : 'bg-[#5F6368]'
-              }`}
-            />
-            <span className="text-[11px] font-semibold text-[#17181A] truncate">
-              {getRoleLabel()}
-            </span>
-          </div>
-          <span className="text-[10px] text-[#8A8F98] font-mono shrink-0">Active Persona</span>
-        </div>
-
         {/* Navigation List */}
         {renderNavList()}
 
-        {/* Docked Footer Info / Standards */}
-        <div className="shrink-0 p-3 border-t border-[#ECEDEF] bg-[#FAFAFB] text-[11px] text-[#8A8F98] flex items-center justify-between">
-          <span className="truncate">GHG Protocol Standard</span>
-          <span className="font-mono text-[10px] text-[#5F6368] shrink-0 ml-1">v1.2</span>
+        {/* Docked Footer Info */}
+        <div className="shrink-0 p-3.5 border-t border-[#ECEDEF] bg-[#FAFAFB] text-xs space-y-1">
+          <div className="flex items-center justify-between text-[11px] font-semibold text-[#17181A]">
+            <span className="flex items-center space-x-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#027A48]" />
+              <span>ISO 14064-1 & 3 Compliant</span>
+            </span>
+            <span className="text-[10px] text-[#8A8F98] font-mono">v1.2</span>
+          </div>
         </div>
       </aside>
 
-      {/* Desktop Persistent Sidebar */}
+      {/* Desktop Persistent Sidebar (w-64 width, perfect visual alignment) */}
       <aside
         id="app-sidebar"
-        className="hidden md:flex md:w-52 lg:w-60 shrink-0 bg-white border-r border-[#ECEDEF] flex-col justify-between select-none sticky top-16 h-[calc(100vh-4rem)] z-20 shadow-[1px_0_2px_rgba(0,0,0,0.02)]"
+        className="hidden md:flex md:w-64 lg:w-64 shrink-0 bg-white border-r border-[#ECEDEF] flex-col justify-between select-none sticky top-16 h-[calc(100vh-4rem)] z-20 shadow-[1px_0_2px_rgba(0,0,0,0.02)]"
       >
-        {/* Role Perspective Ribbon */}
-        <div className="px-3.5 py-2 border-b border-[#ECEDEF] bg-[#FAFAFB] flex items-center justify-between text-xs">
-          <div className="flex items-center space-x-1.5 truncate">
-            <span
-              className={`w-2 h-2 rounded-full shrink-0 ${
-                currentRole === 'VERIFIER'
-                  ? 'bg-[#01153C]'
-                  : currentRole === 'REVIEWER'
-                  ? 'bg-[#43A65C]'
-                  : currentRole === 'DATA_ENTRY'
-                  ? 'bg-[#D79A24]'
-                  : 'bg-[#5F6368]'
-              }`}
-            />
-            <span className="text-[11px] font-semibold text-[#17181A] truncate">
-              {getRoleLabel()}
+        {/* Persona Perspective Card */}
+        <div className="p-3 border-b border-[#ECEDEF] bg-[#F8F9FB]">
+          <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider mb-1.5">
+            <span className="text-[#8A8F98]">Perspective</span>
+            <span className="inline-flex items-center gap-1 font-bold text-[#027A48]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#027A48] animate-pulse" />
+              Active
             </span>
           </div>
-          <span className="text-[10px] text-[#8A8F98] font-mono shrink-0">Role</span>
+          <div className="flex items-center space-x-2.5 bg-white p-2 rounded-xl border border-[#E5E7EB] shadow-2xs">
+            <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${roleMeta.bg} ${roleMeta.text}`}>
+              <RoleIcon className="w-3.5 h-3.5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="text-xs font-bold text-[#17181A] truncate">{roleMeta.title}</div>
+              <div className="text-[10px] text-[#5F6368] font-medium truncate">{roleMeta.subtitle}</div>
+            </div>
+          </div>
         </div>
 
         {/* Inner scrolling navigation list */}
         {renderNavList()}
 
         {/* Docked Footer Info / Standards */}
-        <div className="shrink-0 p-3 border-t border-[#ECEDEF] bg-[#FAFAFB] text-[11px] text-[#8A8F98] flex items-center justify-between">
-          <span className="truncate">GHG Protocol Standard</span>
-          <span className="font-mono text-[10px] text-[#5F6368] shrink-0 ml-1">v1.2</span>
+        <div className="shrink-0 p-3 border-t border-[#ECEDEF] bg-[#F8F9FB] text-xs space-y-1">
+          <div className="flex items-center justify-between text-[11px] font-semibold text-[#17181A]">
+            <span className="flex items-center space-x-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#027A48]" />
+              <span>ISO 14064-1 & 3</span>
+            </span>
+            <span className="text-[10px] text-[#8A8F98] font-mono">v1.2</span>
+          </div>
+          <div className="text-[10px] text-[#8A8F98] truncate">
+            Deterministic Engine · Zero Double-Counting
+          </div>
         </div>
       </aside>
     </>

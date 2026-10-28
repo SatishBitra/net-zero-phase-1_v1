@@ -110,7 +110,7 @@ export const Screen08_UsersRoles: React.FC = () => {
   ];
 
   return (
-    <div id="screen-08-users-roles" className="max-w-6xl mx-auto space-y-6">
+    <div id="screen-08-users-roles" className="w-full space-y-6">
       {/* Header */}
       <PageHeader
         breadcrumbs={[
@@ -118,7 +118,6 @@ export const Screen08_UsersRoles: React.FC = () => {
           { label: 'Users & Roles' },
         ]}
         title="Users & Roles"
-        description="Manage enterprise team access, assign specific roles, and constrain site scopes."
         actions={
           canInvite ? (
             <button
