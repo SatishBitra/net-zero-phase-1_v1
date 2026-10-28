@@ -362,17 +362,17 @@ export const Screen10_ActivityDashboard: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-[#F7F8FC]/80 border-b border-[#E2E5EF] text-[#62697C]">
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27]">Record ID</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27]">Date</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27]">Facility</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27]">Emission Source</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-left">Quantity</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27]">Unit</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-left">Calculated tCO₂e</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-center">Evidence</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27]">Audit Status</th>
-                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-left">Action</th>
+                <tr className="bg-[#F7F8FC]/80 border-b border-[#E2E5EF] text-[#62697C] normal-case">
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] normal-case">Record ID</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] normal-case">Date</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] normal-case">Facility</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] normal-case">Emission Source</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-left normal-case">Quantity</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] normal-case">Unit</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-left normal-case">Calculated tCO₂e</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-center normal-case">Evidence</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] normal-case">Audit Status</th>
+                  <th scope="col" className="py-3 px-4 font-semibold text-[#181B27] text-left normal-case">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E2E5EF]/60">
