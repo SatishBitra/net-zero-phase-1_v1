@@ -1,7 +1,7 @@
   import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { ScreenId } from '../../types';
-import tulaLogo from '../../assets/d7e9d265-de8a-424e-b04e-0eb06357633b.png';
+import tulaLogo from '../../assets/Tula_Carbon_red.png';
 import {
   LayoutDashboard,
   TableProperties,
