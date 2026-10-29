@@ -1,4 +1,4 @@
-  import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { ScreenId } from '../../types';
 import tulaLogo from '../../assets/Tula_Carbon_red.png';
