@@ -107,15 +107,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
                 className="enterprise-btn-primary shadow-xs"
               >
                 <Plus className="w-3.5 h-3.5" />
-                <span>New Activity</span>
-              </button>
-
-              <button
-                onClick={() => navigateToScreen('17_bill_upload', 'FLOW_D')}
-                className="enterprise-btn-coral shadow-xs"
-              >
-                <ScanLine className="w-3.5 h-3.5" />
-                <span>Upload Bill OCR</span>
+                <span>Ingest Activity Data</span>
               </button>
             </>
           )}
@@ -127,7 +119,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
         
         {/* Card 1: Boundary Completeness */}
         <div
-          onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
+          onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
           className="group bg-white rounded-2xl border border-[#EEF0F6] hover:border-[#5141FF]/40 transition-all duration-200 cursor-pointer flex flex-col justify-between overflow-hidden shadow-[0_2px_12px_rgba(28,31,58,0.04)] hover:shadow-[0_10px_24px_rgba(81,65,255,0.12)] hover:-translate-y-0.5"
         >
           {/* Top Chamber: Title + Subtitle on Left, Compact Glowing Squircle Icon on Right */}

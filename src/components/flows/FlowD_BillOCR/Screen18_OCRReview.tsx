@@ -82,7 +82,7 @@ export const Screen18_OCRReview: React.FC = () => {
     });
 
     showToast('OCR Extraction Discarded', 'No data was committed to the calculation engine.');
-    navigateToScreen('17_bill_upload', 'FLOW_D');
+    navigateToScreen('11_entry_form', 'FLOW_B');
   };
 
   return (
@@ -98,11 +98,11 @@ export const Screen18_OCRReview: React.FC = () => {
           <div className="flex items-center space-x-2">
             <StatusBadge status="In Review" customLabel="AI-suggested" size="md" />
             <button
-              onClick={() => navigateToScreen('17_bill_upload', 'FLOW_D')}
+              onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
               className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Upload</span>
+              <span>Back to Ingestion Hub</span>
             </button>
           </div>
         }

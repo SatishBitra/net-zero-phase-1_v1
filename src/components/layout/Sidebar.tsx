@@ -123,9 +123,7 @@ export const Sidebar: React.FC = () => {
       {
         title: 'Data Collection',
         items: [
-          { id: '11_entry_form', label: 'Manual Data Entry', icon: TableProperties, iconTint: 'text-[#5141FF]' },
-          { id: '12_import_upload', label: 'Bulk Import (CSV)', icon: FileSpreadsheet, iconTint: 'text-[#168FE5]' },
-          { id: '17_bill_upload', label: 'Electricity Bill OCR', icon: ScanLine, iconTint: 'text-[#FB3256]' },
+          { id: '11_entry_form', label: 'Activity Data Ingestion', icon: TableProperties, iconTint: 'text-[#5141FF]' },
           { id: '16_attach_evidence', label: 'Evidence & Documents', icon: Files, iconTint: 'text-[#16845B]' },
         ],
       },
@@ -215,9 +213,7 @@ export const Sidebar: React.FC = () => {
       {
         title: 'Data Collection',
         items: [
-          { id: '11_entry_form', label: 'Manual Data Entry', icon: TableProperties, iconTint: 'text-[#5141FF]' },
-          { id: '12_import_upload', label: 'Bulk Import (CSV)', icon: FileSpreadsheet, iconTint: 'text-[#168FE5]' },
-          { id: '17_bill_upload', label: 'Electricity Bill OCR', icon: ScanLine, iconTint: 'text-[#FB3256]' },
+          { id: '11_entry_form', label: 'Activity Data Ingestion', icon: TableProperties, iconTint: 'text-[#5141FF]' },
           { id: '16_attach_evidence', label: 'Evidence & Documents', icon: Files, iconTint: 'text-[#16845B]' },
         ],
       },

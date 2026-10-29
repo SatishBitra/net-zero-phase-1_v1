@@ -451,14 +451,14 @@ export const Screen09_TenantSettings: React.FC = () => {
 
           <div className="p-4 bg-[#FAFAFB] border border-[#E5E7EB] rounded-xl flex items-center justify-between text-xs">
             <div className="text-[#5F6368] font-data">
-              <strong className="text-[#17181A] font-sans">Active Phase 1 Scope:</strong> Manual Activity Entry, Bulk CSV Import, and AI Electricity Bill OCR are fully operational.
+              <strong className="text-[#17181A] font-sans">Active Phase 1 Scope:</strong> Unified Activity Data Ingestion (Manual, Bulk Spreadsheets, and Camera Smart Scan) is fully operational.
             </div>
             <button
               type="button"
-              onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
+              onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
               className="px-4 py-1.5 text-xs font-semibold text-[#5141FF] bg-[#F2F0FF] hover:bg-[#DCE5F5] rounded-full transition-all shrink-0 ml-4"
             >
-              Go to Bulk Import →
+              Go to Activity Ingestion →
             </button>
           </div>
         </div>

@@ -81,25 +81,14 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
 
   const actions: ActionItem[] = [
     {
-      id: 'upload-bill',
-      title: 'Upload Bill',
-      description: 'AI OCR invoice scanning for electricity, fuel & water records',
-      icon: ScanLine,
-      screenId: '17_bill_upload',
-      flowId: 'FLOW_D',
-      badge: 'AI OCR',
-      badgeColor: 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]',
-      priority: true,
-    },
-    {
       id: 'log-emission',
-      title: 'Log Emission',
-      description: 'Record manual activity data with scope categorization & factors',
+      title: 'Activity Data Ingestion',
+      description: 'Single entry, bulk spreadsheet import, or smart camera document scanner',
       icon: PlusCircle,
       screenId: '11_entry_form',
       flowId: 'FLOW_B',
-      badge: 'Manual Entry',
-      badgeColor: 'bg-[#EEF9F1] text-[#26783B] border-[#DDF3E3]',
+      badge: 'Unified Ingestion',
+      badgeColor: 'bg-[#F2F0FF] text-[#5141FF] border-[#E5E0FF]',
       priority: true,
     },
     {
@@ -112,16 +101,6 @@ export const QuickActionsMenu: React.FC<QuickActionsMenuProps> = ({
       badge: 'Reporting',
       badgeColor: 'bg-[#FFF8E6] text-[#B54708] border-[#FEDF89]',
       priority: true,
-    },
-    {
-      id: 'import-csv',
-      title: 'Bulk Import CSV',
-      description: 'Ingest multi-facility activity spreadsheets with auto-mapping',
-      icon: FileSpreadsheet,
-      screenId: '12_import_upload',
-      flowId: 'FLOW_C',
-      badge: 'Batch',
-      badgeColor: 'bg-[#F1F3F5] text-[#5F6368] border-[#E5E7EB]',
     },
     {
       id: 'run-calc',

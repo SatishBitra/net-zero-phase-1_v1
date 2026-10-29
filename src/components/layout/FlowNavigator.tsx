@@ -62,7 +62,7 @@ export const FlowNavigator: React.FC<FlowNavigatorProps> = ({ isOpen, onClose })
       icon: TableProperties,
       steps: [
         { screen: '10_activity_dashboard', label: 'Activity Dashboard' },
-        { screen: '11_entry_form', label: 'Entry Form' },
+        { screen: '11_entry_form', label: 'Activity Data Ingestion' },
         { screen: '16_attach_evidence', label: 'Attach Evidence' },
         { screen: '23_submission_queue', label: 'Submission Queue' },
         { screen: '24_review_approve', label: 'Review & Approve' },
@@ -147,7 +147,7 @@ export const FlowNavigator: React.FC<FlowNavigatorProps> = ({ isOpen, onClose })
     { name: 'User & Role Management', category: 'Administration', screen: '08_users_roles' },
     { name: 'Tenant Settings', category: 'Administration', screen: '09_tenant_settings' },
     { name: 'Activity Data Dashboard', category: 'Data Collection', screen: '10_activity_dashboard' },
-    { name: 'Activity Data Entry Form', category: 'Data Collection', screen: '11_entry_form' },
+    { name: 'Activity Data Ingestion', category: 'Data Collection', screen: '11_entry_form' },
     { name: 'Bulk Import Upload', category: 'Data Collection', screen: '12_import_upload' },
     { name: 'Column Mapping Engine', category: 'Data Collection', screen: '13_column_mapping' },
     { name: 'Import Validation Results', category: 'Data Collection', screen: '14_import_validation' },

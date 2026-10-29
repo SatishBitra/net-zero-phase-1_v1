@@ -86,11 +86,11 @@ export const Screen13_ColumnMapping: React.FC = () => {
         title="Map Columns"
         actions={
           <button
-            onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
+            onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
             className="enterprise-btn-secondary h-9 px-3 text-xs inline-flex items-center space-x-1.5 font-semibold"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Upload</span>
+            <span>Back to Ingestion</span>
           </button>
         }
       />
@@ -184,7 +184,7 @@ export const Screen13_ColumnMapping: React.FC = () => {
       <div className="flex items-center justify-between pt-2">
         <button
           type="button"
-          onClick={() => navigateToScreen('12_import_upload', 'FLOW_C')}
+          onClick={() => navigateToScreen('11_entry_form', 'FLOW_B')}
           className="enterprise-btn-secondary h-9 px-4 text-xs font-semibold"
         >
           Back

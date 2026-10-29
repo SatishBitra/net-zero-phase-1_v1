@@ -21,6 +21,7 @@ import {
   PlusCircle,
   FileBarChart,
   BookOpen,
+  TableProperties,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -410,37 +411,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
                 type="button"
                 onClick={() => {
                   setIsMobileRightNavOpen(false);
-                  navigateToScreen('17_bill_upload', 'FLOW_D');
-                }}
-                className="w-full p-2.5 rounded-lg border border-[#E5E7EB] bg-white hover:bg-[#FAFAFB] text-left flex items-center justify-between text-xs transition-colors"
-              >
-                <div className="flex items-center space-x-2.5">
-                  <div className="w-7 h-7 rounded-md bg-[#F2F0FF] text-[#5141FF] flex items-center justify-center shrink-0">
-                    <ScanLine className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <div className="font-semibold text-[#17181A]">Upload Bill</div>
-                    <div className="text-[10px] text-[#5F6368]">AI OCR Extraction</div>
-                  </div>
-                </div>
-                <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98]" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileRightNavOpen(false);
                   navigateToScreen('11_entry_form', 'FLOW_B');
                 }}
                 className="w-full p-2.5 rounded-lg border border-[#E5E7EB] bg-white hover:bg-[#FAFAFB] text-left flex items-center justify-between text-xs transition-colors"
               >
                 <div className="flex items-center space-x-2.5">
-                  <div className="w-7 h-7 rounded-md bg-[#EEF9F1] text-[#26783B] flex items-center justify-center shrink-0">
-                    <PlusCircle className="w-3.5 h-3.5" />
+                  <div className="w-7 h-7 rounded-md bg-[#F2F0FF] text-[#5141FF] flex items-center justify-center shrink-0">
+                    <TableProperties className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <div className="font-semibold text-[#17181A]">Log Emission</div>
-                    <div className="text-[10px] text-[#5F6368]">Manual Activity Entry</div>
+                    <div className="font-semibold text-[#17181A]">Activity Ingestion</div>
+                    <div className="text-[10px] text-[#5F6368]">Manual, Bulk & Camera Scan</div>
                   </div>
                 </div>
                 <ArrowRight className="w-3.5 h-3.5 text-[#8A8F98]" />
