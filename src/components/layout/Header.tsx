@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { UserRole } from '../../types';
-import tulaLogo from '../../assets/Tula Carbon.png';
+import tulaLogo from '../../assets/d7e9d265-de8a-424e-b04e-0eb06357633b.png';
 import {
   Building2,
   ChevronDown,

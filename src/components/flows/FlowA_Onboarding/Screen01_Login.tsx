@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../../context/AppContext';
 import { Shield, Lock, Mail, ArrowRight, UserCheck } from 'lucide-react';
-import tulaLogo from '../../../assets/Tula Carbon.png';
+import tulaLogo from '../../../assets/d7e9d265-de8a-424e-b04e-0eb06357633b.png';
 import { UserRole } from '../../../types';
 
 export const Screen01_Login: React.FC = () => {
