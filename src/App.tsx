@@ -154,7 +154,7 @@ const MainAppContent: React.FC = () => {
 
   if (isAuthScreen) {
     return (
-      <div className="min-h-screen ambient-glow-bg">
+      <div className="min-h-screen ambient-glow-bg flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         {renderActiveScreen()}
       </div>
     );

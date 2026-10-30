@@ -74,7 +74,7 @@ export const Screen02_MFA: React.FC = () => {
   const isComplete = digits.every((d) => d.length === 1);
 
   return (
-    <div id="screen-02-mfa" className="max-w-md mx-auto my-12 p-6 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
+    <div id="screen-02-mfa" className="w-full max-w-md mx-auto p-6 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
       <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#F1F3F5]">
         <button
           onClick={() => navigateToScreen('01_login', 'FLOW_A')}

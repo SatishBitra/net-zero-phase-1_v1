@@ -13,6 +13,7 @@ import {
   Files,
   ArrowRight,
   CheckCircle2,
+  BarChart3,
   Layers,
   Flame,
   Zap,
@@ -92,6 +93,14 @@ export const Screen10_ActivityDashboard: React.FC = () => {
 
         {/* Clean, Focused Action Buttons on the Right */}
         <div className="flex items-center gap-2.5 shrink-0">
+          <button
+            type="button"
+            onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
+            className="enterprise-btn-secondary shadow-xs"
+          >
+            <BarChart3 className="w-3.5 h-3.5" />
+            <span>View Results Dashboard</span>
+          </button>
           {currentRole === 'VERIFIER' ? (
             <button
               onClick={() => navigateToScreen('32_evidence_trace', 'FLOW_F')}

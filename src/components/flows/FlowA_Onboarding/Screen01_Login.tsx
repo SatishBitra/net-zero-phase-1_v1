@@ -49,13 +49,13 @@ export const Screen01_Login: React.FC = () => {
   };
 
   return (
-    <div id="screen-01-login" className="max-w-md mx-auto my-10 p-6 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
+    <div id="screen-01-login" className="w-full max-w-md mx-auto p-6 sm:p-8 bg-white border border-[#E5E7EB] rounded-2xl shadow-sm font-sans">
       {/* Header */}
       <div className="flex items-center justify-between pb-5 mb-6 border-b border-[#F1F3F5]">
         <img
           src={tulaLogo}
           alt="Tula Carbon"
-          className="h-16 sm:h-18 w-auto max-w-[260px] object-contain"
+          className="h-16 sm:h-[72px] w-auto max-w-[260px] object-contain"
         />
         <span className="text-[11px] font-semibold text-[#027A48] flex items-center space-x-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#027A48]"></span>

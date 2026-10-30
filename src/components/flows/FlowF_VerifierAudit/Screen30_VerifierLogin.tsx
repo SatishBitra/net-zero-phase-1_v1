@@ -60,7 +60,7 @@ export const Screen30_VerifierLogin: React.FC = () => {
   };
 
   return (
-    <div id="screen-30-container" className="min-h-[75vh] flex flex-col justify-center max-w-md mx-auto py-8 px-4 space-y-6 font-sans">
+    <div id="screen-30-container" className="w-full max-w-md flex flex-col justify-center py-8 px-4 space-y-6 font-sans">
       {/* Header */}
       <div className="text-center space-y-2">
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#5141FF]/10 border border-[#5141FF]/20 text-[#181B27] mb-1">

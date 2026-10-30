@@ -37,13 +37,11 @@ export const Screen16_AttachEvidence: React.FC = () => {
       id: 'doc-1',
       file: 'electricity-bill-aug25.pdf',
       type: 'PDF',
-      uploaded: '12-Aug-2025',
+      uploaded: 'Today',
       size: '1.2 MB',
       storedIn: 'Enterprise Evidence Store',
     },
   ]);
-
-  const [dragActive, setDragActive] = useState(false);
 
   const handleUploadFile = () => {
     if (isPeriodLocked) {
@@ -58,7 +56,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
       id: `doc-${Date.now()}`,
       file: `substation-meter-reading-${Date.now().toString().slice(-4)}.pdf`,
       type: 'PDF',
-      uploaded: '12-Aug-2025',
+      uploaded: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }),
       size: '840 KB',
       storedIn: 'Enterprise Evidence Store',
     };
@@ -147,45 +145,23 @@ export const Screen16_AttachEvidence: React.FC = () => {
         </div>
       </div>
 
-      {/* Upload Box */}
-      <div className="p-6 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-4">
-        <div
-          id="evidence-dropzone"
-          onDragOver={(e) => {
-            e.preventDefault();
-            setDragActive(true);
-          }}
-          onDragLeave={() => setDragActive(false)}
-          onDrop={(e) => {
-            e.preventDefault();
-            setDragActive(false);
-            handleUploadFile();
-          }}
-          onClick={handleUploadFile}
-          className={`p-8 border-2 border-dashed rounded-xl text-center cursor-pointer transition-colors ${
-            dragActive ? 'border-[#5141FF] bg-[#5141FF]/5' : 'border-[#E5E7EB] bg-[#FAFAFB] hover:border-[#5141FF]'
-          }`}
-        >
-          <Upload className="w-8 h-8 text-[#8A8F98] mx-auto mb-2" />
-          <h3 className="text-sm font-semibold text-[#17181A]">
-            Drag & drop file, or click to attach (PDF, image, spreadsheet)
-          </h3>
-          <p className="text-xs text-[#5F6368] mt-1 font-data">
-            Max 10MB per document. Files are encrypted and stored in the secure document repository.
-          </p>
-          <div className="mt-3">
-            <span className="enterprise-btn-secondary h-8 px-3.5 text-xs font-semibold inline-flex items-center">
-              Attach file from computer
-            </span>
-          </div>
-        </div>
-
-        {/* Attached Evidence Table */}
+      {/* Recently uploaded evidence */}
+      <div className="p-5 bg-white border border-[#E5E7EB] rounded-xl shadow-2xs space-y-4">
         <div className="border border-[#E5E7EB] rounded-xl overflow-hidden shadow-2xs">
-          <div className="p-3 bg-[#FAFAFB] border-b border-[#E5E7EB] flex items-center justify-between">
-            <h2 className="text-xs font-semibold text-[#17181A]">
-              Attached Evidence ({attachedDocs.length})
-            </h2>
+          <div className="p-3 bg-[#FAFAFB] border-b border-[#E5E7EB] flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 className="text-xs font-semibold text-[#17181A]">Recently uploaded documents ({attachedDocs.length})</h2>
+              <p className="text-[11px] text-[#5F6368] mt-0.5">Latest files linked to this activity record.</p>
+            </div>
+            <button
+              type="button"
+              onClick={handleUploadFile}
+              disabled={isPeriodLocked || isVerifierReadOnly}
+              className="enterprise-btn-primary h-8 px-3.5 text-xs inline-flex items-center gap-1.5 disabled:opacity-50"
+            >
+              <Upload className="w-3.5 h-3.5" />
+              <span>Upload document</span>
+            </button>
             <button
               type="button"
               onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
@@ -207,7 +183,7 @@ export const Screen16_AttachEvidence: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#F1F3F5]">
-              {attachedDocs.map((doc) => (
+              {[...attachedDocs].reverse().map((doc) => (
                 <tr key={doc.id} className="hover:bg-[#FAFAFB]">
                   <td className="py-3 px-4">
                     <div className="flex items-center space-x-2 font-semibold text-[#17181A]">

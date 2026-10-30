@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useApp } from '../../../context/AppContext';
 import {
   Inbox,
@@ -7,6 +7,10 @@ import {
   ArrowLeft,
   History,
   ShieldCheck,
+  LayoutGrid,
+  List,
+  CheckCircle2,
+  XCircle,
 } from 'lucide-react';
 import { PageHeader } from '../../common/PageHeader';
 import { KpiCard } from '../../common/KpiCard';
@@ -23,6 +27,8 @@ interface SubmissionBatch {
 
 export const Screen23_SubmissionQueue: React.FC = () => {
   const { navigateToScreen, showToast, currentRole, currentUser } = useApp();
+  const [viewMode, setViewMode] = useState<'list' | 'tiles'>('list');
+  const [statusFilter, setStatusFilter] = useState<'all' | SubmissionBatch['status']>('all');
 
   // Summary metrics from PRD specification (FR-23.01, 23.02, 23.03)
   const metrics = {
@@ -32,7 +38,7 @@ export const Screen23_SubmissionQueue: React.FC = () => {
   };
 
   // Submissions table from Screen 23 PRD specification
-  const submissions: SubmissionBatch[] = [
+  const [submissions, setSubmissions] = useState<SubmissionBatch[]>([
     {
       id: 'batch-204',
       submittedDate: '20-Aug-2025',
@@ -49,7 +55,21 @@ export const Screen23_SubmissionQueue: React.FC = () => {
       submittedBy: 'A. Kumar',
       status: 'Awaiting Review',
     },
-  ];
+  ]);
+  const canReview = currentRole === 'REVIEWER' || currentRole === 'TENANT_ADMIN';
+  const visibleSubmissions = useMemo(
+    () => statusFilter === 'all' ? submissions : submissions.filter((item) => item.status === statusFilter),
+    [statusFilter, submissions]
+  );
+
+  const updateBatchStatus = (item: SubmissionBatch, status: SubmissionBatch['status']) => {
+    if (!canReview) {
+      showToast('Reviewer access required', 'Only reviewers and tenant admins can approve or reject submissions.', 'error');
+      return;
+    }
+    setSubmissions((current) => current.map((batch) => batch.id === item.id ? { ...batch, status } : batch));
+    showToast(status === 'Approved' ? 'Submission approved' : 'Submission rejected', `${item.id} marked ${status.toLowerCase()}.`);
+  };
 
   const handleReviewBatch = (batchId: string) => {
     if (currentRole === 'DATA_ENTRY') {
@@ -132,11 +152,44 @@ export const Screen23_SubmissionQueue: React.FC = () => {
             <Inbox className="w-4 h-4 text-[#181B27]" />
             <h2 className="text-sm font-semibold text-[#17181A] font-sans">Pending Submissions</h2>
           </div>
-          <span className="text-xs text-[#5F6368] font-sans font-medium">
-            {submissions.length} batches pending
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              aria-label="Filter submissions by status"
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value as typeof statusFilter)}
+              className="h-8 px-2 text-xs border border-[#E5E7EB] rounded-lg bg-white"
+            >
+              <option value="all">All statuses</option>
+              <option value="Awaiting Review">Awaiting review</option>
+              <option value="Returned for Correction">Returned</option>
+              <option value="Approved">Approved</option>
+            </select>
+            <div className="flex border border-[#E5E7EB] rounded-lg overflow-hidden" aria-label="Submission view">
+              <button type="button" onClick={() => setViewMode('list')} aria-label="List view" className={`p-2 ${viewMode === 'list' ? 'bg-[#F2F0FF] text-[#5141FF]' : 'text-[#5F6368]'}`}><List className="w-4 h-4" /></button>
+              <button type="button" onClick={() => setViewMode('tiles')} aria-label="Tile view" className={`p-2 ${viewMode === 'tiles' ? 'bg-[#F2F0FF] text-[#5141FF]' : 'text-[#5F6368]'}`}><LayoutGrid className="w-4 h-4" /></button>
+            </div>
+            <span className="text-xs text-[#5F6368] font-medium">{visibleSubmissions.length} submissions</span>
+          </div>
         </div>
 
+        {viewMode === 'tiles' ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-4">
+            {visibleSubmissions.map((item) => (
+              <div key={item.id} className="p-4 border border-[#E5E7EB] rounded-xl space-y-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div><div className="text-sm font-semibold text-[#17181A]">{item.siteName}</div><div className="text-xs text-[#5F6368] mt-1">{item.id} · {item.submittedDate}</div></div>
+                  <StatusBadge status={item.status === 'Approved' ? 'Approved' : item.status === 'Returned for Correction' ? 'Error' : 'Pending'} customLabel={item.status} size="sm" />
+                </div>
+                <div className="text-xs text-[#5F6368]">{item.rowsCount} records · Submitted by {item.submittedBy}</div>
+                <div className="flex flex-wrap gap-2">
+                  <button type="button" onClick={() => handleReviewBatch(item.id)} className="enterprise-btn-secondary h-8 px-3 text-xs">Review</button>
+                  <button type="button" disabled={!canReview || item.status !== 'Awaiting Review'} onClick={() => updateBatchStatus(item, 'Approved')} className="h-8 px-3 text-xs rounded-lg border border-[#027A48]/30 text-[#027A48] disabled:opacity-40 inline-flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" />Approve</button>
+                  <button type="button" disabled={!canReview || item.status !== 'Awaiting Review'} onClick={() => updateBatchStatus(item, 'Returned for Correction')} className="h-8 px-3 text-xs rounded-lg border border-[#FB3256]/30 text-[#FB3256] disabled:opacity-40 inline-flex items-center gap-1"><XCircle className="w-3.5 h-3.5" />Reject</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[#F4F5F6] border-b border-[#E5E7EB] text-[#5F6368]">
@@ -148,7 +201,7 @@ export const Screen23_SubmissionQueue: React.FC = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-[#F1F3F5]">
-            {submissions.map((item) => (
+            {visibleSubmissions.map((item) => (
               <tr key={item.id} className="hover:bg-[#FAFAFB] transition-colors">
                 <td className="py-3.5 px-4 period-code text-[#5F6368]">
                   {item.submittedDate}
@@ -164,6 +217,7 @@ export const Screen23_SubmissionQueue: React.FC = () => {
                   {item.submittedBy}
                 </td>
                 <td className="py-3.5 px-4 text-right">
+                  <div className="inline-flex items-center gap-1.5">
                   <button
                     id={`btn-review-${item.id}`}
                     type="button"
@@ -185,11 +239,15 @@ export const Screen23_SubmissionQueue: React.FC = () => {
                     </span>
                     <ArrowRight className="w-3 h-3" />
                   </button>
+                  <button type="button" disabled={!canReview || item.status !== 'Awaiting Review'} onClick={() => updateBatchStatus(item, 'Approved')} className="h-8 px-2.5 rounded-lg border border-[#027A48]/30 text-[#027A48] disabled:opacity-40">Approve</button>
+                  <button type="button" disabled={!canReview || item.status !== 'Awaiting Review'} onClick={() => updateBatchStatus(item, 'Returned for Correction')} className="h-8 px-2.5 rounded-lg border border-[#FB3256]/30 text-[#FB3256] disabled:opacity-40">Reject</button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        )}
       </div>
     </div>
   );

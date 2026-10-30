@@ -758,47 +758,33 @@ export const Screen11_EntryForm: React.FC<Screen11Props> = ({ initialTab = 'manu
                     />
                   </div>
 
-                  {/* Entry Method */}
-                  <div>
-                    <label className="block text-xs font-semibold text-[#181B27] mb-1.5">
-                      Ingestion Lineage / Method
-                    </label>
-                    <input
-                      type="text"
-                      disabled
-                      value={entryMethod}
-                      className="w-full h-9 px-3 text-xs border border-[#E2E5EF] rounded-lg bg-slate-50 text-[#62697C] font-mono cursor-not-allowed"
-                    />
-                  </div>
                 </div>
 
-                {/* Quantity & Unit */}
+                {/* Quantity and unit are entered together as one activity value. */}
                 <div className="pt-2 border-t border-[#F0F2F6]">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-[#181B27] mb-1.5">
-                        Activity Quantity <span className="text-[#FB3256]">*</span>
-                      </label>
+                  <div>
+                    <label className="block text-xs font-semibold text-[#181B27] mb-1.5">
+                      Activity quantity and unit <span className="text-[#FB3256]">*</span>
+                    </label>
+                    <div className="flex">
                       <input
                         type="number"
                         step="any"
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
                         placeholder="e.g. 48200"
-                        className="w-full h-9 px-3 text-xs border border-[#E2E5EF] hover:border-[#9AA5BE] rounded-lg bg-white text-[#181B27] focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF]/20 transition-colors font-mono"
+                        className="w-full h-10 px-3 text-sm border border-[#E2E5EF] hover:border-[#9AA5BE] rounded-l-lg bg-white text-[#181B27] focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF]/20 transition-colors font-mono"
                       />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold text-[#181B27] mb-1.5">
-                        Measurement Unit
-                      </label>
-                      <input
-                        type="text"
+                      <select
                         value={unit}
                         onChange={(e) => setUnit(e.target.value)}
-                        className="w-full h-9 px-3 text-xs border border-[#E2E5EF] hover:border-[#9AA5BE] rounded-lg bg-white text-[#181B27] focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF]/20 transition-colors font-mono"
-                      />
+                        aria-label="Measurement unit"
+                        className="w-28 h-10 px-3 text-xs border border-l-0 border-[#E2E5EF] hover:border-[#9AA5BE] rounded-r-lg bg-[#F8F9FC] text-[#181B27] focus:outline-none focus:border-[#5141FF] focus:ring-1 focus:ring-[#5141FF]/20 transition-colors font-mono"
+                      >
+                        {[...new Set([unit, 'kWh', 'MWh', 'L', 'm³', 'kg', 'tonnes'])].map((option) => (
+                          <option key={option} value={option}>{option}</option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 

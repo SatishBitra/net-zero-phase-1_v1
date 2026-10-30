@@ -51,6 +51,12 @@ export const Screen13_ColumnMapping: React.FC = () => {
       sampleValue: 'Grid electricity',
       matched: true,
     },
+    {
+      fileColumn: 'Plant Location',
+      mapsTo: '-- Do not map --',
+      sampleValue: 'Chennai Plant 1 - Block A',
+      matched: false,
+    },
   ]);
 
   const targetSystemFields = [
@@ -70,6 +76,10 @@ export const Screen13_ColumnMapping: React.FC = () => {
   };
 
   const handleValidate = () => {
+    if (mappings.some((row) => row.mapsTo === '-- Do not map --')) {
+      showToast('Mapping Needed', 'Map or exclude every unresolved column before continuing.', 'error');
+      return;
+    }
     showToast('Column Mapping Saved', 'Validating 1,842 rows against system schema and emission factors...');
     navigateToScreen('14_import_validation', 'FLOW_C');
   };
@@ -119,7 +129,7 @@ export const Screen13_ColumnMapping: React.FC = () => {
         <div className="flex items-center space-x-2 text-[#181B27]">
           <Sparkles className="w-4 h-4 shrink-0" />
           <span className="font-semibold">
-            Auto-suggested 5 of 5 column mappings from file headers and past import history.
+            Auto-suggested 5 of 6 column mappings. One column needs your attention.
           </span>
         </div>
         <div className="flex items-center space-x-1.5 text-[#5F6368] text-[11px] font-data">
@@ -164,7 +174,11 @@ export const Screen13_ColumnMapping: React.FC = () => {
                   {row.sampleValue}
                 </td>
                 <td className="py-3 px-4">
-                  <StatusBadge status="Approved" customLabel="Mapped" size="sm" />
+                  {row.mapsTo === '-- Do not map --' ? (
+                    <StatusBadge status="Pending" customLabel="Mapping" size="sm" />
+                  ) : (
+                    <StatusBadge status="Approved" customLabel="Mapped" size="sm" />
+                  )}
                 </td>
               </tr>
             ))}
@@ -176,7 +190,7 @@ export const Screen13_ColumnMapping: React.FC = () => {
       <div className="p-3 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#5F6368] flex items-start space-x-2 shadow-2xs">
         <Info className="w-4 h-4 text-[#8A8F98] shrink-0 mt-0.5" />
         <span className="font-data">
-          <strong>Mapping Persistence:</strong> Column mapping templates are saved for this organization. Future uploads using identical header schemas will be auto-matched.
+          <strong>What to do:</strong> Choose the matching field for each column. If a column is not needed, select “Do not map” to confirm you have reviewed it.
         </span>
       </div>
 
@@ -196,7 +210,7 @@ export const Screen13_ColumnMapping: React.FC = () => {
           onClick={handleValidate}
           className="enterprise-btn-primary h-9 px-5 text-xs font-semibold shadow-xs flex items-center space-x-1.5"
         >
-          <span>Validate</span>
+          <span>Continue to validation</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
