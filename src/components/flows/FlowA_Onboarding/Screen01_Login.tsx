@@ -55,7 +55,7 @@ export const Screen01_Login: React.FC = () => {
         <img
           src={tulaLogo}
           alt="Tula Carbon"
-          className="h-12 sm:h-14 w-auto max-w-[220px] object-contain"
+          className="h-16 sm:h-18 w-auto max-w-[260px] object-contain"
         />
         <span className="text-[11px] font-semibold text-[#027A48] flex items-center space-x-1">
           <span className="w-1.5 h-1.5 rounded-full bg-[#027A48]"></span>

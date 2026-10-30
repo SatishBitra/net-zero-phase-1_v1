@@ -138,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
             <img
               src={tulaLogo}
               alt="Tula Carbon"
-              className="h-11 sm:h-12 w-auto max-w-[220px] object-contain group-hover:opacity-90 transition-opacity"
+              className="h-14 sm:h-16 w-auto max-w-[260px] object-contain group-hover:opacity-90 transition-opacity"
             />
           </div>
 
@@ -180,7 +180,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenFlowMap }) => {
               <img
                 src={tulaLogo}
                 alt="Tula Carbon"
-                className="h-11 sm:h-12 md:h-[50px] w-auto max-w-[230px] object-contain group-hover:opacity-90 transition-opacity"
+                className="h-14 sm:h-16 md:h-[64px] w-auto max-w-[260px] object-contain group-hover:opacity-90 transition-opacity"
               />
             </div>
 

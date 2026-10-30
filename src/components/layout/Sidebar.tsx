@@ -480,7 +480,7 @@ export const Sidebar: React.FC = () => {
             <img
               src={tulaLogo}
               alt="Tula Carbon"
-              className="h-9 sm:h-10 w-auto max-w-[180px] object-contain"
+              className="h-12 sm:h-14 w-auto max-w-[220px] object-contain"
             />
           </div>
           <button
