@@ -95,7 +95,7 @@ export const Screen10_ActivityDashboard: React.FC = () => {
         <div className="flex items-center gap-2.5 shrink-0">
           <button
             type="button"
-            onClick={() => navigateToScreen('21_drill_down', 'FLOW_E')}
+            onClick={() => window.location.assign('https://tula-karbon-ze-d1.vercel.app/')}
             className="enterprise-btn-secondary shadow-xs"
           >
             <BarChart3 className="w-3.5 h-3.5" />
